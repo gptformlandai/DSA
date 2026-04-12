@@ -1,0 +1,136 @@
+WEEK 0.5/1 — MATRIX/2D ARRAYS MASTERY
+Duration: 7 days
+ Problems: 20-25
+ Goal: Complete matrix pattern mastery before advanced topics
+ 
+Topics Covered:
+Day 1-2: Matrix Traversal Fundamentals
+Row-wise, column-wise traversal
+Diagonal traversal
+Spiral traversal
+Zigzag traversal
+Snake pattern
+Boundary traversal
+Day 3-4: Matrix Manipulation
+Rotate matrix (90°, 180°, 270°)
+Transpose matrix
+In-place modifications
+Set zeroes
+Fill techniques
+Day 5: Matrix Search
+Search in row-wise sorted matrix
+Search in row-column sorted matrix
+Binary search on matrix
+Peak element in 2D
+Day 6: Matrix Math & Properties
+Matrix multiplication
+Determinant (if needed)
+Prefix sum 2D
+Range sum query 2D
+Day 7: Mixed Practice & Revision
+Hardest problems from week
+Pattern recognition drill
+Timed practice
+ 
+Complete Problem List (25 Problems):
+A) Traversal Patterns (7 problems)
+Spiral Matrix ⭐⭐
+Pattern: Layer-by-layer traversal
+Key: Boundary management
+Spiral Matrix II ⭐
+Generate spiral matrix
+Key: Direction control
+Diagonal Traverse ⭐⭐
+Diagonal zigzag pattern
+Key: Direction changes on boundaries
+Print Matrix in Snake Pattern (GFG)
+Alternate left-right, right-left
+Key: Row parity
+Print Matrix in Diagonal Pattern (GFG)
+All diagonals sequentially
+Key: Sum of indices
+Boundary Traversal of Matrix (GFG)
+Print outer boundary
+Key: Edge handling
+Zigzag (Wave) Traversal (GFG)
+Column-wise zigzag
+Key: Column parity
+ 
+B) Matrix Rotation & Transformation (6 problems)
+Rotate Image (90° clockwise) ⭐⭐
+In-place rotation
+Key: Transpose + reverse rows
+CRITICAL PATTERN
+Rotate Image 180° (variation)
+Two rotations OR reverse rows + columns
+Transpose Matrix
+Convert rows to columns
+Key: Swap [i][j] with [j][i]
+Set Matrix Zeroes ⭐⭐
+Set entire row/col to zero
+Key: In-place marking using first row/col
+AMAZON FAVORITE
+Reshape Matrix ⭐
+Convert m×n to r×c
+Key: Linear mapping
+Flip Image ⭐
+Horizontal flip + invert
+Key: Two-pointer in each row
+ 
+C) Matrix Search (5 problems)
+Search a 2D Matrix ⭐⭐
+Sorted matrix (treat as 1D array)
+Key: Binary search with row×col conversion
+GOOGLE FAVORITE
+Search a 2D Matrix II ⭐⭐
+Row-wise & column-wise sorted
+Key: Start from top-right or bottom-left
+META FAVORITE
+Find Peak Element II ⭐⭐
+2D peak (greater than all 4 neighbors)
+Key: Binary search on columns
+Kth Smallest Element in Sorted Matrix ⭐⭐
+Row & column sorted
+Key: Binary search on value range OR min-heap
+Count Negative Numbers in Sorted Matrix ⭐
+Sorted rows & columns
+Key: Staircase search
+ 
+D) Matrix Math & Prefix Sum (4 problems)
+Range Sum Query 2D - Immutable ⭐⭐
+Submatrix sum queries
+Key: 2D prefix sum
+CRITICAL PATTERN FOR DP
+Range Sum Query 2D - Mutable ⭐⭐
+With updates
+Key: 2D Binary Indexed Tree (advanced)
+Matrix Block Sum ⭐
+Sum of submatrix around each cell
+Key: 2D prefix sum
+Valid Sudoku ⭐⭐
+Check sudoku validity
+Key: Row/col/box validation
+ 
+E) Matrix Island Patterns (Preview for Week 11) (3 problems)
+Island Perimeter ⭐
+Count perimeter of island
+Key: Count edges
+Max Area of Island ⭐⭐
+Find largest island
+Key: DFS with area counting
+Preview of matrix-as-graph
+Number of Closed Islands ⭐⭐
+Islands not touching boundary
+Key: DFS with boundary check
+ 
+Learning Outcomes:
+After this week, you will:
+ ✅ Master all matrix traversal patterns
+ ✅ Solve rotation/transformation in-place instantly
+ ✅ Recognize when to use 2D prefix sum
+ ✅ Know staircase search pattern for sorted matrices
+ ✅ Convert matrix indices ↔ linear indices fluently
+ ✅ Handle boundary conditions without bugs
+ ✅ Build foundation for matrix-as-graph (Week 11)
+ ✅ Build foundation for 2D DP (Week 19
+ 
