@@ -661,7 +661,7 @@ int[] dailyTemperatures(int[] temps) {
 
 ## Pattern 4: Valid Parentheses
 
-(Covered in Data Structures section — see `04_Stack.md`)
+(Covered in Data Structures section — see `../02_Data_Structures/04_Stack.md`)
 
 ---
 

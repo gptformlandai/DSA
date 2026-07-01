@@ -731,4 +731,4 @@ Used for: unbounded arrays, when element is near beginning.
 
 ---
 
-**Next →** `../04_Sorting/01_Basic_Sorts.md`
+**Next →** `../04_Sorting/01_Sorting_Algorithms.md`

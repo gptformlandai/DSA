@@ -457,7 +457,7 @@ You have mastered this topic when you can:
 8. How does the `components` counter help you determine if it's impossible to connect all computers with k cables?
 
 > **Answers:**
-> 1. 2 components: {0}, {1,2,3}, {4,5} → Wait: 0 was never unioned → components: {0}, {1,2,3}, {4,5} = 3 components.
+> 1. 3 components: {0}, {1,2,3}, {4,5}. Node 0 was never unioned, so it remains its own component.
 > 2. It makes x directly point to the root (skipping intermediate nodes). Future find(x) calls are O(1) instead of traversing the chain.
 > 3. When ranks are equal, you can attach either way. By convention, attach y's root under x's root, then increment rank[x] (tree height increased by 1).
 > 4. If `find(edge[0]) == find(edge[1])` — adding this edge would create a cycle (both endpoints already in the same component).
@@ -659,6 +659,82 @@ String find(Map<String, String> parent, String x) {
 Without compression: find() traces the whole chain → O(n) worst case.  
 With compression: After first find(), every node on path points to root directly.  
 Result: Subsequent finds are O(1).
+
+---
+
+## MAANG Pro Upgrade: DSU Modeling Patterns
+
+DSU is easy to code but hard to model. The interview question is usually:
+
+> "What should each DSU node represent?"
+
+### Modeling Table
+
+| Problem Type | DSU Node Represents | Union When |
+|---|---|---|
+| Number of provinces | City index | `isConnected[i][j] == 1` |
+| Accounts merge | Email string | Emails appear in same account |
+| Stones removed | Row id and column id | Stone connects its row and column |
+| Smallest string with swaps | Character index | Indices can be swapped |
+| Regions cut by slashes | Cell triangles | Slash connects/splits subregions |
+| Kruskal MST | Graph vertex | Edge is chosen in sorted order |
+| Dynamic islands | Grid cell id | Land cell touches land neighbor |
+| Equality equations | Variable char | `a == b` equation |
+
+### DSU vs DFS/BFS
+
+| Use DFS/BFS When | Use DSU When |
+|---|---|
+| You have a fixed graph and need traversal/order/path. | You only need component membership/merge queries. |
+| You need shortest path or actual route. | You process many connectivity unions. |
+| Edges are easy to build once. | Edges arrive over time or are sorted offline. |
+| You need parent/level/path details. | You only need "same group?" |
+
+### Component Counting Pattern
+
+```java
+int components = n;
+
+boolean union(int a, int b) {
+    int ra = find(a), rb = find(b);
+    if (ra == rb) return false;
+    parent[rb] = ra;
+    components--;
+    return true;
+}
+```
+
+Use `components` for:
+- number of connected components
+- "when does everyone become connected?"
+- "how many operations are still needed?"
+
+### Offline Query Pattern
+
+Some problems ask connectivity under a limit, such as edge length `< limit`.
+
+```text
+1. Sort edges by weight.
+2. Sort queries by limit.
+3. For each query, union all edges with weight < query.limit.
+4. Answer query using find(u) == find(v).
+```
+
+This turns repeated expensive graph searches into near-O(1) connectivity checks after sorting.
+
+### DSU Interview Traps
+
+| Trap | Fix |
+|---|---|
+| Unioning raw nodes when the real relation is row/column/email | First define the DSU universe. |
+| Forgetting string IDs | Use `Map<String, String>` or map strings to integer ids. |
+| Counting parents without compression | Call `find(i)` before grouping. |
+| Using DSU for directed cycle casually | Directed cycle detection needs special handling; topo/DFS is usually safer. |
+| Forgetting impossible connectivity condition | For n nodes, at least n-1 edges are required. |
+
+### 60-Second DSU Explanation Template
+
+> "I will model each [index/email/row/column] as a DSU node. Whenever the problem says two entities belong to the same group, I union them. At the end, connected components represent merged groups. Path compression and union by rank make each operation effectively constant time."
 
 ---
 

@@ -113,8 +113,7 @@ The decision is always: if sum < target, only increasing left helps (array sorte
 ```
 slow=0, fast=0: start
 
-fast=0(1): arr[fast]=1 ≠ nothing (slow at 0, first element always kept)
-           actually: slow=0
+fast=0(1): first element is always kept, slow remains 0
 fast=1(1): arr[1]=1 == arr[0]=1 → duplicate, skip
 fast=2(2): arr[2]=2 ≠ arr[0]=1 → different! slow++, arr[1]=2
            arr=[1,2,2,3,3,4], slow=1

@@ -47,6 +47,7 @@
 | 25 | Problem Solving System | `25_Problem_Solving/` | All Levels |
 | 26 | Pattern Recognition Cheatsheet | `26_Cheatsheets/` | All Levels |
 | 27 | Staged Practice Plan | `27_Practice_Plan/` | All Levels |
+| 28 | MAANG Hot Problem Solutions | `28_MAANG_Hot_Problem_Solutions/` | Interview-Ready |
 
 ---
 
@@ -67,7 +68,7 @@ Stage 11 ──► Graphs
 Stage 12 ──► Greedy
 Stage 13 ──► Dynamic Programming
 Stage 14 ──► Advanced Topics
-Stage 15 ──► Mock Interview Ready
+Stage 15 ──► Mock Interview Ready + Hot 150 Solutions
 ```
 
 ---
@@ -80,12 +81,14 @@ After reading this roadmap, go to:
 |------|-------------|-----------|
 | Mode 1 | Teach topic-by-topic from zero | `01_Foundations/01_What_Is_DSA.md` |
 | Mode 2 | Start with Arrays | `02_Data_Structures/01_Arrays.md` |
-| Mode 3 | Start with Searching | `03_Searching/01_Linear_Search.md` |
-| Mode 4 | Start with Sorting | `04_Sorting/01_Basic_Sorts.md` |
-| Mode 5 | Start with Graph Algorithms | `15_Graphs/01_Graph_Basics.md` |
+| Mode 3 | Start with Searching | `03_Searching/01_Searching_Algorithms.md` |
+| Mode 4 | Start with Sorting | `04_Sorting/01_Sorting_Algorithms.md` |
+| Mode 5 | Start with Graph Algorithms | `15_Graphs/01_Graph_Algorithms.md` |
 | Mode 6 | DSA Patterns | `26_Cheatsheets/01_Pattern_Recognition.md` |
 | Mode 7 | Daily Practice Plan | `27_Practice_Plan/01_Staged_Practice_Plan.md` |
 | Mode 8 | Pattern Cheatsheet | `26_Cheatsheets/01_Pattern_Recognition.md` |
+| Mode 9 | Dynamic Programming Masterclass | `18_Dynamic_Programming/02_DP_Pattern_Masterclass.md` |
+| Mode 10 | Hot 150 Solution Tracker | `28_MAANG_Hot_Problem_Solutions/01_Hot_150_Index.md` |
 
 ---
 
@@ -100,4 +103,5 @@ After reading this roadmap, go to:
 - [ ] Can analyze time & space complexity of own code
 - [ ] Can handle edge cases without prompting
 - [ ] Has solved 150+ LeetCode problems across topics
+- [ ] Can explain the Hot 150 patterns without memorizing code
 - [ ] Has done 10+ mock interviews

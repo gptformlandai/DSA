@@ -814,6 +814,93 @@ void backtrack(List<String> result, StringBuilder curr, int open, int close, int
 
 ---
 
+## MAANG Pro Upgrade: Backtracking That Does Not TLE
+
+### The 6-Part Interview Checklist
+
+Before coding any backtracking solution, say these out loud:
+
+1. **State:** What variables define one node in the decision tree?
+2. **Choices:** What candidates can I try from this state?
+3. **Validity:** Which choices are illegal immediately?
+4. **Goal:** When is one complete answer formed?
+5. **Undo:** What mutable state must be restored after recursion?
+6. **Pruning:** What branch can never lead to a valid/better answer?
+
+If you cannot answer all six, the code will usually become messy.
+
+### State Design Patterns
+
+| Problem Family | State to Carry | Why |
+|---|---|---|
+| Subsets / combinations | `start`, `path` | Prevents reusing earlier elements. |
+| Permutations | `used[]`, `path` | Tracks which elements are already placed. |
+| Combination Sum | `start`, `remaining`, `path` | Supports target pruning and optional reuse. |
+| Parentheses | `open`, `close`, `StringBuilder` | Enforces validity while generating. |
+| Grid word search | `r`, `c`, `index`, visited marks | Position plus matched prefix length. |
+| N-Queens | `row`, used columns/diagonals | Place one queen per row. |
+| Sudoku | `cell index`, row/col/box masks | Fast constraint lookup. |
+| K equal subsets | bucket sums / used mask | Tracks load balance and used elements. |
+
+### Pruning Rules That Matter
+
+| Situation | Prune |
+|---|---|
+| Sorted candidates and `candidate > remaining` | `break`, because later values are larger. |
+| Duplicate candidates at same recursion depth | Skip `i > start && nums[i] == nums[i-1]`. |
+| Current partial answer already violates constraint | Return immediately. |
+| Remaining choices cannot fill required length | Return early. |
+| Bucket/backpack problem has symmetric empty buckets | Try one empty bucket, then break. |
+| Best-known answer exists and current cost already worse | Branch-and-bound return. |
+
+### Duplicate Handling Template
+
+Use this for `Subsets II`, `Combination Sum II`, and similar problems:
+
+```java
+Arrays.sort(nums);
+
+void backtrack(int start, List<Integer> path) {
+    result.add(new ArrayList<>(path));
+    for (int i = start; i < nums.length; i++) {
+        if (i > start && nums[i] == nums[i - 1]) continue; // skip duplicate at same depth
+        path.add(nums[i]);
+        backtrack(i + 1, path);
+        path.remove(path.size() - 1);
+    }
+}
+```
+
+**Key distinction:** skip duplicates at the same depth, not globally. The same value can still be used in deeper levels when it represents a different position in the input.
+
+### Complexity Mental Model
+
+| Pattern | Rough Number of Leaves | Time |
+|---|---:|---|
+| Subsets | `2^n` | O(n * 2^n) if copying each subset |
+| Permutations | `n!` | O(n * n!) |
+| Combinations choose k | `C(n, k)` | O(k * C(n, k)) |
+| Phone digits | `3^a * 4^b` | Branching depends on digits |
+| N-Queens | Much less than `n!` after pruning | Often described as O(n!) upper bound |
+| Word Search | `m*n*4*3^(L-1)` | First step has 4 dirs, later avoid going back |
+
+### Interview Explanation Template
+
+> "I will model this as a decision tree. Each recursive call represents a partial answer. At each level I try valid candidates, mutate the path, recurse, and undo the mutation. I prune branches that violate constraints early. The time is proportional to the number of states explored times the cost to copy/build each answer."
+
+### Common Pro Mistakes
+
+| Mistake | Why It Hurts | Fix |
+|---|---|---|
+| Forgetting to copy `path` | All answers point to same mutable list | Use `new ArrayList<>(path)`. |
+| Using global visited but not undoing | Later branches are blocked incorrectly | Always pair mark/unmark. |
+| Skipping duplicates without sorting | Equal values are not adjacent | Sort first. |
+| Skipping all duplicate values globally | Removes valid answers | Skip only at same depth. |
+| Generating invalid states then filtering | Explodes search space | Enforce validity while building. |
+| Using string concatenation in deep recursion | Extra O(n) per call | Use `StringBuilder` and undo. |
+
+---
+
 ## Practice Problems
 
 **Easy:**

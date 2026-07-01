@@ -2,6 +2,10 @@
 
 ---
 
+> Start here for the compact reference. For a slower beginner-to-pro path that begins with recursion and then maps into the `DPPatterns.pdf` families, read `02_DP_Pattern_Masterclass.md`.
+
+---
+
 ## 1. What Problem Does This Solve?
 
 Dynamic Programming solves problems with two properties:
@@ -822,6 +826,154 @@ int matrixChainMultiplication(int[] dims) {
 5. Code: Top-down first (easier to reason), then tabulate.
 6. Optimize: Can I reduce space?
 ```
+
+---
+
+## MAANG Pro Upgrade: Recurrence-First DP System
+
+DP becomes manageable when you stop asking "which code template?" and start asking:
+
+> "What decision am I making, and what information must survive into the next decision?"
+
+### The 7-Step DP Interview Flow
+
+1. **Brute force decision tree:** What choices exist at each step?
+2. **State:** Which variables uniquely describe a subproblem?
+3. **Meaning:** Say `dp[...]` in one sentence.
+4. **Transition:** Try all choices and combine previous states.
+5. **Base cases:** What is true before any choices?
+6. **Answer location:** Which cell/state contains the answer?
+7. **Order:** In what order are dependencies already computed?
+
+If step 3 is vague, the DP will be wrong.
+
+### State Design Cheat Sheet
+
+| Problem Signal | Likely State | Example |
+|---|---|---|
+| Prefix of one array/string | `dp[i]` | Climbing Stairs, Word Break |
+| Prefixes of two strings | `dp[i][j]` | LCS, Edit Distance |
+| Grid path | `dp[r][c]` | Unique Paths, Min Path Sum |
+| Choose/not choose items | `dp[i][capacity]` | 0/1 Knapsack |
+| Unlimited item reuse | `dp[amount]` or `dp[i][amount]` | Coin Change |
+| Subarray/subsequence ending at i | `dp[i]` ending at `i` | LIS, Max Product Subarray |
+| Interval from i to j | `dp[i][j]` | Burst Balloons, MCM |
+| Subset of used items | `dp[mask]` | TSP, Assignment |
+| Tree node decisions | return tuple per node | House Robber III |
+| Stock trading constraints | `dp[day][holding][transactions]` | Stock III/IV |
+
+### Recurrence Templates
+
+#### 1D Count Ways
+
+```text
+dp[i] = sum(dp[i - move] for each valid move)
+```
+
+Use for: Climbing Stairs, Decode Ways, Coin Change II.
+
+#### Min / Max Optimization
+
+```text
+dp[state] = best(dp[next/previous state] + cost)
+```
+
+Use for: Coin Change, Min Cost Tickets, Dungeon Game.
+
+#### 0/1 Choice
+
+```text
+dp[i][cap] = max(
+    dp[i-1][cap],                         // skip item
+    value[i] + dp[i-1][cap - weight[i]]   // take item
+)
+```
+
+Use for: Partition Equal Subset Sum, Target Sum, Ones and Zeroes.
+
+#### Unbounded Choice
+
+```text
+dp[amount] = best(dp[amount - coin] + 1)
+```
+
+Loop direction matters:
+- 0/1 knapsack: capacity goes backward.
+- unbounded knapsack: capacity goes forward.
+
+#### Two-String DP
+
+```text
+if chars match:
+    dp[i][j] = diagonal transition
+else:
+    dp[i][j] = best(top, left, diagonal + edit cost)
+```
+
+Use for: LCS, Edit Distance, Regex, Wildcard Matching.
+
+#### Interval DP
+
+```text
+for len from small to large:
+    for left:
+        right = left + len - 1
+        for split in left..right:
+            dp[left][right] = best(dp[left][split] + dp[split+1][right] + cost)
+```
+
+Use for: Matrix Chain Multiplication, Burst Balloons, Palindrome Partitioning.
+
+#### Bitmask DP
+
+```text
+dp[mask] = best answer after choosing the set bits in mask
+for each item not in mask:
+    nextMask = mask | (1 << item)
+    dp[nextMask] = best(dp[nextMask], dp[mask] + cost)
+```
+
+Use for: TSP, Assignment Problem, Shortest Superstring.
+
+### Tabulation Order Rules
+
+| Dependency | Fill Order |
+|---|---|
+| `dp[i]` uses smaller `i` | Left to right |
+| `dp[r][c]` uses top/left | Top-left to bottom-right |
+| `dp[i][j]` uses shorter intervals | Increasing interval length |
+| 0/1 knapsack 1D | Capacity descending |
+| Unbounded knapsack 1D | Capacity ascending |
+| Tree DP | Postorder DFS |
+| Bitmask DP | Increasing mask or BFS over masks |
+
+### Memoization to Tabulation Conversion
+
+1. Write recursive memo first.
+2. List every dependency in the recursive formula.
+3. Fill the table in the opposite direction of recursion.
+4. Replace recursive calls with table lookups.
+5. Keep only previous row/state if dependencies allow it.
+
+### DP Proof Template
+
+> "My state `dp[...]` means [exact meaning]. The transition is complete because it considers every possible last decision. It is non-overlapping because each last decision maps to a distinct previous state. The base case represents the empty/minimal input. Therefore, by induction over the fill order, each state is correct."
+
+### Common Pro Mistakes
+
+| Mistake | Fix |
+|---|---|
+| Defining `dp[i]` as "answer so far" | State exactly what prefix/condition it represents. |
+| Wrong loop direction in 1D knapsack | Backward for 0/1, forward for unbounded. |
+| Missing impossible sentinel | Use large INF for min problems, not 0. |
+| Confusing subsequence and substring | Subsequence can skip; substring must be contiguous. |
+| Returning wrong cell | Identify answer state before coding. |
+| Optimizing space too early | Get 2D/tabulation correct first. |
+| Ignoring reconstruction | Track parent/choice when actual solution is required. |
+
+### 60-Second DP Explanation Template
+
+> "I first define `dp[...]` as [meaning]. The last decision is [choice]. If I take that choice, I transition from [previous state]; if I skip it, I use [other state]. The base case is [base]. Since every state depends only on smaller/already-computed states, I can fill it in [order] with time [complexity] and space [complexity]."
 
 ---
 

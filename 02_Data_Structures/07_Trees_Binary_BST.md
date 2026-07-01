@@ -443,7 +443,7 @@ You have mastered this topic when you can:
 > 1. [1, 3, 4, 5, 6, 7, 8] — inorder of BST is always sorted ascending.
 > 2. If a node's value equals Integer.MIN_VALUE, using Integer.MIN_VALUE as a lower bound would reject it (since the condition `val <= min` would be `MIN_VALUE <= MIN_VALUE` = true = invalid). Long.MIN_VALUE is always smaller than any valid int value, so it never falsely rejects valid nodes.
 > 3. The null case returns `false` (not `target == 0`) because we check the null of a child, not a leaf. A path must end at a leaf. We return false for null to ensure only leaf-to-root paths count.
-> 4. LCA(root=5, p=1, q=4): Both < 5? No (4<5 but 1<5... both < 5 → go left). Wait: 1<5 and 4<5 → both < 5 → go to left(3). At 3: 1<3 → go left? No: 1<3 but 4>3 → split → return 3. LCA = 3.
+> 4. LCA(root=5, p=1, q=4): both values are less than 5, so move left to node 3. At node 3, one value is smaller (1) and one is larger (4), so this is the split point. LCA = 3.
 > 5. 3. A balanced BST with 7 nodes has 3 levels: root (1 node), level 2 (2 nodes), level 3 (4 nodes). Height = 3 = floor(log2(7)) + 1.
 > 6. [5, 3, 1, 4, 7, 6, 8] — preorder: root first, then left subtree, then right subtree.
 > 7. BST property: for every node, all left subtree values < node < all right subtree values. Inorder visits left subtree first (all smaller values), then root, then right subtree (all larger values). Applied recursively, this produces ascending sorted order.
@@ -647,7 +647,77 @@ TreeNode lca(TreeNode root, TreeNode p, TreeNode q) {
 
 ---
 
-## 10. Practice Problems
+## 10. BST Pro Checklist
+
+### BST Bounds Rule
+
+For validation, **each node owns an allowed range**, not just a local parent comparison.
+
+```text
+left subtree:  (min, root.val)
+right subtree: (root.val, max)
+```
+
+That catches invalid trees like:
+
+```text
+    5
+   / \
+  1   7
+     /
+    4   // invalid because 4 is in the right subtree of 5
+```
+
+### BST Operation Decision Table
+
+| Problem | Best Pattern | Interview Note |
+|---|---|---|
+| Search / insert | Compare and go left/right | O(h), not always O(log n). |
+| Validate BST | DFS with min/max bounds | Use `long` bounds for int nodes. |
+| Kth smallest | Inorder traversal | Stop early after kth visit. |
+| Successor | Track candidate while searching | If node has right child, successor is leftmost in right subtree. |
+| Delete | Search, then handle 0/1/2 children | For 2 children, replace with inorder successor. |
+| Recover BST | Inorder detects two inversions | Track `prev`, `first`, `second`. |
+| Build balanced BST | Pick middle as root | Recursively build left/right halves. |
+
+### Delete Node Cases
+
+```text
+Case 1: node has no child      -> return null
+Case 2: node has one child     -> return that child
+Case 3: node has two children  -> copy successor value, then delete successor
+```
+
+### Successor Template
+
+```java
+TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
+    TreeNode candidate = null;
+    while (root != null) {
+        if (p.val < root.val) {
+            candidate = root;
+            root = root.left;
+        } else {
+            root = root.right;
+        }
+    }
+    return candidate;
+}
+```
+
+### BST Interview Traps
+
+| Trap | Better Approach |
+|---|---|
+| Saying all BST operations are O(log n) | Say O(h), balanced O(log n), skewed O(n). |
+| Validating only immediate children | Pass min/max bounds through recursion. |
+| Using `Integer.MIN_VALUE` as bound | Use `long` bounds to avoid rejecting valid min/max nodes. |
+| Forgetting duplicate policy | Clarify whether duplicates go left, right, or are disallowed. |
+| Deleting two-child node incorrectly | Replace with successor/predecessor and delete that duplicate node. |
+
+---
+
+## 11. Practice Problems
 
 **Easy:**
 1. Maximum depth of binary tree.

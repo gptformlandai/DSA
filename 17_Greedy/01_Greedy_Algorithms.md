@@ -682,4 +682,4 @@ double fractionalKnapsack(int W, int[][] items) {
 
 ---
 
-**Next →** `../18_Dynamic_Programming/01_DP_Basics.md`
+**Next →** `../18_Dynamic_Programming/01_DP_Patterns.md`

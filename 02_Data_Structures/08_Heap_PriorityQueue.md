@@ -612,4 +612,4 @@ double getMedian() {
 
 ---
 
-**Next →** `09_Graphs.md`
+**Next →** `../03_Searching/01_Searching_Algorithms.md`

@@ -60,7 +60,7 @@ DSA/
 │   └── 01_Tree_Algorithms.md        ← All traversals, LCA, diameter, serialize
 │
 ├── 14_Heap/
-│   (see 02_Data_Structures/08_Heap_PriorityQueue.md)
+│   └── 01_Heap_Patterns.md          ← Top-K, k-way merge, median stream, scheduling
 │
 ├── 15_Graphs/
 │   └── 01_Graph_Algorithms.md       ← BFS, DFS, Dijkstra, Kruskal, Prim, Topo
@@ -72,7 +72,8 @@ DSA/
 │   └── 01_Greedy_Algorithms.md
 │
 ├── 18_Dynamic_Programming/
-│   └── 01_DP_Patterns.md            ← 1D, Knapsack, String DP, Grid DP, Interval DP
+│   ├── 01_DP_Patterns.md            ← 1D, Knapsack, String DP, Grid DP, Interval DP
+│   └── 02_DP_Pattern_Masterclass.md ← Recursion-to-DP guide for the DPPatterns.pdf families
 │
 ├── 19_Intervals/
 │   └── 01_Intervals.md
@@ -99,7 +100,17 @@ DSA/
 │   └── 01_Pattern_Recognition.md    ← Quick lookup: "problem says X → use Y"
 │
 ├── 27_Practice_Plan/
-│   └── 01_Staged_Practice_Plan.md   ← 15-stage plan with LeetCode problems
+│   ├── 01_Staged_Practice_Plan.md   ← 15-stage plan with LeetCode problems
+│   ├── 02_PDF_Crosscheck_Missing_Problems.md ← DSA.pdf missing-problem upgrade queue
+│   └── 03_Hot_Topic_Interview_Drills.md ← Timed drills for Recursion, Trees, Graphs, DP
+│
+├── 28_MAANG_Hot_Problem_Solutions/
+│   ├── 01_Hot_150_Index.md          ← Hot 150 tracker + Hot 200 extension queue
+│   ├── 02_Hot_Topic_Solved_Walkthroughs.md ← Detailed interview-style solutions
+│   ├── 03_Arrays_TwoPointers_BinarySearch_Solutions.md
+│   ├── 04_Stack_Linked_Heap_Greedy_Solutions.md
+│   ├── 05_Hot_Topic_Expansion_Solutions.md
+│   └── 06_Remaining_Hot_150_Solutions.md
 │
 └── matrix/                          ← Matrix-specific notes
 ```
@@ -118,7 +129,7 @@ DSA/
 → `27_Practice_Plan/01_Staged_Practice_Plan.md`
 
 **Preparing for interviews next month?**
-→ `25_Problem_Solving/01_Problem_Solving_System.md` + `27_Practice_Plan/`
+→ `25_Problem_Solving/01_Problem_Solving_System.md` + `27_Practice_Plan/` + `28_MAANG_Hot_Problem_Solutions/`
 
 ---
 
@@ -145,4 +156,5 @@ DSA/
 | 50 problems solved | Beginner → Intermediate |
 | 100 problems solved | Intermediate level |
 | 150 problems solved | Interview-ready |
+| Hot 150 explained from memory | Strong MAANG signal |
 | Stages 1-15 complete | MAANG-ready |

@@ -794,6 +794,92 @@ TreeNode findMin(TreeNode node) {
 
 ---
 
+## MAANG Pro Upgrade: Tree Recursion Decision Framework
+
+Most tree problems become easy once you identify **when** the current node should be processed.
+
+| Need | Traversal | Reason |
+|---|---|---|
+| Copy, serialize, root-to-leaf path prefix | Preorder | Root state is needed before children. |
+| BST sorted order / kth smallest | Inorder | BST inorder is sorted. |
+| Height, diameter, balance, max path | Postorder | Parent needs answers from children. |
+| Level view, min depth, shortest level answer | BFS | First time you reach a level is minimal. |
+| Path with undo | DFS + backtracking | Path state must be restored after each branch. |
+
+### What Should the Recursive Function Return?
+
+Ask: **"What does my parent need from me?"**
+
+| Problem | Return Value | Global / External State |
+|---|---|---|
+| Max depth | Height of subtree | None |
+| Balanced tree | Height or `-1` if unbalanced | None |
+| Diameter | Height of subtree | `maxDiameter` |
+| Max path sum | Best one-sided gain | `maxPathSum` |
+| LCA | Found node or null | None |
+| Count good nodes | Count in subtree | Max-so-far passed down |
+| Path Sum III | Count from prefix map | Prefix map with undo |
+| Binary Tree Cameras | State: has camera / covered / needs camera | Camera count |
+
+### Postorder Template for Tree DP
+
+```java
+int solve(TreeNode node) {
+    if (node == null) return base;
+
+    int left = solve(node.left);
+    int right = solve(node.right);
+
+    // Use left/right to update answer at current node.
+    answer = Math.max(answer, combineThroughRoot(left, right, node.val));
+
+    // Return only what the parent can extend upward.
+    return extendToParent(left, right, node.val);
+}
+```
+
+**Pro insight:** The value you update globally is often different from the value you return upward.
+
+Example:
+- Diameter updates with `leftHeight + rightHeight`.
+- But it returns `1 + max(leftHeight, rightHeight)`.
+
+### BFS Level Template
+
+```java
+Queue<TreeNode> queue = new ArrayDeque<>();
+queue.offer(root);
+
+while (!queue.isEmpty()) {
+    int size = queue.size(); // freeze current level
+    for (int i = 0; i < size; i++) {
+        TreeNode node = queue.poll();
+        // process node for this level
+        if (node.left != null) queue.offer(node.left);
+        if (node.right != null) queue.offer(node.right);
+    }
+}
+```
+
+Use BFS when the answer depends on **levels**, **nearest leaf**, or **left/right/vertical view**.
+
+### Tree Interview Traps
+
+| Trap | Symptom | Safer Habit |
+|---|---|---|
+| Returning global answer instead of extendable value | Max path / diameter wrong | Separate "update answer" from "return to parent". |
+| Treating null as leaf | Path sum false positives | Leaf means `left == null && right == null`. |
+| Forgetting negative values | Max path sum wrong | Clamp child gain with `Math.max(0, child)`. |
+| BFS without level size | Levels merge together | Capture `size` before loop. |
+| Recursive depth on skewed tree | Stack overflow risk | Know iterative fallback. |
+| Assuming tree is balanced | O(log n) claims wrong | Use O(h), worst-case O(n). |
+
+### 60-Second Explanation Template
+
+> "This is a tree recursion problem. I will solve each subtree and return exactly the information the parent needs. If the answer can pass through both children, I update a global answer at the current node, but return only a one-sided value upward because a parent path can continue through only one child."
+
+---
+
 ## Practice Problems
 
 **Easy:**

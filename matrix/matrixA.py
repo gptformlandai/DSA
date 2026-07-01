@@ -1,39 +1,38 @@
-#code to create a matrix A of size m x n with random integer whole numbers between 0 and 100.
+# Create a matrix A of size m x n with random integers between 0 and 100.
 
-from random import random
+from random import randint
 
 
-def create_matrix(m, n):
-    matrix_A = []
-    for i in range(m):
-        row = []
-        for j in range(n):
-            row.append(j)
-        matrix_A.append(row)
-    return matrix_A
-# Example usage:
-m = 3  # number of rows
-n = 3  # number of columns
-matrix_A = create_matrix(m, n)
-print("Matrix A:")
-for i in matrix_A:
-    for j in i:
-        print(j)
+def create_matrix(m, n, min_value=0, max_value=100):
+    return [[randint(min_value, max_value) for _ in range(n)] for _ in range(m)]
 
-#reverse each row of the matrix A
-def reverse_matrix(matrix):
-    reversed_matrix = []
-    for row in matrix:
-        reversed_row = row[::-1]  # Reverse the row using slicing
-        reversed_matrix.append(reversed_row)
-    return reversed_matrix
 
-#reverse each column of the matrix A
+def reverse_rows(matrix):
+    return [row[::-1] for row in matrix]
+
+
 def reverse_columns(matrix):
-    reversed_matrix = []
-    for i in range(len(matrix[0])):  # Iterate over columns
-        reversed_column = [row[i] for row in matrix][::-1]  # Reverse the column
-        reversed_matrix.append(reversed_column)
-    return reversed_matrix
+    return matrix[::-1]
 
+
+def print_matrix(matrix):
+    for row in matrix:
+        print(" ".join(f"{value:3d}" for value in row))
+
+
+def main():
+    matrix_a = create_matrix(3, 3)
+
+    print("Matrix A:")
+    print_matrix(matrix_a)
+
+    print("\nRows reversed:")
+    print_matrix(reverse_rows(matrix_a))
+
+    print("\nColumns reversed:")
+    print_matrix(reverse_columns(matrix_a))
+
+
+if __name__ == "__main__":
+    main()
 

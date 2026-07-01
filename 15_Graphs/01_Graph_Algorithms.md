@@ -909,6 +909,95 @@ void dfs(char[][] grid, int r, int c) {
 
 ---
 
+## MAANG Pro Upgrade: Graph Algorithm Selection
+
+### First 5 Questions
+
+Ask these before coding:
+
+1. **Directed or undirected?**
+2. **Weighted or unweighted?**
+3. **Can edge weights be negative?**
+4. **Do I need shortest path, connectivity, ordering, or components?**
+5. **Does my visited state need more than just the node?**
+
+### Algorithm Selector
+
+| Problem Signal | Use | Why |
+|---|---|---|
+| Unweighted shortest path | BFS | First time reaching a node is shortest hops. |
+| Weighted, non-negative edges | Dijkstra | Greedy min-distance expansion is valid. |
+| Edge weights are only 0 or 1 | 0-1 BFS | Deque beats heap: O(V+E). |
+| Negative weights, no negative cycle | Bellman-Ford | Relaxes all edges V-1 times. |
+| All-pairs shortest path | Floyd-Warshall | O(V^3), simple for small dense graphs. |
+| Dependency ordering | Topological sort | DAG linear ordering. |
+| Directed cycle detection | DFS colors or Kahn's | Back edge / incomplete topo result. |
+| Undirected cycle detection | DFS with parent or DSU | Same-component edge creates cycle. |
+| Dynamic connectivity | DSU | Fast union/find queries. |
+| Minimum connection cost | Kruskal / Prim | MST problem. |
+| Grid shortest path | BFS or Dijkstra | Depends on uniform vs weighted moves. |
+| Matrix components | DFS/BFS flood fill | Cells are nodes. |
+
+### Visited State Design
+
+For simple graphs, `visited[node]` is enough. For advanced graphs, it is often wrong.
+
+| Problem Type | Correct State |
+|---|---|
+| Normal BFS/DFS | `node` |
+| Grid BFS | `(row, col)` |
+| Shortest path with obstacle eliminations | `(row, col, remainingEliminations)` |
+| Shortest path to collect keys | `(row, col, keyMask)` |
+| Flights with at most K stops | `(city, stopsUsed)` or Bellman-Ford rounds |
+| Word Ladder | `word` |
+| Bitmask graph traversal | `(node, visitedMask)` |
+
+**Rule:** If reaching the same node with different resources changes the future, those resources must be part of visited state.
+
+### BFS Level Discipline
+
+```java
+int steps = 0;
+while (!queue.isEmpty()) {
+    int size = queue.size();
+    for (int i = 0; i < size; i++) {
+        State cur = queue.poll();
+        if (isTarget(cur)) return steps;
+        for (State next : neighbors(cur)) {
+            if (seen.add(next)) queue.offer(next);
+        }
+    }
+    steps++;
+}
+```
+
+Use this when the answer is **minimum number of moves/edges/transformations**.
+
+### Dijkstra Safety Checklist
+
+| Check | Why |
+|---|---|
+| All weights are non-negative | Dijkstra is invalid with negative edges. |
+| Skip stale heap entries | Prevents extra work after better distance found. |
+| Use `long` for large distances | Avoid overflow. |
+| Distance array initialized to infinity | Unreached nodes must stay impossible. |
+| Return when target is popped, not first pushed | Popped distance is finalized. |
+
+### Topological Sort Safety Checklist
+
+| Check | Why |
+|---|---|
+| Build edge direction correctly | `a depends on b` usually means `b -> a`. |
+| Count all nodes, even isolated nodes | Isolated tasks can appear in answer. |
+| If processed count < n, cycle exists | No full topological ordering. |
+| For unique ordering, queue size must be 1 each step | Multiple zero-indegree choices means multiple valid orders. |
+
+### 60-Second Graph Explanation Template
+
+> "I will first classify the graph. Since edges are [weighted/unweighted] and I need [shortest path/connectivity/order], the right algorithm is [BFS/Dijkstra/topological sort/DSU]. I will define visited state as [state], because reaching the same node with different resources [does/does not] change future choices."
+
+---
+
 ## Practice Problems
 
 **Easy:**

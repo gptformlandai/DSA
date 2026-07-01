@@ -132,5 +132,4 @@ After this week, you will:
  ✅ Convert matrix indices ↔ linear indices fluently
  ✅ Handle boundary conditions without bugs
  ✅ Build foundation for matrix-as-graph (Week 11)
- ✅ Build foundation for 2D DP (Week 19
- 
+ ✅ Build foundation for 2D DP (Week 19)

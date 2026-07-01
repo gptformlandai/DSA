@@ -2,6 +2,10 @@
 
 > Follow this plan in order. Complete all problems per stage before moving on.
 
+> PDF cross-check: after finishing each stage, use `02_PDF_Crosscheck_Missing_Problems.md` as the upgrade queue for problems from `DSA.pdf` that were not already present in the notes.
+
+> Hot-topic drills: use `03_Hot_Topic_Interview_Drills.md` for Recursion, Trees/BST, Graphs/DSU, and DP timed practice.
+
 ---
 
 ## Stage 1: Absolute Basics (Week 1)
@@ -218,6 +222,8 @@
 
 **Start with 1D, then 2D, then string DP, then knapsack.**
 
+**Before solving:** read `../18_Dynamic_Programming/02_DP_Pattern_Masterclass.md` to learn the recursion -> memoization -> tabulation ladder and the five DP pattern families from `DPPatterns.pdf`.
+
 **Problems:**
 | # | Problem | Level |
 |---|---------|-------|
@@ -286,6 +292,8 @@ By the time you've done 150 problems across stages:
 - [ ] 90 Medium
 - [ ] 30 Hard
 - [ ] Coverage: Arrays, Binary Search, Two Pointers, Sliding Window, HashMap, Stack, Queue, Recursion, Backtracking, Trees, Graphs, DP, Greedy
+- [ ] Track completion in `../28_MAANG_Hot_Problem_Solutions/01_Hot_150_Index.md`
+- [ ] Study detailed hot-topic writeups in `../28_MAANG_Hot_Problem_Solutions/02_Hot_Topic_Solved_Walkthroughs.md`
 - [ ] 10+ Mock interviews done
 
 ---
@@ -293,6 +301,7 @@ By the time you've done 150 problems across stages:
 ## Resources for Practice
 
 - LeetCode — primary platform (filter by topic and difficulty)
+- `../28_MAANG_Hot_Problem_Solutions/` — repo-native Hot 150/200 tracker and detailed solutions
 - NeetCode.io — curated 150-problem roadmap with video solutions
 - AlgoExpert — structured video lessons
 - Codeforces / AtCoder — competitive programming (after Stage 13)
