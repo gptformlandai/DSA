@@ -447,4 +447,94 @@ You have mastered this topic when you can:
 
 ---
 
+## 19. PRO-Level Number Theory
+
+### Extended Euclidean Algorithm
+Beyond `gcd`, it finds integers `x, y` with `a·x + b·y = gcd(a, b)` — the basis of modular inverse when the modulus is **not prime**.
+```java
+long[] extgcd(long a, long b) {          // returns {gcd, x, y}
+    if (b == 0) return new long[]{a, 1, 0};
+    long[] r = extgcd(b, a % b);
+    return new long[]{r[0], r[2], r[1] - (a / b) * r[2]};
+}
+long modInverse(long a, long m) {         // works for any m coprime to a
+    long[] r = extgcd(a, m);
+    if (r[0] != 1) return -1;             // inverse exists iff gcd(a,m)==1
+    return (r[1] % m + m) % m;
+}
+```
+
+### Linear Sieve (Euler's Sieve) — O(n)
+Computes primes AND the smallest prime factor of every number in true O(n), each composite marked exactly once.
+```java
+int[] linearSieve(int n) {
+    int[] spf = new int[n + 1];           // smallest prime factor
+    List<Integer> primes = new ArrayList<>();
+    for (int i = 2; i <= n; i++) {
+        if (spf[i] == 0) { spf[i] = i; primes.add(i); }
+        for (int p : primes) {
+            if (p > spf[i] || (long) i * p > n) break;
+            spf[i * p] = p;               // marked once, by its smallest prime factor
+        }
+    }
+    return spf;                           // spf enables O(log n) factorization
+}
+```
+
+### Matrix Exponentiation — Recurrences in O(log n)
+Any linear recurrence (Fibonacci, tribonacci, path counts) can be raised to the n-th term via fast matrix power. Fibonacci uses `[[1,1],[1,0]]^n`.
+```java
+long MOD = 1_000_000_007L;
+long[][] matMul(long[][] a, long[][] b) {
+    int n = a.length, m = b[0].length, k = b.length;
+    long[][] c = new long[n][m];
+    for (int i = 0; i < n; i++)
+        for (int x = 0; x < k; x++) if (a[i][x] != 0)
+            for (int j = 0; j < m; j++)
+                c[i][j] = (c[i][j] + a[i][x] * b[x][j]) % MOD;
+    return c;
+}
+long[][] matPow(long[][] base, long e) {
+    int n = base.length;
+    long[][] res = new long[n][n];
+    for (int i = 0; i < n; i++) res[i][i] = 1;   // identity
+    while (e > 0) {
+        if ((e & 1) == 1) res = matMul(res, base);
+        base = matMul(base, base);
+        e >>= 1;
+    }
+    return res;
+}
+long fib(long n) {                        // O(log n) Fibonacci
+    if (n == 0) return 0;
+    long[][] m = matPow(new long[][]{{1,1},{1,0}}, n);
+    return m[0][1];
+}
+```
+
+### Euler's Totient φ(n)
+Counts integers in `[1, n]` coprime to `n`. Multiplicative; computed from distinct prime factors.
+```java
+long phi(long n) {
+    long result = n;
+    for (long p = 2; p * p <= n; p++) {
+        if (n % p == 0) {
+            while (n % p == 0) n /= p;
+            result -= result / p;         // apply (1 - 1/p)
+        }
+    }
+    if (n > 1) result -= result / n;
+    return result;
+}
+```
+Euler's theorem generalizes Fermat: `a^φ(m) ≡ 1 (mod m)` when `gcd(a,m)=1`, so `a^(-1) ≡ a^(φ(m)-1)`.
+
+### Chinese Remainder Theorem (CRT)
+Given `x ≡ r1 (mod m1)` and `x ≡ r2 (mod m2)` with coprime moduli, CRT reconstructs the unique `x mod (m1·m2)` — useful for combining results computed under several small moduli.
+
+### Miller-Rabin (deterministic for 64-bit)
+For primality of large numbers, trial division is too slow. Miller-Rabin with the witness set `{2,3,5,7,11,13,17,19,23,29,31,37}` is deterministic for all `n < 3.3·10^24`. Implement `mulmod`/`powmod` carefully (via `Math.multiplyHigh` or `BigInteger`) to avoid overflow.
+
+---
+
 **Next →** `../25_Problem_Solving/01_Problem_Solving_System.md`

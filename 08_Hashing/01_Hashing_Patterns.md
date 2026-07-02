@@ -657,6 +657,94 @@ This enables O(n) average string pattern matching.
 
 ---
 
+## LRU Cache — HashMap + Doubly Linked List (LeetCode #146)
+
+### Intuition
+An LRU (Least Recently Used) cache needs O(1) `get` and `put` while evicting the least-recently-used key when full. A **HashMap** gives O(1) key lookup; a **doubly linked list** gives O(1) reorder/eviction. The map points to list nodes; the list keeps usage order (most-recent at the head, least-recent at the tail).
+
+```java
+class LRUCache {
+    class Node { int key, val; Node prev, next; Node(int k, int v){key=k; val=v;} }
+    private final Map<Integer, Node> map = new HashMap<>();
+    private final Node head = new Node(0,0), tail = new Node(0,0); // sentinels
+    private final int capacity;
+
+    public LRUCache(int capacity) {
+        this.capacity = capacity;
+        head.next = tail; tail.prev = head;
+    }
+    private void remove(Node n) { n.prev.next = n.next; n.next.prev = n.prev; }
+    private void addFront(Node n) {                 // most-recently-used position
+        n.next = head.next; n.prev = head;
+        head.next.prev = n; head.next = n;
+    }
+    public int get(int key) {
+        if (!map.containsKey(key)) return -1;
+        Node n = map.get(key);
+        remove(n); addFront(n);                     // mark as recently used
+        return n.val;
+    }
+    public void put(int key, int value) {
+        if (map.containsKey(key)) remove(map.get(key));
+        Node n = new Node(key, value);
+        map.put(key, n);
+        addFront(n);
+        if (map.size() > capacity) {                // evict LRU (tail)
+            Node lru = tail.prev;
+            remove(lru);
+            map.remove(lru.key);
+        }
+    }
+}
+```
+> **Shortcut:** Java's `LinkedHashMap` with `accessOrder=true` and an overridden `removeEldestEntry` is a one-class LRU — but interviewers usually want the HashMap + DLL version above.
+
+---
+
+## LFU Cache — Frequency Buckets (LeetCode #460)
+
+### Intuition
+LFU (Least Frequently Used) evicts the key with the smallest use count; ties break by least-recently-used. Keep a `key→(value,freq)` map, a `freq→ordered set of keys` map (each bucket is access-ordered), and a running `minFreq`. On access, move the key from bucket `f` to bucket `f+1`; on eviction, drop the LRU key from bucket `minFreq`.
+
+```java
+class LFUCache {
+    private final Map<Integer,int[]> vals = new HashMap<>();          // key -> {val, freq}
+    private final Map<Integer,LinkedHashSet<Integer>> lists = new HashMap<>(); // freq -> keys
+    private final int capacity;
+    private int minFreq = 0;
+
+    public LFUCache(int capacity) { this.capacity = capacity; }
+
+    public int get(int key) {
+        if (!vals.containsKey(key)) return -1;
+        touch(key);
+        return vals.get(key)[0];
+    }
+    private void touch(int key) {
+        int f = vals.get(key)[1];
+        vals.get(key)[1] = f + 1;
+        lists.get(f).remove(key);
+        if (f == minFreq && lists.get(f).isEmpty()) minFreq++;
+        lists.computeIfAbsent(f + 1, x -> new LinkedHashSet<>()).add(key);
+    }
+    public void put(int key, int value) {
+        if (capacity == 0) return;
+        if (vals.containsKey(key)) { vals.get(key)[0] = value; touch(key); return; }
+        if (vals.size() >= capacity) {                 // evict LFU + LRU
+            int evict = lists.get(minFreq).iterator().next();
+            lists.get(minFreq).remove(evict);
+            vals.remove(evict);
+        }
+        vals.put(key, new int[]{value, 1});
+        lists.computeIfAbsent(1, x -> new LinkedHashSet<>()).add(key);
+        minFreq = 1;                                    // new key has freq 1
+    }
+}
+```
+Both `get` and `put` are O(1). For hash-table internals (chaining vs open addressing, load factor, resizing), see `../02_Data_Structures/09_Balanced_Trees_And_Hashing_Internals.md`.
+
+---
+
 ## Practice Problems
 
 **Easy:**

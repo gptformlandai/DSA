@@ -880,6 +880,103 @@ Use BFS when the answer depends on **levels**, **nearest leaf**, or **left/right
 
 ---
 
+## Morris Traversal — O(1) Space Inorder
+
+### Intuition
+Recursive/iterative inorder needs O(h) stack space. **Morris traversal** achieves O(1) by temporarily wiring each node's in-order predecessor to point back to it (a "thread"), walking down, then unwinding the thread on the way back. The tree is restored to its original shape by the end.
+
+```java
+public List<Integer> inorderMorris(TreeNode root) {
+    List<Integer> res = new ArrayList<>();
+    TreeNode cur = root;
+    while (cur != null) {
+        if (cur.left == null) {
+            res.add(cur.val);        // no left subtree: visit, go right
+            cur = cur.right;
+        } else {
+            TreeNode pred = cur.left;          // find in-order predecessor
+            while (pred.right != null && pred.right != cur) pred = pred.right;
+            if (pred.right == null) {
+                pred.right = cur;              // create thread, descend left
+                cur = cur.left;
+            } else {
+                pred.right = null;             // thread exists: unwind, visit
+                res.add(cur.val);
+                cur = cur.right;
+            }
+        }
+    }
+    return res;
+}
+```
+Time O(n) (each edge traversed ≤ 3 times), space **O(1)**. Great answer when asked to traverse "without recursion or a stack."
+
+---
+
+## Build Tree from Traversals (LeetCode #105 / #106)
+
+### Intuition
+Preorder's first element is the root; find it in inorder to split left/right subtrees, then recurse. A HashMap of value→inorder-index makes each lookup O(1) for overall **O(n)**.
+
+```java
+Map<Integer,Integer> idx = new HashMap<>();
+int pre = 0;
+public TreeNode buildTreeFromPreIn(int[] preorder, int[] inorder) {
+    for (int i = 0; i < inorder.length; i++) idx.put(inorder[i], i);
+    return build(preorder, 0, inorder.length - 1);
+}
+private TreeNode build(int[] preorder, int lo, int hi) {
+    if (lo > hi) return null;
+    int rootVal = preorder[pre++];
+    TreeNode root = new TreeNode(rootVal);
+    int mid = idx.get(rootVal);           // split point in inorder
+    root.left  = build(preorder, lo, mid - 1);
+    root.right = build(preorder, mid + 1, hi);
+    return root;
+}
+```
+For postorder+inorder (#106), consume postorder from the **end** and build **right before left**.
+
+---
+
+## LCA with Binary Lifting — O(log n) per Query
+
+### Intuition
+The general LCA recursion is O(n) per query. When many queries hit a static rooted tree, precompute each node's `2^k`-th ancestor in an `up[k][v]` table (O(n log n) once). To find LCA(u, v): lift the deeper node to the other's depth, then lift both in powers of two until their parents coincide — **O(log n) per query**.
+
+```java
+int LOG;
+int[][] up;       // up[k][v] = 2^k-th ancestor of v
+int[] depth;
+List<Integer>[] adj;
+
+void preprocess(int n, int root) {
+    LOG = Math.max(1, (int)(Math.log(n) / Math.log(2)) + 1);
+    up = new int[LOG][n];
+    depth = new int[n];
+    dfs(root, root);                       // root is its own parent
+    for (int k = 1; k < LOG; k++)
+        for (int v = 0; v < n; v++)
+            up[k][v] = up[k - 1][up[k - 1][v]];   // 2^k = 2^(k-1) + 2^(k-1)
+}
+void dfs(int v, int parent) {
+    up[0][v] = parent;
+    for (int c : adj[v]) if (c != parent) { depth[c] = depth[v] + 1; dfs(c, v); }
+}
+int lca(int u, int v) {
+    if (depth[u] < depth[v]) { int t = u; u = v; v = t; }
+    int diff = depth[u] - depth[v];
+    for (int k = 0; k < LOG; k++) if (((diff >> k) & 1) == 1) u = up[k][u]; // lift up
+    if (u == v) return u;
+    for (int k = LOG - 1; k >= 0; k--)
+        if (up[k][u] != up[k][v]) { u = up[k][u]; v = up[k][v]; }
+    return up[0][u];
+}
+```
+Distance between two nodes = `depth[u] + depth[v] - 2*depth[lca(u,v)]`.
+
+---
+
 ## Practice Problems
 
 **Easy:**

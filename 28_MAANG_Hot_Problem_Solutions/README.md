@@ -69,6 +69,9 @@ Give a crisp answer in 4-6 sentences.
 | `04_Stack_Linked_Heap_Greedy_Solutions.md` | Stack, linked list, heap, interval, and greedy solutions |
 | `05_Hot_Topic_Expansion_Solutions.md` | Expanded Trees/BST, Backtracking, Graph, DSU, and DP solution cards |
 | `06_Remaining_Hot_150_Solutions.md` | Remaining core Hot 150 solution cards, including trie, math, design, and advanced graph/DP |
+| `07_Hot_150_Completion_Solutions.md` | Final 41 cards (Trees, Backtracking, Graphs, DP) — completes 150/150 core coverage |
+
+> **Coverage:** every one of the 150 core problems in `01_Hot_150_Index.md` now has a written solution card across files 02–07.
 
 ---
 

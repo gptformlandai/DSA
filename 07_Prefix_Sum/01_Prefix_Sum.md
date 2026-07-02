@@ -662,6 +662,36 @@ int countXorSubarrays(int[] arr, int k) {
 
 ---
 
+## 8b. 2D Difference Array (Range Updates on a Grid)
+
+The 1D difference trick extends to 2D: to add `v` to every cell in the rectangle `(r1,c1)..(r2,c2)`, stamp four corners, then take a **2D prefix sum** to materialize the grid. Turns `Q` rectangle updates from O(Q·area) into **O(Q + R·C)**.
+
+```java
+// Apply many rectangle add-updates, then reconstruct the final grid.
+int[][] applyUpdates(int rows, int cols, int[][] updates) { // update = {r1,c1,r2,c2,val}
+    int[][] diff = new int[rows + 1][cols + 1];
+    for (int[] u : updates) {
+        int r1 = u[0], c1 = u[1], r2 = u[2], c2 = u[3], v = u[4];
+        diff[r1][c1]         += v;
+        diff[r2 + 1][c1]     -= v;
+        diff[r1][c2 + 1]     -= v;
+        diff[r2 + 1][c2 + 1] += v;   // inclusion-exclusion corners
+    }
+    int[][] grid = new int[rows][cols];
+    for (int i = 0; i < rows; i++)
+        for (int j = 0; j < cols; j++) {
+            int up   = i > 0 ? grid[i - 1][j] : 0;
+            int left = j > 0 ? grid[i][j - 1] : 0;
+            int diag = (i > 0 && j > 0) ? grid[i - 1][j - 1] : 0;
+            grid[i][j] = diff[i][j] + up + left - diag;   // 2D prefix sum of diff
+        }
+    return grid;
+}
+```
+**Canonical problems:** LeetCode 2536 *Increment Submatrices by One*, 2132 *Stamping the Grid*.
+
+---
+
 ## 9. Real-World Use Cases
 
 - **Analytics dashboards:** Sum sales from date A to date B in O(1).

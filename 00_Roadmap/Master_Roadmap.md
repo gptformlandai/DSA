@@ -51,6 +51,22 @@
 
 ---
 
+## 🚀 PRO-Level Companion Files
+
+These deep-dive files extend the core sections to true "PRO mastery" for hard interviews:
+
+| Companion File | Covers |
+|----------------|--------|
+| `02_Data_Structures/09_Balanced_Trees_And_Hashing_Internals.md` | BST deletion, AVL & Red-Black trees, rotations, open addressing, load factor, O(n) heapify proof |
+| `15_Graphs/02_Advanced_Graph_Algorithms.md` | Bellman-Ford, Floyd-Warshall, 0-1 BFS, A*, Prim, Kruskal, Tarjan/Kosaraju SCC, bridges & articulation points |
+| `18_Dynamic_Programming/03_Advanced_DP.md` | Bitmask DP (TSP/assignment), Digit DP, Tree DP + rerooting, matrix chain, DP reconstruction, state-space design |
+| `21_Strings/02_Advanced_String_Algorithms.md` | Z-algorithm, Manacher's, Rabin-Karp rolling hash, Aho-Corasick, suffix array primer |
+| `23_Range_Query/02_Advanced_Range_Query.md` | Lazy propagation, range-update BIT trick, sqrt decomposition, Mo's algorithm |
+
+Additional PRO topics were folded into existing sections: QuickSelect & Heap Sort (Sorting), Reverse k-Group / Sort List / Copy Random List (Linked List), Basic Calculator & Stock Span (Stack), LRU/LFU Cache (Hashing), 2D difference array (Prefix Sum), Morris traversal / tree reconstruction / binary-lifting LCA (Trees), weighted & rollback DSU, Huffman coding (Greedy), extended Euclid / linear sieve / matrix exponentiation / totient / CRT (Math), Gray code & Gosper's hack (Bit Manipulation), amortized analysis & Master Theorem (Foundations), and sweep line (Intervals).
+
+---
+
 ## 🎯 Learning Stages Overview
 
 ```
@@ -89,6 +105,7 @@ After reading this roadmap, go to:
 | Mode 8 | Pattern Cheatsheet | `26_Cheatsheets/01_Pattern_Recognition.md` |
 | Mode 9 | Dynamic Programming Masterclass | `18_Dynamic_Programming/02_DP_Pattern_Masterclass.md` |
 | Mode 10 | Hot 150 Solution Tracker | `28_MAANG_Hot_Problem_Solutions/01_Hot_150_Index.md` |
+| Mode 11 | Behavioral, Communication & Mock Interviews | `27_Practice_Plan/04_Behavioral_Communication_And_Mock_Rubric.md` |
 
 ---
 
@@ -105,3 +122,5 @@ After reading this roadmap, go to:
 - [ ] Has solved 150+ LeetCode problems across topics
 - [ ] Can explain the Hot 150 patterns without memorizing code
 - [ ] Has done 10+ mock interviews
+- [ ] Can deliver a structured STAR answer for 8+ behavioral prompts
+- [ ] Scores 4+ on every axis of the mock rubric (`27_Practice_Plan/04_Behavioral_Communication_And_Mock_Rubric.md`)

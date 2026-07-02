@@ -284,6 +284,56 @@ Total: 5 comparisons for n=5 → O(n)
 
 ---
 
+## 13b. Amortized Analysis — Averaging Over a Sequence
+
+Some operations are usually cheap but occasionally expensive. **Amortized analysis** proves the *average* cost per operation over a worst-case sequence is small — even though a single operation can spike. Three formal methods:
+
+### 1. Aggregate method
+Bound the total cost of `n` operations, then divide by `n`.
+- **Dynamic array (ArrayList) push:** `n` appends trigger doubling at sizes 1, 2, 4, ..., n. Total copy work = `1 + 2 + 4 + ... + n < 2n`. Plus `n` cheap writes → total `< 3n` → **amortized O(1)** per push, even though the resize itself is O(n).
+
+### 2. Accounting (banker's) method
+Charge each cheap operation a little extra and store the surplus as "credit" to pay for future expensive ones.
+- Charge **3 units** per push: 1 for the write, 2 saved as credit. When a resize copies `k` elements, the credit accumulated since the last resize exactly covers the `k` copies. Credit never goes negative → amortized cost ≤ 3 = **O(1)**.
+
+### 3. Potential method
+Define a potential function Φ (stored "energy" of the structure). Amortized cost = actual cost + ΔΦ. Choose Φ so expensive operations release potential.
+- For the dynamic array, Φ = `2·size - capacity`. A normal push raises Φ by 2 (pays its way); a resize drops Φ sharply, absorbing the O(n) copy → amortized **O(1)**.
+
+### Where amortized reasoning shows up
+| Structure / operation | Single worst case | Amortized |
+|-----------------------|-------------------|-----------|
+| ArrayList append (with doubling) | O(n) on resize | O(1) |
+| HashMap insert (with rehash) | O(n) on resize | O(1) |
+| Two-stack queue (`push`/`pop`) | O(n) on transfer | O(1) |
+| Monotonic stack/deque scan | O(n) for one step | O(1) per element |
+| Union-Find with path compression | ~O(log n) | ~O(α(n)) ≈ O(1) |
+| Fibonacci heap decrease-key | O(n) | O(1) |
+
+> **Amortized ≠ average-case.** Amortized is a *worst-case guarantee over a sequence* (no probability involved); average-case depends on input distribution.
+
+---
+
+## 13c. Recurrence Relations & the Master Theorem
+
+Divide-and-conquer recurrences take the form `T(n) = a·T(n/b) + f(n)` (`a` subproblems, each size `n/b`, plus `f(n)` combine work). Compare `f(n)` against `n^(log_b a)`:
+
+| Case | Condition | Result |
+|------|-----------|--------|
+| 1 | `f(n) = O(n^(log_b a − ε))` (leaves dominate) | `T(n) = Θ(n^(log_b a))` |
+| 2 | `f(n) = Θ(n^(log_b a))` (balanced) | `T(n) = Θ(n^(log_b a) · log n)` |
+| 3 | `f(n) = Ω(n^(log_b a + ε))` (root dominates) | `T(n) = Θ(f(n))` |
+
+**Worked examples:**
+- **Merge sort:** `T(n)=2T(n/2)+O(n)` → `n^(log_2 2)=n^1=n`, matches `f(n)` → Case 2 → **Θ(n log n)**.
+- **Binary search:** `T(n)=T(n/2)+O(1)` → `n^(log_2 1)=n^0=1` → Case 2 → **Θ(log n)**.
+- **Karatsuba multiply:** `T(n)=3T(n/2)+O(n)` → `n^(log_2 3)≈n^1.585` dominates → Case 1 → **Θ(n^1.585)**.
+- **Naive matrix mult (recursive):** `T(n)=8T(n/2)+O(n^2)` → `n^(log_2 8)=n^3` → Case 1 → **Θ(n^3)**.
+
+For subtract-and-conquer (`T(n)=T(n-1)+f(n)`), just sum: linear recursion with O(1) work → O(n); with O(n) work → O(n^2). The **recursion tree** method (sum work per level × number of levels) handles cases the Master Theorem can't.
+
+---
+
 ## 14. Practice Problems
 
 **Easy:**

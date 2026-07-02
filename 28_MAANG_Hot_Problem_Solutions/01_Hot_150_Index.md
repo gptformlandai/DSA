@@ -8,9 +8,10 @@
 
 | Status | Meaning |
 |---|---|
-| Detailed | Full walkthrough or compact solution card exists in this section's solution files |
-| Detailed | Track and solve using the topic notes |
+| Detailed | Full walkthrough or compact solution card exists in the solution files (02–07) |
 | Extension | Hot 200 add-on problem after the core 150 |
+
+> **Coverage:** All **150 core problems** below have a written solution card. Cards are spread across `02_Hot_Topic_Solved_Walkthroughs.md` through `07_Hot_150_Completion_Solutions.md`. Use `grep '^## <number>\.'` across those files to jump to any solution.
 
 ---
 
@@ -316,7 +317,8 @@ You are MAANG-ready when:
 - [ ] You can identify the pattern for every problem in this index.
 - [ ] You can solve 2 medium problems in 45 minutes consistently.
 - [ ] You can debug edge cases while speaking clearly.
+- [ ] You can run a clean mock interview using `../27_Practice_Plan/04_Behavioral_Communication_And_Mock_Rubric.md`.
 
 ---
 
-**Next:** `02_Hot_Topic_Solved_Walkthroughs.md`
+**Next:** `02_Hot_Topic_Solved_Walkthroughs.md` → … → `07_Hot_150_Completion_Solutions.md`

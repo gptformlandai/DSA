@@ -758,6 +758,84 @@ List<Integer> topologicalSort(int n, int[][] edges) {
 
 ---
 
+## QuickSelect — Kth Element in O(n) Average
+
+### Intuition
+QuickSort partitions around a pivot, then recurses on **both** sides. If you only need the k-th smallest element, you only need to recurse into the **one** side that contains it. This drops the average cost from O(n log n) to **O(n)** (n + n/2 + n/4 + ... = 2n).
+
+### Code
+```java
+// Returns the k-th smallest (1-indexed) element. Rearranges nums in place.
+public int quickSelect(int[] nums, int k) {
+    int lo = 0, hi = nums.length - 1, target = k - 1;   // 0-indexed rank
+    Random rand = new Random();
+    while (lo <= hi) {
+        int pivotIdx = lo + rand.nextInt(hi - lo + 1);   // random pivot dodges O(n^2)
+        int p = partition(nums, lo, hi, pivotIdx);
+        if (p == target) return nums[p];
+        else if (p < target) lo = p + 1;                 // recurse right only
+        else hi = p - 1;                                 // recurse left only
+    }
+    return -1;
+}
+private int partition(int[] a, int lo, int hi, int pivotIdx) {
+    int pivot = a[pivotIdx];
+    swap(a, pivotIdx, hi);                               // move pivot to end
+    int store = lo;
+    for (int i = lo; i < hi; i++)
+        if (a[i] < pivot) swap(a, store++, i);
+    swap(a, store, hi);                                  // place pivot in final spot
+    return store;
+}
+private void swap(int[] a, int i, int j) { int t = a[i]; a[i] = a[j]; a[j] = t; }
+```
+
+- **Random pivot** is essential: a fixed pivot on sorted input degrades to O(n²).
+- For **k-th largest**, use rank `n - k`.
+- **Median of Medians** gives a guaranteed O(n) worst case but is rarely needed in interviews.
+- **Canonical problems:** LeetCode 215 *Kth Largest Element*, 973 *K Closest Points to Origin*, 347 *Top K Frequent Elements* (bucket sort is even better here).
+
+---
+
+## Heap Sort — O(n log n) In-Place
+
+### Intuition
+Build a max-heap in the array (O(n)), then repeatedly swap the max (root) to the end and sift down the reduced heap. Fully in-place, O(n log n) worst case, but **not stable** and cache-unfriendly versus quicksort.
+
+### Code
+```java
+public void heapSort(int[] a) {
+    int n = a.length;
+    for (int i = n / 2 - 1; i >= 0; i--) siftDown(a, i, n);   // build max-heap: O(n)
+    for (int end = n - 1; end > 0; end--) {
+        swap(a, 0, end);                                     // max to sorted tail
+        siftDown(a, 0, end);                                 // restore heap on [0, end)
+    }
+}
+private void siftDown(int[] a, int i, int n) {
+    while (true) {
+        int l = 2 * i + 1, r = 2 * i + 2, largest = i;
+        if (l < n && a[l] > a[largest]) largest = l;
+        if (r < n && a[r] > a[largest]) largest = r;
+        if (largest == i) break;
+        swap(a, i, largest);
+        i = largest;
+    }
+}
+```
+
+| Sort | Time | Space | Stable? | Notes |
+|------|------|-------|---------|-------|
+| Heap Sort | O(n log n) | O(1) | No | In-place, no worst-case blowup |
+| Quick Sort | O(n log n) avg, O(n²) worst | O(log n) | No | Fastest in practice (cache) |
+| Merge Sort | O(n log n) | O(n) | Yes | Stable, external sorting |
+
+### Bucket & Shell Sort (quick reference)
+- **Bucket Sort:** scatter values into `k` buckets by range, sort each, concatenate. O(n + k) when input is uniformly distributed (e.g., floats in [0,1)).
+- **Shell Sort:** insertion sort with diminishing gaps (e.g., n/2, n/4, ..., 1). Beats plain insertion sort by moving elements long distances early; ~O(n^1.25) typical.
+
+---
+
 ## Practice Problems
 
 **Easy:**

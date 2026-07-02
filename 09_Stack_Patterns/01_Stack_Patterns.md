@@ -724,6 +724,105 @@ int sumSubarrayMins(int[] arr) {
 
 ---
 
+## Expression Evaluation (Basic Calculator)
+
+### Intuition
+Expressions mix operators of different precedence and parentheses. A stack lets you defer lower-precedence work while resolving higher-precedence sub-expressions. The clean pattern: scan left to right, keep a running `num`, and when you hit an operator or the end of a chunk, **apply the *previous* operator** to decide what to push.
+
+### Basic Calculator II (`+ - * /`, no parentheses)
+```java
+public int calculate(String s) {
+    Deque<Integer> stack = new ArrayDeque<>();
+    int num = 0;
+    char op = '+';                       // pretend a leading '+'
+    for (int i = 0; i < s.length(); i++) {
+        char c = s.charAt(i);
+        if (Character.isDigit(c)) num = num * 10 + (c - '0');
+        if ((!Character.isDigit(c) && c != ' ') || i == s.length() - 1) {
+            switch (op) {                // apply the PREVIOUS operator
+                case '+': stack.push(num); break;
+                case '-': stack.push(-num); break;
+                case '*': stack.push(stack.pop() * num); break;
+                case '/': stack.push(stack.pop() / num); break;
+            }
+            op = c;                      // remember current operator
+            num = 0;
+        }
+    }
+    int sum = 0;
+    while (!stack.isEmpty()) sum += stack.pop();   // add deferred terms
+    return sum;
+}
+```
+`* /` resolve immediately against the stack top; `+ -` defer by pushing signed values. Final sum handles precedence correctly.
+
+### Basic Calculator I (`+ -` with parentheses)
+Carry a running result and sign; push `(result, sign)` on `(` and restore on `)`.
+```java
+public int calculateI(String s) {
+    Deque<Integer> stack = new ArrayDeque<>();
+    int result = 0, num = 0, sign = 1;
+    for (char c : s.toCharArray()) {
+        if (Character.isDigit(c)) num = num * 10 + (c - '0');
+        else if (c == '+') { result += sign * num; num = 0; sign = 1; }
+        else if (c == '-') { result += sign * num; num = 0; sign = -1; }
+        else if (c == '(') { stack.push(result); stack.push(sign); result = 0; sign = 1; }
+        else if (c == ')') {
+            result += sign * num; num = 0;
+            result *= stack.pop();       // sign before the '('
+            result += stack.pop();       // result before the '('
+        }
+    }
+    return result + sign * num;
+}
+```
+
+### Infix → Postfix (Shunting-Yard) + Postfix eval
+```java
+// Convert infix to postfix using operator precedence.
+String toPostfix(String s) {
+    Map<Character,Integer> prec = Map.of('+',1,'-',1,'*',2,'/',2);
+    StringBuilder out = new StringBuilder();
+    Deque<Character> ops = new ArrayDeque<>();
+    for (char c : s.toCharArray()) {
+        if (Character.isLetterOrDigit(c)) out.append(c);
+        else if (c == '(') ops.push(c);
+        else if (c == ')') { while (ops.peek() != '(') out.append(ops.pop()); ops.pop(); }
+        else {
+            while (!ops.isEmpty() && ops.peek() != '('
+                   && prec.getOrDefault(ops.peek(),0) >= prec.get(c)) out.append(ops.pop());
+            ops.push(c);
+        }
+    }
+    while (!ops.isEmpty()) out.append(ops.pop());
+    return out.toString();
+}
+```
+**Canonical problems:** LeetCode 224 *Basic Calculator*, 227 *Basic Calculator II*, 772 *Basic Calculator III* (both), 150 *Evaluate Reverse Polish Notation*.
+
+---
+
+## Stock Span (Monotonic Stack)
+
+### Intuition
+The span of today's price = number of consecutive prior days (including today) with price ≤ today's. Pop all days with a price ≤ today's (they're "covered" by today), then the span is the distance to the previous strictly-greater day. Store indices in a **decreasing** stack.
+
+```java
+class StockSpanner {
+    Deque<int[]> stack = new ArrayDeque<>();  // {price, span}
+    public int next(int price) {
+        int span = 1;
+        while (!stack.isEmpty() && stack.peek()[0] <= price)
+            span += stack.pop()[1];           // absorb covered days
+        stack.push(new int[]{price, span});
+        return span;
+    }
+}
+```
+Amortized **O(1)** per call (each price is pushed and popped once). **Canonical problem:** LeetCode 901 *Online Stock Span*. Same skeleton solves LeetCode 962 *Maximum Width Ramp* and 739 *Daily Temperatures*.
+
+---
+
 ## Practice Problems
 
 **Easy:**

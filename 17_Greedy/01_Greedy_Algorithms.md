@@ -661,6 +661,43 @@ double fractionalKnapsack(int W, int[][] items) {
 
 ---
 
+## 12. Huffman Coding (Greedy + Heap)
+
+### Intuition
+To build an optimal **prefix-free** code (no codeword is a prefix of another), give frequent symbols short codes and rare symbols long ones. Greedily merge the **two lowest-frequency** nodes repeatedly using a min-heap; the merge order builds a binary tree whose root-to-leaf paths are the codes. This is provably optimal by an exchange argument: swapping the two least-frequent symbols to be the deepest siblings never increases total cost.
+
+```java
+class HuffmanNode {
+    int freq; char ch;
+    HuffmanNode left, right;
+    HuffmanNode(char c, int f) { ch = c; freq = f; }
+    HuffmanNode(HuffmanNode l, HuffmanNode r) { left = l; right = r; freq = l.freq + r.freq; }
+}
+public Map<Character,String> huffman(Map<Character,Integer> freq) {
+    PriorityQueue<HuffmanNode> pq = new PriorityQueue<>((a, b) -> a.freq - b.freq);
+    for (var e : freq.entrySet()) pq.offer(new HuffmanNode(e.getKey(), e.getValue()));
+    while (pq.size() > 1) {
+        HuffmanNode a = pq.poll(), b = pq.poll();   // two smallest
+        pq.offer(new HuffmanNode(a, b));            // merge
+    }
+    Map<Character,String> codes = new HashMap<>();
+    buildCodes(pq.poll(), "", codes);
+    return codes;
+}
+private void buildCodes(HuffmanNode node, String code, Map<Character,String> codes) {
+    if (node == null) return;
+    if (node.left == null && node.right == null) {  // leaf = a symbol
+        codes.put(node.ch, code.isEmpty() ? "0" : code);
+        return;
+    }
+    buildCodes(node.left, code + "0", codes);
+    buildCodes(node.right, code + "1", codes);
+}
+```
+Build is **O(n log n)** (n heap operations). Used in ZIP/GZIP, JPEG, MP3, and as the classic "greedy on a heap" interview example. **Related:** LeetCode 1167 *Minimum Cost to Connect Sticks* is Huffman without the tree.
+
+---
+
 ## Practice Problems
 
 **Easy:**

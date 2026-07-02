@@ -415,6 +415,57 @@ You have mastered this topic when you can:
 
 ---
 
+## 17b. Sweep Line — The General Interval Technique
+
+### Intuition
+Many interval problems reduce to processing **events** in sorted order along an axis. Convert each interval `[start, end]` into a `+1` event at `start` and a `-1` event at `end`, sweep left to right maintaining a running count, and read the answer off the running state. This generalizes merge/overlap counting and scales to thousands of intervals.
+
+### Maximum concurrent intervals (e.g., Meeting Rooms II, Car Pooling)
+```java
+public int maxOverlap(int[][] intervals) {
+    int n = intervals.length;
+    int[] starts = new int[n], ends = new int[n];
+    for (int i = 0; i < n; i++) { starts[i] = intervals[i][0]; ends[i] = intervals[i][1]; }
+    Arrays.sort(starts);
+    Arrays.sort(ends);
+    int rooms = 0, maxRooms = 0, j = 0;
+    for (int i = 0; i < n; i++) {
+        while (j < n && ends[j] <= starts[i]) j++;   // a meeting freed a room
+        rooms = i - j + 1;                            // active meetings right now
+        maxRooms = Math.max(maxRooms, rooms);
+    }
+    return maxRooms;
+}
+```
+
+### Event-list variant (handles weights, e.g., Car Pooling / My Calendar)
+```java
+public boolean carPooling(int[][] trips, int capacity) {
+    TreeMap<Integer,Integer> events = new TreeMap<>();
+    for (int[] t : trips) {                           // t = {passengers, from, to}
+        events.merge(t[1],  t[0], Integer::sum);      // board
+        events.merge(t[2], -t[0], Integer::sum);      // alight
+    }
+    int cur = 0;
+    for (int delta : events.values()) {               // sweep in time order
+        cur += delta;
+        if (cur > capacity) return false;
+    }
+    return true;
+}
+```
+
+### When to reach for sweep line
+- "Maximum number of X active at the same time" (rooms, CPUs, overlapping ranges).
+- "Skyline" / "rectangle area union" (sweep + a multiset/segment tree of heights).
+- "Add v over a range, query the max load" (equivalent to a difference array).
+
+**Canonical problems:** LeetCode 253 *Meeting Rooms II*, 1094 *Car Pooling*, 218 *The Skyline Problem*, 731 *My Calendar II*, 850 *Rectangle Area II*.
+
+**Weighted interval scheduling (DP variant):** when intervals carry values and you want the max-value non-overlapping subset (not just the max count), sort by end time and use `dp[i] = max(dp[i-1], value[i] + dp[p(i)])` where `p(i)` is the last interval ending before `i` starts (found by binary search) — this is the DP cousin of the greedy activity-selection problem.
+
+---
+
 ## 18. Mini Quiz — Test Yourself
 
 1. Are intervals [1,3] and [3,5] overlapping? Should they be merged?

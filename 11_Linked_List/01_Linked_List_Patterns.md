@@ -501,6 +501,97 @@ while (fast != null && fast.next != null) // CORRECT: check fast first
 
 ---
 
+## 16b. Full Implementations of the Hard Classics
+
+These three problems are asked constantly at MAANG and deserve worked code, not just hints.
+
+### Reverse Nodes in k-Group (LeetCode #25)
+Reverse each block of `k`; leave a trailing block of `< k` untouched. Use a `groupPrev` anchor and reconnect.
+```java
+public ListNode reverseKGroup(ListNode head, int k) {
+    ListNode dummy = new ListNode(0);
+    dummy.next = head;
+    ListNode groupPrev = dummy;
+    while (true) {
+        ListNode kth = groupPrev;                 // find the k-th node in this group
+        for (int i = 0; i < k && kth != null; i++) kth = kth.next;
+        if (kth == null) break;                   // fewer than k left: stop
+        ListNode groupNext = kth.next;
+        // Reverse the group [groupPrev.next .. kth].
+        ListNode prev = groupNext, curr = groupPrev.next;
+        while (curr != groupNext) {
+            ListNode next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        ListNode newGroupPrev = groupPrev.next;   // old head becomes the tail
+        groupPrev.next = kth;                     // reconnect to reversed head
+        groupPrev = newGroupPrev;
+    }
+    return dummy.next;
+}
+```
+
+### Sort List (LeetCode #148) — merge sort, O(n log n) / O(log n) stack
+```java
+public ListNode sortList(ListNode head) {
+    if (head == null || head.next == null) return head;
+    ListNode mid = split(head);                   // split into two halves
+    ListNode left = sortList(head);
+    ListNode right = sortList(mid);
+    return merge(left, right);
+}
+private ListNode split(ListNode head) {           // returns head of second half
+    ListNode slow = head, fast = head.next;
+    while (fast != null && fast.next != null) { slow = slow.next; fast = fast.next.next; }
+    ListNode second = slow.next;
+    slow.next = null;                             // cut the list
+    return second;
+}
+private ListNode merge(ListNode a, ListNode b) {
+    ListNode dummy = new ListNode(0), tail = dummy;
+    while (a != null && b != null) {
+        if (a.val <= b.val) { tail.next = a; a = a.next; }
+        else                { tail.next = b; b = b.next; }
+        tail = tail.next;
+    }
+    tail.next = (a != null) ? a : b;
+    return dummy.next;
+}
+```
+
+### Copy List with Random Pointer (LeetCode #138) — O(1) extra space
+Interleave each clone right after its original, wire random pointers off the interleaving, then unzip.
+```java
+public Node copyRandomList(Node head) {
+    if (head == null) return null;
+    // 1) Weave: A -> A' -> B -> B' -> ...
+    for (Node cur = head; cur != null; cur = cur.next.next) {
+        Node clone = new Node(cur.val);
+        clone.next = cur.next;
+        cur.next = clone;
+    }
+    // 2) Assign random pointers using the interleaving.
+    for (Node cur = head; cur != null; cur = cur.next.next)
+        if (cur.random != null) cur.next.random = cur.random.next;
+    // 3) Unzip the two lists.
+    Node dummy = new Node(0), copyTail = dummy;
+    for (Node cur = head; cur != null; cur = cur.next) {
+        copyTail.next = cur.next;
+        copyTail = copyTail.next;
+        cur.next = cur.next.next;                 // restore original
+    }
+    return dummy.next;
+}
+```
+
+### Doubly Linked List & Reverse II (quick reference)
+- **Doubly linked list** carries `prev` and `next`, enabling O(1) deletion given a node and O(1) tail operations — the backbone of an **LRU cache** (see `../08_Hashing/01_Hashing_Patterns.md`).
+- **Reverse Linked List II** (#92): reverse only the sublist between positions `left` and `right` by repeatedly moving the node after `left-1` to the front of the segment (head-insertion).
+
+---
+
 ## 17. How to Know You Have Mastered Linked List Patterns
 
 You have mastered this topic when you can:

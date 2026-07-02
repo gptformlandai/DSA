@@ -24,7 +24,8 @@ DSA/
 │   ├── 05_Queue_Deque.md
 │   ├── 06_HashMap_HashSet.md
 │   ├── 07_Trees_Binary_BST.md
-│   └── 08_Heap_PriorityQueue.md
+│   ├── 08_Heap_PriorityQueue.md
+│   └── 09_Balanced_Trees_And_Hashing_Internals.md  ← AVL/Red-Black, BST delete, open addressing, heapify proof
 │
 ├── 03_Searching/
 │   └── 01_Searching_Algorithms.md   ← Linear, Binary, Binary on Answer, all variants
@@ -64,6 +65,7 @@ DSA/
 │
 ├── 15_Graphs/
 │   └── 01_Graph_Algorithms.md       ← BFS, DFS, Dijkstra, Kruskal, Prim, Topo
+│   └── 02_Advanced_Graph_Algorithms.md ← Bellman-Ford, Floyd-Warshall, 0-1 BFS, A*, SCC, bridges
 │
 ├── 16_DSU/
 │   └── 01_DSU.md                    ← Path compression, union by rank, patterns
@@ -73,7 +75,8 @@ DSA/
 │
 ├── 18_Dynamic_Programming/
 │   ├── 01_DP_Patterns.md            ← 1D, Knapsack, String DP, Grid DP, Interval DP
-│   └── 02_DP_Pattern_Masterclass.md ← Recursion-to-DP guide for the DPPatterns.pdf families
+│   ├── 02_DP_Pattern_Masterclass.md ← Recursion-to-DP guide for the DPPatterns.pdf families
+│   └── 03_Advanced_DP.md            ← Bitmask DP, Digit DP, Tree DP + rerooting, reconstruction
 │
 ├── 19_Intervals/
 │   └── 01_Intervals.md
@@ -83,12 +86,14 @@ DSA/
 │
 ├── 21_Strings/
 │   └── 01_String_Algorithms.md      ← KMP, Z-algo, Rabin-Karp, palindromes
+│   └── 02_Advanced_String_Algorithms.md ← Z-algorithm, Manacher, rolling hash, Aho-Corasick, suffix array
 │
 ├── 22_Trie/
 │   └── 01_Trie_Algorithms.md
 │
 ├── 23_Range_Query/
 │   └── 01_Range_Query_Structures.md ← Segment Tree, Fenwick Tree, Sparse Table
+│   └── 02_Advanced_Range_Query.md   ← Lazy propagation, range-update BIT, sqrt decomposition, Mo's
 │
 ├── 24_Math/
 │   └── 01_Math_Algorithms.md        ← GCD, Sieve, Fast Exponentiation, Combinatorics
@@ -102,7 +107,8 @@ DSA/
 ├── 27_Practice_Plan/
 │   ├── 01_Staged_Practice_Plan.md   ← 15-stage plan with LeetCode problems
 │   ├── 02_PDF_Crosscheck_Missing_Problems.md ← DSA.pdf missing-problem upgrade queue
-│   └── 03_Hot_Topic_Interview_Drills.md ← Timed drills for Recursion, Trees, Graphs, DP
+│   ├── 03_Hot_Topic_Interview_Drills.md ← Timed drills for Recursion, Trees, Graphs, DP
+│   └── 04_Behavioral_Communication_And_Mock_Rubric.md ← STAR, talk-tracks, mock scoring, spaced repetition
 │
 ├── 28_MAANG_Hot_Problem_Solutions/
 │   ├── 01_Hot_150_Index.md          ← Hot 150 tracker + Hot 200 extension queue
@@ -110,7 +116,9 @@ DSA/
 │   ├── 03_Arrays_TwoPointers_BinarySearch_Solutions.md
 │   ├── 04_Stack_Linked_Heap_Greedy_Solutions.md
 │   ├── 05_Hot_Topic_Expansion_Solutions.md
+│   ├── 05_Hot_Topic_Expansion_Solutions.md
 │   └── 06_Remaining_Hot_150_Solutions.md
+│   └── 07_Hot_150_Completion_Solutions.md  ← Final 41 cards → all 150 core problems solved
 │
 └── matrix/                          ← Matrix-specific notes
 ```
@@ -130,6 +138,9 @@ DSA/
 
 **Preparing for interviews next month?**
 → `25_Problem_Solving/01_Problem_Solving_System.md` + `27_Practice_Plan/` + `28_MAANG_Hot_Problem_Solutions/`
+
+**Practicing communication & behavioral rounds?**
+→ `27_Practice_Plan/04_Behavioral_Communication_And_Mock_Rubric.md`
 
 ---
 

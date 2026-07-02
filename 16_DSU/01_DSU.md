@@ -738,6 +738,87 @@ This turns repeated expensive graph searches into near-O(1) connectivity checks 
 
 ---
 
+## 8b. Weighted DSU (Union-Find with Relative Values)
+
+### Intuition
+Sometimes edges carry a **relationship**, not just "connected": `a / b = 2.0`, or `a is 3 units ahead of b`. Store, for each node, its value **relative to its root**. `find` accumulates the relative weight while compressing; `union` links two roots and sets the connecting weight so both relations stay consistent.
+
+```java
+// Evaluate Division (LeetCode 399): answer a/b given equation ratios.
+class WeightedDSU {
+    Map<String,String> parent = new HashMap<>();
+    Map<String,Double> weight = new HashMap<>();   // node value / parent value
+
+    void add(String x) {
+        parent.putIfAbsent(x, x);
+        weight.putIfAbsent(x, 1.0);
+    }
+    String find(String x) {
+        if (!parent.get(x).equals(x)) {
+            String root = find(parent.get(x));
+            weight.put(x, weight.get(x) * weight.get(parent.get(x))); // fold ratio
+            parent.put(x, root);
+        }
+        return parent.get(x);
+    }
+    void union(String a, String b, double ratio) {   // a / b = ratio
+        add(a); add(b);
+        String ra = find(a), rb = find(b);
+        if (!ra.equals(rb)) {
+            parent.put(ra, rb);
+            weight.put(ra, ratio * weight.get(b) / weight.get(a));
+        }
+    }
+    double query(String a, String b) {
+        if (!parent.containsKey(a) || !parent.containsKey(b)) return -1.0;
+        if (!find(a).equals(find(b))) return -1.0;    // not connected
+        return weight.get(a) / weight.get(b);
+    }
+}
+```
+Same idea with integer offsets solves "is x exactly d ahead of y?" consistency problems.
+
+---
+
+## 8c. DSU with Rollback (Undoable Union)
+
+### Intuition
+Path compression makes unions irreversible. For **offline** problems that add and later remove edges (e.g., dynamic connectivity over time, or DSU-on-segment-tree), use **union by rank/size WITHOUT path compression** and keep a stack of changes so each union can be undone in O(1).
+
+```java
+class RollbackDSU {
+    int[] parent, rank_;
+    Deque<int[]> history = new ArrayDeque<>();   // {rootChild, rootParent, rankBumped}
+
+    RollbackDSU(int n) {
+        parent = new int[n];
+        rank_ = new int[n];
+        for (int i = 0; i < n; i++) parent[i] = i;
+    }
+    int find(int x) { while (x != parent[x]) x = parent[x]; return x; } // NO compression
+
+    boolean union(int a, int b) {
+        int ra = find(a), rb = find(b);
+        if (ra == rb) { history.push(new int[]{-1, -1, 0}); return false; }
+        if (rank_[ra] > rank_[rb]) { int t = ra; ra = rb; rb = t; } // attach smaller under larger
+        parent[ra] = rb;
+        int bumped = (rank_[ra] == rank_[rb]) ? 1 : 0;
+        rank_[rb] += bumped;
+        history.push(new int[]{ra, rb, bumped});
+        return true;
+    }
+    void rollback() {                            // undo the last union
+        int[] last = history.pop();
+        if (last[0] == -1) return;
+        parent[last[0]] = last[0];               // detach
+        rank_[last[1]] -= last[2];
+    }
+}
+```
+Operations are O(log n) (no compression), which is the price of undo support.
+
+---
+
 ## 9. Practice Problems
 
 **Easy:**

@@ -446,4 +446,50 @@ You have mastered this topic when you can:
 
 ---
 
+## 19. Advanced Bit Techniques
+
+### Gray Code (successive values differ by one bit)
+The `i`-th Gray code is `i ^ (i >> 1)`. Consecutive codes differ in exactly one bit — used in rotary encoders, Karnaugh maps, and error minimization.
+```java
+public List<Integer> grayCode(int n) {
+    List<Integer> res = new ArrayList<>();
+    for (int i = 0; i < (1 << n); i++) res.add(i ^ (i >> 1));
+    return res;   // e.g. n=2 -> [0,1,3,2]
+}
+```
+
+### Iterate All Submasks of a Mask — O(3^n) total
+```java
+for (int sub = mask; sub > 0; sub = (sub - 1) & mask) {
+    // sub ranges over every non-empty subset of mask
+}
+```
+This is the engine behind subset-partition DP (see `../18_Dynamic_Programming/03_Advanced_DP.md`).
+
+### Gosper's Hack — next integer with the same popcount
+Enumerate all k-subsets of n bits in ascending numeric order.
+```java
+int next(int x) {            // smallest integer > x with the same number of set bits
+    int c = x & -x;          // lowest set bit
+    int r = x + c;           // ripple carry
+    return (((r ^ x) >> 2) / c) | r;
+}
+```
+
+### Handy One-Liners
+| Goal | Expression |
+|------|-----------|
+| Lowest set bit | `x & -x` |
+| Clear lowest set bit | `x & (x - 1)` |
+| Set bit `i` | `x \| (1 << i)` |
+| Toggle bit `i` | `x ^ (1 << i)` |
+| Check bit `i` | `(x >> i) & 1` |
+| Is power of two | `x > 0 && (x & (x - 1)) == 0` |
+| Count set bits | `Integer.bitCount(x)` |
+| Round down to power of two | `Integer.highestOneBit(x)` |
+
+> **Bitmask DP** (assignment, TSP, subset partitioning) builds directly on these primitives — see `../18_Dynamic_Programming/03_Advanced_DP.md`.
+
+---
+
 **Next →** `../21_Strings/01_String_Algorithms.md`
