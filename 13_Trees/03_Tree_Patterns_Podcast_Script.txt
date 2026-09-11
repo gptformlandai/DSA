@@ -1,0 +1,399 @@
+TREES: THE ONE-TEMPLATE PODCAST SCRIPT
+A spoken companion to 02_Tree_Patterns_Recursion_Template.md
+No code. Pure narration. Made for NotebookLM. Listen on loop.
+
+
+HOW TO LISTEN
+
+Welcome back. This is your trees episode, and we are going to make you fluent in tree recursion by repetition. There is no code in this recording on purpose. Code is for your eyes, on the page. This is for your ears, so the shape of the thinking sinks in while you walk, commute, or rest your eyes.
+
+Here is the promise. By the end, you will not be memorizing individual problems. You will own a single mental template, and you will run that same template against any depth-first tree problem you meet. Pattern recognition is not recognizing the problem. It is recognizing which answer each of six questions takes. The six questions never change. Only the answers change.
+
+Before anything else, let us make sure we share the same simple words, because everything after this depends on them. If you already know these cold, treat the next minute as a warm-up.
+
+A tree is just data shaped like a family tree, drawn upside down. At the top sits one item called the root. Every item in the tree is called a node. Think of a node as a single box that holds a value, and holds two arrows pointing downward, one to a left child and one to a right child. Because each node has at most two children, a left and a right, we call this a binary tree. Binary just means two.
+
+A node's children are the nodes directly below it. The node directly above is its parent. A node with no children, nothing below it, is called a leaf. Picture the leaves at the very bottom edge of the tree. When either arrow points to nothing, we say it points to null. Null simply means empty, nothing there.
+
+Now, a subtree. Pick any node and cover everything except that node and all its descendants below it. That little piece you are looking at is a subtree. The powerful idea of this whole episode is that a subtree is just a smaller tree, with its own root, which happens to be that node. So the same logic that works on the big tree works on every subtree inside it.
+
+Two more words. An edge is a single arrow between a parent and a child, one step. The height, or depth, of a tree is how many levels tall it is, how many steps from the top down to the deepest leaf.
+
+And the engine behind all of this is recursion. Recursion is when a function calls itself on a smaller piece of the problem. It sounds circular, but it is not, because each call works on a smaller subtree, and eventually the pieces become so small, an empty node, that the answer is obvious and the calling stops. Here is the mindset that makes recursion click. You do not trace the whole thing in your head. You assume the function already works correctly on the smaller subtrees, you use their answers, and you only reason about one node at a time. That assumption, trusting the smaller calls, is what we will keep calling the leap of faith.
+
+So let us learn the six questions first, because everything hangs off them.
+
+Question one. Parameters. Ask yourself: what must I know from above me, from my ancestors, to do my job? If the answer is yes I need ancestor information, you carry it down as a function parameter.
+
+Question two. Base case. Ask: what is the smallest input where the answer is obvious with no recursion at all? For trees that is almost always the empty node, the null.
+
+Question three. Pre-order work. Ask: is there work I must do before my children run, because it depends on the context handed down from my ancestors? Quick vocabulary here, because you will hear these three words constantly. Pre-order means I do my own work first, before visiting my children. In-order means I visit my left child, then do my own work, then my right child, and for a special kind of tree we will meet later, this produces sorted order. Post-order means I visit both children first, and only then do my own work, using their answers. Pre is before, post is after, in is in-between. That is all those words mean.
+
+Question four. Go left, go right. Ask: what subproblem do I hand each child, and do I trust them to return the right thing? This is the leap of faith. You assume the recursion already works for the smaller subtree.
+
+Question five. Post-order work. Ask: now that both children have answered, how do I combine their answers with myself?
+
+Question six. Return. Ask: what single thing does my parent need from me? And here is the subtle part that separates beginners from pros. What you return to your parent may be different from the global answer you are tracking. Hold that thought. It comes back again and again.
+
+Now, the single biggest idea in the whole subject. There are only two pipes for moving information through a tree. Let me make that concrete before it sounds abstract. Imagine a message can travel two ways in our family tree. A parent can whisper something down to a child before the child starts, that is one direction. Or a child can report something back up to the parent after the child finishes, that is the other direction. Those two directions are the two pipes, and almost every tree problem is really a question of which pipe carries your information.
+
+The down pipe is function parameters. A parent hands context to a child before the child runs. A parameter is just an extra value you pass into the function call, riding along with the node. Think of examples like: the maximum value seen so far on the path, or the legal range a value is allowed to fall inside. Down pipe means pre-order, top-down, ancestor context.
+
+The up pipe is return values. A return value is the answer a function hands back when it finishes. A child hands an answer back to its parent after the child finishes. Think of examples like: the height of my subtree, or, did I find the target somewhere below me. Up pipe means post-order, bottom-up, descendant answers.
+
+And one tattoo for your brain. Parameters only move state downward. They do not carry values back up during backtracking, unless you deliberately pass a shared mutable object, like a list or a hashmap, and clean it up on the way out. Upward data transfer is strictly the job of return values. Mix these two directions up, and every hard tree problem will feel impossible. Keep them straight, and the hard problems dissolve.
+
+That is the entire foundation. Now let us walk the patterns. Same rhythm every time. A story, then the six questions, then the one line that unlocks it, then the classic trap. Feel the repetition. That repetition is the point.
+
+
+PATTERN ZERO. MAXIMUM DEPTH. THE FOUNDATION.
+
+Every other pattern is a mutation of this one. Master this, and you are more than halfway there.
+
+The story. Imagine you are the boss of a company, and someone asks, how many layers deep is our org chart? You do not count it yourself. You turn to your two direct reports and ask each of them the same question. How deep is your team? You wait for both numbers, take the bigger one, add one for yourself, and report it up. Every manager does the exact same thing. A person with no reports answers zero. That is the whole algorithm.
+
+Now the six questions. Parameters. Do I need anything from my ancestors to compute my depth? No. Depth is about what is below me, not above. So I carry nothing down. Base case. What is the smallest tree where I know the depth instantly? The empty tree. Null returns zero, because null is nothing, zero levels. Pre-order work. Is there work I must do before my kids run? None. I hand my children no context, so there is nothing to prepare. And notice, pre-order being empty is itself a signal. It tells you this is a pure bottom-up problem.
+
+Go left, go right. What do I ask each child, and do I trust the answer? I ask each child for its depth, and yes, I trust it. This is the leap of faith. If you do not trust the recursion for the smaller subtree, you will try to hand-trace the entire tree and drown. Post-order work. Both kids answered. How do I combine them? I take the maximum of the two, the deeper of my two branches, because a depth chain goes through only one side. Return. What does my parent need? The bigger side plus one. The plus one is me.
+
+The line that unlocks it. I do not measure the tree. I ask my children for their depths and just add myself.
+
+Let us trace it once, slowly, out loud, so the leap of faith stops feeling like magic. Picture a tiny tree. At the top, a root, call it A. A has two children, B on the left and C on the right. And B has a single child of its own, D, on its left. That is four nodes. Now watch depth get computed from the bottom up. We call depth on A. A cannot answer yet, so it asks its left child, B. B cannot answer yet either, so it asks its left child, D. D asks its two children, but both are null, empty, so each returns zero. D takes the max of zero and zero, which is zero, and adds one for itself, and returns one. Back up to B. B now has one from its left child D, and its right child is null, which returns zero. B takes the max of one and zero, that is one, adds one for itself, and returns two. Meanwhile C has two null children, so C returns one. Finally, back at the root A. A has two from B on the left, and one from C on the right. A takes the max of two and one, that is two, and adds one for itself. The answer is three. Notice what we did. We never held the whole tree in our head. Each node just trusted its children's numbers and did one tiny addition. That is the entire feeling of tree recursion.
+
+The classic trap. The base case is zero, not one. Null is nothing, not a node.
+
+Three anchor words. Null to zero. Max of left and right. Plus one for me.
+
+
+PATTERN ONE. DIAMETER OF A BINARY TREE.
+
+This is the first two-brained pattern. The number you return is different from the number you answer. That single idea shows up in half of all hard tree problems, so slow down here.
+
+The story. The diameter is the longest walk between any two nodes, measured in edges. Here is the twist that trips everyone. That longest walk does not have to pass through the root. It could be buried deep in one branch. So you cannot just measure from the top. Instead, you stand at every node and ask, if the longest path bends right here at me, going down my left side, through me, and down my right side, how long is it? You quietly remember the biggest such bend you have ever seen. That remembered maximum is the answer.
+
+The six questions. Parameters. Ancestor info? No, just the node. The running best diameter lives outside the recursion, because many different nodes each produce a candidate, and we want the maximum across all of them. Base case. Null returns height zero, so a leaf sees zero from both sides. Pre-order. None, pure bottom-up. Go left, go right. I get each child's height, because the path bending at me is built from how deep I can reach on each side.
+
+Post-order, the key. The path that bends at me spans left height plus right height edges. I update my global maximum with that sum. I record the best I have ever seen, because the true diameter might bend at some other node, not me. Return, the other half of the key. Does my parent want that same sum? No. I return one plus the taller of my two arms. Here is why. My parent wants to extend a path through me and keep going up, but a path cannot fork. It can pass through me using only one of my arms. So upward I offer just my taller arm plus myself. The both-arms sum was a terminal answer. The path ends by bending here, so it can never be extended, so it never travels up.
+
+The line that unlocks it. At each node I answer with both sides added, the bend, but I return only one side plus me, because my parent's path cannot fork through me.
+
+The classic trap. Returning the bend upward instead of one plus the max side. If you return the bend, you are claiming a parent can walk down both your arms at once. Impossible. The bend is the answer. One plus max is the return. Two separate buckets.
+
+Three anchor words. Answer is left plus right. Return is one plus max. A path cannot fork.
+
+
+PATTERN TWO. COUNT GOOD NODES. THE TOP-DOWN, PARAMETER PATTERN.
+
+This is the mirror image of diameter. Diameter used the up pipe. Good nodes uses the down pipe, parameters. This is where you truly feel the difference between the two directions.
+
+The story. Walk from the root down any path. A node is good if, on the way from the root to that node, nobody you passed was bigger than you. In other words, you are good if you are the tallest person seen so far on your root-to-you path. So as you descend, you carry a running value, the maximum I have seen so far. At each node you check, am I at least that max? If yes, you are good, count yourself. Then you pass an updated max down to your children.
+
+The six questions. Parameters, the key. Do I need anything from my ancestors to judge myself? Yes. I carry the largest value on the path from the root down to my parent. Good is defined relative to who came before me, and that information lives above me, so a parent must hand it down as a parameter. This is the moment the answer to question one flips from no, in depth and diameter, to yes. When the definition mentions ancestors, or the path from the root, or so far, question one is always yes, and you reach for a parameter.
+
+Base case. Null returns zero, an empty spot has no node to be good. Pre-order work, also the key. Before recursing, I do two things using the ancestor context I was handed. First, I judge myself. Am I at least the max so far? Second, I build the updated max to pass down, the larger of the old max and my own value. My children's max so far must include me, so I compute it before calling them. And the rule of thumb here is golden. Work that depends on ancestors happens in pre-order. Work that depends on descendants happens in post-order.
+
+Go left, go right. I hand both children the updated max. Post-order. I add the two children's counts. Return. My own goodness plus both subtree totals.
+
+The line that unlocks it. I judge myself using state my parent handed me, then I hand an updated version of that state to my kids. Down pipe, pre-order.
+
+The classic trap. Trying to compute good in post-order, after the children. You cannot. Goodness depends on ancestors, which are only known on the way down. If you ever find yourself needing ancestor info, that is your signal. Use a parameter, do the work in pre-order.
+
+The twin comparison, say it out loud. Good nodes needs ancestor info, so push down via parameter, pre-order. Diameter and depth need descendant info, so pull up via return, post-order. From the root, on the path so far, ancestor, means down. Height, deepest, longest below, subtree, means up.
+
+Three anchor words. Carry max so far down. Judge in pre-order. Ancestor means parameter.
+
+
+PATTERN THREE. THE STRUCTURAL TRIO. INVERT, SAME TREE, AND MIRROR.
+
+Three problems, one family. Grouping them shows the resemblance so they stop cluttering your brain.
+
+First, invert a binary tree. The story. Hold the tree up to a mirror. Every left child becomes a right child, and vice versa, all the way down. At each node you just swap your two children, then tell both children to do the same to themselves. Quickly through the questions. No ancestor info. Base case, null returns null, an empty tree mirrored is still empty. The work is simply, swap my two kids, then recurse into both, then return myself now mirrored. The line. Invert equals swap my two kids, then ask both kids to invert themselves.
+
+Now the pair, same tree and mirror, and here is the new move. The recursion walks two nodes at once. The function takes two node arguments and steps them in lockstep.
+
+The story. Same tree. Put two trees side by side. Are they identical? Check the two roots match, then check left against left and right against right. Mirror, also called symmetric. Is one tree the mirror of the other? Check the two roots match, then check left against right and right against left. The cross. That single flip, left with right, is the only difference between same and mirror.
+
+The six questions, two-node version. Parameters. What do I carry? Two nodes, one from each side. The question is about a relationship between two positions, so I hold both at once. That is the tell for comparison problems. Base case, and order matters. If both are null, true. If exactly one is null, false. Only after those null checks do you compare values. Pre-order. Compare the two current values, fail fast if they disagree. Go left, go right, the pattern-defining question. How do I pair the children? For same tree, left with left, right with right. For mirror, left with right, right with left, the cross. Post-order. Combine the two child booleans with a logical and. A boolean is just a true-or-false value, and a logical and means the result is true only when both parts are true. Return. Send that and upward.
+
+The line that unlocks it. Same tree and mirror are the same code. The only difference is that mirror crosses the recursive calls, left with right.
+
+The classic trap. Checking the values before the null checks. If one node is null, reading its value crashes. Always do the null base cases first, values after.
+
+Three anchors for the trio. Invert is swap kids. Same is left-left, right-right. Mirror is left-right, right-left, the cross.
+
+
+PATTERN FOUR. LOWEST COMMON ANCESTOR. THE L C A.
+
+The famous return-a-node pattern. The return value is a node, and its meaning shifts depending on where you are. Read this one slowly.
+
+The story. Two cousins, call them p and q, are lost somewhere in a family tree. You want the lowest, the closest, shared ancestor. Here is the elegant trick. Every node asks its two subtrees, did you find either p or q down there? If your left subtree reports I found one, and your right subtree reports I found one, then p and q are on opposite sides of you, so you are the meeting point. You are the lowest common ancestor. If only one side reports a find, the answer is somewhere on that side, so you simply pass that finding upward.
+
+The six questions. Parameters. I carry the node plus the two targets, p and q. Every frame must know what it is hunting for. The targets ride along, read-only. Base case. Null returns null, nothing here. And if the current node is p or q, return the node itself, meaning, I found a target, stop and report me up. Pre-order. That found-check is the pre-order judgment. Go left, go right. Each side returns either a found node, or the confirmed answer, or null. I need to know which sides contain a target.
+
+Post-order, the key. If left is non-null and right is non-null, the two targets were found on opposite sides of me, so I am the answer. Return the current node. Return. Otherwise, return whichever side is non-null, bubbling the single find upward. If both are null, return null. Notice the return slot carries two meanings. Low down it means, a found target. Once both sides meet, it means, the confirmed lowest common ancestor. Same slot, layered meaning.
+
+The line that unlocks it. If p and q come back from opposite sides of me, I am the meeting point. Otherwise I just forward whichever child found something.
+
+The classic trap. Returning the left result before checking whether the right is also non-null. If both are non-null, you must return the current node, not just the left. Always test both sides non-null first.
+
+A shortcut worth mentioning. In a binary search tree, the L C A is even simpler. Walk down. If both targets are smaller than the node, go left. If both are larger, go right. The moment they split, or one equals the node, that node is the L C A. This takes order h steps, and let me unpack that phrase, because it returns often. When we say order something, we mean roughly how the work grows as the tree gets bigger. Order n means the work grows in step with the number of nodes, so touching every node. Order h means the work grows only with the height of the tree, the number of levels, which is far smaller, because you follow a single path from top to bottom instead of visiting everything. So order h is fast. No post-order needed here.
+
+Three anchor words. Node equals target, return node. Both sides non-null, I am the L C A. Otherwise bubble up.
+
+
+PATTERN FIVE. INORDER SUCCESSOR IN A BINARY SEARCH TREE. THE NEXT BIGGER NODE.
+
+This is the walk-in-sorted-order pattern. It leans on the golden fact of binary search trees. First, what is a binary search tree, often shortened to B S T? It is a binary tree with one extra rule: for every node, everything in its left subtree is smaller than it, and everything in its right subtree is larger. That ordering rule is powerful, and here is its most famous consequence. An inorder traversal of a B S T, remember, that is left, then node, then right, produces the values in ascending sorted order, smallest to largest.
+
+The story. Line everyone up in sorted order. That is exactly what an inorder traversal gives you. The inorder successor of a node p is simply the very next person in that sorted line. The smallest value that is still strictly greater than p.
+
+Now, this one bends the template. It is a directed walk, like binary search, not a two-child recursion. Seeing how the same six questions still apply is the lesson. Parameters. What state must survive the walk down? The node, the target p, and a running candidate, the best successor found so far. As I descend, I carry the best-so-far like a torch. The tree's sorted shape is my ancestor context. Base case. When I fall off the tree, when the node is null, I stop, and the candidate holds the answer. Pre-order. At each node I compare its value to p, and I choose a direction. That comparison uses only the current node and the target, no child info, so it belongs before any descent.
+
+Go left, or go right, but only one side. If the node is bigger than p, this node could be the successor, so I record it as the candidate, then I go left to hunt for a smaller-yet-still-bigger value. Otherwise, the node is too small or equal, so I go right and record nothing. This one-sided move is the crucial deviation. The B S T order lets me prune an entire half at each step, which is why it is order h, not order n. Post-order. None. The answer is captured on the way down, not assembled from children. Return. The candidate, the smallest value that was still strictly greater than p.
+
+There is a second flavor worth knowing, when the node carries a parent pointer. If p has a right subtree, the successor is the leftmost, the smallest, node of that right subtree. Go right once, then all the way left. If p has no right subtree, the successor is the lowest ancestor for which p sits in the left subtree. You climb up through parents until you move up and to the right.
+
+The line that unlocks it. The successor is the smallest value still bigger than me. In a B S T I binary-search downward, remembering the last node bigger than p, and that last remembered one is the answer.
+
+The classic trap. Two of them. Forgetting the no-right-subtree case, where you must climb the ancestors. And using greater-than-or-equal instead of strictly greater-than. The successor must be strictly greater.
+
+Three anchor words. Next in the sorted line. If a right subtree exists, leftmost of the right. Otherwise climb up and to the right.
+
+
+PATTERN SIX. LARGEST B S T SUBTREE. THE MULTI-VALUE RETURN PATTERN.
+
+Until now, children returned one number. Here a child must return a bundle of facts. This is the capstone of bottom-up thinking. Once you get this, returning an object becomes a tool you reach for with confidence.
+
+The story. Somewhere inside a big messy binary tree, there may be a chunk that happens to be a valid binary search tree. You want the largest such chunk, the most nodes. To know if I am the root of a valid B S T, one number from my children is not enough. I need four facts from each side. Is that side itself a valid B S T? What is its minimum value? What is its maximum value? And how many nodes does it hold? Then I am a valid B S T only if left is a B S T, right is a B S T, and my value sits strictly above the left side's maximum and strictly below the right side's minimum. That is the B S T ordering rule, enforced at the seam between my two children.
+
+The six questions. Parameters. Ancestor info? No, just the node. Whether a subtree is a B S T depends entirely on what is inside it, so it is pure bottom-up. Base case, and this is the subtle part. An empty subtree reports, I am a valid B S T, size zero, minimum positive infinity, maximum negative infinity. Why those infinities? Because a parent checks, my value is above the left maximum and below the right minimum. With the left maximum at negative infinity and the right minimum at positive infinity, both comparisons pass automatically, so a leaf is never wrongly rejected. This is the classic trick of picking identity values so the general formula needs no special case. An identity value is a starting value chosen so the normal rule just works without a separate exception, the way starting a sum at zero, or a product at one, lets you add or multiply the rest without special-casing the first item.
+
+Pre-order. None. I cannot judge myself until both subtrees report back. Go left, go right. I collect a full bundle of four facts from each side. Post-order, the key. I am a valid B S T if both children are valid and my value fits between the left max and the right min. If so, my size is left size plus right size plus one, and I update the global best. My new minimum is the smaller of my value and the left minimum. My new maximum is the larger of my value and the right maximum. Return. If valid, I return my assembled bundle. If broken, I return a bundle flagged not-a-B-S-T. Why? Because a broken subtree must poison all ancestors. Once B S T-ness breaks below you, no ancestor can be a B S T either.
+
+The line that unlocks it. One number was not enough, so my children hand me a bundle, valid-flag, size, min, and max, and I check the B S T rule right at the seam between my two kids.
+
+The classic trap. The wrong identity for the empty bundle. Minimum positive infinity, maximum negative infinity, is what makes a leaf pass automatically. Flip them and every leaf wrongly fails.
+
+Three anchor words. Return a bundle. Check left-max below value below right-min. Null identity is positive and negative infinity.
+
+
+PATTERN SEVEN. DISTANCE BETWEEN TWO NODES. COMPOSING TWO PATTERNS YOU ALREADY OWN.
+
+This one teaches a huge lesson. Hard problems are often just Lego, built from easy bricks you already have.
+
+The story. You want the number of edges on the path from p to q. Picture the tree as a subway map. To travel from station p to station q, you go up to the first shared junction, and that junction is the lowest common ancestor, and then you go down to q. So the distance is simply the depth from the L C A down to p, plus the depth from the L C A down to q.
+
+The recipe. First, find the L C A of p and q, reusing pattern four exactly. Then measure how many edges from the L C A down to p. Then measure how many edges from the L C A down to q. Add them. That is your answer. No new machinery. Distance equals L C A, plus depth measurement, composed.
+
+The helper that measures depth is itself a tiny down-pipe search. It carries the node, the target, and the depth so far. Base case, null returns negative one, meaning not found on this branch, and reaching the target returns the depth so far. It searches left first, and if the left side found the target, it uses that, otherwise it tries the right. Only one subtree holds the target, so it short-circuits the moment it is found.
+
+The line that unlocks it. Go up to the L C A, then down to the target. Distance is just depth-from-L-C-A to p, plus depth-from-L-C-A to q.
+
+The classic trap. If instead you measure depths from the root, you must subtract twice the depth of the L C A, because the shared trunk got counted once for p and once for q. Measuring from the L C A sidesteps that entirely, which is why it is the cleaner framing.
+
+Three anchor words. Up to the L C A, then down. Distance is the two depths added. Reuse L C A plus depth.
+
+
+PATTERN EIGHT. MAXIMUM PATH SUM. DIAMETER'S RICHER TWIN.
+
+Structurally identical to diameter, the same answer-versus-return split, but with two new wrinkles. Values can be negative, and we sum values instead of counting edges. If you nailed diameter, this is a five-minute win.
+
+The story. Find the path with the biggest total value. A path can start and end anywhere, and it bends at its highest node. At each node, the best path bending here is my value plus the best gain from the left plus the best gain from the right. But here is the negativity wrinkle. If a child's best contribution is negative, you would rather take nothing from that side. So you clamp each child's gain at zero.
+
+The six questions. Parameters. No ancestor info, just the node, and a global max sum outside. Base case. Null returns zero gain, an absent child contributes nothing. Pre-order. None. Go left, go right, the new reflex. Take each child's gain, but clamp it at zero. If your best contribution is negative, I take nothing from you instead. This clamp is the one idea diameter did not need, because edge counts are never negative, but values can be. Post-order, the answer. Update the global with my value plus left gain plus right gain, the path that bends at me. Return. My value plus my better single arm. Same no-fork rule as diameter. A path continuing up through me may use only one of my arms.
+
+The line that unlocks it. It is diameter with money. Answer through both sides, return one side, but clamp negative children to zero because a bad branch is optional.
+
+The classic trap. Initializing the global at zero. If every node is negative, the answer is the least-negative single node, not zero. Start at negative infinity.
+
+Three anchor words. Diameter with values. Clamp children at zero. Answer both, return one.
+
+
+PATTERN NINE. BALANCED BINARY TREE. THE HEIGHT-OR-A-FLAG TRICK.
+
+The story. A tree is height-balanced if, at every node, the left and right subtree heights differ by at most one. The naive way recomputes height over and over, which is order n squared, meaning the work grows painfully fast as the tree gets bigger. The pro way computes height and checks balance in a single bottom-up pass, using a sentinel of negative one to mean, already unbalanced below. A sentinel is just a special value that stands out from all normal answers, so it can carry a hidden signal. Since a real height is always zero or more, negative one can never be a real height, which makes it a perfect flag for something has gone wrong.
+
+Quickly through the questions. No ancestor info. Null returns height zero. No pre-order work. Going left and right, I get each child's height, but if either returns negative one, I immediately return negative one and short-circuit, because once anything below is unbalanced, the whole tree is. Post-order, I judge balance. If the two heights differ by more than one, I return negative one. Return, otherwise, the normal height, one plus the taller side.
+
+The line that unlocks it. I overload the return value. A real height means balanced so far, and negative one is a secret flag meaning already broken. One pass, order n.
+
+Three anchor words. Height, or the negative-one flag. Difference above one means negative one. Single bottom-up pass.
+
+
+PATTERN TEN. PATH SUM TWO. THE BACKTRACKING PATTERN. THE ONE TRUE MUTATION.
+
+Every pattern so far returned values up. This one is different. It mutates a shared list on the way down, and undoes that mutation on the way up. This is real backtracking, and it is the last big mental category.
+
+The story. Find all root-to-leaf paths that sum to a target. You walk down carrying a growing list called path. At a leaf, if the running sum matches, you take a snapshot of the path into your results. Crucially, when you finish exploring a node and step back up, you remove yourself from the path, so your sibling branches start clean. That add, explore, remove dance is backtracking.
+
+The six questions, with the mutation twist. Parameters. The node, the remaining target, a shared mutable path list, and the result collector. The path is the one sanctioned exception to parameters only go down. It is a shared object. I push onto it going down, and pop off it coming up, so the same list is reused for every branch. Base case. Null returns, nothing to do. Pre-order. Add my value to the path, recording myself before my children extend it. Go left, go right. Hand each child the reduced target and the same shared path. Post-order, two things. First, at a leaf where the remaining target equals my value, snapshot a copy of the path into results. Second, after both children return, remove myself from the path. Return. Nothing. The answers live in the shared collector.
+
+Here is the distinction your template flagged, and it is worth repeating. Post-order aggregation, like diameter, means combining the numbers your children returned. Backtracking, like this, means undoing a change to a shared structure. Same position, after the children, completely different purpose.
+
+The line that unlocks it. Add myself on the way in, snapshot at a matching leaf, remove myself on the way out. The shared list is my scratchpad, and backtracking keeps it honest for my siblings.
+
+Two classic traps. First, forgetting to snapshot a copy. If you store the live path, later mutations corrupt your stored answer. Second, removing in the wrong place. The removal happens once per node, after both recursive calls. Put it after each call, and you remove yourself twice.
+
+Three anchor words. Add, explore, remove. Snapshot a copy at the leaf. Undo once, after both kids.
+
+
+PATTERN ELEVEN. VALIDATE A BINARY SEARCH TREE. THE RANGE-PUSHED-DOWN PATTERN. GOOD NODES' TWIN.
+
+This is the second great down-pipe pattern. Good nodes pushed a single max-so-far down. Validate B S T pushes a whole window, a low and a high, down. If you understand good nodes, this is the same reflex, with two bounds instead of one.
+
+The story. A tree is a valid binary search tree if every node obeys, everything in my left subtree is smaller than me, everything in my right is larger, and this must hold against all ancestors, not just my parent. The clean way. As you walk down, carry a legal window, a low and a high, that this node's value must fall strictly inside. When you go left, the ceiling tightens down to the current value, because left children must be smaller than me. When you go right, the floor rises up to the current value.
+
+The six questions. Parameters. What ancestor info must I carry? The low and the high, the open interval my value must lie inside. Validity is defined by all ancestors, and that accumulated constraint lives above me, so I push it down, just like good nodes, but now it is a two-sided window. Base case. Null returns true, an empty subtree cannot violate anything. Pre-order. Check that my value sits strictly between low and high. If it fails, return false immediately. My legality depends only on ancestors, so it is judged on the way down. Go left, go right. The left child gets a window from the old low up to my value. The right child gets a window from my value up to the old high. Everything left of me must be below me, so my value becomes the new ceiling. Everything right must be above me, so my value becomes the new floor. Post-order. Combine with a logical and. Return. That and.
+
+The line that unlocks it. Do not compare parent to child. Carry the legal window down. Going left drops the ceiling to me. Going right lifts the floor to me.
+
+The classic trap. Using only a local parent-child check. That wrongly passes trees that are globally invalid, because a deep grandchild can violate a grandparent even while it looks fine next to its parent. Push the window down instead. And use wide, long-integer bounds so an extreme node value does not break the check.
+
+Three anchor words. Push low and high down. Left sets high to my value, right sets low to my value. Ancestor means parameter, again.
+
+
+PATTERN TWELVE. THE B F S, OR LEVEL-ORDER, FAMILY. THE OTHER TRAVERSAL MODE.
+
+Everything so far was depth-first recursion. This is the big sibling. Breadth-first search with a queue, processing the tree level by level. Let me name the two styles clearly, since we lean on them from here on. Depth-first means you plunge all the way down one branch before backing up, like exploring a maze by always going as deep as you can first. Breadth-first means you explore level by level, finishing an entire row before going one step deeper. Depth-first is our recursion. Breadth-first is this queue-based sweep. A huge fraction of these interview questions are secretly, just do a level-order and tweak what you record. Learn the skeleton once, and four problems fall out.
+
+The story. Instead of diving deep, you sweep the tree row by row, like reading a book line by line. You keep a queue. A queue is a first-in, first-out line, exactly like a line at a shop: whoever joins first gets served first. You add nodes to the back and remove them from the front. And here is the magic trick. Before processing a level, you freeze its size. That frozen count is exactly how many nodes are on the current row. You process exactly that many, and as you go, you enqueue their children, which form the next row. When the loop ends, the queue holds precisely the next level. Repeat.
+
+The one skeleton. A queue, seeded with the root. While the queue is not empty, freeze the size, then loop exactly that many times, pulling one node, doing per-node work, and pushing its children. After the inner loop, do any per-level work. Only the per-node line and the per-level line change between problems.
+
+Four problems from one skeleton. Level order traversal, the per-node work is, collect the value, and the per-level work is, close off the row as its own list. Right-side view, the per-node work is, if I am the last node in the row, record me, because standing on the right you see the rightmost node of every row. Minimum depth, the per-node work is, if I am a leaf, return the current depth, because B F S reaches shallower nodes first, so the first leaf you hit is the minimum. Zigzag, the per-level work is, reverse every other level's list.
+
+The line that unlocks it. One queue, freeze the level size, process exactly that many. Only the per-node and per-level lines change.
+
+The classic trap. Forgetting to freeze the size before the inner loop. If you do not, children mix into the current level and you lose all the level boundaries.
+
+When does B F S beat D F S? Nearest, shortest, minimum depth, level, row, view, widest, all mean B F S. Height, path, subtree property, all paths, diameter, all mean D F S.
+
+Three anchor words. Queue and freeze the size. Per-node versus per-level lines. Nearest or level means B F S.
+
+
+PATTERN THIRTEEN. K-TH SMALLEST IN A B S T. INORDER PLUS A COUNTDOWN.
+
+The flagship of, B S T inorder equals sorted. Any question about the k-th smallest or k-th largest, or validating sorted order, is this pattern. The new idea, stop the traversal early once you have counted enough.
+
+The story. An inorder traversal of a B S T produces values in ascending sorted order, because it visits left, then node, then right. So the k-th smallest is simply the k-th value produced by an inorder walk. You do not need to finish. Carry a countdown, decrement it as you visit each node, and the moment it hits zero, that node is your answer. Stop.
+
+Through the questions quickly. Parameters, the node plus a shared mutable counter holding k and the answer. The count must persist across the whole traversal and survive returning up, so it is a shared object, like path sum two's list. Base case, null, or once k has hit zero, so we short-circuit. The order of work is the key. Recurse left, then visit, decrement k and check for zero, then recurse right. That left, node, right order is exactly ascending order in a B S T, and the visit sits between the two recursive calls, which is the defining shape of inorder. Return, void. The answer lives in the shared holder.
+
+The line that unlocks it. B S T plus k-th anything equals inorder traversal with a countdown. Stop the instant the counter hits zero.
+
+The classic trap. Collecting the entire inorder list, then indexing into it. Correct, but wasteful, order n space with no early exit. The countdown version stops after k visits. For k-th largest, just do reverse inorder, right, node, left.
+
+Three anchor words. Inorder equals sorted. Countdown k, stop at zero. Reverse for k-th largest.
+
+
+PATTERN FOURTEEN. SERIALIZE AND DESERIALIZE. PREORDER ENCODE, QUEUE DECODE.
+
+The turn-a-tree-into-a-string-and-back archetype. Two mirrored recursions. The key idea, null markers preserve the exact shape, and a token queue rebuilds it in the same order it was written.
+
+The story. To save a tree as text, walk it in preorder, root, then left, then right, and write each value. But critically, write a marker, say a hash symbol, for every null too. Those null markers are what let you reconstruct the exact shape later. To rebuild, read the tokens in the same preorder. The first token is the root, then recursively build its left subtree, then its right, consuming tokens from a queue as you go.
+
+For serialize, the questions in short. Carry the node and a shared string builder. Null appends the marker. Pre-order, append my value first, because root-first is the definition of preorder, and decode must see the root before its subtrees. Then serialize left, then right.
+
+For deserialize, the mirror. Carry a queue of tokens, a shared cursor into the string. If the next token is the marker, return null, rebuilding the null we recorded. Otherwise, read one token as this node's value and create the node, before building children, mirroring how we wrote the root first. Then build left, then right, consuming tokens in order. Return the reconstructed node up to its parent.
+
+The line that unlocks it. Write root-first with null markers. Read root-first consuming a token queue. Encode and decode are the same preorder walk, mirrored.
+
+The classic trap. Omitting the null markers. Then you cannot tell a leaf from an internal node, and the shape becomes ambiguous. Every null must be recorded.
+
+Three anchor words. Preorder plus null markers. Token queue rebuild. Encode and decode mirror each other.
+
+
+PATTERN FIFTEEN. BUILD A TREE FROM PREORDER AND INORDER. THE ROOT SPLITS THE ARRAYS.
+
+The reconstruct-from-two-traversals archetype. The insight, preorder hands you roots in order, and inorder tells you how many nodes fall to the left versus the right of each root.
+
+The story. The first element of preorder is always the current subtree's root. Find that root's position inside the inorder array. Everything to its left in inorder is the left subtree. Everything to its right is the right subtree. That split tells you the sizes, so you can carve preorder into left and right chunks too, and recurse. A hashmap from value to inorder index makes each lookup instant, giving overall order n. A hashmap, by the way, is a lookup table. You give it a key and it hands back the matching value immediately, without scanning, so instead of searching the inorder array every time, you ask the map, where does this value live, and you get the position at once.
+
+Through the questions. Parameters, an advancing preorder cursor, and the inorder range this subtree spans. Preorder is consumed front to back, and the inorder range defines which nodes belong here. Base case, when the range is empty, when low passes high, return null. Pre-order, take the next preorder value as the root, and look up its index in inorder. Root-first, again, because preorder gives the root before its subtrees. Go left, go right. The left subtree is the inorder range before the split, the right subtree is the range after the split. And build left before right, so the shared preorder cursor advances in the correct order.
+
+The line that unlocks it. Preorder gives me the next root. Its spot in inorder splits the rest into left and right. Recurse, always building left before right.
+
+The classic trap. Building right before left, which advances the shared cursor in the wrong order and scrambles the tree. And forgetting the hashmap, which drops you to order n squared. For postorder plus inorder, consume postorder from the end and build right before left.
+
+Three anchor words. Preorder is the root, inorder is the split. Left before right. Hashmap for order n.
+
+
+PATTERN SIXTEEN. PATH SUM THREE, AND SUBTREE OF ANOTHER TREE. NESTED SEARCH, AND PREFIX ON A PATH.
+
+Two archetypes where a walk launches another computation at every node.
+
+First, subtree of another tree. The story. Is tree t an exact subtree of tree s? Walk every node of s, and at each one, ask, is the subtree rooted here identical to t? Using the same-tree check from pattern three. If any node says yes, you are done. The move is, an outer walk that visits every node, and at each node, an inner check that tests equality. A depth-first search inside a depth-first search. The line, the outer walk picks a candidate root, the inner same-tree check verifies it.
+
+Second, path sum three, and this is the richer one. The story. Count paths going downward, parent to child, not necessarily starting at the root or ending at a leaf, that sum to a target. The naive way, from every node walk down summing, is order n squared. The pro trick borrows the prefix-sum idea from arrays. A prefix sum is the running total from the start up to your current position, so if you know the running total at two points, subtracting them gives the sum of the stretch in between. Carry the running sum from the root, and a map, that lookup table again, from each prefix sum to how many times it has occurred. A path ending at the current node with the target sum exists for every earlier prefix equal to the running sum minus the target.
+
+Through the questions. Parameters, the running sum from the root to here, and a shared map of prefix-sum frequencies. Both are ancestor context, the sum accumulated above me, and the prefixes seen on my current root path. Pure down pipe. Base case, null contributes zero. Pre-order, three moves. Add my value to the running sum. Add to the count however many earlier prefixes equal the running sum minus the target. Then record my own prefix in the map. Go left, go right, with the updated running sum and the shared map. Post-order, the cleanup, decrement my prefix from the map. This is backtracking again, because my prefix is only valid for my own subtree, and siblings must not see it. Return the count from my subtree.
+
+The line that unlocks it. Prefix sum in a tree. A path summing to the target and ending at me equals an ancestor prefix equal to running sum minus target. Seed the empty prefix, and backtrack the map on the way up.
+
+The classic trap. Forgetting to seed the empty prefix with a count of one, which misses paths that start at the root. And forgetting to decrement the map on the way up, which leaks prefixes into sibling subtrees.
+
+Three anchor words. Subtree is a search inside a search. Path sum three is a prefix map, seed zero, and backtrack.
+
+
+PATTERN SEVENTEEN. TREE VIEWS. A COORDINATE PUSHED DOWN.
+
+The assign-each-node-a-coordinate-then-group-or-pick archetype. You push a position, a depth or a column, down as a parameter, then collect. This unifies right-side view, vertical order, top view, and bottom view.
+
+The story. Give every node a coordinate as you descend. For vertical order, that coordinate is a column. The root is column zero. Going left is column minus one. Going right is column plus one. Bucket every node by its column, then read the buckets from left to right. For top or bottom view, keep the first, or the last, node seen per column. For right-side view, the coordinate is depth, and you keep the last node at each depth.
+
+Through the questions, for vertical order. Parameters, carry a row and a column, because a node's bucket is defined by its position, which is determined by the path from the root, so push it down. Base case, null returns. Pre-order, record my value into the bucket for my column, because my placement depends only on my coordinate. Go left, going down and to the left, row plus one, column minus one. Go right, down and to the right, row plus one, column plus one. After the walk, sort columns left to right, and within a column, order by row, then by value, and emit.
+
+Right-side view is even simpler. It is the B F S skeleton, keeping the last node per level. Or a depth-first search that visits the right child first and records the first node seen at each new depth.
+
+The line that unlocks it. Push a coordinate, a column or a depth, down as a parameter. Bucket nodes by it. Then read the buckets in order.
+
+The classic trap. In vertical order, not breaking ties correctly. When two nodes share a column, order by row, then by value.
+
+Three anchor words. Carry row and column down. Left is column minus one, right is column plus one. Group by coordinate.
+
+
+THE GRAND SYNTHESIS. YOUR MIND MAP, SPOKEN.
+
+Take a breath. Everything you just heard collapses into a handful of decisions. This is the part to loop the most, because this is the mind map itself.
+
+When a new tree problem lands in front of you, run this decision list, in order.
+
+First. Is it about levels, or nearest, or a side view? If yes, use breadth-first search with a queue, and freeze the level size. That is level order, right-side view, minimum depth, and zigzag.
+
+Otherwise it is depth-first recursion, so ask. Does the answer need information from my ancestors, from the root-to-me path? If yes, push state down as a parameter and do the work in pre-order. That is good nodes, and that is validate B S T with its window.
+
+Or, does the answer need information from my descendants, from what is below me? If yes, pull answers up through the return value and do the work in post-order. That is depth, diameter, max path sum, balanced, and largest B S T.
+
+Next. Is the value I return to my parent different from the answer I am tracking? If yes, keep a global for the answer, and return only the extendable, one-side value. That is diameter and max path sum.
+
+Next. Do I need several facts from each child, not just one number? If yes, return a small bundle object. That is largest B S T.
+
+Next. Am I comparing or walking two nodes at once? If yes, the recursion takes two node arguments. That is same tree and mirror.
+
+Next. Do I need every path, and must the path reset between branches? If yes, backtrack. Mutate a shared list, and undo it after both children. That is path sum two, and the prefix map in path sum three.
+
+Next. Is it a B S T, and about order, or the next value, or search? If yes, exploit inorder equals sorted, and the order-h directed walk. That is inorder successor, B S T lowest common ancestor, and k-th smallest.
+
+Next. Do I carry a position, a depth or a column, to group or pick nodes? If yes, push a coordinate down and bucket by it. That is vertical order and the views.
+
+Next. Am I encoding or rebuilding a tree? If yes, preorder plus null markers to serialize, or root-splits-the-array to build from traversals.
+
+And finally. Is it a genuinely new problem? Then compose two patterns you already own. Distance was just lowest common ancestor plus depth.
+
+Now the two pipes, one more time, because they are the whole subject. The down pipe is parameters, pre-order, ancestor context. The up pipe is return values, post-order, descendant answers. Backtracking is a shared object that uses the down pipe on the way in, and undoes itself on the way out. And breadth-first search is the sideways pipe, a queue that moves across a level instead of up or down.
+
+Here is the sixty-second answer you give an interviewer. This is a tree problem. First, is it about levels or nearest? If so, breadth-first search with a queue, freezing the level size. Otherwise it is depth-first recursion, and I ask, does the answer depend on ancestors or descendants? Ancestors means I push state down as a parameter and act in pre-order. Descendants means I compute after my children return, in post-order. If the value my parent needs differs from the global answer, like diameter or max path sum, I track the answer in a field and return only the one-sided extendable value, because a path cannot fork. If I need several facts from each child, I return a small object. If I need every path, I backtrack, add myself, explore, remove myself. And if it is a B S T about order, I lean on inorder equals sorted.
+
+A rapid-fire round of the traps, so they become reflex. The base case for depth or size is zero, because null is nothing. For diameter and max path sum, the answer uses both sides, but the return uses one. Max path sum starts at negative infinity and clamps negative children to zero. Lowest common ancestor checks both sides non-null first. Two-node problems do null checks before reading values. Mirror is same tree with the cross. Largest B S T uses positive and negative infinity as its empty identity. Path sum two stores a copy and removes once, after both kids. Inorder successor is strictly greater. Distance measures from the L C A. Validate B S T pushes a window down, never a local check. Breadth-first search freezes the size before the inner loop. K-th smallest uses a countdown, not a full list. Serialize always writes null markers. Build-from-traversals goes left before right, with a hashmap. Path sum three seeds the empty prefix and backtracks the map. And vertical order breaks ties by row, then value.
+
+Now, how to actually use this recording. Pass one, listen only for the shape, the same six questions every time. Parameters, base case, pre-order, go left and right, post-order, return. Do not chase details. Feel the rhythm. Pass two, listen for the two pipes. For each pattern, ask yourself, is this down, a parameter, or up, a return? Try to answer before the narrator does. You are training prediction. Pass three, catch the answer-versus-return split on diameter and max path sum. Pass four, say each pattern's three anchor words out loud before they play. Pass five, recite the sixty-second interview answer along with the narrator. When you can do that from memory, you are a pro.
+
+That is the whole map. Eighteen patterns, but really just a few moves wearing different costumes. The six questions never change. Only the answers do. Run the questions, and any depth-first tree problem becomes just another face of the one template you now own. Play it again from the top, and let it sink a little deeper each time.
+
+
+
+
+
+
+
+
