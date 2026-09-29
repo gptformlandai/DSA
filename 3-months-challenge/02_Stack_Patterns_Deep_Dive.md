@@ -1763,6 +1763,179 @@ SCORE OF PARENTHESES
 
 ---
 
+# PATTERN 4: Remove Invalid Parentheses (LeetCode 301)
+
+## Pattern Recognition Signal
+
+**When you see:** "remove minimum parentheses", "all valid strings", "make valid with minimum removals"
+
+**Instant thought:** "BFS for minimum removals, or count mismatches then backtrack!"
+
+---
+
+## The Mental Model (Before Coding!)
+
+### What's the problem REALLY asking?
+
+```
+Input: s = "()())()"
+
+Remove MINIMUM number of parentheses to make it valid.
+Return ALL possible results.
+
+- Remove s[4] ')': "()()()" ✓
+- Remove s[2] ')': "(())()" ✓
+
+Answer: ["(())()", "()()()"]
+```
+
+### Why BFS?
+
+```
+BFS guarantees MINIMUM removals!
+
+Level 0: Original string
+Level 1: All strings with 1 removal
+Level 2: All strings with 2 removals
+...
+
+Stop at first level where valid strings are found!
+```
+
+### The Algorithm in Plain English
+
+```
+1. Start BFS with original string
+2. For each string in queue:
+   a. If valid → add to result, mark level as "found"
+   b. If not found yet → generate all strings with one removal
+3. Stop when we find valid strings (minimum removals)
+4. Return all valid strings found at that level
+```
+
+---
+
+## Visual Dry Run (Step-by-Step)
+
+**Input:** `s = "())"`
+
+```
+═══════════════════════════════════════════════════════════
+
+Level 0: Check original string
+  
+  Queue: ["())"]
+  
+  Check "())": 
+    Balance: ( → 1, ) → 0, ) → -1 (invalid!)
+    Not valid, generate children
+
+═══════════════════════════════════════════════════════════
+
+Level 1: All strings with 1 removal
+
+  Remove index 0: "))" 
+  Remove index 1: "()" 
+  Remove index 2: "()"
+  
+  Queue: ["))", "()", "()"]
+  Visited: {"())", "))", "()"}
+  
+  Check "))": Balance goes negative → invalid
+  Check "()": Balance = 0 at end → VALID! ✓
+  
+  Found valid at level 1!
+
+═══════════════════════════════════════════════════════════
+
+Result: ["()"]
+
+(Note: "()" appears twice but we use Set to dedupe)
+```
+
+---
+
+## The Code (With Line-by-Line Explanation)
+
+```java
+public List<String> removeInvalidParentheses(String s) {
+    List<String> result = new ArrayList<>();
+    Set<String> visited = new HashSet<>();
+    Queue<String> queue = new LinkedList<>();
+    
+    queue.offer(s);
+    visited.add(s);
+    boolean found = false;
+    
+    while (!queue.isEmpty()) {
+        String curr = queue.poll();
+        
+        if (isValid(curr)) {
+            result.add(curr);
+            found = true;  // Found at this level
+        }
+        
+        // If found valid at this level, don't go deeper
+        if (found) continue;
+        
+        // Generate all strings with one removal
+        for (int i = 0; i < curr.length(); i++) {
+            char c = curr.charAt(i);
+            if (c != '(' && c != ')') continue;  // Skip non-parentheses
+            
+            String next = curr.substring(0, i) + curr.substring(i + 1);
+            if (!visited.contains(next)) {
+                visited.add(next);
+                queue.offer(next);
+            }
+        }
+    }
+    
+    return result;
+}
+
+private boolean isValid(String s) {
+    int balance = 0;
+    for (char c : s.toCharArray()) {
+        if (c == '(') balance++;
+        else if (c == ')') balance--;
+        if (balance < 0) return false;  // More ')' than '('
+    }
+    return balance == 0;
+}
+```
+
+---
+
+## Common Traps
+
+| Trap | Example | Why Wrong |
+|------|---------|-----------|
+| Not using visited set | Duplicate processing | Exponential time |
+| Continuing after found | Goes to deeper levels | Not minimum removals |
+| Removing non-parentheses | "a)b(" → "ab(" | Only remove '(' or ')' |
+
+---
+
+## Mind-Map Anchor
+
+```
+REMOVE INVALID PARENTHESES
+         │
+         ▼
+┌─────────────────────────┐
+│ BFS for minimum removal │
+│ Level = # of removals   │
+│ Stop at first valid     │
+│ Use Set to avoid dupes  │
+│ Only remove ( or )      │
+└─────────────────────────┘
+```
+
+**Memory phrase:** "BFS levels = removals, stop at first valid, dedupe with Set"
+
+---
+
 # MONOTONIC STACK FAMILY
 
 ---
@@ -2254,6 +2427,214 @@ NEXT GREATER ELEMENT II (CIRCULAR)
 ```
 
 **Memory phrase:** "2n iterations, modulo index, push only first pass"
+
+---
+
+# PATTERN 8: Next Greater Element III (LeetCode 556)
+
+## Pattern Recognition Signal
+
+**When you see:** "next greater number", "same digits", "smallest greater permutation"
+
+**Instant thought:** "Find rightmost ascending pair, swap with smallest larger digit, reverse suffix!"
+
+---
+
+## The Mental Model (Before Coding!)
+
+### What's the problem REALLY asking?
+
+```
+Input: n = 12443322
+
+Find the smallest number GREATER than n using the SAME digits.
+
+12443322 → 12443322 (digits: 1,2,4,4,3,3,2,2)
+Next greater: 13222344
+
+Answer: 13222344
+```
+
+### The Algorithm (Next Permutation!)
+
+```
+This is the "Next Permutation" algorithm:
+
+1. Find rightmost ASCENDING pair (digits[i] < digits[i+1])
+   - This is where we can make the number larger
+   
+2. Find smallest digit LARGER than digits[i] to its right
+   - Swap them
+   
+3. Reverse everything after position i
+   - Makes the suffix as small as possible
+```
+
+### Why This Works
+
+```
+Example: 12443322
+
+Step 1: Find rightmost ascending pair
+  1-2: 1 < 2 ✓ (ascending)
+  2-4: 2 < 4 ✓ (ascending)
+  4-4: 4 = 4 ✗
+  4-3: 4 > 3 ✗
+  3-3: 3 = 3 ✗
+  3-2: 3 > 2 ✗
+  2-2: 2 = 2 ✗
+  
+  Rightmost ascending: index 1 (digit 2)
+  
+Step 2: Find smallest digit > 2 in suffix [4,4,3,3,2,2]
+  Scan from right: 2,2,3 → 3 is smallest > 2
+  Swap: 12443322 → 13443222
+  
+Step 3: Reverse suffix after index 1
+  Suffix [4,4,3,2,2,2] → [2,2,2,3,4,4]
+  Result: 13222344 ✓
+```
+
+---
+
+## Visual Dry Run (Step-by-Step)
+
+**Input:** `n = 12443322`
+
+```
+═══════════════════════════════════════════════════════════
+
+Convert to char array: ['1','2','4','4','3','3','2','2']
+                        0   1   2   3   4   5   6   7
+
+═══════════════════════════════════════════════════════════
+
+Step 1: Find rightmost ascending pair (i where digits[i] < digits[i+1])
+
+  i=6: '2' < '2'? NO
+  i=5: '3' < '2'? NO
+  i=4: '3' < '3'? NO
+  i=3: '4' < '3'? NO
+  i=2: '4' < '4'? NO
+  i=1: '2' < '4'? YES! ✓
+  
+  Found i = 1 (digit '2')
+
+═══════════════════════════════════════════════════════════
+
+Step 2: Find smallest digit > '2' in suffix (scan from right)
+
+  Suffix: ['4','4','3','3','2','2'] (indices 2-7)
+  
+  j=7: '2' > '2'? NO
+  j=6: '2' > '2'? NO
+  j=5: '3' > '2'? YES! ✓
+  
+  Found j = 5 (digit '3')
+
+═══════════════════════════════════════════════════════════
+
+Step 3: Swap digits[1] and digits[5]
+
+  Before: ['1','2','4','4','3','3','2','2']
+  After:  ['1','3','4','4','3','2','2','2']
+
+═══════════════════════════════════════════════════════════
+
+Step 4: Reverse suffix after index 1
+
+  Suffix to reverse: ['4','4','3','2','2','2'] (indices 2-7)
+  Reversed:          ['2','2','2','3','4','4']
+  
+  Result: ['1','3','2','2','2','3','4','4']
+
+═══════════════════════════════════════════════════════════
+
+Final: 13222344 ✓
+
+Verify: 13222344 > 12443322 ✓
+        Uses same digits ✓
+        Is smallest such number ✓
+```
+
+---
+
+## The Code (With Line-by-Line Explanation)
+
+```java
+public int nextGreaterElement(int n) {
+    char[] digits = String.valueOf(n).toCharArray();
+    int len = digits.length;
+    
+    // Step 1: Find rightmost ascending pair
+    int i = len - 2;
+    while (i >= 0 && digits[i] >= digits[i + 1]) {
+        i--;
+    }
+    
+    // No ascending pair found → no greater permutation
+    if (i < 0) return -1;
+    
+    // Step 2: Find smallest digit > digits[i] in suffix
+    int j = len - 1;
+    while (digits[j] <= digits[i]) {
+        j--;
+    }
+    
+    // Step 3: Swap
+    swap(digits, i, j);
+    
+    // Step 4: Reverse suffix
+    reverse(digits, i + 1, len - 1);
+    
+    // Convert back to number, check overflow
+    long result = Long.parseLong(new String(digits));
+    return result > Integer.MAX_VALUE ? -1 : (int) result;
+}
+
+private void swap(char[] arr, int i, int j) {
+    char temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+}
+
+private void reverse(char[] arr, int left, int right) {
+    while (left < right) {
+        swap(arr, left++, right--);
+    }
+}
+```
+
+---
+
+## Common Traps
+
+| Trap | Why Wrong | Fix |
+|------|-----------|-----|
+| Not handling "no answer" | All digits descending | Return -1 if i < 0 |
+| Integer overflow | Result > INT_MAX | Use long, check bounds |
+| Wrong swap target | Must be smallest LARGER | Scan from right |
+
+---
+
+## Mind-Map Anchor
+
+```
+NEXT GREATER ELEMENT III
+         │
+         ▼
+┌─────────────────────────────┐
+│ Next Permutation Algorithm  │
+│                             │
+│ 1. Find rightmost ascending │
+│ 2. Swap with smallest larger│
+│ 3. Reverse suffix           │
+│                             │
+│ Handle: no answer, overflow │
+└─────────────────────────────┘
+```
+
+**Memory phrase:** "Find ascending, swap with smallest larger, reverse suffix"
 
 ---
 
@@ -3572,6 +3953,170 @@ BASIC CALCULATOR II
 
 ---
 
+# PATTERN 16: Basic Calculator III (LeetCode 772)
+
+## Pattern Recognition Signal
+
+**When you see:** "calculator", "+ - * / with parentheses", "full expression"
+
+**Instant thought:** "Combine Calculator I (parentheses) + Calculator II (precedence)!"
+
+---
+
+## The Mental Model (Before Coding!)
+
+### What's the problem REALLY asking?
+
+```
+Input: "2*(5+5*2)/3+(6/2+8)"
+
+Evaluate with:
+- Parentheses (highest precedence)
+- * / (next precedence)
+- + - (lowest precedence)
+
+= 2*(5+10)/3+(3+8)
+= 2*15/3+11
+= 30/3+11
+= 10+11
+= 21
+```
+
+### The Approach: Recursion for Parentheses
+
+```
+When we see '(':
+  - Recursively evaluate the inner expression
+  - Return when we see ')'
+  
+For + - * /:
+  - Use Calculator II approach (apply previous operator)
+```
+
+---
+
+## Visual Dry Run (Step-by-Step)
+
+**Input:** `"(2+3)*4"`
+
+```
+═══════════════════════════════════════════════════════════
+
+Start: i=0, s="(2+3)*4"
+
+char '(':
+  Recursively call calculate starting at i=1
+  
+  Inner call: s="2+3)*4", starting at i=1
+    char '2': num = 2
+    char '+': apply '+', push 2, op = '+', num = 0
+    char '3': num = 3
+    char ')': apply '+', push 3, sum stack = 5
+              return (5, index=4)
+  
+  Back to outer: num = 5, i = 5
+
+═══════════════════════════════════════════════════════════
+
+char '*':
+  Apply previous op '+': push 5 → stack = [5]
+  op = '*', num = 0
+
+char '4':
+  num = 4
+
+End of string:
+  Apply previous op '*': pop 5, compute 5*4=20, push 20
+  stack = [20]
+
+Sum stack: 20 ✓
+```
+
+---
+
+## The Code (With Line-by-Line Explanation)
+
+```java
+class Solution {
+    int i = 0;  // Global index to track position
+    
+    public int calculate(String s) {
+        Deque<Integer> stack = new ArrayDeque<>();
+        int num = 0;
+        char op = '+';
+        
+        while (i < s.length()) {
+            char c = s.charAt(i);
+            i++;
+            
+            if (Character.isDigit(c)) {
+                num = num * 10 + (c - '0');
+            }
+            
+            if (c == '(') {
+                num = calculate(s);  // Recursive call
+            }
+            
+            if (c == '+' || c == '-' || c == '*' || c == '/' 
+                || c == ')' || i == s.length()) {
+                
+                switch (op) {
+                    case '+': stack.push(num); break;
+                    case '-': stack.push(-num); break;
+                    case '*': stack.push(stack.pop() * num); break;
+                    case '/': stack.push(stack.pop() / num); break;
+                }
+                
+                op = c;
+                num = 0;
+                
+                if (c == ')') break;  // Return to caller
+            }
+        }
+        
+        int result = 0;
+        while (!stack.isEmpty()) {
+            result += stack.pop();
+        }
+        return result;
+    }
+}
+```
+
+---
+
+## Common Traps
+
+| Trap | Why Wrong | Fix |
+|------|-----------|-----|
+| Not handling nested parens | "(1+(2*3))" fails | Recursion handles nesting |
+| Local index variable | Loses position after recursion | Use instance variable |
+| Forgetting to break on ')' | Continues past closing paren | Break when c == ')' |
+
+---
+
+## Mind-Map Anchor
+
+```
+BASIC CALCULATOR III
+         │
+         ▼
+┌─────────────────────────────┐
+│ Combine I + II              │
+│                             │
+│ '(' → recursive call        │
+│ ')' → return to caller      │
+│ +- → push (with sign)       │
+│ */ → compute immediately    │
+│                             │
+│ Use instance variable for i │
+└─────────────────────────────┘
+```
+
+**Memory phrase:** "Recurse on '(', return on ')', apply previous operator"
+
+---
+
 # PATTERN 17: Evaluate Reverse Polish Notation (LeetCode 150)
 
 ## Pattern Recognition Signal
@@ -3715,6 +4260,436 @@ EVALUATE RPN
 ```
 
 **Memory phrase:** "Push numbers, pop two for operators, order matters (a op b)"
+
+---
+
+# PATTERN 18: Simplify Path (LeetCode 71)
+
+## Pattern Recognition Signal
+
+**When you see:** "Unix path", "simplify path", "canonical path", ".." and "."
+
+**Instant thought:** "Stack of directory names! '..' pops, '.' does nothing"
+
+---
+
+## The Mental Model (Before Coding!)
+
+### What's the problem REALLY asking?
+
+```
+Input: "/a/./b/../../c/"
+
+Simplify to canonical Unix path:
+- "/a" → push "a"
+- "/." → current dir, ignore
+- "/b" → push "b"
+- "/.." → parent dir, pop "b"
+- "/.." → parent dir, pop "a"
+- "/c" → push "c"
+
+Stack: ["c"]
+Result: "/c"
+```
+
+### The Algorithm in Plain English
+
+```
+1. Split path by "/"
+2. For each part:
+   - ".." → pop from stack (if not empty)
+   - "." or "" → ignore
+   - else → push to stack
+3. Join stack with "/" prefix
+```
+
+---
+
+## Visual Dry Run (Step-by-Step)
+
+**Input:** `"/home//foo/../bar/"`
+
+```
+═══════════════════════════════════════════════════════════
+
+Split by "/": ["", "home", "", "foo", "..", "bar", ""]
+
+═══════════════════════════════════════════════════════════
+
+Process each part:
+
+"" → empty, skip
+"home" → push → stack = ["home"]
+"" → empty, skip
+"foo" → push → stack = ["home", "foo"]
+".." → pop → stack = ["home"]
+"bar" → push → stack = ["home", "bar"]
+"" → empty, skip
+
+═══════════════════════════════════════════════════════════
+
+Join with "/": "/home/bar" ✓
+```
+
+---
+
+## The Code (With Line-by-Line Explanation)
+
+```java
+public String simplifyPath(String path) {
+    Deque<String> stack = new ArrayDeque<>();
+    
+    // Split by "/" and process each part
+    for (String part : path.split("/")) {
+        if (part.equals("..")) {
+            if (!stack.isEmpty()) {
+                stack.pop();  // Go to parent
+            }
+        } else if (!part.equals(".") && !part.isEmpty()) {
+            stack.push(part);  // Valid directory name
+        }
+        // Ignore "." and empty strings
+    }
+    
+    // Build result from bottom to top
+    StringBuilder result = new StringBuilder();
+    while (!stack.isEmpty()) {
+        result.insert(0, "/" + stack.pop());
+    }
+    
+    return result.length() == 0 ? "/" : result.toString();
+}
+```
+
+---
+
+## Common Traps
+
+| Trap | Why Wrong | Fix |
+|------|-----------|-----|
+| Popping empty stack | ".." at root | Check `!stack.isEmpty()` |
+| Forgetting empty parts | "//" creates empty strings | Skip empty strings |
+| Wrong join order | Stack is LIFO | Insert at beginning or use Deque |
+
+---
+
+## Mind-Map Anchor
+
+```
+SIMPLIFY PATH
+      │
+      ▼
+┌─────────────────────────┐
+│ Stack of directory names│
+│ ".." → pop (if not empty)│
+│ "." → ignore            │
+│ "" → ignore             │
+│ else → push             │
+│ Join with "/" prefix    │
+└─────────────────────────┘
+```
+
+**Memory phrase:** "Split by /, stack dirs, .. pops, . ignores, join with /"
+
+---
+
+# PATTERN 19: Remove All Adjacent Duplicates (LeetCode 1047)
+
+## Pattern Recognition Signal
+
+**When you see:** "remove adjacent duplicates", "repeatedly remove pairs", "like matching game"
+
+**Instant thought:** "Stack! Push if different from top, pop if same"
+
+---
+
+## The Mental Model (Before Coding!)
+
+### What's the problem REALLY asking?
+
+```
+Input: "abbaca"
+
+Remove adjacent duplicates repeatedly:
+- "abbaca" → "bb" are adjacent duplicates
+- "aaca" → "aa" are adjacent duplicates
+- "ca" → no more duplicates
+
+Answer: "ca"
+```
+
+### Why Stack?
+
+```
+When we remove a pair, the characters that were separated might become adjacent!
+
+"abbaca":
+  a → push → [a]
+  b → push → [a, b]
+  b → same as top! pop → [a]
+  a → same as top! pop → []
+  c → push → [c]
+  a → push → [c, a]
+
+Result: "ca" ✓
+```
+
+---
+
+## Visual Dry Run (Step-by-Step)
+
+**Input:** `"abbaca"`
+
+```
+═══════════════════════════════════════════════════════════
+
+Process each character:
+
+char 'a':
+  Stack empty, push 'a'
+  Stack: ['a']
+
+═══════════════════════════════════════════════════════════
+
+char 'b':
+  Top is 'a' ≠ 'b', push 'b'
+  Stack: ['a', 'b']
+
+═══════════════════════════════════════════════════════════
+
+char 'b':
+  Top is 'b' == 'b', POP!
+  Stack: ['a']
+
+═══════════════════════════════════════════════════════════
+
+char 'a':
+  Top is 'a' == 'a', POP!
+  Stack: []
+
+═══════════════════════════════════════════════════════════
+
+char 'c':
+  Stack empty, push 'c'
+  Stack: ['c']
+
+═══════════════════════════════════════════════════════════
+
+char 'a':
+  Top is 'c' ≠ 'a', push 'a'
+  Stack: ['c', 'a']
+
+═══════════════════════════════════════════════════════════
+
+Build result from stack: "ca" ✓
+```
+
+---
+
+## The Code (With Line-by-Line Explanation)
+
+```java
+public String removeDuplicates(String s) {
+    StringBuilder stack = new StringBuilder();  // Use StringBuilder as stack
+    
+    for (char c : s.toCharArray()) {
+        int len = stack.length();
+        
+        // If top of stack equals current char, pop (remove)
+        if (len > 0 && stack.charAt(len - 1) == c) {
+            stack.deleteCharAt(len - 1);
+        } else {
+            stack.append(c);  // Push
+        }
+    }
+    
+    return stack.toString();
+}
+```
+
+---
+
+## Common Traps
+
+| Trap | Why Wrong | Fix |
+|------|-----------|-----|
+| Using actual Stack | Need to convert to String | Use StringBuilder |
+| Checking after push | Should check before | Check, then push or pop |
+
+---
+
+## Mind-Map Anchor
+
+```
+REMOVE ADJACENT DUPLICATES
+          │
+          ▼
+┌─────────────────────────┐
+│ StringBuilder as stack  │
+│ Same as top → pop       │
+│ Different → push        │
+│ One pass, O(n)          │
+└─────────────────────────┘
+```
+
+**Memory phrase:** "Same as top = pop, different = push"
+
+---
+
+# PATTERN 20: Remove All Adjacent Duplicates II (LeetCode 1209)
+
+## Pattern Recognition Signal
+
+**When you see:** "remove k adjacent duplicates", "k consecutive same characters"
+
+**Instant thought:** "Stack of (char, count) pairs! Pop when count reaches k"
+
+---
+
+## The Mental Model (Before Coding!)
+
+### What's the problem REALLY asking?
+
+```
+Input: s = "deeedbbcccbdaa", k = 3
+
+Remove groups of 3 adjacent duplicates repeatedly:
+- "deeedbbcccbdaa" → "eee" removed
+- "dddbbcccbdaa" → "ddd" removed
+- "bbcccbdaa" → "ccc" removed
+- "bbbdaa" → "bbb" removed
+- "daa" → no more groups of 3
+
+Answer: "daa"
+```
+
+### Why Stack of (char, count)?
+
+```
+Track consecutive count for each character!
+
+When count reaches k, remove the entry.
+When new char matches top, increment count.
+When new char differs, push new entry.
+```
+
+---
+
+## Visual Dry Run (Step-by-Step)
+
+**Input:** `s = "aabbba"`, `k = 3`
+
+```
+═══════════════════════════════════════════════════════════
+
+Process each character:
+
+char 'a':
+  Stack empty, push ('a', 1)
+  Stack: [('a', 1)]
+
+═══════════════════════════════════════════════════════════
+
+char 'a':
+  Top is 'a', increment count
+  Stack: [('a', 2)]
+
+═══════════════════════════════════════════════════════════
+
+char 'b':
+  Top is 'a' ≠ 'b', push ('b', 1)
+  Stack: [('a', 2), ('b', 1)]
+
+═══════════════════════════════════════════════════════════
+
+char 'b':
+  Top is 'b', increment count
+  Stack: [('a', 2), ('b', 2)]
+
+═══════════════════════════════════════════════════════════
+
+char 'b':
+  Top is 'b', increment count → count = 3 = k!
+  POP the entry!
+  Stack: [('a', 2)]
+
+═══════════════════════════════════════════════════════════
+
+char 'a':
+  Top is 'a', increment count → count = 3 = k!
+  POP the entry!
+  Stack: []
+
+═══════════════════════════════════════════════════════════
+
+Build result: "" (empty string) ✓
+```
+
+---
+
+## The Code (With Line-by-Line Explanation)
+
+```java
+public String removeDuplicates(String s, int k) {
+    // Stack of [character, count]
+    Deque<int[]> stack = new ArrayDeque<>();
+    
+    for (char c : s.toCharArray()) {
+        if (!stack.isEmpty() && stack.peek()[0] == c) {
+            // Same as top, increment count
+            stack.peek()[1]++;
+            
+            // If count reaches k, remove
+            if (stack.peek()[1] == k) {
+                stack.pop();
+            }
+        } else {
+            // Different char, push new entry
+            stack.push(new int[]{c, 1});
+        }
+    }
+    
+    // Build result string
+    StringBuilder result = new StringBuilder();
+    while (!stack.isEmpty()) {
+        int[] entry = stack.pop();
+        for (int i = 0; i < entry[1]; i++) {
+            result.insert(0, (char) entry[0]);
+        }
+    }
+    
+    return result.toString();
+}
+```
+
+---
+
+## Common Traps
+
+| Trap | Why Wrong | Fix |
+|------|-----------|-----|
+| Only storing char | Can't track count | Store (char, count) pairs |
+| Forgetting to pop at k | Groups not removed | Check count == k after increment |
+| Wrong result order | Stack is LIFO | Insert at beginning |
+
+---
+
+## Mind-Map Anchor
+
+```
+REMOVE K ADJACENT DUPLICATES
+           │
+           ▼
+┌─────────────────────────────┐
+│ Stack of (char, count)      │
+│ Same char → increment count │
+│ Count == k → pop            │
+│ Different → push (c, 1)     │
+│ Build string from stack     │
+└─────────────────────────────┘
+```
+
+**Memory phrase:** "Stack of (char, count), pop when count hits k"
 
 ---
 
@@ -4219,6 +5194,205 @@ Much simpler!
 ```
 
 **Memory phrase:** "Right to left, stack is j, third is k, found when current < third"
+
+---
+
+# PATTERN 24: Sum of Subarray Ranges (LeetCode 2104)
+
+## Pattern Recognition Signal
+
+**When you see:** "sum of ranges", "max - min for all subarrays", "subarray range"
+
+**Instant thought:** "Sum of all maxes - Sum of all mins! Use monotonic stack twice"
+
+---
+
+## The Mental Model (Before Coding!)
+
+### What's the problem REALLY asking?
+
+```
+Input: nums = [1, 2, 3]
+
+For each subarray, compute (max - min), sum them all:
+- [1]: max=1, min=1, range=0
+- [2]: max=2, min=2, range=0
+- [3]: max=3, min=3, range=0
+- [1,2]: max=2, min=1, range=1
+- [2,3]: max=3, min=2, range=1
+- [1,2,3]: max=3, min=1, range=2
+
+Sum = 0+0+0+1+1+2 = 4
+```
+
+### The Key Insight
+
+```
+Sum of (max - min) for all subarrays
+= Sum of max for all subarrays - Sum of min for all subarrays
+
+For each element, count how many subarrays it's the MAX of.
+For each element, count how many subarrays it's the MIN of.
+
+This is Pattern 12 (Sum of Subarray Minimums) applied twice!
+```
+
+### The Formula
+
+```
+For element at index i:
+- left[i] = distance to previous greater (for max) or smaller (for min)
+- right[i] = distance to next greater or equal (for max) or smaller or equal (for min)
+
+Contribution as max = nums[i] * left[i] * right[i]
+Contribution as min = nums[i] * left[i] * right[i]
+
+Answer = sum of max contributions - sum of min contributions
+```
+
+---
+
+## Visual Dry Run (Step-by-Step)
+
+**Input:** `nums = [1, 2, 3]`
+
+```
+═══════════════════════════════════════════════════════════
+
+Step 1: Calculate sum of subarray MAXIMUMS
+
+For each element, find:
+- left: # of elements to left that are smaller (until larger found)
+- right: # of elements to right that are smaller or equal (until larger found)
+
+nums[0] = 1:
+  left = 1 (just itself)
+  right = 1 (2 > 1, stops)
+  Contribution = 1 * 1 * 1 = 1
+
+nums[1] = 2:
+  left = 2 (includes 1)
+  right = 1 (3 > 2, stops)
+  Contribution = 2 * 2 * 1 = 4
+
+nums[2] = 3:
+  left = 3 (includes 1, 2)
+  right = 1 (end of array)
+  Contribution = 3 * 3 * 1 = 9
+
+Sum of maxes = 1 + 4 + 9 = 14
+
+═══════════════════════════════════════════════════════════
+
+Step 2: Calculate sum of subarray MINIMUMS
+
+For each element, find:
+- left: # of elements to left that are larger (until smaller found)
+- right: # of elements to right that are larger or equal (until smaller found)
+
+nums[0] = 1:
+  left = 1 (just itself)
+  right = 3 (all elements to right are larger)
+  Contribution = 1 * 1 * 3 = 3
+
+nums[1] = 2:
+  left = 1 (1 < 2, stops)
+  right = 2 (includes 3)
+  Contribution = 2 * 1 * 2 = 4
+
+nums[2] = 3:
+  left = 1 (2 < 3, stops)
+  right = 1 (end of array)
+  Contribution = 3 * 1 * 1 = 3
+
+Sum of mins = 3 + 4 + 3 = 10
+
+═══════════════════════════════════════════════════════════
+
+Answer = Sum of maxes - Sum of mins = 14 - 10 = 4 ✓
+```
+
+---
+
+## The Code (With Line-by-Line Explanation)
+
+```java
+public long subArrayRanges(int[] nums) {
+    int n = nums.length;
+    
+    // Sum of subarray maximums
+    long sumMax = sumOfSubarrayExtremes(nums, true);
+    
+    // Sum of subarray minimums
+    long sumMin = sumOfSubarrayExtremes(nums, false);
+    
+    return sumMax - sumMin;
+}
+
+private long sumOfSubarrayExtremes(int[] nums, boolean findMax) {
+    int n = nums.length;
+    long sum = 0;
+    Deque<Integer> stack = new ArrayDeque<>();
+    
+    for (int i = 0; i <= n; i++) {
+        // Use sentinel value at the end
+        while (!stack.isEmpty() && 
+               (i == n || compare(nums[stack.peek()], nums[i], findMax))) {
+            
+            int mid = stack.pop();
+            int left = stack.isEmpty() ? -1 : stack.peek();
+            int right = i;
+            
+            // Number of subarrays where nums[mid] is the extreme
+            long count = (long)(mid - left) * (right - mid);
+            sum += (long)nums[mid] * count;
+        }
+        stack.push(i);
+    }
+    
+    return sum;
+}
+
+// For max: pop when current >= stack top
+// For min: pop when current <= stack top
+private boolean compare(int stackVal, int currVal, boolean findMax) {
+    return findMax ? stackVal <= currVal : stackVal >= currVal;
+}
+```
+
+---
+
+## Common Traps
+
+| Trap | Why Wrong | Fix |
+|------|-----------|-----|
+| Double counting | Same subarray counted twice | Use < vs <= carefully |
+| Integer overflow | Large sums | Use long |
+| Wrong comparison | Max vs min have opposite logic | Parameterize comparison |
+
+---
+
+## Mind-Map Anchor
+
+```
+SUM OF SUBARRAY RANGES
+         │
+         ▼
+┌─────────────────────────────┐
+│ Range = Max - Min           │
+│                             │
+│ Sum(ranges) =               │
+│   Sum(maxes) - Sum(mins)    │
+│                             │
+│ Use Pattern 12 twice:       │
+│   - Once for maximums       │
+│   - Once for minimums       │
+│                             │
+│ Monotonic stack for both    │
+└─────────────────────────────┘
+```
+
+**Memory phrase:** "Sum of ranges = sum of maxes - sum of mins, use monotonic stack twice"
 
 ---
 

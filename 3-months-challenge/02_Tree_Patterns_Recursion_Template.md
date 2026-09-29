@@ -294,6 +294,108 @@ int maxDepth(TreeNode node) {
 - `maxDepth(C)`: left=0, right=0 → returns 1
 - `maxDepth(A)`: left=2, right=1 → returns `1 + max(2,1)` = **3** ✓
 
+## Visual Dry Run
+
+**Input Tree:**
+```
+        3
+       / \
+      9  20
+        /  \
+       15   7
+```
+
+```
+═══════════════════════════════════════════════════════════════
+
+Step 1: Call maxDepth(3)
+  Current node: 3
+  Action: Need depths from children first → recurse left
+
+═══════════════════════════════════════════════════════════════
+
+Step 2: Call maxDepth(9)
+  Current node: 9
+  Action: Recurse left → maxDepth(null)
+
+═══════════════════════════════════════════════════════════════
+
+Step 3: Call maxDepth(null) [left of 9]
+  Current node: null
+  Base case hit!
+  Return value: 0
+
+═══════════════════════════════════════════════════════════════
+
+Step 4: Call maxDepth(null) [right of 9]
+  Current node: null
+  Base case hit!
+  Return value: 0
+
+═══════════════════════════════════════════════════════════════
+
+Step 5: Back at node 9
+  left = 0, right = 0
+  Compute: 1 + max(0, 0) = 1
+  Return value: 1  ← "I'm 1 level deep"
+
+═══════════════════════════════════════════════════════════════
+
+Step 6: Call maxDepth(20)
+  Current node: 20
+  Action: Recurse left → maxDepth(15)
+
+═══════════════════════════════════════════════════════════════
+
+Step 7: Call maxDepth(15)
+  Current node: 15
+  Recurse left → null returns 0
+  Recurse right → null returns 0
+  Compute: 1 + max(0, 0) = 1
+  Return value: 1
+
+═══════════════════════════════════════════════════════════════
+
+Step 8: Call maxDepth(7)
+  Current node: 7
+  Recurse left → null returns 0
+  Recurse right → null returns 0
+  Compute: 1 + max(0, 0) = 1
+  Return value: 1
+
+═══════════════════════════════════════════════════════════════
+
+Step 9: Back at node 20
+  left = 1 (from 15), right = 1 (from 7)
+  Compute: 1 + max(1, 1) = 2
+  Return value: 2  ← "My subtree is 2 levels deep"
+
+═══════════════════════════════════════════════════════════════
+
+Step 10: Back at root node 3
+  left = 1 (from 9), right = 2 (from 20)
+  Compute: 1 + max(1, 2) = 3
+  Return value: 3  ← FINAL ANSWER
+
+═══════════════════════════════════════════════════════════════
+
+RECURSION STACK VISUALIZATION:
+
+    maxDepth(3)                    returns 3
+        ├── maxDepth(9)            returns 1
+        │       ├── maxDepth(null) returns 0
+        │       └── maxDepth(null) returns 0
+        └── maxDepth(20)           returns 2
+                ├── maxDepth(15)   returns 1
+                │       ├── null → 0
+                │       └── null → 0
+                └── maxDepth(7)    returns 1
+                        ├── null → 0
+                        └── null → 0
+
+Final: Maximum Depth = 3
+```
+
 ## The "aha" line
 > "I don't measure the tree. I ask my kids for their depths and just add 1 for myself."
 
@@ -397,6 +499,128 @@ int height(TreeNode node) {
 - At node 1: leftH=2, rightH=1 → bend = `2+1 = 3` → diameter becomes **3**. ✓
 - Longest walk: `4 → 2 → 1 → 3` = 3 edges.
 
+## Visual Dry Run
+
+**Input Tree:**
+```
+        1
+       / \
+      2   3
+     / \
+    4   5
+```
+
+```
+═══════════════════════════════════════════════════════════════
+
+Step 1: Call height(1)
+  Current node: 1
+  Global diameter: 0
+  Action: Need heights from children → recurse left to node 2
+
+═══════════════════════════════════════════════════════════════
+
+Step 2: Call height(2)
+  Current node: 2
+  Action: Recurse left to node 4
+
+═══════════════════════════════════════════════════════════════
+
+Step 3: Call height(4)
+  Current node: 4
+  Recurse left → null returns 0
+  Recurse right → null returns 0
+  
+  POST-ORDER WORK:
+    leftH = 0, rightH = 0
+    ANSWER (bend at 4): 0 + 0 = 0 → diameter = max(0, 0) = 0
+    RETURN (one arm): 1 + max(0, 0) = 1
+  
+  Return value: 1
+
+═══════════════════════════════════════════════════════════════
+
+Step 4: Call height(5)
+  Current node: 5
+  Recurse left → null returns 0
+  Recurse right → null returns 0
+  
+  POST-ORDER WORK:
+    leftH = 0, rightH = 0
+    ANSWER (bend at 5): 0 + 0 = 0 → diameter = max(0, 0) = 0
+    RETURN (one arm): 1 + max(0, 0) = 1
+  
+  Return value: 1
+
+═══════════════════════════════════════════════════════════════
+
+Step 5: Back at node 2
+  leftH = 1 (from 4), rightH = 1 (from 5)
+  
+  POST-ORDER WORK:
+    ANSWER (bend at 2): 1 + 1 = 2
+      Path bending here: 4 → 2 → 5 (2 edges)
+      diameter = max(0, 2) = 2  ← UPDATED!
+    
+    RETURN (one arm): 1 + max(1, 1) = 2
+      "Parent can extend through me using my taller arm"
+  
+  Return value: 2
+
+═══════════════════════════════════════════════════════════════
+
+Step 6: Call height(3)
+  Current node: 3
+  Recurse left → null returns 0
+  Recurse right → null returns 0
+  
+  POST-ORDER WORK:
+    leftH = 0, rightH = 0
+    ANSWER (bend at 3): 0 + 0 = 0 → diameter stays 2
+    RETURN (one arm): 1 + max(0, 0) = 1
+  
+  Return value: 1
+
+═══════════════════════════════════════════════════════════════
+
+Step 7: Back at root node 1
+  leftH = 2 (from 2), rightH = 1 (from 3)
+  
+  POST-ORDER WORK:
+    ANSWER (bend at 1): 2 + 1 = 3
+      Path bending here: 4 → 2 → 1 → 3 (3 edges)
+      diameter = max(2, 3) = 3  ← UPDATED!
+    
+    RETURN (one arm): 1 + max(2, 1) = 3
+      (Not used since this is root)
+  
+  Return value: 3
+
+═══════════════════════════════════════════════════════════════
+
+KEY INSIGHT: ANSWER vs RETURN at each node
+
+    Node    leftH   rightH   ANSWER(bend)   RETURN(one arm)
+    ────    ─────   ──────   ────────────   ───────────────
+      4       0       0         0+0=0         1+max=1
+      5       0       0         0+0=0         1+max=1
+      2       1       1         1+1=2 ✓       1+max=2
+      3       0       0         0+0=0         1+max=1
+      1       2       1         2+1=3 ✓       1+max=3
+
+═══════════════════════════════════════════════════════════════
+
+LONGEST PATH VISUALIZATION:
+
+        1           The diameter path: 4 → 2 → 1 → 3
+       /↖\↗         
+      2   3         It BENDS at node 1 (uses both arms)
+     /↖             
+    4   5           3 edges total
+
+Final: Diameter = 3 edges
+```
+
 ## The "aha" line
 > "At each node I ANSWER with both sides added (the bend), but I RETURN only one side plus me — because my parent's path can't fork through me."
 
@@ -491,6 +715,119 @@ int dfs(TreeNode node, int maxSoFar) {         // maxSoFar comes DOWN from paren
 ```
 Good nodes: `3, 4, 5, and the deep 3` → **4 good nodes**.
 
+## Visual Dry Run
+
+**Input Tree:**
+```
+        3
+       / \
+      1   4
+       \   \
+        3   5
+```
+
+```
+═══════════════════════════════════════════════════════════════
+
+Step 1: dfs(3, maxSoFar=-∞)
+  Current node: 3
+  PRE-ORDER CHECK: Is 3 >= -∞? YES → good = 1 ✓
+  Update: newMax = max(-∞, 3) = 3
+  Pass newMax=3 DOWN to children
+
+═══════════════════════════════════════════════════════════════
+
+Step 2: dfs(1, maxSoFar=3)
+  Current node: 1
+  PRE-ORDER CHECK: Is 1 >= 3? NO → good = 0 ✗
+  Update: newMax = max(3, 1) = 3  (max stays 3)
+  Pass newMax=3 DOWN to children
+
+═══════════════════════════════════════════════════════════════
+
+Step 3: dfs(null, maxSoFar=3) [left of 1]
+  Base case! Return 0
+
+═══════════════════════════════════════════════════════════════
+
+Step 4: dfs(3, maxSoFar=3) [right of 1]
+  Current node: 3
+  PRE-ORDER CHECK: Is 3 >= 3? YES → good = 1 ✓
+  Update: newMax = max(3, 3) = 3
+  Children are null → left=0, right=0
+  Return: 1 + 0 + 0 = 1
+
+═══════════════════════════════════════════════════════════════
+
+Step 5: Back at node 1
+  good = 0
+  left = 0, right = 1
+  Return: 0 + 0 + 1 = 1
+
+═══════════════════════════════════════════════════════════════
+
+Step 6: dfs(4, maxSoFar=3)
+  Current node: 4
+  PRE-ORDER CHECK: Is 4 >= 3? YES → good = 1 ✓
+  Update: newMax = max(3, 4) = 4
+  Pass newMax=4 DOWN to children
+
+═══════════════════════════════════════════════════════════════
+
+Step 7: dfs(null, maxSoFar=4) [left of 4]
+  Base case! Return 0
+
+═══════════════════════════════════════════════════════════════
+
+Step 8: dfs(5, maxSoFar=4) [right of 4]
+  Current node: 5
+  PRE-ORDER CHECK: Is 5 >= 4? YES → good = 1 ✓
+  Update: newMax = max(4, 5) = 5
+  Children are null → left=0, right=0
+  Return: 1 + 0 + 0 = 1
+
+═══════════════════════════════════════════════════════════════
+
+Step 9: Back at node 4
+  good = 1
+  left = 0, right = 1
+  Return: 1 + 0 + 1 = 2
+
+═══════════════════════════════════════════════════════════════
+
+Step 10: Back at root node 3
+  good = 1
+  left = 1 (from subtree rooted at 1)
+  right = 2 (from subtree rooted at 4)
+  Return: 1 + 1 + 2 = 4
+
+═══════════════════════════════════════════════════════════════
+
+PARAMETER FLOW VISUALIZATION (DOWN pipe):
+
+        3 (maxSoFar=-∞)
+        ↓ newMax=3
+       / \
+      1   4 (maxSoFar=3)
+      ↓   ↓ newMax=4
+       \   \
+        3   5 (maxSoFar=4)
+   (maxSoFar=3)
+
+═══════════════════════════════════════════════════════════════
+
+GOOD NODES MARKED:
+
+        [3] ✓ (3 >= -∞)
+       /   \
+      1     [4] ✓ (4 >= 3)
+       \       \
+       [3] ✓   [5] ✓ (5 >= 4)
+      (3 >= 3)
+
+Total Good Nodes: 4
+```
+
 ## The "aha" line
 > "I judge myself using info my parent handed me, THEN I hand an updated version of that info to my kids. Down pipe, pre-order."
 
@@ -547,6 +884,79 @@ TreeNode invert(TreeNode node) {
 ### The "aha" line
 > "Invert = swap my two kids, then ask both kids to invert themselves."
 
+### Visual Dry Run (Invert Binary Tree)
+
+**Input Tree:**
+```
+        4
+       / \
+      2   7
+     / \ / \
+    1  3 6  9
+```
+
+```
+═══════════════════════════════════════════════════════════════
+
+Step 1: invert(4)
+  Current node: 4
+  PRE-ORDER: Swap children
+    Before: left=2, right=7
+    After:  left=7, right=2
+  
+  Tree now:
+        4
+       / \
+      7   2
+     / \ / \
+    6  9 1  3
+  
+  Recurse to children (now swapped positions)
+
+═══════════════════════════════════════════════════════════════
+
+Step 2: invert(7) [now left child of 4]
+  Current node: 7
+  PRE-ORDER: Swap children
+    Before: left=6, right=9
+    After:  left=9, right=6
+  
+  Recurse to 9 and 6 (both are leaves, no children to swap)
+
+═══════════════════════════════════════════════════════════════
+
+Step 3: invert(2) [now right child of 4]
+  Current node: 2
+  PRE-ORDER: Swap children
+    Before: left=1, right=3
+    After:  left=3, right=1
+  
+  Recurse to 3 and 1 (both are leaves, no children to swap)
+
+═══════════════════════════════════════════════════════════════
+
+FINAL INVERTED TREE:
+
+        4
+       / \
+      7   2
+     / \ / \
+    9  6 3  1
+
+═══════════════════════════════════════════════════════════════
+
+BEFORE vs AFTER:
+
+    BEFORE              AFTER
+        4                   4
+       / \                 / \
+      2   7      →       7   2
+     / \ / \            / \ / \
+    1  3 6  9          9  6 3  1
+
+Every left-right pair is swapped at every level!
+```
+
 ---
 
 ## 3B. Same Tree & 3C. Is Mirror (parallel two-node recursion)
@@ -594,6 +1004,113 @@ boolean isMirror(TreeNode a, TreeNode b) {
 
 ### The "aha" line
 > "Same Tree and Mirror are the SAME code — the only difference is Mirror crosses the recursive calls (left with right)."
+
+### Visual Dry Run (Same Tree)
+
+**Input Trees:**
+```
+Tree A:        Tree B:
+    1              1
+   / \            / \
+  2   3          2   3
+```
+
+```
+═══════════════════════════════════════════════════════════════
+
+Step 1: isSame(A:1, B:1)
+  Both non-null? YES
+  Values equal? 1 == 1? YES ✓
+  Recurse: isSame(A.left, B.left) AND isSame(A.right, B.right)
+
+═══════════════════════════════════════════════════════════════
+
+Step 2: isSame(A:2, B:2)
+  Both non-null? YES
+  Values equal? 2 == 2? YES ✓
+  Recurse to children (all null)
+    isSame(null, null) → true
+    isSame(null, null) → true
+  Return: true && true = true
+
+═══════════════════════════════════════════════════════════════
+
+Step 3: isSame(A:3, B:3)
+  Both non-null? YES
+  Values equal? 3 == 3? YES ✓
+  Recurse to children (all null)
+    isSame(null, null) → true
+    isSame(null, null) → true
+  Return: true && true = true
+
+═══════════════════════════════════════════════════════════════
+
+Step 4: Back at root
+  left result = true, right result = true
+  Return: true && true = true
+
+Final: Trees are SAME ✓
+```
+
+### Visual Dry Run (Is Mirror / Symmetric)
+
+**Input Tree (checking if symmetric):**
+```
+        1
+       / \
+      2   2
+     / \ / \
+    3  4 4  3
+```
+
+```
+═══════════════════════════════════════════════════════════════
+
+Call: isSymmetric(1) → isMirror(left=2, right=2)
+
+═══════════════════════════════════════════════════════════════
+
+Step 1: isMirror(L:2, R:2)
+  Both non-null? YES
+  Values equal? 2 == 2? YES ✓
+  
+  THE CROSS:
+    isMirror(L.left=3, R.right=3)   ← left vs right!
+    isMirror(L.right=4, R.left=4)   ← right vs left!
+
+═══════════════════════════════════════════════════════════════
+
+Step 2: isMirror(3, 3) [outer pair]
+  Values equal? 3 == 3? YES ✓
+  Children all null → true
+
+═══════════════════════════════════════════════════════════════
+
+Step 3: isMirror(4, 4) [inner pair]
+  Values equal? 4 == 4? YES ✓
+  Children all null → true
+
+═══════════════════════════════════════════════════════════════
+
+Final: true && true = true → Tree is SYMMETRIC ✓
+
+═══════════════════════════════════════════════════════════════
+
+THE CROSS VISUALIZED:
+
+        1
+       / \
+      2   2
+     /↘ ↙\
+    3  4 4  3
+    ↑     ↑
+    └─────┘ These must match (outer)
+       ↑ ↑
+       └─┘ These must match (inner)
+
+Same Tree:  L-L, R-R (parallel)
+Mirror:     L-R, R-L (crossed)
+```
 
 ### The classic trap
 Checking `a.val == b.val` **before** the null checks. If one node is null, `a.val` throws a NullPointerException. Always do the null base cases first, values after.
@@ -680,6 +1197,127 @@ TreeNode lca(TreeNode node, TreeNode p, TreeNode q) {
 - Right side: `lca(1)` → 1==q → returns 1.
 - At root 3: left=5 (non-null), right=1 (non-null) → **both found → return 3**. ✓
 
+## Visual Dry Run
+
+**Input Tree:** Find LCA of p=5 and q=1
+```
+        3
+       / \
+      5   1
+     / \   \
+    6   2   8
+       / \
+      7   4
+```
+
+```
+═══════════════════════════════════════════════════════════════
+
+Step 1: Call lca(3, p=5, q=1)
+  Current node: 3
+  Check: node == p? (3 == 5?) No
+  Check: node == q? (3 == 1?) No
+  Action: Search both subtrees
+
+═══════════════════════════════════════════════════════════════
+
+Step 2: Call lca(5, p=5, q=1)
+  Current node: 5
+  Check: node == p? (5 == 5?) YES!
+  Base case hit! Return node 5 immediately
+  
+  ⚡ Key insight: We don't search below 5!
+     If q is below 5, then 5 is the LCA anyway.
+  
+  Return value: node 5
+
+═══════════════════════════════════════════════════════════════
+
+Step 3: Call lca(1, p=5, q=1)
+  Current node: 1
+  Check: node == p? (1 == 5?) No
+  Check: node == q? (1 == 1?) YES!
+  Base case hit! Return node 1 immediately
+  
+  Return value: node 1
+
+═══════════════════════════════════════════════════════════════
+
+Step 4: Back at root node 3
+  left = node 5 (non-null) ← found p on left side
+  right = node 1 (non-null) ← found q on right side
+  
+  POST-ORDER DECISION:
+    Both sides returned non-null!
+    → p and q are on OPPOSITE sides of me
+    → I am the meeting point!
+  
+  Return value: node 3 ← THE LCA!
+
+═══════════════════════════════════════════════════════════════
+
+RECURSION TREE:
+
+    lca(3)                    returns 3 ← LCA!
+        │
+        ├── lca(5)            returns 5 (found p!)
+        │   (base case: 5==p)
+        │
+        └── lca(1)            returns 1 (found q!)
+            (base case: 1==q)
+
+═══════════════════════════════════════════════════════════════
+
+DIFFERENT SCENARIO: LCA of p=6 and q=4
+
+        3
+       / \
+      5   1
+     / \
+    6   2
+       / \
+      7   4
+
+Step-by-step:
+  lca(3) → search left
+    lca(5) → search left
+      lca(6) → 6==p? YES! return 6
+    lca(5) → search right  
+      lca(2) → search left
+        lca(7) → null children, not p or q → return null
+      lca(2) → search right
+        lca(4) → 4==q? YES! return 4
+      Back at 2: left=null, right=4 → return 4 (bubble up)
+    Back at 5: left=6, right=4 → BOTH non-null!
+      → 5 is the LCA! return 5
+  Back at 3: left=5, right=null → return 5 (bubble up)
+
+Final: LCA of 6 and 4 is node 5
+
+═══════════════════════════════════════════════════════════════
+
+THE THREE CASES VISUALIZED:
+
+Case 1: Targets on opposite sides → current node is LCA
+        [LCA]
+        /   \
+      [p]   [q]
+
+Case 2: Both targets in same subtree → bubble up the result
+        [ ]
+        /   \
+     [LCA]  null
+      / \
+    [p] [q]
+
+Case 3: One target is ancestor of other → first found is LCA
+        [p=LCA]
+        /
+      [q]
+
+Final: LCA = 3
+```
+
 ## The "aha" line
 > "If p and q come back from opposite sides of me, I'm the meeting point. Otherwise I just forward whichever kid found something."
 
@@ -753,6 +1391,119 @@ TreeNode successorWithParent(Node p) {
 
 ## The "aha" line
 > "Successor = the smallest value still bigger than me. In a BST I binary-search downward, remembering the last node bigger than p — that last remembered one is the answer."
+
+## Visual Dry Run
+
+**Input BST:** Find inorder successor of p=6
+```
+        20
+       /  \
+      8    22
+     / \
+    4  12
+      /  \
+     10  14
+    /
+   6
+```
+
+**Inorder (sorted): [4, 6, 8, 10, 12, 14, 20, 22]**
+**Successor of 6 = 8** (next in sorted order)
+
+```
+═══════════════════════════════════════════════════════════════
+
+FLAVOR A: Binary Search Style (O(h))
+
+Step 1: node=20, p.val=6
+  Is 20 > 6? YES → candidate = 20, go LEFT
+  candidate = 20
+
+═══════════════════════════════════════════════════════════════
+
+Step 2: node=8, p.val=6
+  Is 8 > 6? YES → candidate = 8, go LEFT
+  candidate = 8 (tighter than 20!)
+
+═══════════════════════════════════════════════════════════════
+
+Step 3: node=4, p.val=6
+  Is 4 > 6? NO → go RIGHT
+  candidate stays 8
+
+═══════════════════════════════════════════════════════════════
+
+Step 4: node=null
+  Base case! Return candidate = 8
+
+═══════════════════════════════════════════════════════════════
+
+PATH VISUALIZATION:
+
+        20 ← candidate=20, go left
+       /
+      8 ← candidate=8 (better!), go left
+     /
+    4 → go right (4 < 6)
+     \
+     null → STOP, return 8
+
+Final: Inorder Successor of 6 = 8
+
+═══════════════════════════════════════════════════════════════
+
+FLAVOR B: With Parent Pointers
+
+Case 1: p HAS a right subtree
+  Example: successor of 12
+  
+        12
+          \
+          14  ← go right once
+         /
+       (nothing) ← then all the way left
+  
+  Successor = 14 (leftmost of right subtree)
+
+Case 2: p has NO right subtree
+  Example: successor of 6
+  
+        20
+       /
+      8 ← STOP! We came from left (10→8)
+     / \
+    4  12
+      /
+     10 ← climb up (we're right child)
+    /
+   6 ← start here, no right subtree
+  
+  Climb up: 6→10 (we're left child of 10)
+  Climb up: 10→12 (we're left child of 12)... wait, 10 is LEFT of 12
+  Actually: 6→10, 10 is left of 12, so successor is 10? No...
+  
+  Let me redo: 6 has no right child
+  6's parent is 10, and 6 is LEFT child of 10
+  So successor = 10 (first ancestor where we came from left)
+
+═══════════════════════════════════════════════════════════════
+
+THE TWO CASES VISUALIZED:
+
+Case 1: Has right subtree → go right, then leftmost
+        p
+         \
+          R
+         /
+        L ← successor (leftmost of right)
+
+Case 2: No right subtree → climb until you go up-left
+        A ← successor (first ancestor where p is in left subtree)
+       /
+      ...
+       \
+        p ← start here
+```
 
 ## The classic trap
 Forgetting the **no-right-subtree** case in Flavor B (people always remember "go right then left" and forget the "climb the ancestors" case). And in Flavor A, using `>=` instead of `>` — the successor must be **strictly** greater.
@@ -956,6 +1707,157 @@ int gain(TreeNode node) {
 ## The "aha" line
 > "It's Diameter with money: ANSWER through both sides, RETURN one side — but clamp negative children to zero because a bad branch is optional."
 
+## Visual Dry Run
+
+**Input Tree:**
+```
+       -10
+       /  \
+      9   20
+         /  \
+        15   7
+```
+
+```
+═══════════════════════════════════════════════════════════════
+
+Step 1: Call gain(-10)
+  Current node: -10
+  Global maxSum: -∞
+  Action: Need gains from children → recurse left
+
+═══════════════════════════════════════════════════════════════
+
+Step 2: Call gain(9)
+  Current node: 9
+  Recurse left → null returns 0
+  Recurse right → null returns 0
+  
+  POST-ORDER WORK:
+    leftGain = max(0, 0) = 0
+    rightGain = max(0, 0) = 0
+    
+    ANSWER (bend at 9): 9 + 0 + 0 = 9
+      maxSum = max(-∞, 9) = 9
+    
+    RETURN (one arm): 9 + max(0, 0) = 9
+  
+  Return value: 9
+
+═══════════════════════════════════════════════════════════════
+
+Step 3: Call gain(20)
+  Current node: 20
+  Action: Recurse to children 15 and 7
+
+═══════════════════════════════════════════════════════════════
+
+Step 4: Call gain(15)
+  Current node: 15
+  Recurse left → null returns 0
+  Recurse right → null returns 0
+  
+  POST-ORDER WORK:
+    leftGain = 0, rightGain = 0
+    ANSWER (bend at 15): 15 + 0 + 0 = 15
+      maxSum = max(9, 15) = 15
+    RETURN: 15 + max(0, 0) = 15
+  
+  Return value: 15
+
+═══════════════════════════════════════════════════════════════
+
+Step 5: Call gain(7)
+  Current node: 7
+  Recurse left → null returns 0
+  Recurse right → null returns 0
+  
+  POST-ORDER WORK:
+    ANSWER (bend at 7): 7 + 0 + 0 = 7
+      maxSum = max(15, 7) = 15 (no change)
+    RETURN: 7 + max(0, 0) = 7
+  
+  Return value: 7
+
+═══════════════════════════════════════════════════════════════
+
+Step 6: Back at node 20
+  leftGain = max(0, 15) = 15 (from node 15)
+  rightGain = max(0, 7) = 7 (from node 7)
+  
+  POST-ORDER WORK:
+    ANSWER (bend at 20): 20 + 15 + 7 = 42
+      Path: 15 → 20 → 7
+      maxSum = max(15, 42) = 42  ← NEW BEST!
+    
+    RETURN (one arm): 20 + max(15, 7) = 35
+      "Parent can extend through me + my better arm (15)"
+  
+  Return value: 35
+
+═══════════════════════════════════════════════════════════════
+
+Step 7: Back at root node -10
+  leftGain = max(0, 9) = 9 (from node 9)
+  rightGain = max(0, 35) = 35 (from node 20)
+  
+  POST-ORDER WORK:
+    ANSWER (bend at -10): -10 + 9 + 35 = 34
+      Path: 9 → -10 → 20 → 15
+      maxSum = max(42, 34) = 42 (no change, 42 is still best)
+    
+    RETURN: -10 + max(9, 35) = 25
+  
+  Return value: 25
+
+═══════════════════════════════════════════════════════════════
+
+NEGATIVE VALUE EXAMPLE:
+
+       1
+      / \
+    -2   3
+
+  gain(-2):
+    leftGain = 0, rightGain = 0
+    ANSWER: -2 + 0 + 0 = -2
+    RETURN: -2 + 0 = -2  ← NEGATIVE!
+  
+  Back at node 1:
+    leftGain = max(0, -2) = 0  ← CLAMPED TO ZERO!
+    rightGain = max(0, 3) = 3
+    
+    ANSWER: 1 + 0 + 3 = 4  (we SKIP the -2 branch!)
+    
+  ⚡ The clamp says: "A negative branch hurts me, so I take 0 instead"
+
+═══════════════════════════════════════════════════════════════
+
+SUMMARY TABLE:
+
+    Node    leftGain   rightGain   ANSWER(bend)   RETURN(one arm)
+    ────    ────────   ─────────   ────────────   ───────────────
+      9        0          0           9              9
+     15        0          0          15             15
+      7        0          0           7              7
+     20       15          7          42 ✓           35
+    -10        9         35          34             25
+
+═══════════════════════════════════════════════════════════════
+
+BEST PATH VISUALIZATION:
+
+       -10
+       /  \
+      9   20
+         /  \
+       [15]←→[7]    Best path: 15 → 20 → 7 = 42
+         ↖ ↗
+         [20]
+
+Final: Maximum Path Sum = 42
+```
+
 ## The classic trap
 Initializing `maxSum = 0`. If every node is negative (e.g. all `-3`), the answer is the least-negative single node, not 0. Start at `Integer.MIN_VALUE`.
 
@@ -997,6 +1899,124 @@ int check(TreeNode node) {
 
 ## The "aha" line
 > "I overload the return: a real height means 'balanced so far,' and `−1` is a secret flag for 'already broken.' One pass, O(n)."
+
+## Visual Dry Run
+
+**Input Tree (BALANCED):**
+```
+        3
+       / \
+      9  20
+        /  \
+       15   7
+```
+
+```
+═══════════════════════════════════════════════════════════════
+
+Step 1: check(3)
+  Recurse left to node 9
+
+═══════════════════════════════════════════════════════════════
+
+Step 2: check(9)
+  Recurse left → null returns 0
+  Recurse right → null returns 0
+  
+  Balance check: |0 - 0| = 0 ≤ 1? YES ✓
+  Return: 1 + max(0, 0) = 1
+
+═══════════════════════════════════════════════════════════════
+
+Step 3: check(20)
+  Recurse left to node 15
+
+═══════════════════════════════════════════════════════════════
+
+Step 4: check(15)
+  Recurse left → null returns 0
+  Recurse right → null returns 0
+  
+  Balance check: |0 - 0| = 0 ≤ 1? YES ✓
+  Return: 1 + max(0, 0) = 1
+
+═══════════════════════════════════════════════════════════════
+
+Step 5: check(7)
+  Recurse left → null returns 0
+  Recurse right → null returns 0
+  
+  Balance check: |0 - 0| = 0 ≤ 1? YES ✓
+  Return: 1 + max(0, 0) = 1
+
+═══════════════════════════════════════════════════════════════
+
+Step 6: Back at node 20
+  left = 1 (from 15), right = 1 (from 7)
+  
+  Balance check: |1 - 1| = 0 ≤ 1? YES ✓
+  Return: 1 + max(1, 1) = 2
+
+═══════════════════════════════════════════════════════════════
+
+Step 7: Back at root 3
+  left = 1 (from 9), right = 2 (from 20)
+  
+  Balance check: |1 - 2| = 1 ≤ 1? YES ✓
+  Return: 1 + max(1, 2) = 3
+
+═══════════════════════════════════════════════════════════════
+
+Final: check(root) = 3 ≠ -1 → BALANCED ✓
+
+═══════════════════════════════════════════════════════════════
+
+UNBALANCED TREE EXAMPLE:
+
+        1
+       /
+      2
+     /
+    3
+
+Step-by-step:
+  check(3): left=0, right=0 → |0-0|=0 ✓ → return 1
+  check(2): left=1, right=0 → |1-0|=1 ✓ → return 2
+  check(1): left=2, right=0 → |2-0|=2 > 1 → UNBALANCED!
+            Return -1 (poison flag)
+
+Final: check(root) = -1 → NOT BALANCED ✗
+
+═══════════════════════════════════════════════════════════════
+
+SHORT-CIRCUIT EXAMPLE:
+
+        1
+       / \
+      2   3
+     /
+    4
+   /
+  5
+
+  check(5): returns 1
+  check(4): left=1, right=0 → |1-0|=1 ✓ → return 2
+  check(2): left=2, right=0 → |2-0|=2 > 1 → return -1 ⚡
+  
+  Back at node 1:
+    left = -1 ← POISON FLAG!
+    Short-circuit: return -1 immediately
+    (Don't even bother checking right subtree!)
+
+═══════════════════════════════════════════════════════════════
+
+RETURN VALUE MEANINGS:
+
+  Return ≥ 0  →  "I'm balanced, my height is this value"
+  Return = -1 →  "POISON: something below me is unbalanced"
+
+This dual-meaning return turns O(n²) into O(n)!
+```
 
 ## Mind-map anchor
 **"height OR −1 flag" · `abs(L−R)>1 ⇒ −1` · single post-order pass**
@@ -1040,6 +2060,123 @@ void dfs(TreeNode node, int remaining, List<Integer> path, List<List<Integer>> r
 
 ## The "aha" line
 > "Add myself on the way in, snapshot at a matching leaf, remove myself on the way out. The single shared list is my scratchpad; backtracking keeps it honest for siblings."
+
+## Visual Dry Run
+
+**Input Tree:** Find all paths with sum = 22
+```
+        5
+       / \
+      4   8
+     /   / \
+    11  13  4
+   /  \      \
+  7    2      1
+```
+
+**Expected paths:** [5,4,11,2] and [5,8,4,5]... wait, let me recalculate.
+Actually: [5,4,11,2] = 22 ✓
+
+```
+═══════════════════════════════════════════════════════════════
+
+Step 1: dfs(5, remaining=22, path=[], result=[])
+  PRE-ORDER: path.add(5) → path = [5]
+  Not a leaf, recurse to children
+
+═══════════════════════════════════════════════════════════════
+
+Step 2: dfs(4, remaining=17, path=[5], result=[])
+  PRE-ORDER: path.add(4) → path = [5, 4]
+  Not a leaf, recurse to children
+
+═══════════════════════════════════════════════════════════════
+
+Step 3: dfs(11, remaining=13, path=[5,4], result=[])
+  PRE-ORDER: path.add(11) → path = [5, 4, 11]
+  Not a leaf, recurse to children
+
+═══════════════════════════════════════════════════════════════
+
+Step 4: dfs(7, remaining=2, path=[5,4,11], result=[])
+  PRE-ORDER: path.add(7) → path = [5, 4, 11, 7]
+  IS LEAF! Check: remaining(2) == node.val(7)? NO
+  Recurse left → null, recurse right → null
+  BACKTRACK: path.remove(7) → path = [5, 4, 11]
+
+═══════════════════════════════════════════════════════════════
+
+Step 5: dfs(2, remaining=2, path=[5,4,11], result=[])
+  PRE-ORDER: path.add(2) → path = [5, 4, 11, 2]
+  IS LEAF! Check: remaining(2) == node.val(2)? YES! ✓
+  
+  SNAPSHOT: result.add(new ArrayList<>([5,4,11,2]))
+  result = [[5,4,11,2]]
+  
+  Recurse left → null, recurse right → null
+  BACKTRACK: path.remove(2) → path = [5, 4, 11]
+
+═══════════════════════════════════════════════════════════════
+
+Step 6: Back at node 11
+  Both children done
+  BACKTRACK: path.remove(11) → path = [5, 4]
+
+═══════════════════════════════════════════════════════════════
+
+Step 7: Back at node 4
+  Both children done (right child was null)
+  BACKTRACK: path.remove(4) → path = [5]
+
+═══════════════════════════════════════════════════════════════
+
+Step 8: dfs(8, remaining=17, path=[5], result=[[5,4,11,2]])
+  PRE-ORDER: path.add(8) → path = [5, 8]
+  Not a leaf, recurse to children
+  
+  ... (continue exploring 13 and 4 subtrees)
+  ... (no more paths sum to 22)
+  
+  BACKTRACK: path.remove(8) → path = [5]
+
+═══════════════════════════════════════════════════════════════
+
+Step 9: Back at root 5
+  Both children done
+  BACKTRACK: path.remove(5) → path = []
+
+═══════════════════════════════════════════════════════════════
+
+PATH STATE VISUALIZATION:
+
+        5           path = [5]
+       / \
+      4   8         path = [5,4] or [5,8]
+     /   / \
+    11  13  4       path = [5,4,11]
+   /  \
+  7    2            path = [5,4,11,7] or [5,4,11,2] ← MATCH!
+  
+After visiting 7:  path = [5,4,11,7] → backtrack → [5,4,11]
+After visiting 2:  path = [5,4,11,2] → SNAPSHOT! → backtrack → [5,4,11]
+After visiting 11: path = [5,4,11] → backtrack → [5,4]
+After visiting 4:  path = [5,4] → backtrack → [5]
+
+═══════════════════════════════════════════════════════════════
+
+WHY SNAPSHOT MUST BE A COPY:
+
+If we did: result.add(path)  ← WRONG!
+
+  path = [5,4,11,2] → result = [[5,4,11,2]]
+  backtrack → path = [5,4,11]
+  
+  Now result[0] ALSO becomes [5,4,11] because it's the SAME list!
+  
+Correct: result.add(new ArrayList<>(path))  ← COPY!
+
+Final Result: [[5, 4, 11, 2]]
+```
 
 ## The two classic traps
 1. **Forgetting the snapshot** — you must add `new ArrayList<>(path)`, a **copy**. If you add `path` directly, later mutations corrupt your stored answer (they all point to the same list).
@@ -1088,6 +2225,128 @@ boolean validate(TreeNode node, long low, long high) {
 
 ## The "aha" line
 > "Don't compare parent-to-child. Carry the *legal window* down: going left drops the ceiling to me, going right lifts the floor to me."
+
+## Visual Dry Run
+
+**Input Tree (VALID BST):**
+```
+        5
+       / \
+      3   7
+     / \   \
+    1   4   9
+```
+
+```
+═══════════════════════════════════════════════════════════════
+
+Step 1: Call validate(5, low=-∞, high=+∞)
+  Current node: 5
+  Window check: -∞ < 5 < +∞ ? YES ✓
+  Action: Recurse to children with tightened windows
+
+═══════════════════════════════════════════════════════════════
+
+Step 2: Call validate(3, low=-∞, high=5)
+  Current node: 3
+  Window: (-∞, 5) — "must be less than 5"
+  Window check: -∞ < 3 < 5 ? YES ✓
+  Action: Recurse to children
+
+═══════════════════════════════════════════════════════════════
+
+Step 3: Call validate(1, low=-∞, high=3)
+  Current node: 1
+  Window: (-∞, 3) — "must be less than 3"
+  Window check: -∞ < 1 < 3 ? YES ✓
+  Children are null → return true
+
+═══════════════════════════════════════════════════════════════
+
+Step 4: Call validate(4, low=3, high=5)
+  Current node: 4
+  Window: (3, 5) — "must be > 3 AND < 5"
+  Window check: 3 < 4 < 5 ? YES ✓
+  Children are null → return true
+
+═══════════════════════════════════════════════════════════════
+
+Step 5: Back at node 3
+  left = true, right = true
+  Return: true && true = true
+
+═══════════════════════════════════════════════════════════════
+
+Step 6: Call validate(7, low=5, high=+∞)
+  Current node: 7
+  Window: (5, +∞) — "must be greater than 5"
+  Window check: 5 < 7 < +∞ ? YES ✓
+
+═══════════════════════════════════════════════════════════════
+
+Step 7: Call validate(9, low=7, high=+∞)
+  Current node: 9
+  Window: (7, +∞) — "must be > 7"
+  Window check: 7 < 9 < +∞ ? YES ✓
+  Children are null → return true
+
+═══════════════════════════════════════════════════════════════
+
+Step 8: Back at root 5
+  left = true (from 3), right = true (from 7)
+  Return: true && true = true ← VALID BST!
+
+═══════════════════════════════════════════════════════════════
+
+WINDOW PROPAGATION VISUALIZATION:
+
+        5 (-∞, +∞)
+       / \
+      3   7
+   (-∞,5) (5,+∞)
+     / \     \
+    1   4     9
+ (-∞,3)(3,5) (7,+∞)
+
+Each node's window = constraints from ALL ancestors!
+
+═══════════════════════════════════════════════════════════════
+
+INVALID BST EXAMPLE:
+
+        5
+       / \
+      3   7
+     / \
+    1   6  ← INVALID! 6 > 5 but it's in left subtree
+
+Step-by-step:
+  validate(5, -∞, +∞) → 5 is valid
+    validate(3, -∞, 5) → 3 is valid
+      validate(1, -∞, 3) → 1 is valid ✓
+      validate(6, 3, 5) → Is 3 < 6 < 5?
+        6 >= 5 → FAILS! ✗
+        Return false immediately!
+
+⚡ Key insight: 6 > 3 (its parent), but 6 > 5 (its grandparent)
+   The WINDOW catches this because high=5 was inherited from root!
+
+═══════════════════════════════════════════════════════════════
+
+WHY LOCAL CHECK FAILS:
+
+        5
+       / \
+      3   7
+       \
+        6  ← 6 > 3 ✓ (local check passes!)
+              But 6 > 5 ✗ (violates grandparent!)
+
+Local check: "Is 6 > 3?" → Yes → WRONG ANSWER (says valid)
+Window check: "Is 3 < 6 < 5?" → No → CORRECT (says invalid)
+
+Final: The tree with 6 is NOT a valid BST
+```
 
 ## The classic trap
 Comparing only `node.left.val < node.val < node.right.val` locally — this passes trees that are globally invalid (a deep-left grandchild can exceed a grandparent). Also: use `long` bounds (or handle equals carefully) so a node equal to `Integer.MIN/MAX_VALUE` doesn't break the check.
@@ -1165,6 +2424,144 @@ List<List<Integer>> levelOrder(TreeNode root) {
 ## The "aha" line
 > "One queue, freeze the level size, process exactly that many. Only the per-node and per-level lines change between problems."
 
+## Visual Dry Run
+
+**Input Tree:**
+```
+        3
+       / \
+      9  20
+        /  \
+       15   7
+```
+
+```
+═══════════════════════════════════════════════════════════════
+
+LEVEL ORDER TRAVERSAL DRY RUN
+
+Initial: queue = [3]
+
+═══════════════════════════════════════════════════════════════
+
+LEVEL 0:
+  size = 1 (freeze!)
+  level = []
+  
+  Iteration i=0:
+    poll → node 3
+    level.add(3) → level = [3]
+    enqueue children: 9, 20
+    queue = [9, 20]
+  
+  After level: res.add([3])
+  Result so far: [[3]]
+
+═══════════════════════════════════════════════════════════════
+
+LEVEL 1:
+  size = 2 (freeze!)
+  level = []
+  
+  Iteration i=0:
+    poll → node 9
+    level.add(9) → level = [9]
+    enqueue children: (none)
+    queue = [20]
+  
+  Iteration i=1:
+    poll → node 20
+    level.add(20) → level = [9, 20]
+    enqueue children: 15, 7
+    queue = [15, 7]
+  
+  After level: res.add([9, 20])
+  Result so far: [[3], [9, 20]]
+
+═══════════════════════════════════════════════════════════════
+
+LEVEL 2:
+  size = 2 (freeze!)
+  level = []
+  
+  Iteration i=0:
+    poll → node 15
+    level.add(15) → level = [15]
+    enqueue children: (none)
+    queue = [7]
+  
+  Iteration i=1:
+    poll → node 7
+    level.add(7) → level = [15, 7]
+    enqueue children: (none)
+    queue = []
+  
+  After level: res.add([15, 7])
+  Result so far: [[3], [9, 20], [15, 7]]
+
+═══════════════════════════════════════════════════════════════
+
+queue is empty → DONE!
+
+Final Result: [[3], [9, 20], [15, 7]]
+
+═══════════════════════════════════════════════════════════════
+
+QUEUE STATE VISUALIZATION:
+
+        3           Level 0: queue = [3]
+       / \                   process 3, enqueue 9,20
+      9  20         Level 1: queue = [9, 20]
+        /  \                 process 9,20, enqueue 15,7
+       15   7       Level 2: queue = [15, 7]
+                             process 15,7, enqueue nothing
+                    Level 3: queue = [] → DONE
+
+═══════════════════════════════════════════════════════════════
+
+RIGHT-SIDE VIEW VARIANT:
+
+Same traversal, but only record last node of each level:
+  Level 0: last node = 3  → result = [3]
+  Level 1: last node = 20 → result = [3, 20]
+  Level 2: last node = 7  → result = [3, 20, 7]
+
+        3     ←
+       / \
+      9  20   ←
+        /  \
+       15   7 ←
+
+Final: Right-Side View = [3, 20, 7]
+
+═══════════════════════════════════════════════════════════════
+
+ZIGZAG VARIANT:
+
+Same traversal, but reverse odd levels:
+  Level 0: [3]       → keep as is  → [3]
+  Level 1: [9, 20]   → reverse     → [20, 9]
+  Level 2: [15, 7]   → keep as is  → [15, 7]
+
+Final: Zigzag = [[3], [20, 9], [15, 7]]
+
+═══════════════════════════════════════════════════════════════
+
+WHY FREEZE SIZE MATTERS:
+
+WITHOUT freeze (WRONG):
+  queue = [3]
+  poll 3, enqueue 9, 20 → queue = [9, 20]
+  poll 9 (still in "level 0" loop!) ← WRONG!
+  
+WITH freeze (CORRECT):
+  size = 1 (frozen!)
+  for i < 1: only process node 3
+  THEN move to next level
+
+The freeze ensures we process EXACTLY one level at a time!
+```
+
 ## The classic trap
 Forgetting to freeze `size` before the inner loop. If you loop `while (!q.isEmpty())` and poll without the fixed count, children mix into the current level and you lose all level boundaries.
 
@@ -1215,6 +2612,136 @@ void inorder(TreeNode node, int[] state) {
 
 ## The "aha" line
 > "BST + k-th anything = inorder traversal with a countdown. Stop the instant the counter hits zero."
+
+## Visual Dry Run
+
+**Input BST:** Find 3rd smallest (k=3)
+```
+        5
+       / \
+      3   6
+     / \
+    2   4
+   /
+  1
+```
+
+**Inorder (sorted): [1, 2, 3, 4, 5, 6]**
+**3rd smallest = 3**
+
+```
+═══════════════════════════════════════════════════════════════
+
+Initial: state = [k=3, answer=-1]
+
+═══════════════════════════════════════════════════════════════
+
+Step 1: inorder(5)
+  state[0]=3 ≠ 0, continue
+  Go LEFT first → inorder(3)
+
+═══════════════════════════════════════════════════════════════
+
+Step 2: inorder(3)
+  state[0]=3 ≠ 0, continue
+  Go LEFT first → inorder(2)
+
+═══════════════════════════════════════════════════════════════
+
+Step 3: inorder(2)
+  state[0]=3 ≠ 0, continue
+  Go LEFT first → inorder(1)
+
+═══════════════════════════════════════════════════════════════
+
+Step 4: inorder(1)
+  state[0]=3 ≠ 0, continue
+  Go LEFT → inorder(null) → return
+  
+  VISIT node 1:
+    --state[0] → state = [2, -1]
+    Is state[0]==0? NO, continue
+  
+  Go RIGHT → inorder(null) → return
+
+═══════════════════════════════════════════════════════════════
+
+Step 5: Back at node 2
+  VISIT node 2:
+    --state[0] → state = [1, -1]
+    Is state[0]==0? NO, continue
+  
+  Go RIGHT → inorder(null) → return
+
+═══════════════════════════════════════════════════════════════
+
+Step 6: Back at node 3
+  VISIT node 3:
+    --state[0] → state = [0, -1]
+    Is state[0]==0? YES! ✓
+    state[1] = 3 → state = [0, 3]
+    RETURN immediately! (early stop)
+
+═══════════════════════════════════════════════════════════════
+
+EARLY STOP PROPAGATION:
+
+  Back at node 2: state[0]=0, return immediately
+  Back at node 3: already returned
+  Back at node 5: state[0]=0, return immediately
+  
+  We NEVER visited nodes 4, 5, or 6!
+
+═══════════════════════════════════════════════════════════════
+
+INORDER TRAVERSAL VISUALIZATION:
+
+        5
+       / \
+      3   6
+     / \
+    2   4
+   /
+  1 ← VISIT #1 (k=3→2)
+   ↑
+  2 ← VISIT #2 (k=2→1)
+   ↑
+  3 ← VISIT #3 (k=1→0) ✓ FOUND! STOP!
+  
+  4, 5, 6 never visited (early exit)
+
+═══════════════════════════════════════════════════════════════
+
+COUNTDOWN TABLE:
+
+  Visit Order    Node    k before    k after    Found?
+  ───────────    ────    ────────    ───────    ──────
+      1           1         3          2         No
+      2           2         2          1         No
+      3           3         1          0         YES! ✓
+
+═══════════════════════════════════════════════════════════════
+
+FOR K-TH LARGEST: Reverse inorder (Right, Node, Left)
+
+        5
+       / \
+      3   6
+     / \
+    2   4
+   /
+  1
+
+Reverse inorder: [6, 5, 4, 3, 2, 1]
+3rd largest = 4
+
+Just change the order:
+  inorder(node.right, state);  // RIGHT first
+  if (--state[0] == 0) ...     // visit
+  inorder(node.left, state);   // LEFT last
+
+Final: 3rd Smallest = 3
+```
 
 ## The classic trap
 Collecting the *entire* inorder list then indexing `list.get(k-1)` — correct but O(n) space and no early exit. The counter version stops after k visits. For k-th *largest*, just do reverse inorder (right, node, left).
@@ -1281,6 +2808,183 @@ TreeNode rebuild(Queue<String> tokens) {
 ## The "aha" line
 > "Write root-first with null markers; read root-first consuming a token queue. Encode and decode are the same preorder walk, mirrored."
 
+## Visual Dry Run
+
+**Input Tree:**
+```
+        1
+       / \
+      2   3
+         / \
+        4   5
+```
+
+```
+═══════════════════════════════════════════════════════════════
+
+SERIALIZE (Tree → String)
+
+═══════════════════════════════════════════════════════════════
+
+Step 1: build(1)
+  Append "1," → sb = "1,"
+  Recurse left to node 2
+
+═══════════════════════════════════════════════════════════════
+
+Step 2: build(2)
+  Append "2," → sb = "1,2,"
+  Recurse left to null
+
+═══════════════════════════════════════════════════════════════
+
+Step 3: build(null) [left of 2]
+  Base case! Append "#," → sb = "1,2,#,"
+  Return
+
+═══════════════════════════════════════════════════════════════
+
+Step 4: build(null) [right of 2]
+  Base case! Append "#," → sb = "1,2,#,#,"
+  Return
+
+═══════════════════════════════════════════════════════════════
+
+Step 5: Back at node 1, recurse right to node 3
+  build(3)
+  Append "3," → sb = "1,2,#,#,3,"
+  Recurse left to node 4
+
+═══════════════════════════════════════════════════════════════
+
+Step 6: build(4)
+  Append "4," → sb = "1,2,#,#,3,4,"
+  Recurse left → null → append "#,"
+  Recurse right → null → append "#,"
+  sb = "1,2,#,#,3,4,#,#,"
+
+═══════════════════════════════════════════════════════════════
+
+Step 7: build(5)
+  Append "5," → sb = "1,2,#,#,3,4,#,#,5,"
+  Recurse left → null → append "#,"
+  Recurse right → null → append "#,"
+  sb = "1,2,#,#,3,4,#,#,5,#,#,"
+
+═══════════════════════════════════════════════════════════════
+
+SERIALIZED STRING: "1,2,#,#,3,4,#,#,5,#,#,"
+
+Preorder traversal with null markers:
+        1
+       / \
+      2   3
+     /\  / \
+    # # 4   5
+       /\ /\
+      # ## #
+
+═══════════════════════════════════════════════════════════════
+
+DESERIALIZE (String → Tree)
+
+Input: "1,2,#,#,3,4,#,#,5,#,#,"
+Queue: [1, 2, #, #, 3, 4, #, #, 5, #, #]
+
+═══════════════════════════════════════════════════════════════
+
+Step 1: rebuild()
+  poll → "1"
+  Create node(1)
+  queue = [2, #, #, 3, 4, #, #, 5, #, #]
+  node.left = rebuild()  ← recurse
+
+═══════════════════════════════════════════════════════════════
+
+Step 2: rebuild() [building left of 1]
+  poll → "2"
+  Create node(2)
+  queue = [#, #, 3, 4, #, #, 5, #, #]
+  node.left = rebuild()  ← recurse
+
+═══════════════════════════════════════════════════════════════
+
+Step 3: rebuild() [building left of 2]
+  poll → "#"
+  Base case! Return null
+  queue = [#, 3, 4, #, #, 5, #, #]
+
+═══════════════════════════════════════════════════════════════
+
+Step 4: rebuild() [building right of 2]
+  poll → "#"
+  Base case! Return null
+  queue = [3, 4, #, #, 5, #, #]
+
+═══════════════════════════════════════════════════════════════
+
+Step 5: Back at node 2
+  node(2).left = null
+  node(2).right = null
+  Return node(2) to node(1)
+
+═══════════════════════════════════════════════════════════════
+
+Step 6: rebuild() [building right of 1]
+  poll → "3"
+  Create node(3)
+  queue = [4, #, #, 5, #, #]
+  node.left = rebuild()  ← recurse
+
+═══════════════════════════════════════════════════════════════
+
+Step 7: rebuild() [building left of 3]
+  poll → "4"
+  Create node(4)
+  queue = [#, #, 5, #, #]
+  node.left = rebuild() → poll "#" → null
+  node.right = rebuild() → poll "#" → null
+  Return node(4)
+  queue = [5, #, #]
+
+═══════════════════════════════════════════════════════════════
+
+Step 8: rebuild() [building right of 3]
+  poll → "5"
+  Create node(5)
+  queue = [#, #]
+  node.left = rebuild() → poll "#" → null
+  node.right = rebuild() → poll "#" → null
+  Return node(5)
+  queue = []
+
+═══════════════════════════════════════════════════════════════
+
+FINAL RECONSTRUCTED TREE:
+
+        1
+       / \
+      2   3
+         / \
+        4   5
+
+═══════════════════════════════════════════════════════════════
+
+KEY INSIGHT: Why null markers are essential
+
+Without "#":  "1,2,3,4,5"
+  Could be:     1           OR      1
+               / \                 /
+              2   3               2
+                 / \               \
+                4   5               3
+                                     \
+                                      4...
+
+With "#": "1,2,#,#,3,4,#,#,5,#,#"
+  Unambiguous! The #'s tell us exactly where each subtree ends.
+```
+
 ## The classic trap
 Omitting null markers — then you can't tell a leaf from an internal node, and the shape is ambiguous (e.g., `[1,2]` could mean 2 is left or right child). Every null must be recorded.
 
@@ -1330,6 +3034,179 @@ TreeNode build(int[] preorder, int lo, int hi) {
 
 ## The "aha" line
 > "Preorder gives me the next root; its spot in inorder splits the rest into left and right. Recurse, always building left before right."
+
+## Visual Dry Run
+
+**Input:**
+```
+preorder = [3, 9, 20, 15, 7]
+inorder  = [9, 3, 15, 20, 7]
+```
+
+**Expected Tree:**
+```
+        3
+       / \
+      9  20
+        /  \
+       15   7
+```
+
+```
+═══════════════════════════════════════════════════════════════
+
+SETUP:
+  Build hashmap from inorder: {9:0, 3:1, 15:2, 20:3, 7:4}
+  pre = 0 (cursor into preorder array)
+
+═══════════════════════════════════════════════════════════════
+
+Step 1: build(lo=0, hi=4)
+  pre = 0
+  rootVal = preorder[0] = 3
+  pre++ → pre = 1
+  
+  Create node(3)
+  mid = idx[3] = 1  ← position in inorder
+  
+  Inorder split:
+    [9, | 3 | 15, 20, 7]
+     ↑     ↑      ↑
+    left  root   right
+    [0,0]        [2,4]
+  
+  Build left subtree: build(lo=0, hi=0)
+  Build right subtree: build(lo=2, hi=4)
+
+═══════════════════════════════════════════════════════════════
+
+Step 2: build(lo=0, hi=0) [left of 3]
+  pre = 1
+  rootVal = preorder[1] = 9
+  pre++ → pre = 2
+  
+  Create node(9)
+  mid = idx[9] = 0
+  
+  Inorder split:
+    [| 9 |]
+       ↑
+      root
+    left=[0,-1] (empty!)  right=[1,0] (empty!)
+  
+  Build left: build(lo=0, hi=-1) → null (base case)
+  Build right: build(lo=1, hi=0) → null (base case)
+  
+  Return node(9) with no children
+
+═══════════════════════════════════════════════════════════════
+
+Step 3: build(lo=2, hi=4) [right of 3]
+  pre = 2
+  rootVal = preorder[2] = 20
+  pre++ → pre = 3
+  
+  Create node(20)
+  mid = idx[20] = 3
+  
+  Inorder split:
+    [15, | 20 | 7]
+      ↑     ↑    ↑
+    left  root  right
+    [2,2]       [4,4]
+  
+  Build left: build(lo=2, hi=2)
+  Build right: build(lo=4, hi=4)
+
+═══════════════════════════════════════════════════════════════
+
+Step 4: build(lo=2, hi=2) [left of 20]
+  pre = 3
+  rootVal = preorder[3] = 15
+  pre++ → pre = 4
+  
+  Create node(15)
+  mid = idx[15] = 2
+  
+  Build left: build(lo=2, hi=1) → null
+  Build right: build(lo=3, hi=2) → null
+  
+  Return node(15) with no children
+
+═══════════════════════════════════════════════════════════════
+
+Step 5: build(lo=4, hi=4) [right of 20]
+  pre = 4
+  rootVal = preorder[4] = 7
+  pre++ → pre = 5
+  
+  Create node(7)
+  mid = idx[7] = 4
+  
+  Build left: build(lo=4, hi=3) → null
+  Build right: build(lo=5, hi=4) → null
+  
+  Return node(7) with no children
+
+═══════════════════════════════════════════════════════════════
+
+TREE CONSTRUCTION VISUALIZATION:
+
+preorder: [3, 9, 20, 15, 7]
+           ↑
+          pre cursor advances left-to-right
+
+inorder:  [9, 3, 15, 20, 7]
+              ↑
+           root splits into left [9] and right [15,20,7]
+
+Step-by-step tree building:
+
+  1. Root = 3           3
+                       / \
+  2. Left of 3 = 9    9   ?
+  
+  3. Right of 3 = 20  3
+                     / \
+                    9  20
+                      /  \
+  4. Left of 20 = 15     ?
+  
+  5. Right of 20 = 7  3
+                     / \
+                    9  20
+                      /  \
+                     15   7
+
+═══════════════════════════════════════════════════════════════
+
+WHY LEFT BEFORE RIGHT MATTERS:
+
+preorder = [3, 9, 20, 15, 7]
+            ^  ^   ^   ^  ^
+            |  |   |   |  |
+            |  |   |   |  └─ 5th: right of 20
+            |  |   |   └──── 4th: left of 20
+            |  |   └──────── 3rd: right of 3
+            |  └──────────── 2nd: left of 3
+            └─────────────── 1st: root
+
+If we built RIGHT before LEFT:
+  - After root 3, we'd consume 9 for right subtree (WRONG!)
+  - The tree would be scrambled
+
+Building LEFT first keeps the preorder cursor aligned!
+
+═══════════════════════════════════════════════════════════════
+
+FINAL TREE:
+
+        3
+       / \
+      9  20
+        /  \
+       15   7
+```
 
 ## The classic trap
 Building right before left — the shared preorder cursor then advances in the wrong order and the tree scrambles. Also forgetting the hashmap and scanning inorder each time → O(n²). (For **postorder + inorder**, consume postorder from the **end** and build **right before left**.)

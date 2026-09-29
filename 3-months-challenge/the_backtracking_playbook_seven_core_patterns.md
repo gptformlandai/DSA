@@ -3,6 +3,44 @@
 
 ---
 
+# INDEX — Quick Navigation
+
+## Core Concepts
+| Section | Description |
+|---------|-------------|
+| [The One Sentence That Unlocks Everything](#-the-one-sentence-that-unlocks-everything) | The core insight |
+| [The Mental Model: Two Questions](#-the-mental-model-two-questions-every-single-time) | What to ask before coding |
+| [The Golden Rule: Undo Must Mirror Do](#-the-golden-rule-the-undo-must-mirror-the-do) | Non-negotiable rule |
+| [The Master Blueprint](#the-master-blueprint-the-universal-backtracking-engine) | Universal engine |
+
+## Patterns (1-10)
+| # | Pattern | LeetCode | Key Technique |
+|---|---------|----------|---------------|
+| 1 | [Subsets (Power Set)](#-pattern-1-subsets-power-set) | 78 | Include/Exclude |
+| 2 | [Combination Sum](#-pattern-2-combination-sum-running-budget--unbounded-reuse) | 39 | Reuse allowed |
+| 3 | [Permutations](#-pattern-3-permutations-the-slot-filling--pool-search-model) | 46 | Used array |
+| 4 | [Generate Parentheses](#-pattern-4-generate-parentheses-prefix-balance--quota-model) | 22 | Open/Close balance |
+| 5 | [Letter Combinations](#-pattern-5-letter-combinations-of-a-phone-number-multi-dial-lock) | 17 | Multiple pools |
+| 6 | [Palindrome Partitioning](#️-pattern-6-palindrome-partitioning-the-ribbon-knife-cutter) | 131 | Substring slicing |
+| 7 | [Restore IP Addresses](#-pattern-7-restore-ip-addresses-depth-bounded-ribbon-cutter) | 93 | Constraint pruning |
+| 8 | [Word Search](#-pattern-8-word-search-lc-79-) | 79 | Grid DFS + masking |
+| 9 | [N-Queens](#-pattern-9-n-queens-lc-51--n-queens-ii-lc-52-) | 51/52 | Diagonal tracking |
+| 10 | [Sudoku Solver](#-pattern-10-sudoku-solver-lc-37-) | 37 | Boolean early exit |
+| 11 | [Partition K Equal Sum](#-pattern-11-partition-to-k-equal-sum-subsets-lc-698--matchsticks-to-square-lc-473-) | 698/473 | Sort DESC + bucket pruning |
+| 12 | [Expression Add Operators](#-pattern-12-expression-add-operators-lc-282-) | 282 | Prev tracking for multiply |
+
+## Reference Sections
+| Section | Description |
+|---------|-------------|
+| [Master Comparison Table](#-master-comparison-table-plain-english) | All patterns side-by-side |
+| [The Ultimate Cheat Sheet](#-the-ultimate-cheat-sheet-pattern-recognition-in-10-seconds) | 10-second pattern recognition |
+| [The 5 Most Common Mistakes](#-the-5-most-common-mistakes-and-how-to-avoid-them) | Avoid these traps |
+| [How to Explain in Interview](#-how-to-explain-your-solution-in-an-interview) | Communication template |
+| [Mastery Checklist](#-youve-mastered-backtracking-when-you-can) | Self-assessment |
+| [Pattern Family Tree](#-the-pattern-family-tree) | How patterns relate |
+
+---
+
 ## 🧠 The "One Sentence That Unlocks Everything"
 
 > **Backtracking is just "try everything, but be smart about undoing your mistakes."**
@@ -2263,6 +2301,9 @@ RESTORE IP ADDRESSES
 | **Phone Keypad** | Dial #digit | Lock letter, next dial | **Start from letter 0** | Try next letter, same dial | Remove last character |
 | **Palindrome Cut** | Where to cut | Cut here, move start forward | Slices from new start | Make slice longer | Remove last from path |
 | **Restore IP** | Segment # (0-3) | Take segment, move start | Slices from new start | Make segment longer | Remove last from path |
+| **Word Search** | Grid cell (r,c) | Mark cell, move to neighbor | 4 directions: ↑↓←→ | Try next direction | Restore original cell |
+| **N-Queens** | Row #row | Place queen, next row | All columns in next row | Try next column, same row | Remove from 3 sets |
+| **Sudoku** | Empty cell | Place digit, next empty | All empty cells | Try next digit 1-9 | Remove digit (set to '.') |
 
 ---
 
@@ -2276,6 +2317,9 @@ RESTORE IP ADDRESSES
 "Valid sequence?"                → PARENTHESES
 "Each position has own choices?" → PHONE KEYPAD
 "Cut a string into pieces?"      → PARTITIONING (Palindrome/Word Break/IP)
+"Find word in grid?"             → WORD SEARCH
+"Place N non-attacking items?"   → N-QUEENS
+"Fill grid with constraints?"    → SUDOKU
 ```
 
 ### Step 2: Does Order Matter?
@@ -2376,13 +2420,16 @@ When explaining your backtracking solution, use this simple structure:
 
 ## 🏆 You've Mastered Backtracking When You Can:
 
-- [ ] Look at a problem and know which of the 7 patterns it is within 30 seconds
+- [ ] Look at a problem and know which of the 10 patterns it is within 30 seconds
 - [ ] Write the code without looking at notes
 - [ ] Explain WHY you use `index + 1` vs `index` vs `reset to 0` for each pattern
 - [ ] Handle duplicates correctly (sort first, then skip twins at same level)
 - [ ] Add shortcuts to avoid wasting time on dead-end paths
 - [ ] Switch between loop-based and pure recursive styles
 - [ ] Know when backtracking is too slow and you need DP instead
+- [ ] Use in-place masking for grid problems (Word Search)
+- [ ] Track diagonal attacks with r-c and r+c (N-Queens)
+- [ ] Return boolean to stop early when only one solution needed (Sudoku)
 
 ---
 
@@ -2391,19 +2438,1942 @@ When explaining your backtracking solution, use this simple structure:
 ```
                         BACKTRACKING
                              |
-        +--------------------+--------------------+
-        |                    |                    |
-   SELECTION            ARRANGEMENT          PARTITIONING
-   (Include/Exclude)    (Order Matters)      (Cut String)
-        |                    |                    |
-   +----+----+          +----+----+          +----+----+
-   |         |          |         |          |         |
-Subsets  Combination  Perms   Phone      Palindrome  IP
+        +--------------------+--------------------+--------------------+
+        |                    |                    |                    |
+   SELECTION            ARRANGEMENT          PARTITIONING          CONSTRAINT
+   (Include/Exclude)    (Order Matters)      (Cut String)          SATISFACTION
+        |                    |                    |                    |
+   +----+----+          +----+----+          +----+----+          +----+----+
+   |         |          |         |          |         |          |         |
+Subsets  Combination  Perms   Phone      Palindrome  IP       N-Queens  Sudoku
          Sum                  Keypad     Partition   Restore
-   |         |          |         |          |         |
-   v         v          v         v          v         v
-Forward   Stay/Move   Reset    Reset      Slice     Slice
-Only      (reuse?)    to 0     to 0       Forward   + Bounds
+   |         |          |         |          |         |          |         |
+   v         v          v         v          v         v          v         v
+Forward   Stay/Move   Reset    Reset      Slice     Slice     Row-by-   Find
+Only      (reuse?)    to 0     to 0       Forward   + Bounds  Row+3Sets Empty+
+                                                               Check    3Zones
+
+                    +--------------------+
+                    |                    |
+                GRID-BASED           SINGLE
+                EXPLORATION          SOLUTION
+                    |                    |
+               Word Search           Sudoku
+                    |                    |
+                    v                    v
+               4-Dir DFS +          Return bool
+               In-place Mark        to stop early
 ```
 
 **Remember:** Every backtracking problem is just a variation of these core patterns. Master the patterns, and you can solve ANY backtracking problem!
+
+---
+
+## 🔍 Pattern 8: Word Search (LC 79) ⭐⭐
+
+### Pattern Recognition Signal
+
+**When you see:** "grid", "find word", "adjacent cells", "path through matrix", "spell a word"
+
+**Instant thought:** "Grid DFS with in-place cell masking → Word Search pattern!"
+
+---
+
+### The Mental Model (Before Coding!)
+
+#### What's the problem REALLY asking?
+
+```
+Input: board = [["A","B","C","E"],
+                ["S","F","C","S"],
+                ["A","D","E","E"]]
+       word = "ABCCED"
+
+Can you trace a path through adjacent cells (up/down/left/right)
+that spells the word? Each cell can only be used ONCE per path.
+
+Output: true (A→B→C→C→E→D)
+```
+
+#### The Maze Walker Analogy
+
+```
+You're walking through a letter maze, trying to spell a word.
+
+Rules:
+1. Start anywhere that matches the first letter
+2. Move only to adjacent cells (up/down/left/right)
+3. Can't step on the same cell twice in one path
+4. If you hit a dead end, BACKTRACK and try another direction
+
+┌─────────────────────────────────────────────────────────┐
+│                                                          │
+│  You're at 'A', need to spell "ABCCED"                  │
+│                                                          │
+│  A → B → C → C → E → D  ✓ Found it!                     │
+│  ↓                                                       │
+│  If 'B' wasn't adjacent, you'd backtrack to 'A'         │
+│  and try a different direction                          │
+│                                                          │
+└─────────────────────────────────────────────────────────┘
+```
+
+#### Why In-Place Masking? (The Key Trick!)
+
+```
+Problem: How do we track "visited" cells without extra space?
+
+Naive approach: boolean[][] visited = new boolean[m][n];
+               → Works but uses O(m×n) extra space
+
+Smart approach: TEMPORARILY modify the cell itself!
+               → Save original: char temp = board[r][c]
+               → Mark visited:  board[r][c] = '#' (sentinel)
+               → After recursion: board[r][c] = temp (restore!)
+
+Why '#'? Any character NOT in the word works as a sentinel.
+The cell becomes "invisible" to future checks because '#' ≠ any letter.
+
+Alternative: XOR trick
+  board[r][c] ^= 256;  // Flip a high bit, making it non-ASCII
+  // ... recurse ...
+  board[r][c] ^= 256;  // XOR again to restore original
+```
+
+#### The Algorithm in Plain English
+
+```
+1. For each cell in the grid:
+   a. If cell matches first letter of word, start DFS from here
+2. DFS(row, col, wordIndex):
+   a. BASE CASE: If wordIndex == word.length → Found it! Return true
+   b. BOUNDS CHECK: If out of bounds or cell doesn't match → Return false
+   c. MARK: Save cell, replace with '#' (visited)
+   d. EXPLORE: Try all 4 directions, if ANY returns true → Return true
+   e. BACKTRACK: Restore original cell value
+   f. Return false (this path didn't work)
+```
+
+---
+
+### Visual Dry Run (Step-by-Step Grid State)
+
+**Input:** 
+```
+board = [["A","B","C","E"],
+         ["S","F","C","S"],
+         ["A","D","E","E"]]
+word = "ABCCED"
+```
+
+**Step-by-step trace:**
+
+```
+═══════════════════════════════════════════════════════════
+STEP 1: Start at (0,0) = 'A', need word[0] = 'A' ✓ MATCH!
+
+Grid State:          Path: "A"
+┌───┬───┬───┬───┐
+│ # │ B │ C │ E │   '#' marks current cell as visited
+├───┼───┼───┼───┤
+│ S │ F │ C │ S │
+├───┼───┼───┼───┤
+│ A │ D │ E │ E │
+└───┴───┴───┴───┘
+
+Next: need word[1] = 'B', try 4 directions from (0,0)
+  UP:    (-1,0) → out of bounds ✗
+  DOWN:  (1,0) = 'S' ≠ 'B' ✗
+  LEFT:  (0,-1) → out of bounds ✗
+  RIGHT: (0,1) = 'B' = 'B' ✓ GO!
+
+═══════════════════════════════════════════════════════════
+STEP 2: Move to (0,1) = 'B', need word[1] = 'B' ✓ MATCH!
+
+Grid State:          Path: "AB"
+┌───┬───┬───┬───┐
+│ # │ # │ C │ E │   Two cells marked as visited
+├───┼───┼───┼───┤
+│ S │ F │ C │ S │
+├───┼───┼───┼───┤
+│ A │ D │ E │ E │
+└───┴───┴───┴───┘
+
+Next: need word[2] = 'C', try 4 directions from (0,1)
+  UP:    out of bounds ✗
+  DOWN:  (1,1) = 'F' ≠ 'C' ✗
+  LEFT:  (0,0) = '#' ≠ 'C' ✗ (already visited!)
+  RIGHT: (0,2) = 'C' = 'C' ✓ GO!
+
+═══════════════════════════════════════════════════════════
+STEP 3: Move to (0,2) = 'C', need word[2] = 'C' ✓ MATCH!
+
+Grid State:          Path: "ABC"
+┌───┬───┬───┬───┐
+│ # │ # │ # │ E │
+├───┼───┼───┼───┤
+│ S │ F │ C │ S │
+├───┼───┼───┼───┤
+│ A │ D │ E │ E │
+└───┴───┴───┴───┘
+
+Next: need word[3] = 'C', try 4 directions from (0,2)
+  UP:    out of bounds ✗
+  DOWN:  (1,2) = 'C' = 'C' ✓ GO!
+
+═══════════════════════════════════════════════════════════
+STEP 4: Move to (1,2) = 'C', need word[3] = 'C' ✓ MATCH!
+
+Grid State:          Path: "ABCC"
+┌───┬───┬───┬───┐
+│ # │ # │ # │ E │
+├───┼───┼───┼───┤
+│ S │ F │ # │ S │
+├───┼───┼───┼───┤
+│ A │ D │ E │ E │
+└───┴───┴───┴───┘
+
+Next: need word[4] = 'E', try 4 directions from (1,2)
+  UP:    (0,2) = '#' ✗ (visited)
+  DOWN:  (2,2) = 'E' = 'E' ✓ GO!
+
+═══════════════════════════════════════════════════════════
+STEP 5: Move to (2,2) = 'E', need word[4] = 'E' ✓ MATCH!
+
+Grid State:          Path: "ABCCE"
+┌───┬───┬───┬───┐
+│ # │ # │ # │ E │
+├───┼───┼───┼───┤
+│ S │ F │ # │ S │
+├───┼───┼───┼───┤
+│ A │ D │ # │ E │
+└───┴───┴───┴───┘
+
+Next: need word[5] = 'D', try 4 directions from (2,2)
+  UP:    (1,2) = '#' ✗ (visited)
+  DOWN:  out of bounds ✗
+  LEFT:  (2,1) = 'D' = 'D' ✓ GO!
+  RIGHT: (2,3) = 'E' ≠ 'D' ✗
+
+═══════════════════════════════════════════════════════════
+STEP 6: Move to (2,1) = 'D', need word[5] = 'D' ✓ MATCH!
+
+Grid State:          Path: "ABCCED"
+┌───┬───┬───┬───┐
+│ # │ # │ # │ E │
+├───┼───┼───┼───┤
+│ S │ F │ # │ S │
+├───┼───┼───┼───┤
+│ A │ # │ # │ E │
+└───┴───┴───┴───┘
+
+wordIndex = 6 == word.length = 6
+BASE CASE HIT! Return TRUE ✓
+
+═══════════════════════════════════════════════════════════
+BACKTRACK: Restore all cells as we unwind
+
+After returning true, the grid is restored:
+┌───┬───┬───┬───┐
+│ A │ B │ C │ E │
+├───┼───┼───┼───┤
+│ S │ F │ C │ S │
+├───┼───┼───┼───┤
+│ A │ D │ E │ E │
+└───┴───┴───┴───┘
+
+Result: TRUE (word "ABCCED" found!)
+═══════════════════════════════════════════════════════════
+```
+
+---
+
+### The Code (With Line-by-Line Explanation)
+
+```java
+public boolean exist(char[][] board, String word) {
+    int m = board.length, n = board[0].length;
+    
+    // Try starting from every cell
+    for (int r = 0; r < m; r++) {
+        for (int c = 0; c < n; c++) {
+            // If first letter matches, start DFS
+            if (board[r][c] == word.charAt(0)) {
+                if (dfs(board, word, r, c, 0)) {
+                    return true;  // Found it!
+                }
+            }
+        }
+    }
+    return false;  // Tried all starting points, no luck
+}
+
+private boolean dfs(char[][] board, String word, int r, int c, int idx) {
+    // ==========================================
+    // BASE CASE: We've matched all characters!
+    // ==========================================
+    if (idx == word.length()) {
+        return true;  // SUCCESS! Word found!
+    }
+    
+    // ==========================================
+    // BOUNDS CHECK + CHARACTER MATCH
+    // ==========================================
+    if (r < 0 || r >= board.length ||      // Row out of bounds
+        c < 0 || c >= board[0].length ||   // Col out of bounds
+        board[r][c] != word.charAt(idx)) { // Character doesn't match
+        return false;  // Dead end
+    }
+    
+    // ==========================================
+    // DO: Mark cell as visited (in-place masking)
+    // ==========================================
+    char temp = board[r][c];  // Save original character
+    board[r][c] = '#';        // Mark as visited (sentinel)
+    
+    // ==========================================
+    // EXPLORE: Try all 4 directions
+    // ==========================================
+    boolean found = dfs(board, word, r - 1, c, idx + 1) ||  // UP
+                    dfs(board, word, r + 1, c, idx + 1) ||  // DOWN
+                    dfs(board, word, r, c - 1, idx + 1) ||  // LEFT
+                    dfs(board, word, r, c + 1, idx + 1);    // RIGHT
+    
+    // ==========================================
+    // BACKTRACK: Restore original character
+    // ==========================================
+    board[r][c] = temp;  // CRITICAL: Restore for other paths!
+    
+    return found;
+}
+```
+
+---
+
+### Alternative: Using Direction Array (Cleaner Code)
+
+```java
+private static final int[][] DIRS = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+
+private boolean dfs(char[][] board, String word, int r, int c, int idx) {
+    if (idx == word.length()) return true;
+    
+    if (r < 0 || r >= board.length || c < 0 || c >= board[0].length ||
+        board[r][c] != word.charAt(idx)) {
+        return false;
+    }
+    
+    char temp = board[r][c];
+    board[r][c] = '#';
+    
+    // Cleaner: iterate through directions
+    for (int[] dir : DIRS) {
+        if (dfs(board, word, r + dir[0], c + dir[1], idx + 1)) {
+            board[r][c] = temp;  // Restore before returning!
+            return true;
+        }
+    }
+    
+    board[r][c] = temp;
+    return false;
+}
+```
+
+---
+
+### The Golden Rule: Match, Mark, Explore, Restore
+
+```java
+// The 4-step pattern for grid backtracking:
+
+// 1. MATCH: Check if current cell matches expected character
+if (board[r][c] != word.charAt(idx)) return false;
+
+// 2. MARK: Save and mark as visited
+char temp = board[r][c];
+board[r][c] = '#';
+
+// 3. EXPLORE: Try all directions
+boolean found = dfs(...UP...) || dfs(...DOWN...) || dfs(...LEFT...) || dfs(...RIGHT...);
+
+// 4. RESTORE: Put the original character back
+board[r][c] = temp;
+```
+
+---
+
+### Why Short-Circuit OR (||) Matters
+
+```java
+// Using || means we STOP as soon as we find the word
+boolean found = dfs(UP) || dfs(DOWN) || dfs(LEFT) || dfs(RIGHT);
+
+// If dfs(UP) returns true, we DON'T call dfs(DOWN), dfs(LEFT), dfs(RIGHT)
+// This is a HUGE optimization!
+
+// Without short-circuit (using | instead of ||):
+boolean found = dfs(UP) | dfs(DOWN) | dfs(LEFT) | dfs(RIGHT);
+// This would explore ALL directions even after finding the word! SLOW!
+```
+
+---
+
+### Common Traps
+
+| Trap | Why Wrong | Fix |
+|------|-----------|-----|
+| Forgetting to restore cell | Other paths can't use this cell | Always `board[r][c] = temp` after recursion |
+| Using `visited[][]` array | Extra O(m×n) space | Use in-place masking with sentinel |
+| Not checking bounds first | ArrayIndexOutOfBounds | Check bounds before accessing `board[r][c]` |
+| Checking `idx == length` after match | Off-by-one error | Check `idx == length` FIRST (base case) |
+| Using `|` instead of `||` | Explores all paths even after success | Use `||` for short-circuit |
+| Not restoring before early return | Grid left corrupted | Restore in ALL return paths |
+
+---
+
+### Mind-Map Anchor
+
+```
+WORD SEARCH (GRID DFS)
+         │
+         ▼
+┌─────────────────────────┐
+│ Grid + spell word       │
+│ In-place masking: '#'   │
+│ 4 directions: ↑↓←→      │
+│ Match → Mark → Explore  │
+│ → Restore (ALWAYS!)     │
+│ Short-circuit || to stop│
+│ O(m×n×4^L) worst case   │
+└─────────────────────────┘
+```
+
+**Memory phrase:** "Match, mark, explore, restore"
+
+---
+
+### ⚠️ The Trap: Word Search II (Multiple Words)
+
+**The Problem:** Finding ONE word is fine, but finding MANY words with repeated DFS will TLE!
+
+**The Solution:** Build a **Trie** from all words, then DFS once while checking the Trie!
+
+```java
+// Instead of: for each word, search the grid
+// Do: Build Trie from all words, search grid ONCE
+
+// At each cell, check if current path is a Trie prefix
+// If not a prefix → prune immediately (no word starts with this)
+// If it's a complete word → add to results
+```
+
+---
+
+## ♛ Pattern 9: N-Queens (LC 51) & N-Queens II (LC 52) ⭐⭐
+
+### Pattern Recognition Signal
+
+**When you see:** "place N items", "no conflicts", "all valid configurations", "chess board", "non-attacking"
+
+**Instant thought:** "Row-by-row placement with 3-set conflict tracking → N-Queens pattern!"
+
+---
+
+### The Mental Model (Before Coding!)
+
+#### What's the problem REALLY asking?
+
+```
+Input: n = 4
+
+Place 4 queens on a 4×4 chessboard such that NO two queens attack each other.
+Queens attack horizontally, vertically, and diagonally.
+
+Output (N-Queens I): All valid board configurations as strings
+Output (N-Queens II): Just the COUNT of valid configurations
+
+For n=4, there are exactly 2 solutions:
+  . Q . .      . . Q .
+  . . . Q      Q . . .
+  Q . . .      . . . Q
+  . . Q .      . Q . .
+```
+
+#### The Chess Tournament Analogy
+
+```
+You're organizing a chess tournament with N queens.
+Each queen MUST be on a different row (one queen per row).
+Your job: For each row, find a SAFE column.
+
+A column is SAFE if:
+1. No queen already in that column
+2. No queen on the same diagonal (\)
+3. No queen on the same anti-diagonal (/)
+
+┌─────────────────────────────────────────────────────────┐
+│                                                          │
+│  Row 0: Try each column, place queen in first safe one  │
+│         ↓                                                │
+│  Row 1: Try each column, skip attacked ones             │
+│         ↓                                                │
+│  Row 2: Try each column... if ALL attacked, BACKTRACK!  │
+│         ↓                                                │
+│  Row 3: Place queen, if successful → VALID SOLUTION!    │
+│                                                          │
+└─────────────────────────────────────────────────────────┘
+```
+
+#### The Diagonal Insight (The Key Mathematical Trick!)
+
+```
+How do we efficiently check if a cell is on the same diagonal as a queen?
+
+OBSERVATION 1: Same column
+  → Just track which columns have queens: cols set
+
+OBSERVATION 2: Same diagonal (\) — going down-right
+  → For all cells on the same \ diagonal, (row - col) is CONSTANT!
+  
+  Example (4×4 board):
+    (0,0): 0-0 = 0
+    (1,1): 1-1 = 0  ← Same diagonal!
+    (2,2): 2-2 = 0  ← Same diagonal!
+    (3,3): 3-3 = 0  ← Same diagonal!
+    
+    (0,1): 0-1 = -1
+    (1,2): 1-2 = -1 ← Same diagonal!
+    (2,3): 2-3 = -1 ← Same diagonal!
+
+  → Track (r - c) values in diag1 set
+
+OBSERVATION 3: Same anti-diagonal (/) — going down-left
+  → For all cells on the same / diagonal, (row + col) is CONSTANT!
+  
+  Example (4×4 board):
+    (0,3): 0+3 = 3
+    (1,2): 1+2 = 3  ← Same anti-diagonal!
+    (2,1): 2+1 = 3  ← Same anti-diagonal!
+    (3,0): 3+0 = 3  ← Same anti-diagonal!
+
+  → Track (r + c) values in diag2 set
+
+THREE SETS = COMPLETE ATTACK COVERAGE!
+  cols:  tracks vertical attacks
+  diag1: tracks \ diagonal attacks (r - c)
+  diag2: tracks / diagonal attacks (r + c)
+```
+
+#### The Algorithm in Plain English
+
+```
+1. Start at row 0 with empty sets: cols, diag1, diag2
+2. BASE CASE: If row == n, we've placed all queens!
+   → Save the board configuration (N-Queens I) or increment count (N-Queens II)
+3. RECURSIVE CASE: For each column c in current row:
+   a. Check if column c is SAFE:
+      - c not in cols (no vertical attack)
+      - (row - c) not in diag1 (no \ diagonal attack)
+      - (row + c) not in diag2 (no / diagonal attack)
+   b. If SAFE:
+      - DO: Add c to cols, (row-c) to diag1, (row+c) to diag2
+      - Place queen at (row, c)
+      - RECURSE: Move to next row
+      - UNDO: Remove from all three sets
+```
+
+---
+
+### Visual Dry Run (4×4 Board)
+
+**Input:** `n = 4`
+
+```
+═══════════════════════════════════════════════════════════
+ROW 0: Try placing queen
+
+  Try col=0:
+    cols={}, diag1={}, diag2={}
+    Is col=0 safe? 
+      0 not in cols ✓
+      (0-0)=0 not in diag1 ✓
+      (0+0)=0 not in diag2 ✓
+    SAFE! Place queen at (0,0)
+    
+    Board:           Sets after placement:
+    Q . . .          cols = {0}
+    . . . .          diag1 = {0}    (r-c = 0-0 = 0)
+    . . . .          diag2 = {0}    (r+c = 0+0 = 0)
+    . . . .
+
+═══════════════════════════════════════════════════════════
+ROW 1: Try placing queen
+
+  Try col=0: 0 in cols ✗ ATTACKED!
+  
+  Try col=1:
+    Is col=1 safe?
+      1 not in cols ✓
+      (1-1)=0 in diag1 ✗ ATTACKED! (same \ diagonal as (0,0))
+      
+  Try col=2:
+    Is col=2 safe?
+      2 not in cols ✓
+      (1-2)=-1 not in diag1 ✓
+      (1+2)=3 not in diag2 ✓
+    SAFE! Place queen at (1,2)
+    
+    Board:           Sets after placement:
+    Q . . .          cols = {0, 2}
+    . . Q .          diag1 = {0, -1}
+    . . . .          diag2 = {0, 3}
+    . . . .
+
+═══════════════════════════════════════════════════════════
+ROW 2: Try placing queen
+
+  Try col=0: 0 in cols ✗ ATTACKED!
+  
+  Try col=1:
+    Is col=1 safe?
+      1 not in cols ✓
+      (2-1)=1 not in diag1 ✓
+      (2+1)=3 in diag2 ✗ ATTACKED! (same / diagonal as (1,2))
+      
+  Try col=2: 2 in cols ✗ ATTACKED!
+  
+  Try col=3:
+    Is col=3 safe?
+      3 not in cols ✓
+      (2-3)=-1 in diag1 ✗ ATTACKED! (same \ diagonal as (1,2))
+
+  ALL COLUMNS ATTACKED! BACKTRACK to Row 1!
+
+═══════════════════════════════════════════════════════════
+BACKTRACK: Remove queen from (1,2)
+
+    Board:           Sets after removal:
+    Q . . .          cols = {0}
+    . . . .          diag1 = {0}
+    . . . .          diag2 = {0}
+    . . . .
+
+ROW 1 (continued): Try col=3
+
+  Is col=3 safe?
+    3 not in cols ✓
+    (1-3)=-2 not in diag1 ✓
+    (1+3)=4 not in diag2 ✓
+  SAFE! Place queen at (1,3)
+  
+    Board:           Sets:
+    Q . . .          cols = {0, 3}
+    . . . Q          diag1 = {0, -2}
+    . . . .          diag2 = {0, 4}
+    . . . .
+
+═══════════════════════════════════════════════════════════
+ROW 2: Try placing queen
+
+  Try col=0: 0 in cols ✗
+  
+  Try col=1:
+    1 not in cols ✓
+    (2-1)=1 not in diag1 ✓
+    (2+1)=3 not in diag2 ✓
+  SAFE! Place queen at (2,1)
+  
+    Board:           Sets:
+    Q . . .          cols = {0, 3, 1}
+    . . . Q          diag1 = {0, -2, 1}
+    . Q . .          diag2 = {0, 4, 3}
+    . . . .
+
+═══════════════════════════════════════════════════════════
+ROW 3: Try placing queen
+
+  Try col=0: 0 in cols ✗
+  Try col=1: 1 in cols ✗
+  
+  Try col=2:
+    2 not in cols ✓
+    (3-2)=1 in diag1 ✗ ATTACKED! (same \ as (2,1))
+    
+  Try col=3: 3 in cols ✗
+
+  ALL COLUMNS ATTACKED! BACKTRACK!
+
+═══════════════════════════════════════════════════════════
+... (continue backtracking and exploring)
+
+Eventually find 2 valid solutions:
+
+Solution 1:        Solution 2:
+. Q . .            . . Q .
+. . . Q            Q . . .
+Q . . .            . . . Q
+. . Q .            . Q . .
+
+═══════════════════════════════════════════════════════════
+```
+
+---
+
+### The Code: N-Queens I (Return All Board Configurations)
+
+```java
+public List<List<String>> solveNQueens(int n) {
+    List<List<String>> result = new ArrayList<>();
+    
+    // Three sets to track attacks
+    Set<Integer> cols = new HashSet<>();   // Columns with queens
+    Set<Integer> diag1 = new HashSet<>();  // \ diagonals (r - c)
+    Set<Integer> diag2 = new HashSet<>();  // / diagonals (r + c)
+    
+    // Track queen positions: queens[row] = column
+    int[] queens = new int[n];
+    
+    backtrack(n, 0, cols, diag1, diag2, queens, result);
+    return result;
+}
+
+private void backtrack(int n, int row, 
+                       Set<Integer> cols, Set<Integer> diag1, Set<Integer> diag2,
+                       int[] queens, List<List<String>> result) {
+    // ==========================================
+    // BASE CASE: All queens placed!
+    // ==========================================
+    if (row == n) {
+        result.add(buildBoard(queens, n));  // Convert to board strings
+        return;
+    }
+    
+    // Try each column in current row
+    for (int col = 0; col < n; col++) {
+        // ==========================================
+        // CHECK: Is this column safe?
+        // ==========================================
+        if (cols.contains(col)) continue;           // Vertical attack
+        if (diag1.contains(row - col)) continue;    // \ diagonal attack
+        if (diag2.contains(row + col)) continue;    // / diagonal attack
+        
+        // ==========================================
+        // DO: Place queen, mark attacks
+        // ==========================================
+        queens[row] = col;
+        cols.add(col);
+        diag1.add(row - col);
+        diag2.add(row + col);
+        
+        // ==========================================
+        // RECURSE: Move to next row
+        // ==========================================
+        backtrack(n, row + 1, cols, diag1, diag2, queens, result);
+        
+        // ==========================================
+        // UNDO: Remove queen, unmark attacks
+        // ==========================================
+        cols.remove(col);
+        diag1.remove(row - col);
+        diag2.remove(row + col);
+        // Note: queens[row] will be overwritten, no need to reset
+    }
+}
+
+private List<String> buildBoard(int[] queens, int n) {
+    List<String> board = new ArrayList<>();
+    for (int row = 0; row < n; row++) {
+        char[] rowChars = new char[n];
+        Arrays.fill(rowChars, '.');
+        rowChars[queens[row]] = 'Q';
+        board.add(new String(rowChars));
+    }
+    return board;
+}
+```
+
+---
+
+### The Code: N-Queens II (Just Count Solutions)
+
+```java
+public int totalNQueens(int n) {
+    return backtrack(n, 0, new HashSet<>(), new HashSet<>(), new HashSet<>());
+}
+
+private int backtrack(int n, int row, 
+                      Set<Integer> cols, Set<Integer> diag1, Set<Integer> diag2) {
+    // BASE CASE: All queens placed!
+    if (row == n) {
+        return 1;  // Found one valid configuration
+    }
+    
+    int count = 0;
+    
+    for (int col = 0; col < n; col++) {
+        // Check if safe
+        if (cols.contains(col) || 
+            diag1.contains(row - col) || 
+            diag2.contains(row + col)) {
+            continue;
+        }
+        
+        // DO: Place queen
+        cols.add(col);
+        diag1.add(row - col);
+        diag2.add(row + col);
+        
+        // RECURSE: Count solutions from this state
+        count += backtrack(n, row + 1, cols, diag1, diag2);
+        
+        // UNDO: Remove queen
+        cols.remove(col);
+        diag1.remove(row - col);
+        diag2.remove(row + col);
+    }
+    
+    return count;
+}
+```
+
+---
+
+### The Golden Rule: Check 3 Sets, Undo 3 Sets
+
+```java
+// The DO-RECURSE-UNDO pattern with THREE things to track:
+
+// DO: Mark all three attack vectors
+cols.add(col);           // Vertical
+diag1.add(row - col);    // \ diagonal
+diag2.add(row + col);    // / diagonal
+
+backtrack(...);          // RECURSE
+
+// UNDO: Unmark all three attack vectors
+cols.remove(col);
+diag1.remove(row - col);
+diag2.remove(row + col);
+
+// Forgetting ANY of the three undos will corrupt future paths!
+```
+
+---
+
+### Why Row-by-Row? (Implicit Constraint)
+
+```java
+// We place exactly ONE queen per row
+// This is IMPLICIT in our recursion structure:
+//   - We iterate row by row (row 0, then row 1, then row 2...)
+//   - For each row, we try each column
+//   - We never revisit a row
+
+// This means we DON'T need a "rows" set!
+// The row constraint is automatically satisfied by our recursion.
+
+// We only need to track:
+//   - cols: which columns are taken
+//   - diag1: which \ diagonals are taken
+//   - diag2: which / diagonals are taken
+```
+
+---
+
+### Common Traps
+
+| Trap | Why Wrong | Fix |
+|------|-----------|-----|
+| Forgetting diag1 or diag2 | Queens attack diagonally! | Always check all 3 sets |
+| Using `row - col` for both diagonals | \ and / have different formulas | diag1 = r-c, diag2 = r+c |
+| Not undoing all 3 sets | Future paths see phantom queens | Remove from cols, diag1, AND diag2 |
+| Checking row conflicts | Unnecessary, row-by-row handles it | Only check cols, diag1, diag2 |
+| Building board during recursion | Slow and complex | Build board only at base case |
+
+---
+
+### Mind-Map Anchor
+
+```
+N-QUEENS
+    │
+    ▼
+┌─────────────────────────┐
+│ Place N queens, no attack│
+│ Row by row placement     │
+│ 3 sets: cols, diag1, diag2│
+│ diag1 = r - c (\ diagonal)│
+│ diag2 = r + c (/ diagonal)│
+│ DO: add to 3 sets        │
+│ UNDO: remove from 3 sets │
+│ Base: row == n           │
+└─────────────────────────┘
+```
+
+**Memory phrase:** "Row by row, check 3 sets: col, r-c, r+c"
+
+---
+
+## 🔢 Pattern 10: Sudoku Solver (LC 37) ⭐⭐
+
+### Pattern Recognition Signal
+
+**When you see:** "fill grid", "constraints per row/column/box", "single valid solution", "constraint satisfaction"
+
+**Instant thought:** "Try 1-9, check 3 zones, return boolean to stop early → Sudoku pattern!"
+
+---
+
+### The Mental Model (Before Coding!)
+
+#### What's the problem REALLY asking?
+
+```
+Input: A 9×9 Sudoku board with some cells filled (1-9) and empty cells ('.')
+
+Fill every empty cell such that:
+1. Each row contains digits 1-9 exactly once
+2. Each column contains digits 1-9 exactly once
+3. Each 3×3 sub-box contains digits 1-9 exactly once
+
+Output: The completed board (guaranteed to have exactly ONE solution)
+```
+
+#### The Puzzle Master Analogy
+
+```
+You're solving a Sudoku puzzle by trial and error:
+
+1. Find the first empty cell
+2. Try digits 1 through 9
+3. For each digit, check if it's VALID:
+   - Not already in the same row
+   - Not already in the same column
+   - Not already in the same 3×3 box
+4. If valid: Place it, move to next empty cell
+5. If you get stuck (no valid digit): BACKTRACK!
+6. If you fill all cells: SUCCESS!
+
+┌─────────────────────────────────────────────────────────┐
+│                                                          │
+│  Find empty cell → Try 1 → Valid? → Place → Next cell   │
+│                      ↓                                   │
+│                    Invalid? → Try 2 → Try 3 → ... → 9   │
+│                                                ↓         │
+│                              All invalid? → BACKTRACK!   │
+│                                                          │
+└─────────────────────────────────────────────────────────┘
+```
+
+#### The Boolean Return Trick (The Key Insight!)
+
+```
+Why do we return boolean instead of void?
+
+PROBLEM: Sudoku has exactly ONE solution. Once we find it, we want to STOP.
+         With void return, we'd keep exploring and find the same solution
+         multiple times (or waste time on dead branches).
+
+SOLUTION: Return boolean!
+  - true  = "I found the solution! Stop everything!"
+  - false = "This path is a dead end, try something else"
+
+The magic line:
+  if (solve(board)) return true;  // Propagate success UP!
+
+When solve() returns true:
+  1. The recursive call found a solution
+  2. We immediately return true (don't undo, don't try other digits)
+  3. This propagates ALL THE WAY UP the call stack
+  4. The entire recursion tree STOPS instantly!
+
+Without this trick:
+  - We'd find the solution, then UNDO it during backtracking
+  - We'd keep trying other digits unnecessarily
+  - Much slower and the board would be empty at the end!
+```
+
+#### The 3 Constraint Checks
+
+```
+For a digit d at position (r, c), check:
+
+1. ROW CHECK: Is d already in row r?
+   → Scan board[r][0] through board[r][8]
+
+2. COLUMN CHECK: Is d already in column c?
+   → Scan board[0][c] through board[8][c]
+
+3. BOX CHECK: Is d already in the 3×3 box containing (r, c)?
+   → The box starts at:
+       boxRow = (r / 3) * 3
+       boxCol = (c / 3) * 3
+   → Scan the 3×3 region from (boxRow, boxCol)
+
+Example: Cell (5, 7) is in which box?
+  boxRow = (5 / 3) * 3 = 1 * 3 = 3
+  boxCol = (7 / 3) * 3 = 2 * 3 = 6
+  → Box starts at (3, 6), covers (3,6) to (5,8)
+```
+
+#### The Algorithm in Plain English
+
+```
+1. Find the first empty cell ('.')
+2. If no empty cell found → SOLVED! Return true
+3. For digits 1 through 9:
+   a. Check if digit is valid at this cell (row, col, box)
+   b. If valid:
+      - Place the digit
+      - Recursively solve the rest
+      - If recursion returns true → Return true (STOP!)
+      - If recursion returns false → UNDO (remove digit)
+4. If no digit works → Return false (trigger backtracking)
+```
+
+---
+
+### Visual Dry Run (Simplified 4×4 Sudoku)
+
+**Input:** (Using 4×4 for clarity, same logic applies to 9×9)
+
+```
+┌───┬───┬───┬───┐
+│ 1 │ . │ . │ 4 │
+├───┼───┼───┼───┤
+│ . │ . │ 1 │ . │
+├───┼───┼───┼───┤
+│ . │ 1 │ . │ . │
+├───┼───┼───┼───┤
+│ 4 │ . │ . │ 1 │
+└───┴───┴───┴───┘
+
+Rules: Each row, column, and 2×2 box must have 1-4 exactly once.
+```
+
+**Step-by-step trace:**
+
+```
+═══════════════════════════════════════════════════════════
+STEP 1: Find first empty cell → (0, 1)
+
+Try digit 1: Already in row 0 ✗
+Try digit 2: 
+  Row 0: no 2 ✓
+  Col 1: no 2 ✓
+  Box (0,0)-(1,1): no 2 ✓
+  VALID! Place 2 at (0,1)
+
+Board:
+┌───┬───┬───┬───┐
+│ 1 │ 2 │ . │ 4 │
+├───┼───┼───┼───┤
+│ . │ . │ 1 │ . │
+├───┼───┼───┼───┤
+│ . │ 1 │ . │ . │
+├───┼───┼───┼───┤
+│ 4 │ . │ . │ 1 │
+└───┴───┴───┴───┘
+
+Recurse to next empty cell...
+
+═══════════════════════════════════════════════════════════
+STEP 2: Find first empty cell → (0, 2)
+
+Try digit 1: Already in row 0 ✗
+Try digit 2: Already in row 0 ✗
+Try digit 3:
+  Row 0: no 3 ✓
+  Col 2: has 1, no 3 ✓
+  Box (0,2)-(1,3): has 1,4, no 3 ✓
+  VALID! Place 3 at (0,2)
+
+Board:
+┌───┬───┬───┬───┐
+│ 1 │ 2 │ 3 │ 4 │  ← Row 0 complete!
+├───┼───┼───┼───┤
+│ . │ . │ 1 │ . │
+├───┼───┼───┼───┤
+│ . │ 1 │ . │ . │
+├───┼───┼───┼───┤
+│ 4 │ . │ . │ 1 │
+└───┴───┴───┴───┘
+
+Recurse to next empty cell...
+
+═══════════════════════════════════════════════════════════
+STEP 3: Find first empty cell → (1, 0)
+
+Try digit 1: Already in row 1 ✗
+Try digit 2: Already in col 0? No. Already in box? No. ✓
+  But wait... let's continue and see if this leads to solution
+
+Place 2 at (1,0), recurse...
+
+... (continuing the solve)
+
+═══════════════════════════════════════════════════════════
+STEP N: Eventually hit a dead end
+
+At some cell, no digit 1-4 is valid!
+Return false → BACKTRACK
+
+Remove the last placed digit, try next digit...
+
+═══════════════════════════════════════════════════════════
+EVENTUALLY: All cells filled!
+
+Board:
+┌───┬───┬───┬───┐
+│ 1 │ 2 │ 3 │ 4 │
+├───┼───┼───┼───┤
+│ 3 │ 4 │ 1 │ 2 │
+├───┼───┼───┼───┤
+│ 2 │ 1 │ 4 │ 3 │
+├───┼───┼───┼───┤
+│ 4 │ 3 │ 2 │ 1 │
+└───┴───┴───┴───┘
+
+No empty cell found → Return TRUE!
+This propagates up, stopping all recursion.
+The board remains filled with the solution!
+
+═══════════════════════════════════════════════════════════
+```
+
+---
+
+### The Code (With Line-by-Line Explanation)
+
+```java
+public void solveSudoku(char[][] board) {
+    solve(board);  // The board is modified in-place
+}
+
+private boolean solve(char[][] board) {
+    // ==========================================
+    // STEP 1: Find the first empty cell
+    // ==========================================
+    for (int r = 0; r < 9; r++) {
+        for (int c = 0; c < 9; c++) {
+            if (board[r][c] == '.') {
+                // Found an empty cell!
+                
+                // ==========================================
+                // STEP 2: Try digits 1-9
+                // ==========================================
+                for (char d = '1'; d <= '9'; d++) {
+                    // ==========================================
+                    // STEP 3: Check if digit is valid
+                    // ==========================================
+                    if (isValid(board, r, c, d)) {
+                        // ==========================================
+                        // DO: Place the digit
+                        // ==========================================
+                        board[r][c] = d;
+                        
+                        // ==========================================
+                        // RECURSE: Solve the rest
+                        // ==========================================
+                        if (solve(board)) {
+                            return true;  // SUCCESS! Propagate up!
+                        }
+                        
+                        // ==========================================
+                        // UNDO: Remove the digit (backtrack)
+                        // ==========================================
+                        board[r][c] = '.';
+                    }
+                }
+                
+                // ==========================================
+                // No digit worked → Dead end!
+                // ==========================================
+                return false;  // Trigger backtracking
+            }
+        }
+    }
+    
+    // ==========================================
+    // No empty cell found → SOLVED!
+    // ==========================================
+    return true;
+}
+
+private boolean isValid(char[][] board, int row, int col, char d) {
+    // ==========================================
+    // CHECK 1: Row constraint
+    // ==========================================
+    for (int c = 0; c < 9; c++) {
+        if (board[row][c] == d) return false;
+    }
+    
+    // ==========================================
+    // CHECK 2: Column constraint
+    // ==========================================
+    for (int r = 0; r < 9; r++) {
+        if (board[r][col] == d) return false;
+    }
+    
+    // ==========================================
+    // CHECK 3: 3×3 Box constraint
+    // ==========================================
+    int boxRow = (row / 3) * 3;  // Starting row of the box
+    int boxCol = (col / 3) * 3;  // Starting col of the box
+    
+    for (int r = boxRow; r < boxRow + 3; r++) {
+        for (int c = boxCol; c < boxCol + 3; c++) {
+            if (board[r][c] == d) return false;
+        }
+    }
+    
+    return true;  // Passed all checks!
+}
+```
+
+---
+
+### The Golden Rule: Return True to Stop Everything
+
+```java
+// The CRITICAL line that makes Sudoku work:
+
+if (solve(board)) {
+    return true;  // DON'T undo! DON'T try other digits!
+}
+
+// What this does:
+// 1. If solve() found a solution (returned true)
+// 2. We IMMEDIATELY return true
+// 3. We skip the "board[r][c] = '.'" undo step
+// 4. The digit STAYS on the board
+// 5. This true propagates all the way up
+// 6. The entire recursion stops instantly
+
+// Without this:
+if (solve(board)) {
+    // Missing return true!
+}
+board[r][c] = '.';  // This would UNDO the solution!
+// We'd keep trying other digits for no reason
+```
+
+---
+
+### Why `(row / 3) * 3` for Box Calculation?
+
+```java
+// Integer division truncates, then we multiply back
+
+// Row 0, 1, 2 → (0/3)*3 = 0, (1/3)*3 = 0, (2/3)*3 = 0 → Box row 0
+// Row 3, 4, 5 → (3/3)*3 = 3, (4/3)*3 = 3, (5/3)*3 = 3 → Box row 3
+// Row 6, 7, 8 → (6/3)*3 = 6, (7/3)*3 = 6, (8/3)*3 = 6 → Box row 6
+
+// Same logic for columns
+
+// Example: Cell (5, 7)
+//   boxRow = (5/3)*3 = 1*3 = 3
+//   boxCol = (7/3)*3 = 2*3 = 6
+//   Box covers rows 3-5, cols 6-8
+
+// Visual:
+//   ┌─────────┬─────────┬─────────┐
+//   │ Box 0,0 │ Box 0,3 │ Box 0,6 │  rows 0-2
+//   ├─────────┼─────────┼─────────┤
+//   │ Box 3,0 │ Box 3,3 │ Box 3,6 │  rows 3-5  ← (5,7) is here
+//   ├─────────┼─────────┼─────────┤
+//   │ Box 6,0 │ Box 6,3 │ Box 6,6 │  rows 6-8
+//   └─────────┴─────────┴─────────┘
+//     cols     cols      cols
+//     0-2      3-5       6-8
+```
+
+---
+
+### Optimization: Using Sets for O(1) Lookup
+
+```java
+// Instead of scanning row/col/box each time, pre-compute sets:
+
+Set<Character>[] rows = new HashSet[9];
+Set<Character>[] cols = new HashSet[9];
+Set<Character>[][] boxes = new HashSet[3][3];
+
+// Initialize and populate from initial board...
+
+// Then isValid becomes O(1):
+private boolean isValid(int r, int c, char d) {
+    return !rows[r].contains(d) &&
+           !cols[c].contains(d) &&
+           !boxes[r/3][c/3].contains(d);
+}
+
+// Don't forget to update sets during DO and UNDO!
+```
+
+---
+
+### Common Traps
+
+| Trap | Why Wrong | Fix |
+|------|-----------|-----|
+| Returning void instead of boolean | Can't stop when solution found | Return boolean, propagate true |
+| Forgetting `return true` after successful recurse | Solution gets undone | `if (solve(board)) return true;` |
+| Wrong box calculation | Checks wrong 3×3 region | Use `(r/3)*3` and `(c/3)*3` |
+| Not returning false when no digit works | Infinite loop or wrong result | Return false after trying all digits |
+| Checking validity AFTER placing | Corrupts the board state | Check validity BEFORE placing |
+| Using `int` instead of `char` | Type mismatch with board | Use `char d = '1'` to `'9'` |
+
+---
+
+### Mind-Map Anchor
+
+```
+SUDOKU SOLVER
+      │
+      ▼
+┌─────────────────────────┐
+│ Fill grid, 3 constraints│
+│ Find empty → Try 1-9    │
+│ Check: row, col, 3×3 box│
+│ Box: (r/3)*3, (c/3)*3   │
+│ Return BOOLEAN!         │
+│ true = STOP everything  │
+│ false = backtrack       │
+│ Don't undo on success!  │
+└─────────────────────────┘
+```
+
+**Memory phrase:** "Try 1-9, check 3 zones, return true to stop"
+
+---
+
+### ⚠️ The Trap: Multiple Solutions
+
+**The Problem:** What if the puzzle has multiple solutions and you want ALL of them?
+
+**The Solution:** Remove the early termination!
+
+```java
+// For ALL solutions, don't return true immediately:
+
+if (solve(board)) {
+    // return true;  ← REMOVE THIS
+}
+board[r][c] = '.';  // Always undo to explore other solutions
+
+// And at base case, save a COPY of the board:
+if (noEmptyCell) {
+    result.add(copyBoard(board));  // Save this solution
+    return false;  // Return false to keep exploring!
+}
+```
+
+---
+
+## 🎯 PATTERN 11: Partition to K Equal Sum Subsets (LC 698) & Matchsticks to Square (LC 473) ⭐⭐
+
+### Pattern Recognition Signal
+
+> **When you see:** "Partition array into K groups with equal sum" or "Can you divide items into K equal parts?"
+> 
+> **Instant thought:** "Bucket-filling DFS with SORT DESCENDING for pruning!"
+
+**Trigger keywords:** partition, divide, K subsets, equal sum, matchsticks, square
+
+---
+
+### The Mental Model: "The Moving Company"
+
+**Analogy:** You're a moving company with K trucks, each with the SAME weight capacity. You have N boxes of different weights. Can you load ALL boxes such that each truck carries EXACTLY the target weight?
+
+```
+Boxes: [4, 3, 2, 3, 5, 2, 1]  Total = 20
+K = 4 trucks → Each truck must carry 20/4 = 5
+
+Truck 1: [4, 1] = 5 ✓
+Truck 2: [3, 2] = 5 ✓
+Truck 3: [3, 2] = 5 ✓
+Truck 4: [5]    = 5 ✓
+
+All boxes loaded! → Return TRUE
+```
+
+**The Question:** For each box, which truck should it go into?
+
+---
+
+### The L5 Pruning Insight (CRITICAL FOR INTERVIEWS!)
+
+#### Why Sort Descending?
+
+This is the **make-or-break optimization** that separates TLE from Accepted:
+
+```
+WITHOUT SORTING (Ascending or unsorted):
+nums = [1, 1, 1, 1, 2, 2, 2, 2], k=4, target=4
+
+DFS tries small numbers first:
+- Puts 1s in buckets → many valid partial states
+- Eventually realizes 2s don't fit well
+- Has to backtrack through MILLIONS of combinations
+→ TLE!
+
+WITH SORTING DESCENDING:
+nums = [2, 2, 2, 2, 1, 1, 1, 1], k=4, target=4
+
+DFS tries large numbers first:
+- Puts 2 in bucket 1 → bucket 1 has 2
+- Puts 2 in bucket 2 → bucket 2 has 2
+- Puts 2 in bucket 3 → bucket 3 has 2
+- Puts 2 in bucket 4 → bucket 4 has 2
+- Now 1s fill remaining space perfectly
+→ FAST!
+```
+
+**Why it works:** Large elements have FEWER valid placements. By placing them first:
+1. Invalid configurations fail at **shallow tree depths**
+2. We prune **massive branches** before they expand
+3. Small elements are flexible and fill gaps easily
+
+---
+
+### Additional Pruning Techniques
+
+```java
+// PRUNING 1: Impossible case - largest element exceeds target
+if (nums[0] > target) return false;
+
+// PRUNING 2: Skip duplicate bucket states
+// If bucket[i] == bucket[j] and we failed with bucket[i],
+// don't try bucket[j] - it's equivalent!
+if (i > 0 && buckets[i] == buckets[i-1]) continue;
+
+// PRUNING 3: Empty bucket equivalence
+// If bucket[i] == 0 and placing num here fails,
+// ALL other empty buckets will also fail
+if (buckets[i] == 0) {
+    // Try this bucket, if fails, skip all remaining empty buckets
+    break;  // Not continue!
+}
+
+// PRUNING 4: Bucket overflow
+if (buckets[i] + nums[index] > target) continue;
+```
+
+---
+
+### Visual Dry Run
+
+**Problem:** nums = [4, 3, 2, 3, 5, 2, 1], k = 2
+
+**Step 1: Preprocessing**
+```
+Total sum = 4+3+2+3+5+2+1 = 20
+Target per bucket = 20/2 = 10
+Sort descending: [5, 4, 3, 3, 2, 2, 1]
+```
+
+**Step 2: DFS with buckets**
+```
+buckets = [0, 0]  (two buckets, each needs to reach 10)
+
+Place 5:
+  Try bucket[0]: buckets = [5, 0]
+  
+  Place 4:
+    Try bucket[0]: 5+4=9 ≤ 10 ✓, buckets = [9, 0]
+    
+    Place 3:
+      Try bucket[0]: 9+3=12 > 10 ✗ (overflow!)
+      Try bucket[1]: 0+3=3 ≤ 10 ✓, buckets = [9, 3]
+      
+      Place 3:
+        Try bucket[0]: 9+3=12 > 10 ✗
+        Try bucket[1]: 3+3=6 ≤ 10 ✓, buckets = [9, 6]
+        
+        Place 2:
+          Try bucket[0]: 9+2=11 > 10 ✗
+          Try bucket[1]: 6+2=8 ≤ 10 ✓, buckets = [9, 8]
+          
+          Place 2:
+            Try bucket[0]: 9+2=11 > 10 ✗
+            Try bucket[1]: 8+2=10 = target! ✓, buckets = [9, 10]
+            
+            Place 1:
+              Try bucket[0]: 9+1=10 = target! ✓, buckets = [10, 10]
+              
+              All items placed! → Return TRUE
+```
+
+**Result:** [5,4,1] in bucket 1, [3,3,2,2] in bucket 2 → Both sum to 10 ✓
+
+---
+
+### The Code (With Line-by-Line Explanation)
+
+```java
+public boolean canPartitionKSubsets(int[] nums, int k) {
+    int sum = 0;
+    for (int num : nums) sum += num;          // Calculate total sum
+    
+    // PRUNING: Sum must be divisible by k
+    if (sum % k != 0) return false;
+    
+    int target = sum / k;                      // Each bucket's target
+    
+    // CRITICAL: Sort descending for early pruning!
+    // Large elements first = fail fast at shallow depths
+    Arrays.sort(nums);
+    reverse(nums);  // Now largest first
+    
+    // PRUNING: Largest element can't exceed target
+    if (nums[0] > target) return false;
+    
+    int[] buckets = new int[k];                // k buckets to fill
+    return backtrack(nums, buckets, 0, target);
+}
+
+private boolean backtrack(int[] nums, int[] buckets, int index, int target) {
+    // BASE CASE: All items placed successfully
+    if (index == nums.length) {
+        // All buckets should be exactly at target (guaranteed by our logic)
+        return true;
+    }
+    
+    int num = nums[index];  // Current item to place
+    
+    for (int i = 0; i < buckets.length; i++) {
+        // PRUNING: Skip if bucket would overflow
+        if (buckets[i] + num > target) continue;
+        
+        // PRUNING: Skip duplicate bucket states
+        // If this bucket has same value as previous, and previous failed,
+        // this one will fail too (they're equivalent states)
+        if (i > 0 && buckets[i] == buckets[i-1]) continue;
+        
+        // DO: Place item in this bucket
+        buckets[i] += num;
+        
+        // RECURSE: Try to place remaining items
+        if (backtrack(nums, buckets, index + 1, target)) {
+            return true;  // Found valid partition!
+        }
+        
+        // UNDO: Remove item from bucket (backtrack)
+        buckets[i] -= num;
+        
+        // PRUNING: If bucket is empty and we failed,
+        // all other empty buckets will also fail
+        if (buckets[i] == 0) break;
+    }
+    
+    return false;  // Couldn't place this item in any bucket
+}
+
+private void reverse(int[] nums) {
+    int left = 0, right = nums.length - 1;
+    while (left < right) {
+        int temp = nums[left];
+        nums[left++] = nums[right];
+        nums[right--] = temp;
+    }
+}
+```
+
+---
+
+### Matchsticks to Square (LC 473)
+
+**This is just K=4 special case!**
+
+```java
+public boolean makesquare(int[] matchsticks) {
+    int sum = 0;
+    for (int m : matchsticks) sum += m;
+    
+    // Square has 4 equal sides
+    if (sum % 4 != 0) return false;
+    
+    int side = sum / 4;
+    
+    // Sort descending - CRITICAL!
+    Arrays.sort(matchsticks);
+    reverse(matchsticks);
+    
+    if (matchsticks[0] > side) return false;
+    
+    int[] sides = new int[4];  // 4 sides of square
+    return backtrack(matchsticks, sides, 0, side);
+}
+// backtrack() is IDENTICAL to canPartitionKSubsets!
+```
+
+**The insight:** A square is just "partition into 4 equal parts" where each part is a side.
+
+---
+
+### Common Traps
+
+| Trap | Why Wrong | Fix |
+|------|-----------|-----|
+| Not sorting descending | TLE - explores too many branches | Always sort DESC first |
+| Forgetting sum % k check | Wastes time on impossible cases | Check divisibility first |
+| Not skipping duplicate buckets | Redundant exploration | `if (buckets[i] == buckets[i-1]) continue` |
+| Not breaking on empty bucket fail | Explores equivalent empty buckets | `if (buckets[i] == 0) break` |
+| Using `index++` instead of `index + 1` | Corrupts index for backtracking | Always pass `index + 1` |
+
+---
+
+### Mind-Map Anchor
+
+```
+PARTITION K EQUAL SUM
+        │
+        ▼
+┌─────────────────────────┐
+│ 1. sum % k == 0?        │
+│ 2. SORT DESCENDING!     │
+│ 3. nums[0] ≤ target?    │
+│ 4. k buckets, fill each │
+│ 5. Skip duplicate bucket│
+│ 6. Break on empty fail  │
+└─────────────────────────┘
+```
+
+**Memory phrase:** "Sort DESC, fill buckets, prune duplicates and empty equivalents"
+
+---
+
+## 🎯 PATTERN 12: Expression Add Operators (LC 282) ⭐⭐⭐
+
+### Pattern Recognition Signal
+
+> **When you see:** "Insert +, -, * between digits to reach target" or "Add operators to make expression equal value"
+> 
+> **Instant thought:** "Track 'prev' for multiplication undo, handle multi-digit with no leading zeros!"
+
+**Trigger keywords:** add operators, insert operators, expression evaluation, digits to target
+
+---
+
+### The Mental Model: "The Calculator Builder"
+
+**Analogy:** You're building a calculator display. You have a string of digits "123" and need to insert operators (+, -, *) between them to make the result equal a target.
+
+```
+Input: "123", target = 6
+
+Possible expressions:
+"1+2+3" = 6 ✓
+"1*2*3" = 6 ✓
+
+Output: ["1+2+3", "1*2*3"]
+```
+
+**The Challenge:** You're not just inserting operators - you're also deciding where numbers BEGIN and END!
+
+```
+"123" can be parsed as:
+- "1", "2", "3"     → three single digits
+- "1", "23"         → one digit + two digits
+- "12", "3"         → two digits + one digit
+- "123"             → one three-digit number
+```
+
+---
+
+### The Precedence Problem (THE HARD PART!)
+
+#### Addition and Subtraction: Easy
+```
+"2+3" → result = 5, simple accumulation
+```
+
+#### Multiplication: TRICKY!
+```
+"2+3*4" 
+
+WRONG approach (left-to-right):
+  2+3 = 5, then 5*4 = 20 ✗
+
+CORRECT (precedence):
+  3*4 = 12, then 2+12 = 14 ✓
+```
+
+**The Solution: Track the "prev" operand!**
+
+When we see multiplication, we need to "undo" the previous addition/subtraction:
+
+```
+State after "2+3": result=5, prev=3
+
+Now we see "*4":
+  1. Undo the +3:     result - prev = 5 - 3 = 2
+  2. Apply multiply:  prev * 4 = 3 * 4 = 12
+  3. Add back:        2 + 12 = 14
+
+Formula: result = result - prev + (prev * current)
+         prev = prev * current
+```
+
+---
+
+### The Multi-Digit Challenge
+
+```
+"105", target = 5
+
+Valid: "1*0+5" = 5 ✓
+Valid: "10-5" = 5 ✓
+Invalid: "1*05" ✗ (leading zero in "05"!)
+```
+
+**Rules:**
+1. Single "0" is valid: "1*0+5"
+2. Multi-digit starting with "0" is INVALID: "05", "007"
+3. Build number digit by digit: `num = num * 10 + digit`
+
+---
+
+### The 4 Choices at Each Position
+
+At each step, we have these choices:
+
+```
+1. FIRST NUMBER (no operator yet):
+   - Just set result = num, prev = num
+   
+2. ADDITION (+):
+   - result = result + num
+   - prev = num  (positive, for potential future multiply)
+   
+3. SUBTRACTION (-):
+   - result = result - num
+   - prev = -num  (negative! for potential future multiply)
+   
+4. MULTIPLICATION (*):
+   - result = result - prev + (prev * num)  // Undo then redo
+   - prev = prev * num
+```
+
+---
+
+### Visual Dry Run
+
+**Problem:** num = "123", target = 6
+
+**Decision Tree (partial):**
+```
+                        ""
+                        │
+            ┌───────────┼───────────┐
+            1          12          123
+         (r=1,p=1)  (r=12,p=12)  (r=123,p=123)
+            │
+    ┌───────┼───────┐
+   1+2     1-2     1*2
+(r=3,p=2) (r=-1,p=-2) (r=2,p=2)
+    │
+┌───┼───┐
+1+2+3  1+2-3  1+2*3
+(r=6)  (r=0)  (r=1-2+2*3=7)
+  ✓      ✗       ✗
+
+Also: 1*2*3 → r=1*2=2, then r=2-2+2*3=6 ✓
+```
+
+**Detailed trace for "1+2+3":**
+```
+Step 1: index=0, path="", result=0, prev=0
+  Try num="1": path="1", result=1, prev=1
+  
+Step 2: index=1, path="1", result=1, prev=1
+  Try "+2": path="1+2", result=1+2=3, prev=2
+  
+Step 3: index=2, path="1+2", result=3, prev=2
+  Try "+3": path="1+2+3", result=3+3=6, prev=3
+  
+Step 4: index=3 == length → BASE CASE
+  result=6 == target=6 → ADD "1+2+3" to answer!
+```
+
+**Detailed trace for "1*2*3":**
+```
+Step 1: index=0, path="", result=0, prev=0
+  Try num="1": path="1", result=1, prev=1
+  
+Step 2: index=1, path="1", result=1, prev=1
+  Try "*2": 
+    result = result - prev + prev*2 = 1 - 1 + 1*2 = 2
+    prev = prev * 2 = 1 * 2 = 2
+    path="1*2"
+  
+Step 3: index=2, path="1*2", result=2, prev=2
+  Try "*3":
+    result = result - prev + prev*3 = 2 - 2 + 2*3 = 6
+    prev = prev * 3 = 2 * 3 = 6
+    path="1*2*3"
+  
+Step 4: index=3 == length → BASE CASE
+  result=6 == target=6 → ADD "1*2*3" to answer!
+```
+
+---
+
+### The Code (With Line-by-Line Explanation)
+
+```java
+public List<String> addOperators(String num, int target) {
+    List<String> result = new ArrayList<>();
+    if (num == null || num.length() == 0) return result;
+    
+    backtrack(result, num, target, 
+              new StringBuilder(),  // Path (expression being built)
+              0,                    // Current index in num
+              0,                    // Current evaluation result
+              0);                   // Previous operand (for multiply undo)
+    return result;
+}
+
+private void backtrack(List<String> result, String num, int target,
+                       StringBuilder path, int index, 
+                       long eval, long prev) {
+    
+    // BASE CASE: Used all digits
+    if (index == num.length()) {
+        if (eval == target) {
+            result.add(path.toString());  // Found valid expression!
+        }
+        return;
+    }
+    
+    // Try all possible operand lengths starting at index
+    for (int i = index; i < num.length(); i++) {
+        
+        // PRUNING: No leading zeros (except "0" itself)
+        // "05" is invalid, but "0" alone is valid
+        if (i > index && num.charAt(index) == '0') break;
+        
+        // Extract the current number (could be multi-digit)
+        long curr = Long.parseLong(num.substring(index, i + 1));
+        int len = path.length();  // Save length for backtracking
+        
+        if (index == 0) {
+            // FIRST NUMBER: No operator, just the number itself
+            path.append(curr);
+            backtrack(result, num, target, path, i + 1, curr, curr);
+            path.setLength(len);  // UNDO: Restore path
+            
+        } else {
+            // TRY ADDITION (+)
+            path.append("+").append(curr);
+            backtrack(result, num, target, path, i + 1, 
+                      eval + curr,   // Add to result
+                      curr);         // prev = curr (positive)
+            path.setLength(len);     // UNDO
+            
+            // TRY SUBTRACTION (-)
+            path.append("-").append(curr);
+            backtrack(result, num, target, path, i + 1,
+                      eval - curr,   // Subtract from result
+                      -curr);        // prev = -curr (negative!)
+            path.setLength(len);     // UNDO
+            
+            // TRY MULTIPLICATION (*)
+            path.append("*").append(curr);
+            backtrack(result, num, target, path, i + 1,
+                      eval - prev + prev * curr,  // Undo prev, apply multiply
+                      prev * curr);               // prev = prev * curr
+            path.setLength(len);     // UNDO
+        }
+    }
+}
+```
+
+---
+
+### Why StringBuilder with setLength()?
+
+**The Problem:** Creating new strings at each step is expensive (O(n) per string).
+
+**The Solution:** Use StringBuilder and backtrack by resetting length:
+
+```java
+// INEFFICIENT (creates new strings):
+backtrack(path + "+" + curr, ...);  // New string allocated!
+
+// EFFICIENT (reuses buffer):
+path.append("+").append(curr);      // Modify in place
+backtrack(path, ...);
+path.setLength(len);                // Reset to original length (O(1)!)
+```
+
+This avoids heap allocation during recursion - critical for performance!
+
+---
+
+### Why Use `long` Instead of `int`?
+
+```java
+// Input: "2147483648", target = ...
+// This exceeds Integer.MAX_VALUE (2147483647)!
+
+long curr = Long.parseLong(...);  // Use long to avoid overflow
+```
+
+Intermediate results can overflow int, especially with multiplication.
+
+---
+
+### Common Traps
+
+| Trap | Why Wrong | Fix |
+|------|-----------|-----|
+| Forgetting leading zero check | "05" treated as valid | `if (i > index && num.charAt(index) == '0') break` |
+| Using int instead of long | Overflow on large numbers | Use `long` for curr, eval, prev |
+| Wrong prev for subtraction | Multiply undo fails | `prev = -curr` (negative!) |
+| Creating new strings | TLE from allocations | Use StringBuilder + setLength() |
+| Forgetting to undo path | Corrupted expressions | Always `path.setLength(len)` |
+| Not handling first number | Missing operator case | Special case when `index == 0` |
+
+---
+
+### Mind-Map Anchor
+
+```
+EXPRESSION ADD OPERATORS
+         │
+         ▼
+┌─────────────────────────┐
+│ 1. Try all num lengths  │
+│ 2. No leading zeros!    │
+│ 3. First num: no op     │
+│ 4. +: eval+curr, p=curr │
+│ 5. -: eval-curr, p=-curr│
+│ 6. *: eval-p+p*curr     │
+│ 7. StringBuilder undo   │
+└─────────────────────────┘
+```
+
+**Memory phrase:** "Track prev for multiply undo. No leading zeros. StringBuilder backtrack."
+
+---
+
+### The Multiplication Undo Formula (Memorize This!)
+
+```
+For expression "a + b * c":
+
+After "a + b":  eval = a + b,  prev = b
+See "* c":      
+  - Undo the +b:  eval - prev = a + b - b = a
+  - Apply b*c:    a + (b * c)
+  - Formula:      eval = eval - prev + (prev * c)
+  - New prev:     prev = prev * c = b * c
+
+This works for chains too: "a + b * c * d"
+  After "a + b * c": eval = a + b*c, prev = b*c
+  See "* d":
+    eval = (a + b*c) - (b*c) + (b*c*d) = a + b*c*d ✓
+```

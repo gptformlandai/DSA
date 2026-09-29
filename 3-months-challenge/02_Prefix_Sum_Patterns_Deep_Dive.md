@@ -3041,3 +3041,736 @@ COUNT SUBMATRICES = TARGET
 **Memory phrase:** "Fix two rows, compress columns, solve 1D — dimension reduction!"
 
 ---
+
+# PATTERN 12: Product of Array Except Self (LeetCode 238)
+
+## Pattern Recognition Signal
+
+**When you see:** "product of all elements except self", "without division", "O(n) time"
+
+**Instant thought:** "Prefix and Suffix Products! Build left products and right products"
+
+---
+
+## The Mental Model (Before Coding!)
+
+### What's the problem REALLY asking?
+
+```
+Input: nums = [1, 2, 3, 4]
+
+For each index i, compute product of ALL OTHER elements:
+- result[0] = 2 × 3 × 4 = 24
+- result[1] = 1 × 3 × 4 = 12
+- result[2] = 1 × 2 × 4 = 8
+- result[3] = 1 × 2 × 3 = 6
+
+Output: [24, 12, 8, 6]
+
+Constraint: Can't use division!
+```
+
+### Why Prefix/Suffix Products?
+
+```
+For each index i:
+  result[i] = (product of elements BEFORE i) × (product of elements AFTER i)
+            = prefix_product[i-1] × suffix_product[i+1]
+
+Build prefix products: left[i] = nums[0] × nums[1] × ... × nums[i-1]
+Build suffix products: right[i] = nums[i+1] × nums[i+2] × ... × nums[n-1]
+
+result[i] = left[i] × right[i]
+```
+
+### The Algorithm in Plain English
+
+```
+1. Build left[] where left[i] = product of all elements before index i
+2. Build right[] where right[i] = product of all elements after index i
+3. result[i] = left[i] × right[i]
+
+Space optimization: Use result array for left, then multiply right on the fly
+```
+
+---
+
+## Visual Dry Run (Step-by-Step)
+
+**Input:** `nums = [1, 2, 3, 4]`
+
+```
+═══════════════════════════════════════════════════════════
+
+Step 1: Build Left Products (products of elements BEFORE each index)
+
+nums:    [1,  2,  3,  4]
+index:    0   1   2   3
+
+left[0] = 1 (nothing before index 0)
+left[1] = nums[0] = 1
+left[2] = nums[0] × nums[1] = 1 × 2 = 2
+left[3] = nums[0] × nums[1] × nums[2] = 1 × 2 × 3 = 6
+
+left:    [1,  1,  2,  6]
+
+═══════════════════════════════════════════════════════════
+
+Step 2: Build Right Products (products of elements AFTER each index)
+
+nums:    [1,  2,  3,  4]
+index:    0   1   2   3
+
+right[3] = 1 (nothing after index 3)
+right[2] = nums[3] = 4
+right[1] = nums[2] × nums[3] = 3 × 4 = 12
+right[0] = nums[1] × nums[2] × nums[3] = 2 × 3 × 4 = 24
+
+right:   [24, 12,  4,  1]
+
+═══════════════════════════════════════════════════════════
+
+Step 3: Multiply Left × Right
+
+result[0] = left[0] × right[0] = 1 × 24 = 24
+result[1] = left[1] × right[1] = 1 × 12 = 12
+result[2] = left[2] × right[2] = 2 × 4 = 8
+result[3] = left[3] × right[3] = 6 × 1 = 6
+
+result:  [24, 12,  8,  6] ✓
+
+═══════════════════════════════════════════════════════════
+```
+
+---
+
+## The Code (With Line-by-Line Explanation)
+
+```java
+public int[] productExceptSelf(int[] nums) {
+    int n = nums.length;
+    int[] result = new int[n];
+    
+    // Step 1: Build left products into result array
+    result[0] = 1;  // Nothing before index 0
+    for (int i = 1; i < n; i++) {
+        result[i] = result[i-1] * nums[i-1];
+    }
+    
+    // Step 2: Multiply by right products (on the fly)
+    int rightProduct = 1;  // Nothing after last index
+    for (int i = n - 1; i >= 0; i--) {
+        result[i] *= rightProduct;
+        rightProduct *= nums[i];
+    }
+    
+    return result;
+}
+```
+
+---
+
+## Common Traps
+
+| Trap | Why Wrong | Fix |
+|------|-----------|-----|
+| Using division | Fails when array contains 0 | Use prefix/suffix products |
+| Off-by-one in products | Include current element | left[i] excludes nums[i] |
+| Forgetting edge cases | Single element array | Handle n=1 case |
+
+---
+
+## Mind-Map Anchor
+
+```
+PRODUCT EXCEPT SELF
+       │
+       ▼
+┌─────────────────────────┐
+│ Prefix × Suffix Products│
+│                         │
+│ left[i] = product before│
+│ right[i] = product after│
+│ result = left × right   │
+│                         │
+│ O(n) time, O(1) space   │
+└─────────────────────────┘
+```
+
+**Memory phrase:** "Left products × Right products — no division needed"
+
+---
+
+# PATTERN 13: Maximum Size Subarray Sum Equals K (LeetCode 325)
+
+## Pattern Recognition Signal
+
+**When you see:** "longest subarray", "sum equals K", "maximum length"
+
+**Instant thought:** "Prefix Sum + HashMap storing FIRST occurrence!"
+
+---
+
+## The Mental Model (Before Coding!)
+
+### What's the problem REALLY asking?
+
+```
+Input: nums = [1, -1, 5, -2, 3], k = 3
+
+Find the LONGEST subarray with sum = 3:
+- [1, -1, 5, -2] → sum = 3, length = 4 ← LONGEST!
+- [5, -2] → sum = 3, length = 2
+- [3] → sum = 3, length = 1
+
+Answer: 4
+```
+
+### Why Store First Occurrence?
+
+```
+For LONGEST subarray, we want the EARLIEST starting point.
+
+If prefix sum P appears at indices [2, 5, 8]:
+- Subarray from 3 to current has length (current - 2)
+- Subarray from 6 to current has length (current - 5)
+
+First occurrence (index 2) gives longest subarray!
+```
+
+### The Algorithm in Plain English
+
+```
+1. Initialize: prefix = 0, maxLen = 0, map = {0: -1}
+   
+2. For each index i:
+   a. Add nums[i] to prefix
+   b. If (prefix - k) in map:
+      - Length = i - map[prefix - k]
+      - Update maxLen if longer
+   c. If prefix NOT in map:
+      - Store current index (first occurrence only!)
+   
+3. Return maxLen
+```
+
+---
+
+## Visual Dry Run (Step-by-Step)
+
+**Input:** `nums = [1, -1, 5, -2, 3]`, `k = 3`
+
+```
+═══════════════════════════════════════════════════════════
+
+Initial: prefix = 0, maxLen = 0, map = {0: -1}
+
+═══════════════════════════════════════════════════════════
+
+i=0, nums[0]=1:
+  prefix = 0 + 1 = 1
+  Look for prefix - k = 1 - 3 = -2 → not in map
+  1 not in map → store: map = {0: -1, 1: 0}
+  maxLen = 0
+
+═══════════════════════════════════════════════════════════
+
+i=1, nums[1]=-1:
+  prefix = 1 + (-1) = 0
+  Look for prefix - k = 0 - 3 = -3 → not in map
+  0 already in map at -1 → DON'T update (keep first)
+  maxLen = 0
+
+═══════════════════════════════════════════════════════════
+
+i=2, nums[2]=5:
+  prefix = 0 + 5 = 5
+  Look for prefix - k = 5 - 3 = 2 → not in map
+  5 not in map → store: map = {0: -1, 1: 0, 5: 2}
+  maxLen = 0
+
+═══════════════════════════════════════════════════════════
+
+i=3, nums[3]=-2:
+  prefix = 5 + (-2) = 3
+  Look for prefix - k = 3 - 3 = 0 → in map at -1!
+  length = 3 - (-1) = 4
+  maxLen = max(0, 4) = 4
+  "Found [1,-1,5,-2] with sum 3, length 4"
+  3 not in map → store: map = {0: -1, 1: 0, 5: 2, 3: 3}
+
+═══════════════════════════════════════════════════════════
+
+i=4, nums[4]=3:
+  prefix = 3 + 3 = 6
+  Look for prefix - k = 6 - 3 = 3 → in map at 3!
+  length = 4 - 3 = 1
+  maxLen = max(4, 1) = 4 (no change)
+  6 not in map → store: map = {0: -1, 1: 0, 5: 2, 3: 3, 6: 4}
+
+═══════════════════════════════════════════════════════════
+
+Final Answer: maxLen = 4 ✓
+```
+
+---
+
+## The Code (With Line-by-Line Explanation)
+
+```java
+public int maxSubArrayLen(int[] nums, int k) {
+    // HashMap: prefix_sum → FIRST index where seen
+    Map<Integer, Integer> firstIndex = new HashMap<>();
+    
+    // Empty prefix at index -1
+    firstIndex.put(0, -1);
+    
+    int prefix = 0;
+    int maxLen = 0;
+    
+    for (int i = 0; i < nums.length; i++) {
+        prefix += nums[i];
+        
+        // Check if (prefix - k) was seen before
+        if (firstIndex.containsKey(prefix - k)) {
+            int length = i - firstIndex.get(prefix - k);
+            maxLen = Math.max(maxLen, length);
+        }
+        
+        // Only store FIRST occurrence (for longest)
+        firstIndex.putIfAbsent(prefix, i);
+    }
+    
+    return maxLen;
+}
+```
+
+---
+
+## Common Traps
+
+| Trap | Why Wrong | Fix |
+|------|-----------|-----|
+| Updating map when prefix exists | Lose first occurrence, get shorter length | Use `putIfAbsent` |
+| Using `{0: 0}` instead of `{0: -1}` | Off-by-one in length calculation | Use `{0: -1}` |
+| Confusing with count pattern | Count uses `{0: 1}`, length uses `{0: -1}` | Different initialization! |
+
+---
+
+## Mind-Map Anchor
+
+```
+LONGEST SUBARRAY SUM = K
+       │
+       ▼
+┌─────────────────────────┐
+│ Prefix Sum + HashMap    │
+│                         │
+│ Store FIRST index only  │
+│ putIfAbsent for longest │
+│                         │
+│ Init: {0: -1}           │
+└─────────────────────────┘
+```
+
+**Memory phrase:** "First occurrence for longest — putIfAbsent, init {0: -1}"
+
+---
+
+# PATTERN 14: Contiguous Array (LeetCode 525)
+
+## Pattern Recognition Signal
+
+**When you see:** "equal number of 0s and 1s", "longest subarray", "binary array"
+
+**Instant thought:** "Transform 0→-1! Then find longest subarray with sum = 0"
+
+---
+
+## The Mental Model (Before Coding!)
+
+### What's the problem REALLY asking?
+
+```
+Input: nums = [0, 1, 0, 1, 1, 0, 0]
+
+Find longest subarray with equal 0s and 1s:
+- [0, 1] → 1 zero, 1 one ✓ length 2
+- [0, 1, 0, 1] → 2 zeros, 2 ones ✓ length 4
+- [0, 1, 0, 1, 1, 0] → 3 zeros, 3 ones ✓ length 6 ← LONGEST!
+
+Answer: 6
+```
+
+### The Transformation Trick
+
+```
+Transform: 0 → -1, 1 → 1
+
+Original: [0, 1, 0, 1, 1, 0, 0]
+Transform:[-1, 1,-1, 1, 1,-1,-1]
+
+"Equal 0s and 1s" means:
+  count(0) = count(1)
+  
+After transform:
+  count(-1) = count(1)
+  sum = count(1) - count(-1) = 0
+
+So we need: longest subarray with SUM = 0!
+This is Pattern 13 with k = 0!
+```
+
+### The Algorithm in Plain English
+
+```
+1. Transform (conceptually): 0 → -1
+2. Apply Pattern 13: Prefix Sum + HashMap for sum = 0
+3. Store first occurrence of each prefix sum
+4. Return max length
+```
+
+---
+
+## Visual Dry Run (Step-by-Step)
+
+**Input:** `nums = [0, 1, 0, 1, 1, 0, 0]`
+
+```
+═══════════════════════════════════════════════════════════
+
+Transform (conceptually):
+nums:      [0,  1,  0,  1,  1,  0,  0]
+transform: [-1, 1, -1,  1,  1, -1, -1]
+
+═══════════════════════════════════════════════════════════
+
+Initial: prefix = 0, maxLen = 0, map = {0: -1}
+
+═══════════════════════════════════════════════════════════
+
+i=0, nums[0]=0 (treat as -1):
+  prefix = 0 + (-1) = -1
+  Look for -1 - 0 = -1 → not in map
+  -1 not in map → store: map = {0: -1, -1: 0}
+  maxLen = 0
+
+═══════════════════════════════════════════════════════════
+
+i=1, nums[1]=1 (treat as +1):
+  prefix = -1 + 1 = 0
+  Look for 0 - 0 = 0 → in map at -1!
+  length = 1 - (-1) = 2
+  maxLen = max(0, 2) = 2
+  "Found [0,1] with equal 0s and 1s, length 2"
+  0 already in map → DON'T update
+
+═══════════════════════════════════════════════════════════
+
+i=2, nums[2]=0 (treat as -1):
+  prefix = 0 + (-1) = -1
+  Look for -1 - 0 = -1 → in map at 0!
+  length = 2 - 0 = 2
+  maxLen = max(2, 2) = 2 (no change)
+  -1 already in map → DON'T update
+
+═══════════════════════════════════════════════════════════
+
+i=3, nums[3]=1 (treat as +1):
+  prefix = -1 + 1 = 0
+  Look for 0 - 0 = 0 → in map at -1!
+  length = 3 - (-1) = 4
+  maxLen = max(2, 4) = 4
+  "Found [0,1,0,1] with equal 0s and 1s, length 4"
+
+═══════════════════════════════════════════════════════════
+
+i=4, nums[4]=1 (treat as +1):
+  prefix = 0 + 1 = 1
+  Look for 1 - 0 = 1 → not in map
+  1 not in map → store: map = {0: -1, -1: 0, 1: 4}
+  maxLen = 4
+
+═══════════════════════════════════════════════════════════
+
+i=5, nums[5]=0 (treat as -1):
+  prefix = 1 + (-1) = 0
+  Look for 0 - 0 = 0 → in map at -1!
+  length = 5 - (-1) = 6
+  maxLen = max(4, 6) = 6
+  "Found [0,1,0,1,1,0] with equal 0s and 1s, length 6"
+
+═══════════════════════════════════════════════════════════
+
+i=6, nums[6]=0 (treat as -1):
+  prefix = 0 + (-1) = -1
+  Look for -1 - 0 = -1 → in map at 0!
+  length = 6 - 0 = 6
+  maxLen = max(6, 6) = 6 (no change)
+
+═══════════════════════════════════════════════════════════
+
+Final Answer: maxLen = 6 ✓
+```
+
+---
+
+## The Code (With Line-by-Line Explanation)
+
+```java
+public int findMaxLength(int[] nums) {
+    // HashMap: prefix_sum → FIRST index
+    Map<Integer, Integer> firstIndex = new HashMap<>();
+    
+    // Empty prefix at index -1
+    firstIndex.put(0, -1);
+    
+    int prefix = 0;
+    int maxLen = 0;
+    
+    for (int i = 0; i < nums.length; i++) {
+        // Transform: 0 → -1, 1 → +1
+        prefix += (nums[i] == 0) ? -1 : 1;
+        
+        // Looking for sum = 0, so look for same prefix
+        if (firstIndex.containsKey(prefix)) {
+            int length = i - firstIndex.get(prefix);
+            maxLen = Math.max(maxLen, length);
+        } else {
+            // Store first occurrence only
+            firstIndex.put(prefix, i);
+        }
+    }
+    
+    return maxLen;
+}
+```
+
+---
+
+## Common Traps
+
+| Trap | Why Wrong | Fix |
+|------|-----------|-----|
+| Not transforming 0 to -1 | Can't use prefix sum for equal counts | Transform: 0 → -1 |
+| Looking for (prefix - k) | k = 0, so just look for prefix itself | Same prefix = sum 0 between |
+| Updating existing prefix | Lose first occurrence | Only store if not present |
+
+---
+
+## Mind-Map Anchor
+
+```
+EQUAL 0s AND 1s
+       │
+       ▼
+┌─────────────────────────┐
+│ Transform: 0 → -1       │
+│                         │
+│ Equal counts = sum 0    │
+│ Same prefix = sum 0     │
+│ between them            │
+│                         │
+│ Store first occurrence  │
+│ Init: {0: -1}           │
+└─────────────────────────┘
+```
+
+**Memory phrase:** "0 becomes -1, equal counts means sum zero, same prefix = valid subarray"
+
+---
+
+# PATTERN 15: Find Pivot Index (LeetCode 724)
+
+## Pattern Recognition Signal
+
+**When you see:** "pivot index", "left sum equals right sum", "equilibrium point"
+
+**Instant thought:** "Total sum - left sum - pivot = right sum, check if left = right"
+
+---
+
+## The Mental Model (Before Coding!)
+
+### What's the problem REALLY asking?
+
+```
+Input: nums = [1, 7, 3, 6, 5, 6]
+
+Find index where sum of left = sum of right:
+- Index 0: left = 0, right = 7+3+6+5+6 = 27 ✗
+- Index 1: left = 1, right = 3+6+5+6 = 20 ✗
+- Index 2: left = 1+7 = 8, right = 6+5+6 = 17 ✗
+- Index 3: left = 1+7+3 = 11, right = 5+6 = 11 ✓ FOUND!
+
+Answer: 3
+```
+
+### The Key Insight
+
+```
+At pivot index i:
+  leftSum = sum of nums[0..i-1]
+  rightSum = sum of nums[i+1..n-1]
+  
+We want: leftSum == rightSum
+
+Note: total = leftSum + nums[i] + rightSum
+
+So: rightSum = total - leftSum - nums[i]
+
+Condition: leftSum == total - leftSum - nums[i]
+           2 * leftSum + nums[i] == total
+```
+
+### The Algorithm in Plain English
+
+```
+1. Calculate total sum
+2. Initialize leftSum = 0
+3. For each index i:
+   a. rightSum = total - leftSum - nums[i]
+   b. If leftSum == rightSum: return i
+   c. leftSum += nums[i]
+4. Return -1 (no pivot found)
+```
+
+---
+
+## Visual Dry Run (Step-by-Step)
+
+**Input:** `nums = [1, 7, 3, 6, 5, 6]`
+
+```
+═══════════════════════════════════════════════════════════
+
+Step 1: Calculate total sum
+  total = 1 + 7 + 3 + 6 + 5 + 6 = 28
+
+═══════════════════════════════════════════════════════════
+
+Initial: leftSum = 0
+
+═══════════════════════════════════════════════════════════
+
+i=0, nums[0]=1:
+  rightSum = total - leftSum - nums[0]
+           = 28 - 0 - 1 = 27
+  leftSum (0) == rightSum (27)? NO
+  leftSum = 0 + 1 = 1
+
+═══════════════════════════════════════════════════════════
+
+i=1, nums[1]=7:
+  rightSum = 28 - 1 - 7 = 20
+  leftSum (1) == rightSum (20)? NO
+  leftSum = 1 + 7 = 8
+
+═══════════════════════════════════════════════════════════
+
+i=2, nums[2]=3:
+  rightSum = 28 - 8 - 3 = 17
+  leftSum (8) == rightSum (17)? NO
+  leftSum = 8 + 3 = 11
+
+═══════════════════════════════════════════════════════════
+
+i=3, nums[3]=6:
+  rightSum = 28 - 11 - 6 = 11
+  leftSum (11) == rightSum (11)? YES! ✓
+  
+  Return 3
+
+═══════════════════════════════════════════════════════════
+
+Final Answer: 3 ✓
+
+Verification:
+  Left of index 3:  [1, 7, 3] → sum = 11
+  Right of index 3: [5, 6]    → sum = 11
+  Equal! ✓
+```
+
+---
+
+## The Code (With Line-by-Line Explanation)
+
+```java
+public int pivotIndex(int[] nums) {
+    // Calculate total sum
+    int total = 0;
+    for (int num : nums) {
+        total += num;
+    }
+    
+    // Scan for pivot
+    int leftSum = 0;
+    
+    for (int i = 0; i < nums.length; i++) {
+        // rightSum = total - leftSum - nums[i]
+        int rightSum = total - leftSum - nums[i];
+        
+        if (leftSum == rightSum) {
+            return i;  // Found pivot!
+        }
+        
+        leftSum += nums[i];
+    }
+    
+    return -1;  // No pivot found
+}
+```
+
+**Alternative using the formula:**
+
+```java
+public int pivotIndex(int[] nums) {
+    int total = 0;
+    for (int num : nums) total += num;
+    
+    int leftSum = 0;
+    for (int i = 0; i < nums.length; i++) {
+        // Check: 2 * leftSum + nums[i] == total
+        if (2 * leftSum + nums[i] == total) {
+            return i;
+        }
+        leftSum += nums[i];
+    }
+    
+    return -1;
+}
+```
+
+---
+
+## Common Traps
+
+| Trap | Why Wrong | Fix |
+|------|-----------|-----|
+| Including pivot in left or right | Pivot is excluded from both sides | rightSum = total - leftSum - nums[i] |
+| Updating leftSum before check | Wrong leftSum for current index | Check first, then update |
+| Returning 0 when no pivot | -1 is the correct "not found" value | Return -1 |
+
+---
+
+## Mind-Map Anchor
+
+```
+FIND PIVOT INDEX
+       │
+       ▼
+┌─────────────────────────┐
+│ total = leftSum + pivot │
+│         + rightSum      │
+│                         │
+│ rightSum = total -      │
+│   leftSum - nums[i]     │
+│                         │
+│ Check: left == right    │
+│ O(n) time, O(1) space   │
+└─────────────────────────┘
+```
+
+**Memory phrase:** "Total minus left minus pivot equals right — check if left equals right"
+
+---
