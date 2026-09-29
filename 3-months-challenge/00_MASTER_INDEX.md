@@ -7,8 +7,8 @@
 
 | Metric | Value |
 |--------|-------|
-| **Total Topics** | 16 |
-| **Total Patterns** | 393+ |
+| **Total Topics** | 18 |
+| **Total Patterns** | 408+ |
 | **Total Lines** | 66,000+ |
 | **Interview Coverage** | 100% |
 
@@ -18,22 +18,24 @@
 
 ## By Study Week (Recommended Order)
 
-### Phase 1: Foundation (Weeks 1-5)
+### Phase 1: Foundation (Weeks 0-6)
 | Week | Topic | File | Patterns | Priority |
 |------|-------|------|----------|----------|
-| 1 | Arrays & Hashing | [Prefix Sum](02_Prefix_Sum_Patterns_Deep_Dive.md) | 20 | 🔴 Critical |
-| 2 | Two Pointers | [Two Pointers](02_Two_Pointers_Patterns_Deep_Dive.md) | 18 | 🔴 Critical |
-| 3 | Sliding Window | [Sliding Window](02_Sliding_Window_Patterns_Deep_Dive.md) | 15 | 🔴 Critical |
+| 0 | Arrays & Sorting | [Sorting](02_Sorting_Patterns_Deep_Dive.md) | 15 | 🔴 Critical |
+| 0.5 | **Matrix/2D Arrays** | [Matrix](02_Matrix_2D_Arrays_Patterns_Deep_Dive.md) | 15 | 🔴 Critical |
+| 1 | Sliding Window + Two Pointers | [Sliding Window](02_Sliding_Window_Patterns_Deep_Dive.md), [Two Pointers](02_Two_Pointers_Patterns_Deep_Dive.md) | 33 | 🔴 Critical |
+| 2 | Hashing + Prefix Sum | [Prefix Sum](02_Prefix_Sum_Patterns_Deep_Dive.md) | 20 | 🔴 Critical |
+| 3 | Linked List | [Linked List](02_Linked_List_Patterns_Deep_Dive.md) | 23 | 🟡 High |
 | 4 | Stack | [Stack Patterns](02_Stack_Patterns_Deep_Dive.md) | 25 | 🔴 Critical |
-| 5 | Linked List | [Linked List](02_Linked_List_Patterns_Deep_Dive.md) | 23 | 🟡 High |
+| 5 | Heap | [Heap](02_Heap_Patterns_Deep_Dive.md) | 19 | 🟡 High |
+| 6 | Binary Search | [Binary Search](02_Binary_Search_Patterns_Deep_Dive.md) | 20 | 🔴 Critical |
 
-### Phase 2: Core Algorithms (Weeks 6-10)
+### Phase 2: Trees + Backtracking (Weeks 7-10)
 | Week | Topic | File | Patterns | Priority |
 |------|-------|------|----------|----------|
-| 6 | Binary Search | [Binary Search](02_Binary_Search_Patterns_Deep_Dive.md) | 20 | 🔴 Critical |
-| 7 | Sorting | [Sorting](02_Sorting_Patterns_Deep_Dive.md) | 15 | 🟡 High |
-| 8-9 | Trees | [Trees](02_Tree_Patterns_Recursion_Template.md) | 50 | 🔴 Critical |
-| 10 | Heap | [Heap](02_Heap_Patterns_Deep_Dive.md) | 19 | 🟡 High |
+| 7-8 | Trees | [Trees](02_Tree_Patterns_Recursion_Template.md) | 50 | 🔴 Critical |
+| 9 | BST Patterns | [Trees](02_Tree_Patterns_Recursion_Template.md) | (included) | 🔴 Critical |
+| 10 | Backtracking | [Backtracking](the_backtracking_playbook_seven_core_patterns.md) | 12 | 🔴 Critical |
 
 ### Phase 3: Graph Domination (Weeks 11-16)
 | Week | Topic | File | Patterns | Priority |
@@ -48,11 +50,12 @@
 ### Phase 5: Advanced Patterns (Weeks 23-27)
 | Week | Topic | File | Patterns | Priority |
 |------|-------|------|----------|----------|
-| 23 | Backtracking | [Backtracking](the_backtracking_playbook_seven_core_patterns.md) | 12 | 🔴 Critical |
-| 24 | Trie & Strings | [Trie & Strings](02_Trie_String_Patterns_Deep_Dive.md) | 22 | 🟡 High |
+| 23 | Trie | [Trie & Strings](02_Trie_String_Patterns_Deep_Dive.md) | 22 | 🟡 High |
+| 24 | Advanced Strings | [Trie & Strings](02_Trie_String_Patterns_Deep_Dive.md) | (included) | 🟡 High |
 | 25 | Greedy & Intervals | [Greedy](02_Greedy_Intervals_Patterns_Deep_Dive.md) | 24 | 🟡 High |
-| 26 | Bit Manipulation | [Bit Manipulation](02_Bit_Manipulation_Patterns_Deep_Dive.md) | 21 | 🟢 Medium |
-| 27 | Segment/Fenwick Tree | [Segment Tree](02_Segment_Tree_Fenwick_Tree_Deep_Dive.md) | 12 | 🟢 Medium |
+| 26 | Design + Math | [Various] | - | 🟡 High |
+| 27 | Bit Manipulation | [Bit Manipulation](02_Bit_Manipulation_Patterns_Deep_Dive.md) | 21 | 🟢 Medium |
+| 27+ | Segment/Fenwick Tree | [Segment Tree](02_Segment_Tree_Fenwick_Tree_Deep_Dive.md) | 12 | 🟢 Medium |
 
 ---
 
