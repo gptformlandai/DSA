@@ -1,7 +1,7 @@
 # Segment Tree & Fenwick Tree Patterns Deep Dive
 ## Junior Dev's Complete Guide to L5 MAANG Range Query Mastery
 
----
+--
 
 # THE RANGE QUERY MINDSET: Before You Code Anything
 
@@ -22,13 +22,13 @@ DYNAMIC ARRAY (with updates):
 DECISION TREE:
                     Need range queries?
                           |
-              +-----------+-----------+
+              +------+------+
               |                       |
            No updates              Updates needed
               |                       |
          Prefix Sum           What type of query?
                                       |
-                    +-----------------+-----------------+
+                    +---------+---------+
                     |                 |                 |
                Sum only         Min/Max/GCD        Range updates
                     |                 |                 |
@@ -36,7 +36,7 @@ DECISION TREE:
                                                   (with lazy)
 ```
 
----
+--
 
 # PART 1: FENWICK TREE (Binary Indexed Tree)
 
@@ -106,7 +106,7 @@ Why it works:
 - Query: Subtract lowest bit to move to PREVIOUS range
 ```
 
----
+--
 
 ## PATTERN 1: Range Sum Query - Mutable (LC 307)
 
@@ -191,7 +191,7 @@ class NumArray {
 ### Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | 0-indexed tree | Fenwick needs 1-indexed | Use `tree[n+1]`, convert indices |
 | Forgetting delta | Update needs difference, not new value | `delta = newVal - oldVal` |
 | Wrong range | Off-by-one in range query | `query(right) - query(left-1)` |
@@ -202,7 +202,7 @@ class NumArray {
 FENWICK TREE (BIT)
         |
         v
-+------------------------+
++------------+
 | tree[i] stores partial |
 | sum based on lowest    |
 | set bit of i           |
@@ -210,12 +210,12 @@ FENWICK TREE (BIT)
 | Update: i += i & (-i)  |
 | Query:  i -= i & (-i)  |
 | O(log n) both ops      |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Lowest bit magic: add to go up, subtract to go left"
 
----
+--
 
 ## PATTERN 2: Count of Smaller Numbers After Self (LC 315)
 
@@ -279,7 +279,7 @@ public List<Integer> countSmaller(int[] nums) {
     int[] tree = new int[r + 1];
     
     // Process right to left
-    for (int i = n - 1; i >= 0; i--) {
+    for (int i = n - 1; i >= 0; i-) {
         int pos = rank.get(nums[i]);
         result[i] = query(tree, pos - 1);  // Count smaller
         update(tree, pos);                  // Add current
@@ -311,19 +311,19 @@ private int query(int[] tree, int i) {
 COUNT SMALLER AFTER SELF
           |
           v
-+------------------------+
++------------+
 | Process RIGHT to LEFT  |
 | BIT tracks frequencies |
 | query(val-1) = count   |
 | of smaller values seen |
 | Coordinate compression |
 | for large values       |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Right to left, BIT counts frequencies, query for smaller"
 
----
+--
 
 ## PATTERN 3: Count Inversions (Classic)
 
@@ -397,18 +397,18 @@ public long countInversions(int[] arr) {
 COUNT INVERSIONS
        |
        v
-+------------------------+
++------------+
 | Process LEFT to RIGHT  |
 | For each element:      |
 | inversions += seen -   |
 |              query(val)|
 | (counts larger before) |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Left to right, inversions = seen - query(val)"
 
----
+--
 
 # PART 2: SEGMENT TREE
 
@@ -496,7 +496,7 @@ class SegmentTree {
 }
 ```
 
----
+--
 
 ## PATTERN 4: Range Sum Query - Mutable (Segment Tree Version)
 
@@ -603,7 +603,7 @@ class NumArray {
 SEGMENT TREE
      |
      v
-+------------------------+
++------------+
 | tree[4*n] array        |
 | Leaves = elements      |
 | Parents = merged kids  |
@@ -611,12 +611,12 @@ SEGMENT TREE
 | Build: O(n)            |
 | Update: O(log n)       |
 | Query: O(log n)        |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Tournament bracket: leaves are players, parents are winners"
 
----
+--
 
 ## PATTERN 5: Range Minimum Query (RMQ)
 
@@ -712,17 +712,17 @@ class RangeMinQuery {
 RANGE MIN QUERY
        |
        v
-+------------------------+
++------------+
 | Same as sum tree but   |
 | merge = Math.min()     |
 | Identity = MAX_VALUE   |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Same structure, just change merge function to min"
 
 
----
+--
 
 ## PATTERN 6: Lazy Propagation (Range Updates)
 
@@ -851,19 +851,19 @@ class LazySegmentTree {
 LAZY PROPAGATION
        |
        v
-+------------------------+
++------------+
 | lazy[] stores pending  |
 | updates                |
 | pushDown() before      |
 | accessing children     |
 | Range update: O(log n) |
 | Range query: O(log n)  |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Lazy = procrastinate updates, push down when needed"
 
----
+--
 
 ## PATTERN 7: Range Maximum Query with Point Update
 
@@ -938,14 +938,14 @@ class RangeMaxQuery {
 RANGE MAX QUERY
        |
        v
-+------------------------+
++------------+
 | merge = Math.max()     |
 | Identity = MIN_VALUE   |
 | Same structure as sum  |
-+------------------------+
++------------+
 ```
 
----
+--
 
 ## PATTERN 8: Count of Range Sum (LC 327)
 
@@ -1035,7 +1035,7 @@ private int mergeSort(long[] prefix, int start, int end, int lower, int upper) {
 COUNT OF RANGE SUM
         |
         v
-+------------------------+
++------------+
 | Prefix sum array       |
 | For each j, count i    |
 | where prefix[i] in     |
@@ -1043,12 +1043,12 @@ COUNT OF RANGE SUM
 |  prefix[j]-lower]      |
 | Use merge sort or      |
 | segment tree           |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Prefix sums + count in range during merge sort"
 
----
+--
 
 ## PATTERN 9: Falling Squares (LC 699)
 
@@ -1142,16 +1142,16 @@ private void updateRange(int[] tree, int[] lazy, int node, int start, int end, i
 FALLING SQUARES
       |
       v
-+------------------------+
++------------+
 | Coordinate compression |
 | Segment tree for max   |
 | Query max in range     |
 | Update range with new  |
 | height                 |
-+------------------------+
++------------+
 ```
 
----
+--
 
 ## PATTERN 10: My Calendar III (LC 732)
 
@@ -1197,7 +1197,7 @@ class MyCalendarThree {
 }
 ```
 
----
+--
 
 # PART 3: ADDITIONAL PATTERNS
 
@@ -1279,14 +1279,14 @@ class RangeGCDQuery {
 RANGE GCD QUERY
       |
       v
-+------------------------+
++------------+
 | merge = gcd(left,right)|
 | Identity = 0           |
 | gcd(0, x) = x          |
-+------------------------+
++------------+
 ```
 
----
+--
 
 ## PATTERN 12: 2D Segment Tree (Range Sum 2D - Mutable)
 
@@ -1351,22 +1351,22 @@ class NumMatrix {
 2D FENWICK TREE
       |
       v
-+------------------------+
++------------+
 | Nested loops for both  |
 | dimensions             |
 | Update: i += i & (-i)  |
 |         j += j & (-j)  |
 | Query: i -= i & (-i)   |
 |        j -= j & (-j)   |
-+------------------------+
++------------+
 ```
 
----
+--
 
 # QUICK REFERENCE: All 12 Patterns
 
 | # | Pattern | Data Structure | Key Technique |
-|---|---------|----------------|---------------|
+|--|-----|--------|--------|
 | 1 | Range Sum Mutable | Fenwick Tree | Point update, prefix sum |
 | 2 | Count Smaller After | Fenwick Tree | Frequency counting |
 | 3 | Count Inversions | Fenwick Tree | Left-to-right processing |
@@ -1380,7 +1380,7 @@ class NumMatrix {
 | 11 | Range GCD Query | Segment Tree | GCD merge function |
 | 12 | 2D Range Sum | 2D Fenwick | Nested BIT operations |
 
----
+--
 
 ## Fenwick vs Segment Tree Decision
 
@@ -1398,12 +1398,12 @@ USE SEGMENT TREE WHEN:
 └── Need more flexibility
 ```
 
----
+--
 
 ## Complexity Comparison
 
 | Operation | Fenwick Tree | Segment Tree |
-|-----------|--------------|--------------|
+|------|-------|-------|
 | Build | O(n log n) | O(n) |
 | Point Update | O(log n) | O(log n) |
 | Range Update | ❌ | O(log n) with lazy |
@@ -1411,19 +1411,19 @@ USE SEGMENT TREE WHEN:
 | Range Query | O(log n) | O(log n) |
 | Space | O(n) | O(4n) |
 
----
+--
 
 ## Common Traps Table
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | 0-indexed Fenwick | BIT needs 1-indexed | Use `tree[n+1]`, convert indices |
 | Forgetting pushDown | Lazy values not propagated | Always pushDown before recursing |
 | Wrong tree size | Segment tree needs 4n | Use `tree[4 * n]` |
 | Identity value | Wrong default for min/max | Use MAX_VALUE for min, MIN_VALUE for max |
 | Range boundaries | Off-by-one errors | Draw the tree, trace carefully |
 
----
+--
 
 *End of Segment Tree & Fenwick Tree Deep Dive - 12 Patterns for L5 MAANG*
 

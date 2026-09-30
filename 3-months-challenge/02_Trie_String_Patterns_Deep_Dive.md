@@ -1,7 +1,7 @@
 # Trie & String Algorithms Patterns Deep Dive
 ## Junior Dev's Complete Guide to L5 MAANG String Mastery
 
----
+--
 
 # THE TRIE MINDSET: Before You Code Anything
 
@@ -19,7 +19,7 @@
 5. XOR PROBLEMS: Binary trie for max XOR
 ```
 
----
+--
 
 # PART 1: TRIE PATTERNS
 
@@ -68,7 +68,7 @@ class Trie {
 }
 ```
 
----
+--
 
 ## PATTERN 1: Implement Trie (LC 208)
 
@@ -154,19 +154,19 @@ class TrieNode {
 IMPLEMENT TRIE
       |
       v
-+----------------------+
++-----------+
 | TrieNode: children[] |
 | + isEndOfWord        |
 | Insert: create path  |
 | Search: traverse +   |
 | check isEnd          |
 | StartsWith: traverse |
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "Children array + isEnd flag, traverse for all operations"
 
----
+--
 
 ## PATTERN 2: Design Add and Search Words (LC 211)
 
@@ -256,17 +256,17 @@ class WordDictionary {
 ADD AND SEARCH WORDS
          |
          v
-+------------------------+
++------------+
 | Trie + DFS             |
 | '.' = try ALL children |
 | Regular = normal trie  |
 | Recursive search       |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Dot means branch to all children with DFS"
 
----
+--
 
 ## PATTERN 3: Word Search II (LC 212)
 
@@ -369,18 +369,18 @@ class TrieNode {
 WORD SEARCH II
       |
       v
-+------------------------+
++------------+
 | Build Trie of words    |
 | DFS from each cell     |
 | Follow Trie path       |
 | Store word at TrieNode |
 | Mark visited with '#'  |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Trie of words, DFS on grid, follow Trie path"
 
----
+--
 
 ## PATTERN 4: Replace Words (LC 648)
 
@@ -471,18 +471,18 @@ private String findRoot(TrieNode root, String word) {
 REPLACE WORDS
       |
       v
-+----------------------+
++-----------+
 | Trie of dictionary   |
 | For each word, find  |
 | shortest prefix that |
 | is a complete root   |
 | Return root or word  |
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "Trie of roots, find shortest matching prefix"
 
----
+--
 
 ## PATTERN 5: Design Search Autocomplete System (LC 642)
 
@@ -572,18 +572,18 @@ class TrieNode {
 AUTOCOMPLETE SYSTEM
         |
         v
-+------------------------+
++------------+
 | Trie with frequency map|
 | at each node           |
 | Track current position |
 | '#' = end input, save  |
 | Return top 3 by freq   |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Trie + frequency map at nodes, track current position"
 
----
+--
 
 ## PATTERN 6: Longest Word in Dictionary (LC 720)
 
@@ -670,18 +670,18 @@ public String longestWord(String[] words) {
 LONGEST WORD
      |
      v
-+----------------------+
++-----------+
 | Build Trie           |
 | BFS only through     |
 | nodes with isEnd=true|
 | Track longest word   |
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "BFS through complete words only"
 
 
----
+--
 
 ## PATTERN 7: Maximum XOR of Two Numbers (LC 421)
 
@@ -731,7 +731,7 @@ public int findMaximumXOR(int[] nums) {
     // Build binary Trie
     for (int num : nums) {
         TrieNode node = root;
-        for (int i = 31; i >= 0; i--) {
+        for (int i = 31; i >= 0; i-) {
             int bit = (num >> i) & 1;
             if (node.children[bit] == null) {
                 node.children[bit] = new TrieNode();
@@ -747,7 +747,7 @@ public int findMaximumXOR(int[] nums) {
         TrieNode node = root;
         int xor = 0;
         
-        for (int i = 31; i >= 0; i--) {
+        for (int i = 31; i >= 0; i-) {
             int bit = (num >> i) & 1;
             int oppositeBit = 1 - bit;
             
@@ -776,18 +776,18 @@ class TrieNode {
 MAXIMUM XOR
      |
      v
-+----------------------+
++-----------+
 | Binary Trie (0/1)    |
 | Insert all numbers   |
 | For each, greedily   |
 | pick OPPOSITE bits   |
 | Maximize XOR result  |
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "Binary Trie, greedily pick opposite bits"
 
----
+--
 
 # PART 2: STRING ALGORITHM PATTERNS
 
@@ -885,19 +885,19 @@ private int[] buildLPS(String pattern) {
 KMP ALGORITHM
       |
       v
-+----------------------+
++-----------+
 | Build LPS array      |
 | LPS[i] = longest     |
 | prefix = suffix      |
 | On mismatch, jump to |
 | LPS[j-1] position    |
 | O(n+m) time!         |
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "LPS array, on mismatch jump to lps[j-1]"
 
----
+--
 
 ## PATTERN 9: Rabin-Karp - Rolling Hash
 
@@ -970,18 +970,18 @@ public int rabinKarp(String text, String pattern) {
 RABIN-KARP
     |
     v
-+----------------------+
++-----------+
 | Rolling hash         |
 | Remove first char    |
 | Add new char         |
 | O(1) hash update     |
 | Verify on hash match |
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "Rolling hash, remove old add new, verify matches"
 
----
+--
 
 ## PATTERN 10: Longest Palindromic Substring (LC 5)
 
@@ -1036,7 +1036,7 @@ public String longestPalindrome(String s) {
 
 private int expandAroundCenter(String s, int left, int right) {
     while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
-        left--;
+        left-;
         right++;
     }
     return right - left - 1;
@@ -1049,18 +1049,18 @@ private int expandAroundCenter(String s, int left, int right) {
 LONGEST PALINDROME SUBSTRING
             |
             v
-+------------------------+
++------------+
 | Expand around center   |
 | Try odd (i,i) and      |
 | even (i,i+1) centers   |
 | Track max length       |
 | O(n²) time             |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Expand from each center, try odd and even"
 
----
+--
 
 ## PATTERN 11: Shortest Palindrome (LC 214)
 
@@ -1120,18 +1120,18 @@ public String shortestPalindrome(String s) {
 SHORTEST PALINDROME
         |
         v
-+------------------------+
++------------+
 | s + "#" + reverse(s)   |
 | Build LPS array        |
 | LPS[last] = palindrome |
 | prefix length          |
 | Add reverse of rest    |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "KMP on s#reverse(s), LPS gives palindrome prefix length"
 
----
+--
 
 ## PATTERN 12: Repeated Substring Pattern (LC 459)
 
@@ -1185,17 +1185,17 @@ public boolean repeatedSubstringPatternKMP(String s) {
 REPEATED SUBSTRING
         |
         v
-+------------------------+
++------------+
 | Method 1: (s+s)[1:-1]  |
 | contains s?            |
 | Method 2: KMP LPS      |
 | len % (n - LPS[n-1])==0|
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Double string, check middle contains original"
 
----
+--
 
 ## PATTERN 13: Palindrome Pairs (LC 336)
 
@@ -1246,7 +1246,7 @@ public List<List<Integer>> palindromePairs(String[] words) {
 private boolean isPalindrome(String s) {
     int left = 0, right = s.length() - 1;
     while (left < right) {
-        if (s.charAt(left++) != s.charAt(right--)) return false;
+        if (s.charAt(left++) != s.charAt(right-)) return false;
     }
     return true;
 }
@@ -1258,24 +1258,24 @@ private boolean isPalindrome(String s) {
 PALINDROME PAIRS
        |
        v
-+------------------------+
++------------+
 | Map word -> index      |
 | For each word, try all |
 | prefix/suffix splits   |
 | If prefix palindrome,  |
 | find reverse(suffix)   |
 | Vice versa for suffix  |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Split at each position, check palindrome + reverse exists"
 
----
+--
 
 # QUICK REFERENCE: All 13 Trie & String Patterns
 
 | # | Pattern | Key Technique |
-|---|---------|---------------|
+|--|-----|--------|
 | 1 | Implement Trie | TrieNode array + isEnd |
 | 2 | Add/Search Words | Trie + DFS for wildcard |
 | 3 | Word Search II | Trie of words + grid DFS |
@@ -1290,7 +1290,7 @@ PALINDROME PAIRS
 | 12 | Repeated Substring | (s+s)[1:-1] contains s |
 | 13 | Palindrome Pairs | Split + reverse lookup |
 
----
+--
 
 ## When to Use What?
 
@@ -1317,12 +1317,12 @@ XOR PROBLEMS:
   -> Binary Trie
 ```
 
----
+--
 
 *End of Trie & String Patterns Deep Dive - 13 Patterns for L5 MAANG*
 
 
----
+--
 
 # PART 3: ADDITIONAL TRIE PATTERNS
 
@@ -1406,18 +1406,18 @@ class TrieNode {
 MAP SUM PAIRS
       |
       v
-+----------------------+
++-----------+
 | Trie with sum at node|
 | Track delta for      |
 | updates              |
 | Traverse to prefix   |
 | Return node.sum      |
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "Store running sum at each node, use delta for updates"
 
----
+--
 
 ## PATTERN 15: Prefix and Suffix Search (LC 745)
 
@@ -1490,17 +1490,17 @@ class TrieNode {
 PREFIX + SUFFIX SEARCH
          |
          v
-+------------------------+
++------------+
 | Insert suffix#word     |
 | for all suffixes       |
 | Query: suffix#prefix   |
 | Store weight at nodes  |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "All suffix#word combos, query suffix#prefix"
 
----
+--
 
 ## PATTERN 16: Stream of Characters (LC 1032)
 
@@ -1523,7 +1523,7 @@ class StreamChecker {
         // Insert reversed words
         for (String word : words) {
             TrieNode node = root;
-            for (int i = word.length() - 1; i >= 0; i--) {
+            for (int i = word.length() - 1; i >= 0; i-) {
                 int idx = word.charAt(i) - 'a';
                 if (node.children[idx] == null) {
                     node.children[idx] = new TrieNode();
@@ -1539,7 +1539,7 @@ class StreamChecker {
         
         TrieNode node = root;
         // Check from end of stream backwards
-        for (int i = stream.length() - 1; i >= 0 && node != null; i--) {
+        for (int i = stream.length() - 1; i >= 0 && node != null; i-) {
             int idx = stream.charAt(i) - 'a';
             node = node.children[idx];
             if (node != null && node.isEndOfWord) {
@@ -1558,17 +1558,17 @@ class StreamChecker {
 STREAM OF CHARACTERS
          |
          v
-+------------------------+
++------------+
 | Trie of REVERSED words |
 | On query, check stream |
 | from END backwards     |
 | Match = suffix exists  |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Reverse words in Trie, check stream backwards"
 
----
+--
 
 ## PATTERN 17: Concatenated Words (LC 472)
 
@@ -1620,19 +1620,19 @@ private boolean canForm(String word, Set<String> wordSet, Map<String, Boolean> m
 CONCATENATED WORDS
         |
         v
-+------------------------+
++------------+
 | For each word, try all |
 | prefix splits          |
 | If prefix in dict AND  |
 | suffix in dict or can  |
 | be formed -> valid     |
 | Use memoization        |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Split at each position, check prefix + recurse on suffix"
 
----
+--
 
 # PART 4: ADVANCED STRING PATTERNS
 
@@ -1704,18 +1704,18 @@ public int findPattern(String text, String pattern) {
 Z-ALGORITHM
      |
      v
-+----------------------+
++-----------+
 | Z[i] = longest match |
 | with prefix starting |
 | at position i        |
 | Use [l,r] window     |
 | O(n) time            |
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "Z[i] = how much of prefix matches at position i"
 
----
+--
 
 ## PATTERN 19: Longest Happy Prefix (LC 1392)
 
@@ -1773,17 +1773,17 @@ public String longestPrefix(String s) {
 LONGEST HAPPY PREFIX
          |
          v
-+----------------------+
++-----------+
 | Build KMP LPS array  |
 | LPS[n-1] = length of |
 | longest prefix that  |
 | is also suffix       |
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "KMP LPS, answer is LPS[last]"
 
----
+--
 
 ## PATTERN 20: Longest Duplicate Substring (LC 1044)
 
@@ -1860,18 +1860,18 @@ private String findDuplicate(String s, int len) {
 LONGEST DUPLICATE SUBSTRING
             |
             v
-+------------------------+
++------------+
 | Binary search on length|
 | For each length, use   |
 | rolling hash to find   |
 | duplicate              |
 | O(n log n) average     |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Binary search length + rolling hash for duplicates"
 
----
+--
 
 ## PATTERN 21: Count Palindromic Substrings (LC 647)
 
@@ -1915,7 +1915,7 @@ private int expandAndCount(String s, int left, int right) {
     int count = 0;
     while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
         count++;
-        left--;
+        left-;
         right++;
     }
     return count;
@@ -1928,17 +1928,17 @@ private int expandAndCount(String s, int left, int right) {
 COUNT PALINDROMES
        |
        v
-+----------------------+
++-----------+
 | Expand around center |
 | Count each expansion |
 | Try odd and even     |
 | O(n²) time           |
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "Expand and count, same as longest but count all"
 
----
+--
 
 ## PATTERN 22: Repeated DNA Sequences (LC 187)
 
@@ -1996,24 +1996,24 @@ public List<String> findRepeatedDnaSequencesBit(String s) {
 REPEATED DNA SEQUENCES
           |
           v
-+------------------------+
++------------+
 | Fixed length = 10      |
 | HashSet of seen        |
 | Add to result if seen  |
 | twice                  |
 | Optimize: 2-bit encode |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "HashSet of 10-char substrings, track seen twice"
 
----
+--
 
 # COMPLETE INDEX: All 22 Trie & String Patterns
 
 ## Trie Patterns (1-7, 14-17)
 | # | Pattern | LeetCode | Key Technique |
-|---|---------|----------|---------------|
+|--|-----|-----|--------|
 | 1 | Implement Trie | 208 | TrieNode array + isEnd |
 | 2 | Add/Search Words | 211 | Trie + DFS for wildcard |
 | 3 | Word Search II | 212 | Trie of words + grid DFS |
@@ -2028,7 +2028,7 @@ REPEATED DNA SEQUENCES
 
 ## String Algorithm Patterns (8-13, 18-22)
 | # | Pattern | LeetCode | Key Technique |
-|---|---------|----------|---------------|
+|--|-----|-----|--------|
 | 8 | KMP strStr | 28 | LPS array, skip on mismatch |
 | 9 | Rabin-Karp | - | Rolling hash |
 | 10 | Longest Palindrome | 5 | Expand around center |
@@ -2041,7 +2041,7 @@ REPEATED DNA SEQUENCES
 | 21 | Count Palindromes | 647 | Expand and count |
 | 22 | Repeated DNA | 187 | HashSet of fixed substrings |
 
----
+--
 
 ## MAANG Interview Frequency
 
@@ -2068,7 +2068,7 @@ GOOD TO KNOW:
 └── Longest Duplicate Substring (LC 1044)
 ```
 
----
+--
 
 *End of Trie & String Patterns Deep Dive - 22 Patterns for L5 MAANG*
 

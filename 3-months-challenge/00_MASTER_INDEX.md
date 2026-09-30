@@ -1,18 +1,18 @@
 # 🎯 DSA Master Index - L5 MAANG Complete Guide
 ## Junior Dev's 3-Month Challenge - 393+ Patterns
 
----
+--
 
 # 📊 Quick Stats
 
 | Metric | Value |
-|--------|-------|
+|----|----|
 | **Total Topics** | 18 |
 | **Total Patterns** | 408+ |
 | **Total Lines** | 66,000+ |
 | **Interview Coverage** | 100% |
 
----
+--
 
 # 🗺️ NAVIGATION MAP
 
@@ -20,7 +20,7 @@
 
 ### Phase 1: Foundation (Weeks 0-6)
 | Week | Topic | File | Patterns | Priority |
-|------|-------|------|----------|----------|
+|---|----|---|-----|-----|
 | 0 | Arrays & Sorting | [Sorting](02_Sorting_Patterns_Deep_Dive.md) | 15 | 🔴 Critical |
 | 0.5 | **Matrix/2D Arrays** | [Matrix](02_Matrix_2D_Arrays_Patterns_Deep_Dive.md) | 15 | 🔴 Critical |
 | 1 | Sliding Window + Two Pointers | [Sliding Window](02_Sliding_Window_Patterns_Deep_Dive.md), [Two Pointers](02_Two_Pointers_Patterns_Deep_Dive.md) | 33 | 🔴 Critical |
@@ -32,24 +32,24 @@
 
 ### Phase 2: Trees + Backtracking (Weeks 7-10)
 | Week | Topic | File | Patterns | Priority |
-|------|-------|------|----------|----------|
+|---|----|---|-----|-----|
 | 7-8 | Trees | [Trees](02_Tree_Patterns_Recursion_Template.md) | 50 | 🔴 Critical |
 | 9 | BST Patterns | [Trees](02_Tree_Patterns_Recursion_Template.md) | (included) | 🔴 Critical |
 | 10 | Backtracking | [Backtracking](the_backtracking_playbook_seven_core_patterns.md) | 12 | 🔴 Critical |
 
 ### Phase 3: Graph Domination (Weeks 11-16)
 | Week | Topic | File | Patterns | Priority |
-|------|-------|------|----------|----------|
+|---|----|---|-----|-----|
 | 11-16 | Graphs | [Graph Search](02_Graph_Search_Patterns_Deep_Dive.md) | 47 | 🔴 Critical |
 
 ### Phase 4: DP Elite Mastery (Weeks 17-22)
 | Week | Topic | File | Patterns | Priority |
-|------|-------|------|----------|----------|
+|---|----|---|-----|-----|
 | 17-22 | Dynamic Programming | [DP Patterns](02_Dynamic_Programming_Patterns_Deep_Dive.md) | 50 | 🔴 Critical |
 
 ### Phase 5: Advanced Patterns (Weeks 23-27)
 | Week | Topic | File | Patterns | Priority |
-|------|-------|------|----------|----------|
+|---|----|---|-----|-----|
 | 23 | Trie | [Trie & Strings](02_Trie_String_Patterns_Deep_Dive.md) | 22 | 🟡 High |
 | 24 | Advanced Strings | [Trie & Strings](02_Trie_String_Patterns_Deep_Dive.md) | (included) | 🟡 High |
 | 25 | Greedy & Intervals | [Greedy](02_Greedy_Intervals_Patterns_Deep_Dive.md) | 24 | 🟡 High |
@@ -57,7 +57,7 @@
 | 27 | Bit Manipulation | [Bit Manipulation](02_Bit_Manipulation_Patterns_Deep_Dive.md) | 21 | 🟢 Medium |
 | 27+ | Segment/Fenwick Tree | [Segment Tree](02_Segment_Tree_Fenwick_Tree_Deep_Dive.md) | 12 | 🟢 Medium |
 
----
+--
 
 # 📚 TOPIC DEEP LINKS
 
@@ -71,7 +71,7 @@
 
 **When to use:** "Find subarray with sum = X" or "Range sum queries"
 
----
+--
 
 ## 2. [Two Pointers Patterns](02_Two_Pointers_Patterns_Deep_Dive.md) (18 Patterns)
 **Key Patterns:**
@@ -84,7 +84,7 @@
 
 **When to use:** "Sorted array" or "Find pair/triplet" or "In-place modification"
 
----
+--
 
 ## 3. [Sliding Window Patterns](02_Sliding_Window_Patterns_Deep_Dive.md) (15 Patterns)
 **Key Patterns:**
@@ -96,7 +96,7 @@
 
 **When to use:** "Contiguous subarray/substring" with "maximum/minimum length"
 
----
+--
 
 ## 4. [Stack Patterns](02_Stack_Patterns_Deep_Dive.md) (25 Patterns)
 **Key Patterns:**
@@ -109,7 +109,7 @@
 
 **When to use:** "Matching pairs" or "Next greater/smaller" or "Expression evaluation"
 
----
+--
 
 ## 5. [Linked List Patterns](02_Linked_List_Patterns_Deep_Dive.md) (23 Patterns)
 **Key Patterns:**
@@ -122,7 +122,7 @@
 
 **When to use:** "Linked list manipulation" or "In-place reversal" or "Cycle detection"
 
----
+--
 
 ## 6. [Binary Search Patterns](02_Binary_Search_Patterns_Deep_Dive.md) (20 Patterns)
 **Key Patterns:**
@@ -135,7 +135,7 @@
 
 **When to use:** "Sorted array" or "Minimize maximum" or "Search space reduction"
 
----
+--
 
 ## 7. [Sorting Patterns](02_Sorting_Patterns_Deep_Dive.md) (15 Patterns)
 **Key Patterns:**
@@ -148,7 +148,7 @@
 
 **When to use:** "Custom ordering" or "Interval problems" or "Top K"
 
----
+--
 
 ## 8. [Tree Patterns](02_Tree_Patterns_Recursion_Template.md) (50 Patterns)
 **Key Patterns:**
@@ -162,7 +162,7 @@
 
 **When to use:** "Tree structure" - use the ONE recursion template!
 
----
+--
 
 ## 9. [Heap Patterns](02_Heap_Patterns_Deep_Dive.md) (19 Patterns)
 **Key Patterns:**
@@ -175,7 +175,7 @@
 
 **When to use:** "Top K" or "Kth element" or "Streaming data" or "Scheduling"
 
----
+--
 
 ## 10. [Graph Patterns](02_Graph_Search_Patterns_Deep_Dive.md) (47 Patterns)
 **Key Patterns:**
@@ -189,7 +189,7 @@
 
 **When to use:** "Connected components" or "Shortest path" or "Dependencies"
 
----
+--
 
 ## 11. [Dynamic Programming Patterns](02_Dynamic_Programming_Patterns_Deep_Dive.md) (50 Patterns)
 **Key Patterns:**
@@ -203,7 +203,7 @@
 
 **When to use:** "Optimal substructure" + "Overlapping subproblems"
 
----
+--
 
 ## 12. [Backtracking Patterns](the_backtracking_playbook_seven_core_patterns.md) (12 Patterns)
 **Key Patterns:**
@@ -216,7 +216,7 @@
 
 **When to use:** "Generate all" or "Find all valid" or "Constraint satisfaction"
 
----
+--
 
 ## 13. [Trie & String Patterns](02_Trie_String_Patterns_Deep_Dive.md) (22 Patterns)
 **Key Patterns:**
@@ -229,7 +229,7 @@
 
 **When to use:** "Prefix matching" or "Dictionary operations" or "Pattern matching"
 
----
+--
 
 ## 14. [Greedy & Intervals Patterns](02_Greedy_Intervals_Patterns_Deep_Dive.md) (24 Patterns)
 **Key Patterns:**
@@ -242,7 +242,7 @@
 
 **When to use:** "Interval scheduling" or "Local optimal = Global optimal"
 
----
+--
 
 ## 15. [Bit Manipulation Patterns](02_Bit_Manipulation_Patterns_Deep_Dive.md) (21 Patterns)
 **Key Patterns:**
@@ -255,7 +255,7 @@
 
 **When to use:** "XOR properties" or "Bit counting" or "Subset generation"
 
----
+--
 
 ## 16. [Segment Tree & Fenwick Tree](02_Segment_Tree_Fenwick_Tree_Deep_Dive.md) (12 Patterns)
 **Key Patterns:**
@@ -267,14 +267,14 @@
 
 **When to use:** "Range queries with updates" or "Count inversions"
 
----
+--
 
 # 🎯 PATTERN RECOGNITION CHEAT SHEET
 
 ## Instant Pattern Triggers
 
 | When You See... | Think... | Go To... |
-|-----------------|----------|----------|
+|---------|-----|-----|
 | "Subarray sum equals K" | Prefix Sum + HashMap | [Prefix Sum](02_Prefix_Sum_Patterns_Deep_Dive.md) |
 | "Sorted array, find pair" | Two Pointers | [Two Pointers](02_Two_Pointers_Patterns_Deep_Dive.md) |
 | "Longest/shortest substring" | Sliding Window | [Sliding Window](02_Sliding_Window_Patterns_Deep_Dive.md) |
@@ -294,7 +294,7 @@
 | "XOR / bit counting" | Bit Manipulation | [Bit Manipulation](02_Bit_Manipulation_Patterns_Deep_Dive.md) |
 | "Range query with updates" | Segment/Fenwick Tree | [Segment Tree](02_Segment_Tree_Fenwick_Tree_Deep_Dive.md) |
 
----
+--
 
 # 📅 DAILY PRACTICE PLAN
 
@@ -311,13 +311,13 @@ Sunday:    Review + fill gaps
 
 ## Problem Count Target
 | Difficulty | Per Week | Total (12 weeks) |
-|------------|----------|------------------|
+|------|-----|---------|
 | Easy | 5 | 60 |
 | Medium | 10 | 120 |
 | Hard | 2 | 24 |
 | **Total** | **17** | **~200** |
 
----
+--
 
 # 🏆 INTERVIEW DAY QUICK REVIEW
 
@@ -355,7 +355,7 @@ Sunday:    Review + fill gaps
 - [ ] Test with examples
 - [ ] Analyze complexity
 
----
+--
 
 # 📁 FILE STRUCTURE
 
@@ -380,7 +380,7 @@ Sunday:    Review + fill gaps
 └── the_backtracking_playbook_seven_core_patterns.md (4,378 lines)
 ```
 
----
+--
 
 # 🎉 YOU'RE READY!
 
@@ -396,7 +396,7 @@ Sunday:    Review + fill gaps
 3. **Communicate** your thought process
 4. **Stay calm** - you've prepared well!
 
----
+--
 
 *Good luck with your L5 MAANG interviews! 🚀*
 

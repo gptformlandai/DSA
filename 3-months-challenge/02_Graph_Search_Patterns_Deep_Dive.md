@@ -1,24 +1,24 @@
 # Graph Search Patterns Deep Dive (MAANG L5 Coverage)
 
----
+--
 
 # INDEX
 
 | Category | Patterns |
-|----------|----------|
+|-----|-----|
 | [Core Concepts](#core-templates) | BFS vs DFS, Templates |
-| [Matrix/Grid](#pattern-0-number-of-islands-lc-200-) | Patterns 0-8 |
-| [Graph Traversal](#pattern-9-course-schedule-lc-207-) | Patterns 9-14 |
-| [Shortest Path](#pattern-15-word-ladder-lc-127-) | Patterns 15-18 |
+| [Matrix/Grid](#pattern-0-number-of-islands-lc-200) | Patterns 0-8 |
+| [Graph Traversal](#pattern-9-course-schedule-lc-207) | Patterns 9-14 |
+| [Shortest Path](#pattern-15-word-ladder-lc-127) | Patterns 15-18 |
 | [Advanced](#additional-detailed-patterns) | Patterns 19-22 |
 
----
+--
 
 # The One Sentence That Unlocks All Graph Problems
 
 > **"BFS for SHORTEST PATH, DFS for EXPLORING ALL PATHS."**
 
----
+--
 
 # 🌟 ZERO TO HERO: Understanding Graph Search
 
@@ -45,7 +45,7 @@
 └─────────────────────────────────────────────────────────────┘
 ```
 
----
+--
 
 # CORE TEMPLATES
 
@@ -89,7 +89,7 @@ int bfs(int[][] grid, int startR, int startC) {
 }
 ```
 
----
+--
 
 ## Template 2: DFS (Depth-First Search)
 
@@ -115,7 +115,7 @@ void dfs(int[][] grid, int r, int c, boolean[][] visited) {
 }
 ```
 
----
+--
 
 ## The 4-Directions Array
 
@@ -133,7 +133,7 @@ boolean isValid(int r, int c, int rows, int cols) {
 }
 ```
 
----
+--
 
 # PATTERN 0: Number of Islands (LC 200) ⭐⭐
 
@@ -143,7 +143,7 @@ boolean isValid(int r, int c, int rows, int cols) {
 
 **Instant thought:** "DFS flood fill! Sink each island as you count."
 
----
+--
 
 ## The Mental Model: "The Flood"
 
@@ -160,7 +160,7 @@ Strategy:
 The flooding ensures each island counted exactly once.
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -201,7 +201,7 @@ Step 3: Found '1' at (3,3)
 Final count = 3 ✓
 ```
 
----
+--
 
 ## The Code
 
@@ -241,16 +241,16 @@ void dfs(char[][] grid, int r, int c) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Not sinking before recursing | Infinite loop | Sink BEFORE recursive calls |
 | Using '1' vs 1 | char vs int | Use '1' and '0' for char grid |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -269,7 +269,7 @@ void dfs(char[][] grid, int r, int c) {
 
 **Memory phrase:** "Find land, count it, flood it, move on."
 
----
+--
 
 # PATTERN 3: Rotting Oranges (LC 994) ⭐⭐
 
@@ -279,7 +279,7 @@ void dfs(char[][] grid, int r, int c) {
 
 **Instant thought:** "Multi-source BFS! Start from ALL sources."
 
----
+--
 
 ## The Mental Model: "The Zombie Apocalypse"
 
@@ -293,7 +293,7 @@ How long until all humans are zombies (or some survive)?
 Key insight: Start BFS from ALL zombies simultaneously!
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -365,7 +365,7 @@ Step 4: Minute 4 - Process (2,1)
 Final: minutes = 4, fresh = 0 → Return 4 ✓
 ```
 
----
+--
 
 ## The Code
 
@@ -402,7 +402,7 @@ int orangesRotting(int[][] grid) {
                 if (nr >= 0 && nr < rows && nc >= 0 && nc < cols 
                     && grid[nr][nc] == 1) {
                     grid[nr][nc] = 2;  // Rot it
-                    fresh--;
+                    fresh-;
                     queue.offer(new int[]{nr, nc});
                     rotted = true;
                 }
@@ -415,17 +415,17 @@ int orangesRotting(int[][] grid) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Single-source BFS | Wrong time calculation | Add ALL rotten to queue first |
 | Incrementing time wrong | Off by one | Only increment when something rotted |
 | Forgetting impossible case | Return wrong answer | Check fresh == 0 at end |
 
----
+--
 
 # PATTERN 9: Course Schedule (LC 207) ⭐⭐
 
@@ -435,7 +435,7 @@ int orangesRotting(int[][] grid) {
 
 **Instant thought:** "Cycle detection in directed graph!"
 
----
+--
 
 ## The Mental Model: "The Chicken and Egg"
 
@@ -447,7 +447,7 @@ We need to detect if there's a CYCLE in the dependency graph.
 No cycle = can finish all courses.
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -528,7 +528,7 @@ Step 8: Node 2 done, Node 0 done
 Final: No GRAY→GRAY edge found → No cycle → Return true ✓
 ```
 
----
+--
 
 ## The Code (DFS with 3 colors)
 
@@ -565,7 +565,7 @@ boolean hasCycle(List<List<Integer>> graph, int node, int[] state) {
 }
 ```
 
----
+--
 
 ## The 3-Color Approach
 
@@ -578,7 +578,7 @@ If we reach a GRAY node → CYCLE detected!
 (We found a back edge to a node still being processed)
 ```
 
----
+--
 
 # PATTERN 15: Word Ladder (LC 127) ⭐⭐
 
@@ -588,7 +588,7 @@ If we reach a GRAY node → CYCLE detected!
 
 **Instant thought:** "BFS on implicit graph! Words are nodes."
 
----
+--
 
 ## Visual Dry Run
 
@@ -659,7 +659,7 @@ Final: Return level = 5 ✓
 Path: hit → hot → dot → dog → cog (5 words)
 ```
 
----
+--
 
 ## The Code
 
@@ -704,12 +704,12 @@ int ladderLength(String beginWord, String endWord, List<String> wordList) {
 }
 ```
 
----
+--
 
 # MAANG Coverage Map
 
 | Pattern | Problem | Difficulty | Frequency |
-|---------|---------|------------|-----------|
+|-----|-----|------|------|
 | 0 | Number of Islands (LC 200) | Medium | ⭐⭐⭐⭐⭐ |
 | 3 | Rotting Oranges (LC 994) | Medium | ⭐⭐⭐⭐⭐ |
 | 5 | Word Search (LC 79) | Medium | ⭐⭐⭐⭐ |
@@ -718,7 +718,7 @@ int ladderLength(String beginWord, String endWord, List<String> wordList) {
 | 12 | Clone Graph (LC 133) | Medium | ⭐⭐⭐⭐ |
 | 15 | Word Ladder (LC 127) | Hard | ⭐⭐⭐⭐ |
 
----
+--
 
 # Mastery Checklist
 
@@ -737,7 +737,7 @@ int ladderLength(String beginWord, String endWord, List<String> wordList) {
 - [ ] Alien Dictionary (LC 269)
 - [ ] Critical Connections (LC 1192)
 
----
+--
 
 # Quick Reference Card
 
@@ -765,11 +765,11 @@ int ladderLength(String beginWord, String endWord, List<String> wordList) {
 └─────────────────────────────────────────────────────────────┘
 ```
 
----
+--
 
 # ADDITIONAL DETAILED PATTERNS
 
----
+--
 
 # PATTERN 1: Max Area of Island (LC 695)
 
@@ -779,7 +779,7 @@ int ladderLength(String beginWord, String endWord, List<String> wordList) {
 
 **Instant thought:** "DFS flood fill with counting! Return max count."
 
----
+--
 
 ## The Mental Model
 
@@ -793,7 +793,7 @@ For each island:
 4. Track maximum across all islands
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -890,7 +890,7 @@ Step 8: Continue scanning... no more '1's found
 Final: maxArea = 5 ✓
 ```
 
----
+--
 
 ## The Code
 
@@ -926,13 +926,13 @@ int dfs(int[][] grid, int r, int c) {
 }
 ```
 
----
+--
 
 ## Mind-Map Anchor
 
 **Memory phrase:** "Flood and count. Return 1 + four neighbors."
 
----
+--
 
 # PATTERN 4: Pacific Atlantic Water Flow (LC 417) ⭐
 
@@ -942,7 +942,7 @@ int dfs(int[][] grid, int r, int c) {
 
 **Instant thought:** "Reverse DFS! Start from oceans, go uphill."
 
----
+--
 
 ## The Mental Model: "Reverse the Flow"
 
@@ -959,7 +959,7 @@ Why uphill? Water flows downhill, so if we go uphill from ocean,
 we find all cells that COULD flow down to that ocean.
 ```
 
----
+--
 
 ## Visual Explanation
 
@@ -978,7 +978,7 @@ Cells that can reach Atlantic: Start from right/bottom, go to higher/equal
 Intersection = answer
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -1036,7 +1036,7 @@ Step 3: Find intersection (both P and A)
 Final: Result = [[0,4], [1,3], [1,4], [2,1], [2,2], [3,0], [3,1], [4,0]] ✓
 ```
 
----
+--
 
 ## The Code
 
@@ -1085,17 +1085,17 @@ void dfs(int[][] heights, int r, int c, boolean[][] visited) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Going downhill | That's forward flow, not reverse | Use >= for uphill |
 | Starting from all cells | Too slow O(n²m²) | Start from edges only |
 | Forgetting to mark visited | Infinite loop | Mark at start of DFS |
 
----
+--
 
 # PATTERN 6: Shortest Path in Binary Matrix (LC 1091)
 
@@ -1105,7 +1105,7 @@ void dfs(int[][] heights, int r, int c, boolean[][] visited) {
 
 **Instant thought:** "BFS! Level = distance. Use 8 directions."
 
----
+--
 
 ## Visual Dry Run
 
@@ -1181,7 +1181,7 @@ Final: Return path = 4 ✓
 Path: (0,0) → (0,1) → (1,2) → (2,2)
 ```
 
----
+--
 
 ## The Code
 
@@ -1219,7 +1219,7 @@ int shortestPathBinaryMatrix(int[][] grid) {
 }
 ```
 
----
+--
 
 # PATTERN 10: Word Search (LC 79) ⭐⭐
 
@@ -1229,7 +1229,7 @@ int shortestPathBinaryMatrix(int[][] grid) {
 
 **Instant thought:** "DFS backtracking! Try each cell as start, explore paths."
 
----
+--
 
 ## The Mental Model: "The Maze Walker"
 
@@ -1245,7 +1245,7 @@ At each step:
 Key: Must UNMARK after exploring (backtracking)
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -1348,7 +1348,7 @@ Final: Return true ✓
 Path found: A(0,0) → B(0,1) → C(0,2) → C(1,2) → E(2,2) → D(2,1)
 ```
 
----
+--
 
 ## The Code
 
@@ -1392,17 +1392,17 @@ boolean dfs(char[][] board, String word, int r, int c, int index) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Not backtracking | Can't reuse cells in different paths | Restore after DFS |
 | Using visited array | Extra space, slower | Modify board in-place |
 | Checking index at wrong place | Off-by-one errors | Check at START of DFS |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1421,7 +1421,7 @@ boolean dfs(char[][] board, String word, int r, int c, int index) {
 
 **Memory phrase:** "Match, mark, explore, restore."
 
----
+--
 
 # PATTERN 16: Course Schedule II (LC 210) ⭐
 
@@ -1431,7 +1431,7 @@ boolean dfs(char[][] board, String word, int r, int c, int index) {
 
 **Instant thought:** "Topological Sort! Use Kahn's (BFS) or DFS post-order."
 
----
+--
 
 ## The Mental Model: "The Dependency Chain"
 
@@ -1446,7 +1446,7 @@ Two approaches:
 2. DFS: Post-order traversal, reverse at end
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -1518,7 +1518,7 @@ Final: Return [0, 1, 2, 3] ✓
 Valid order: Take 0 first, then 1 or 2, finally 3
 ```
 
----
+--
 
 ## Kahn's Algorithm (BFS with Indegree)
 
@@ -1550,7 +1550,7 @@ int[] findOrder(int numCourses, int[][] prerequisites) {
         result[index++] = course;
         
         for (int next : graph.get(course)) {
-            indegree[next]--;
+            indegree[next]-;
             if (indegree[next] == 0) {
                 queue.offer(next);
             }
@@ -1562,17 +1562,17 @@ int[] findOrder(int numCourses, int[][] prerequisites) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Wrong edge direction | Dependency goes wrong way | pre[1] → pre[0] |
 | Not detecting cycle | Return invalid order | Check index == numCourses |
-| Forgetting to decrement indegree | Nodes never become ready | indegree[next]-- |
+| Forgetting to decrement indegree | Nodes never become ready | indegree[next]- |
 
----
+--
 
 # PATTERN 19: Word Ladder (LC 127) ⭐⭐
 
@@ -1582,7 +1582,7 @@ int[] findOrder(int numCourses, int[][] prerequisites) {
 
 **Instant thought:** "BFS on implicit graph! Words are nodes, edges = 1 letter diff."
 
----
+--
 
 ## The Mental Model: "The Word Network"
 
@@ -1598,7 +1598,7 @@ hit → hot → dot → dog → cog
 Total: 5 words (4 transformations)
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -1667,7 +1667,7 @@ Final: Return level = 5 ✓
 Transformation: hit → hot → dot → dog → cog
 ```
 
----
+--
 
 ## The Code
 
@@ -1715,17 +1715,17 @@ int ladderLength(String beginWord, String endWord, List<String> wordList) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Not removing from wordSet | Revisit same word, TLE | Remove when adding to queue |
 | Checking endWord in wordSet | beginWord might not be in list | Only check endWord |
 | Returning level-1 | Off by one | Return level (count words, not edges) |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1744,7 +1744,7 @@ int ladderLength(String beginWord, String endWord, List<String> wordList) {
 
 **Memory phrase:** "Words are nodes. BFS finds shortest path. Remove visited from set."
 
----
+--
 
 # PATTERN 25: Topological Sort (Kahn's Algorithm)
 
@@ -1760,7 +1760,7 @@ int ladderLength(String beginWord, String endWord, List<String> wordList) {
 4. If result.size() != numNodes → cycle exists!
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -1858,7 +1858,7 @@ Final: Return [4, 5, 0, 2, 3, 1] ✓
 Valid topological order: 4 → 5 → 0 → 2 → 3 → 1
 ```
 
----
+--
 
 ## Template Code
 
@@ -1886,7 +1886,7 @@ List<Integer> topologicalSort(int n, int[][] edges) {
         result.add(node);
         
         for (int neighbor : graph.get(node)) {
-            if (--indegree[neighbor] == 0) {
+            if (-indegree[neighbor] == 0) {
                 queue.offer(neighbor);
             }
         }
@@ -1896,9 +1896,9 @@ List<Integer> topologicalSort(int n, int[][] edges) {
 }
 ```
 
----
+--
 
----
+--
 
 # PART 2: MATRIX AS GRAPH PATTERNS
 
@@ -1906,11 +1906,11 @@ List<Integer> topologicalSort(int n, int[][] edges) {
 
 ```
 Matrix:          Graph View:
-[1][2][3]        (0,0)---(0,1)---(0,2)
+[1][2][3]        (0,0)--(0,1)--(0,2)
 [4][5][6]          |       |       |
-[7][8][9]        (1,0)---(1,1)---(1,2)
+[7][8][9]        (1,0)--(1,1)--(1,2)
                    |       |       |
-                 (2,0)---(2,1)---(2,2)
+                 (2,0)--(2,1)--(2,2)
 ```
 
 ## The Universal 4-Directions Array
@@ -1928,7 +1928,7 @@ for (int[] d : dirs) {
 }
 ```
 
----
+--
 
 ## PATTERN 10: Number of Islands (LC 200)
 
@@ -1947,7 +1947,7 @@ You're a cartographer flying over an ocean. Every time you spot NEW land, you:
 ```
 Grid:           After visiting island 1:    After all:
 1 1 0 0 0       X X 0 0 0                   X X 0 0 0
-1 1 0 0 0  -->  X X 0 0 0              -->  X X 0 0 0
+1 1 0 0 0  ->  X X 0 0 0              ->  X X 0 0 0
 0 0 1 0 0       0 0 1 0 0                   0 0 X 0 0
 0 0 0 1 1       0 0 0 1 1                   0 0 0 X X
 
@@ -2021,7 +2021,7 @@ private void dfs(char[][] grid, int r, int c) {
 ### Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Forgetting to mark visited | Infinite loop | Mark BEFORE recursing |
 | Using separate visited array | Extra O(mn) space | Modify grid in-place |
 | Checking bounds after access | ArrayIndexOutOfBounds | Check bounds FIRST |
@@ -2032,17 +2032,17 @@ private void dfs(char[][] grid, int r, int c) {
 NUMBER OF ISLANDS
       |
       v
-+------------------+
++---------+
 | For each cell:   |
 | If '1' -> count++|
 | DFS sink island  |
 | Mark as '0'      |
-+------------------+
++---------+
 ```
 
 **Memory phrase:** "Scan, count new land, sink the island"
 
----
+--
 
 ## PATTERN 11: Rotting Oranges (LC 994) - Multi-Source BFS
 
@@ -2058,7 +2058,7 @@ Multiple zombies start at different locations. Each minute, they infect adjacent
 ```
 Minute 0:     Minute 1:     Minute 2:
 2 1 1         2 2 1         2 2 2
-1 1 0    -->  2 1 0    -->  2 2 0
+1 1 0    ->  2 1 0    ->  2 2 0
 0 1 1         0 1 1         0 2 2
 
 Rotten=2, Fresh=1, Empty=0
@@ -2161,7 +2161,7 @@ public int orangesRotting(int[][] grid) {
                 if (nr >= 0 && nr < rows && nc >= 0 && nc < cols && grid[nr][nc] == 1) {
                     grid[nr][nc] = 2;  // Infect!
                     queue.offer(new int[]{nr, nc});
-                    fresh--;
+                    fresh-;
                     infected = true;
                 }
             }
@@ -2177,7 +2177,7 @@ public int orangesRotting(int[][] grid) {
 ### Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | BFS from one source at a time | Wrong time calculation | Multi-source: add ALL first |
 | Forgetting to check fresh == 0 at start | Returns wrong for no fresh | Check before BFS |
 | Incrementing minutes every iteration | Overcounts | Only increment if infected |
@@ -2189,18 +2189,18 @@ public int orangesRotting(int[][] grid) {
 ROTTING ORANGES
       |
       v
-+--------------------+
++----------+
 | 1. Queue ALL rotten|
 | 2. Count fresh     |
 | 3. BFS by level    |
 | 4. Level = minute  |
 | 5. Check fresh==0  |
-+--------------------+
++----------+
 ```
 
 **Memory phrase:** "All zombies start together, level = time, check survivors"
 
----
+--
 
 ## PATTERN 12: Pacific Atlantic Water Flow (LC 417)
 
@@ -2331,18 +2331,18 @@ private void bfs(int[][] heights, Queue<int[]> queue, boolean[][] reachable) {
 PACIFIC ATLANTIC
       |
       v
-+---------------------+
++-----------+
 | 1. Reverse thinking |
 | 2. BFS from Pacific |
 | 3. BFS from Atlantic|
 | 4. Flow UPHILL      |
 | 5. Find intersection|
-+---------------------+
++-----------+
 ```
 
 **Memory phrase:** "Reverse flow from oceans, meet in the middle"
 
----
+--
 
 ## PATTERN 13: Shortest Path in Binary Matrix (LC 1091)
 
@@ -2442,17 +2442,17 @@ public int shortestPathBinaryMatrix(int[][] grid) {
 SHORTEST PATH BINARY MATRIX
          |
          v
-+-------------------+
++----------+
 | BFS = shortest    |
 | 8 directions!     |
 | Level = distance  |
 | First reach = ans |
-+-------------------+
++----------+
 ```
 
 **Memory phrase:** "BFS ripple, 8 directions, first touch wins"
 
----
+--
 
 ## PATTERN 14: Clone Graph (LC 133)
 
@@ -2472,9 +2472,9 @@ You have a cloning machine. For each person:
 
 ```
 Original Graph:
-    1 --- 2
+    1 -- 2
     |     |
-    4 --- 3
+    4 -- 3
 
 Step 1: Start at node 1
   - Create clone of 1: clone1
@@ -2484,25 +2484,25 @@ Step 1: Start at node 1
 Step 2: Clone node 2
   - Create clone of 2: clone2
   - Map: {1 -> clone1, 2 -> clone2}
-  - Connect clone1 -- clone2
+  - Connect clone1 - clone2
   - Process neighbors: 1 (already cloned), 3
 
 Step 3: Clone node 3
   - Create clone of 3: clone3
   - Map: {1 -> clone1, 2 -> clone2, 3 -> clone3}
-  - Connect clone2 -- clone3
+  - Connect clone2 - clone3
   - Process neighbors: 2 (done), 4
 
 Step 4: Clone node 4
   - Create clone of 4: clone4
   - Map: {1 -> clone1, 2 -> clone2, 3 -> clone3, 4 -> clone4}
-  - Connect clone3 -- clone4
-  - Connect clone4 -- clone1
+  - Connect clone3 - clone4
+  - Connect clone4 - clone1
 
 Cloned Graph:
-    clone1 --- clone2
+    clone1 -- clone2
       |          |
-    clone4 --- clone3
+    clone4 -- clone3
 ```
 
 ### The Code
@@ -2535,7 +2535,7 @@ private Node dfs(Node node, Map<Node, Node> map) {
 ### Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Not handling cycles | Infinite recursion | Check map BEFORE creating |
 | Adding to map AFTER recursion | Cycles cause duplicates | Add to map BEFORE recursing |
 | Shallow copy of neighbors | Points to original nodes | Recursively clone neighbors |
@@ -2546,17 +2546,17 @@ private Node dfs(Node node, Map<Node, Node> map) {
 CLONE GRAPH
     |
     v
-+------------------+
++---------+
 | Map: old -> new  |
 | Check map first  |
 | Add BEFORE recurse|
 | Clone neighbors  |
-+------------------+
++---------+
 ```
 
 **Memory phrase:** "Map old to new, register before recursing"
 
----
+--
 
 ## PATTERN 15: Course Schedule (LC 207) - Cycle Detection
 
@@ -2667,17 +2667,17 @@ private boolean hasCycle(List<List<Integer>> graph, int node, int[] color) {
 COURSE SCHEDULE (CYCLE DETECTION)
             |
             v
-+------------------------+
++------------+
 | 3 Colors: W -> G -> B  |
 | GRAY = in progress     |
 | GRAY meets GRAY = CYCLE|
 | All BLACK = no cycle   |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Gray meets gray = cycle detected"
 
----
+--
 
 ## PATTERN 16: Course Schedule II (LC 210) - Topological Sort
 
@@ -2778,7 +2778,7 @@ public int[] findOrder(int numCourses, int[][] prerequisites) {
         result[index++] = course;
         
         for (int next : graph.get(course)) {
-            if (--indegree[next] == 0) {
+            if (-indegree[next] == 0) {
                 queue.offer(next);
             }
         }
@@ -2794,18 +2794,18 @@ public int[] findOrder(int numCourses, int[][] prerequisites) {
 TOPOLOGICAL SORT (KAHN'S)
           |
           v
-+---------------------+
++-----------+
 | 1. Calc indegrees   |
 | 2. Queue indegree=0 |
 | 3. Process & reduce |
 | 4. Add when ind=0   |
 | 5. Check size == n  |
-+---------------------+
++-----------+
 ```
 
 **Memory phrase:** "Start with no prereqs, reduce neighbors, queue when free"
 
----
+--
 
 ## PATTERN 17: Is Graph Bipartite (LC 785)
 
@@ -2822,11 +2822,11 @@ If you can seat everyone following this rule = Bipartite!
 
 ```
 Bipartite:          Not Bipartite:
-  A---B               A---B
+  A--B               A--B
   |   |               |\ /|
-  C---D               | X |
+  C--D               | X |
                       |/ \|
-A,D = Table 1         C---D
+A,D = Table 1         C--D
 B,C = Table 2
                     A-B-C forms odd cycle!
 ```
@@ -2837,9 +2837,9 @@ B,C = Table 2
 Graph: [[1,3], [0,2], [1,3], [0,2]]
 
 Adjacency:
-0 -- 1
+0 - 1
 |    |
-3 -- 2
+3 - 2
 
 BFS Coloring:
 Step 1: Start at 0, color RED
@@ -2909,17 +2909,17 @@ private boolean bfs(int[][] graph, int start, int[] colors) {
 BIPARTITE CHECK
       |
       v
-+-------------------+
++----------+
 | 2 colors: 1, -1   |
 | Neighbor = -color |
 | Same color = FAIL |
 | Odd cycle = FAIL  |
-+-------------------+
++----------+
 ```
 
 **Memory phrase:** "Alternate colors, same color neighbors = not bipartite"
 
----
+--
 
 ## PATTERN 18: Alien Dictionary (LC 269)
 
@@ -3053,7 +3053,7 @@ public String alienOrder(String[] words) {
 ### Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Not checking prefix case | "abc" before "ab" is invalid | Check startsWith |
 | Using all char diffs | Only first diff gives order | Break after first diff |
 | Missing characters | Some chars have no edges | Initialize all chars first |
@@ -3065,18 +3065,18 @@ public String alienOrder(String[] words) {
 ALIEN DICTIONARY
        |
        v
-+----------------------+
++-----------+
 | 1. Init all chars    |
 | 2. Compare adj words |
 | 3. First diff = edge |
 | 4. Check prefix trap |
 | 5. Topo sort result  |
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "Adjacent words, first diff = edge, topo sort the alphabet"
 
----
+--
 
 ## PATTERN 19: Surrounded Regions (LC 130)
 
@@ -3178,17 +3178,17 @@ private void dfs(char[][] board, int r, int c) {
 SURROUNDED REGIONS
         |
         v
-+--------------------+
++----------+
 | 1. DFS from borders|
 | 2. Mark safe as 'S'|
 | 3. O -> X (capture)|
 | 4. S -> O (restore)|
-+--------------------+
++----------+
 ```
 
 **Memory phrase:** "Save the border-connected, capture the rest"
 
----
+--
 
 ## PATTERN 20: Walls and Gates (LC 286) - Multi-Source BFS
 
@@ -3308,17 +3308,17 @@ public void wallsAndGates(int[][] rooms) {
 WALLS AND GATES
       |
       v
-+-------------------+
++----------+
 | Multi-source BFS  |
 | Queue ALL gates   |
 | Spread distance   |
 | Only update INF   |
-+-------------------+
++----------+
 ```
 
 **Memory phrase:** "All gates start together, spread distance outward"
 
----
+--
 
 ## PATTERN 21: 01 Matrix (LC 542)
 
@@ -3367,7 +3367,7 @@ public int[][] updateMatrix(int[][] mat) {
 }
 ```
 
----
+--
 
 ## PATTERN 22: Shortest Bridge (LC 934)
 
@@ -3483,17 +3483,17 @@ private void dfs(int[][] grid, int r, int c, Queue<int[]> queue) {
 SHORTEST BRIDGE
       |
       v
-+-------------------+
++----------+
 | 1. DFS find island|
 | 2. Queue its cells|
 | 3. BFS expand     |
 | 4. Hit 1 = done!  |
-+-------------------+
++----------+
 ```
 
 **Memory phrase:** "DFS to find, BFS to bridge"
 
----
+--
 
 ## PATTERN 23: Evaluate Division (LC 399)
 
@@ -3516,8 +3516,8 @@ Equations: [["a","b"], ["b","c"]]
 Values: [2.0, 3.0]
 
 Graph (bidirectional with reciprocal weights):
-a --2.0--> b --3.0--> c
-a <--0.5-- b <--0.33-- c
+a -2.0-> b -3.0-> c
+a <-0.5- b <-0.33- c
 
 Query: a/c
   Path: a -> b -> c
@@ -3592,17 +3592,17 @@ private double dfs(Map<String, Map<String, Double>> graph,
 EVALUATE DIVISION
        |
        v
-+---------------------+
++-----------+
 | Weighted graph      |
 | a/b=x → a->b (x)    |
 |       → b->a (1/x)  |
 | DFS multiply path   |
-+---------------------+
++-----------+
 ```
 
 **Memory phrase:** "Build weighted graph, multiply along the path"
 
----
+--
 
 ## PATTERN 24: Longest Increasing Path in Matrix (LC 329)
 
@@ -3688,17 +3688,17 @@ private int dfs(int[][] matrix, int r, int c, int[][] memo) {
 LONGEST INCREASING PATH
          |
          v
-+--------------------+
++----------+
 | DFS + Memoization  |
 | Only go to LARGER  |
 | No cycles (it's DAG)|
 | memo[r][c] = answer|
-+--------------------+
++----------+
 ```
 
 **Memory phrase:** "DFS to larger neighbors, memo the result"
 
----
+--
 
 # GRAPH PATTERNS REFERENCE SECTION
 
@@ -3771,7 +3771,7 @@ while (!queue.isEmpty()) {
 ## Topological Sort: Kahn's vs DFS
 
 | Aspect | Kahn's (BFS) | DFS |
-|--------|--------------|-----|
+|----|-------|---|
 | Approach | Remove indegree-0 nodes | Post-order traversal |
 | Cycle detection | result.size() < n | Gray meets gray |
 | Output order | Direct order | Reverse of post-order |
@@ -3781,7 +3781,7 @@ while (!queue.isEmpty()) {
 ## Cycle Detection Summary
 
 | Graph Type | Method | Key Insight |
-|------------|--------|-------------|
+|------|----|-------|
 | Directed | 3-color DFS | Gray → Gray = cycle |
 | Directed | Kahn's BFS | result.size() < n = cycle |
 | Undirected | DFS with parent | Visit non-parent visited = cycle |
@@ -3790,7 +3790,7 @@ while (!queue.isEmpty()) {
 ## MAANG Graph Coverage Map
 
 | Pattern | Frequency | Must Know |
-|---------|-----------|-----------|
+|-----|------|------|
 | Number of Islands | Very High | ⭐⭐⭐ |
 | Clone Graph | High | ⭐⭐⭐ |
 | Course Schedule I/II | Very High | ⭐⭐⭐ |
@@ -3806,7 +3806,7 @@ while (!queue.isEmpty()) {
 | Word Ladder | High | ⭐⭐⭐ |
 | Critical Connections | Medium | ⭐⭐ |
 
----
+--
 
 # PART 3: UNION-FIND (DISJOINT SET UNION)
 
@@ -3860,13 +3860,13 @@ class UnionFind {
             parent[rootY] = rootX;
             rank[rootX]++;
         }
-        components--;
+        components-;
         return true;
     }
 }
 ```
 
----
+--
 
 ## PATTERN 25: Redundant Connection (LC 684)
 
@@ -3912,15 +3912,15 @@ public int[] findRedundantConnection(int[][] edges) {
 REDUNDANT CONNECTION
         |
         v
-+-------------------+
++----------+
 | Process edges     |
 | Union-Find each   |
 | Same root = cycle |
 | Return that edge  |
-+-------------------+
++----------+
 ```
 
----
+--
 
 ## PATTERN 26: Graph Valid Tree (LC 261)
 
@@ -3953,17 +3953,17 @@ public boolean validTree(int n, int[][] edges) {
 GRAPH VALID TREE
       |
       v
-+------------------+
++---------+
 | n-1 edges?       |
 | No cycles?       |
 | All connected?   |
 | Union-Find check |
-+------------------+
++---------+
 ```
 
 **Memory phrase:** "n-1 edges, no cycles, all connected"
 
----
+--
 
 ## PATTERN 27: Accounts Merge (LC 721)
 
@@ -3993,28 +3993,28 @@ Group by root -> Merge accounts sharing emails
 ACCOUNTS MERGE
       |
       v
-+--------------------+
++----------+
 | Email = node       |
 | Same account=union |
 | Group by root      |
 | Sort & add name    |
-+--------------------+
++----------+
 ```
 
 **Memory phrase:** "Union emails in same account, group by root"
 
----
+--
 
 # PART 4: SHORTEST PATH ALGORITHMS
 
 | Algorithm | Weights | Time | Use Case |
-|-----------|---------|------|----------|
+|------|-----|---|-----|
 | BFS | Unweighted | O(V+E) | Shortest hops |
 | Dijkstra | Non-negative | O(E log V) | Shortest distance |
 | Bellman-Ford | Any | O(VE) | Negative weights, K stops |
 | Floyd-Warshall | Any | O(V3) | All pairs |
 
----
+--
 
 ## PATTERN 28: Network Delay Time (LC 743) - Dijkstra
 
@@ -4026,7 +4026,7 @@ ACCOUNTS MERGE
 ### Visual Dry Run
 
 ```
-Graph: 1 --(1)--> 2 --(1)--> 3
+Graph: 1 -(1)-> 2 -(1)-> 3
 Source: 1
 
 PQ: [(0,1)]
@@ -4086,15 +4086,15 @@ public int networkDelayTime(int[][] times, int n, int k) {
 DIJKSTRA
    |
    v
-+--------------------+
++----------+
 | PQ by distance     |
 | Process closest    |
 | Relax neighbors    |
 | Skip if outdated   |
-+--------------------+
++----------+
 ```
 
----
+--
 
 ## PATTERN 29: Cheapest Flights K Stops (LC 787) - Bellman-Ford
 
@@ -4132,15 +4132,15 @@ public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
 BELLMAN-FORD (K STOPS)
          |
          v
-+---------------------+
++-----------+
 | K+1 iterations      |
 | Clone dist each iter|
 | Relax ALL edges     |
 | Use prev iter values|
-+---------------------+
++-----------+
 ```
 
----
+--
 
 ## PATTERN 30: Word Ladder (LC 127)
 
@@ -4194,17 +4194,17 @@ public int ladderLength(String beginWord, String endWord, List<String> wordList)
 WORD LADDER
     |
     v
-+---------------------+
++-----------+
 | BFS level = length  |
 | Try all 26 letters  |
 | Check in wordSet    |
 | Mark visited        |
-+---------------------+
++-----------+
 ```
 
 **Memory phrase:** "BFS, try all letters, level = transformation count"
 
----
+--
 
 # PART 5: ADVANCED GRAPH PATTERNS
 
@@ -4261,15 +4261,15 @@ void dfs(int u, int parent, List<List<Integer>> graph, int[] disc, int[] low, Li
 CRITICAL CONNECTIONS (BRIDGES)
             |
             v
-+------------------------+
++------------+
 | Tarjan's Algorithm     |
 | disc[] = discovery time|
 | low[] = min reachable  |
 | low[v] > disc[u] = BRIDGE|
-+------------------------+
++------------+
 ```
 
----
+--
 
 ## PATTERN 32: Reconstruct Itinerary (LC 332) - Eulerian Path
 
@@ -4307,22 +4307,22 @@ void dfs(String airport, Map<String, PriorityQueue<String>> graph, LinkedList<St
 RECONSTRUCT ITINERARY (EULERIAN)
               |
               v
-+------------------------+
++------------+
 | Hierholzer's Algorithm |
 | PQ for lex order       |
 | DFS greedily           |
 | Add to front when stuck|
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Greedy DFS, add when stuck, result is reversed"
 
----
+--
 
 ## Quick Reference: All 32 Graph Patterns
 
 | # | Pattern | Technique |
-|---|---------|-----------|
+|--|-----|------|
 | 10-14 | Matrix BFS/DFS | Flood fill, Multi-source |
 | 15-18 | Topo Sort/Cycle | 3-color, Kahn's, Bipartite |
 | 19-24 | Advanced Matrix | Borders, Weighted, Memo |
@@ -4330,11 +4330,11 @@ RECONSTRUCT ITINERARY (EULERIAN)
 | 28-30 | Shortest Path | Dijkstra, Bellman-Ford, BFS |
 | 31-32 | Advanced | Tarjan Bridges, Eulerian |
 
----
+--
 
 *End of Graph Search Patterns Deep Dive*
 
----
+--
 
 ## PATTERN 33: Flood Fill (LC 733)
 
@@ -4391,18 +4391,18 @@ private void dfs(int[][] image, int r, int c, int original, int newColor) {
 FLOOD FILL
     |
     v
-+------------------+
++---------+
 | Start at (sr,sc) |
 | DFS to same color|
 | Change to new    |
 | Check orig!=new  |
-+------------------+
++---------+
 ```
 
 **Memory phrase:** "Paint bucket - DFS to same color neighbors"
 
 
----
+--
 
 ## PATTERN 34: Word Search II (LC 212) - Trie + DFS
 
@@ -4505,18 +4505,18 @@ private void dfs(char[][] board, int r, int c, TrieNode node, List<String> resul
 WORD SEARCH II
       |
       v
-+--------------------+
++----------+
 | Build Trie of words|
 | DFS from each cell |
 | Follow Trie path   |
 | Mark word=null used|
-+--------------------+
++----------+
 ```
 
 **Memory phrase:** "Trie holds words, DFS follows Trie path"
 
 
----
+--
 
 ## PATTERN 35: Number of Provinces (LC 547)
 
@@ -4576,18 +4576,18 @@ private void dfs(int[][] isConnected, boolean[] visited, int person) {
 NUMBER OF PROVINCES
         |
         v
-+-------------------+
++----------+
 | Adjacency matrix  |
 | DFS from unvisited|
 | Count DFS starts  |
 | Or use Union-Find |
-+-------------------+
++----------+
 ```
 
 **Memory phrase:** "Count DFS starts = count provinces"
 
 
----
+--
 
 ## PATTERN 36: Keys and Rooms (LC 841)
 
@@ -4644,18 +4644,18 @@ private void dfs(List<List<Integer>> rooms, int room, boolean[] visited) {
 KEYS AND ROOMS
       |
       v
-+------------------+
++---------+
 | Room 0 unlocked  |
 | Keys = edges     |
 | DFS collect keys |
 | Check all visited|
-+------------------+
++---------+
 ```
 
 **Memory phrase:** "Start room 0, keys unlock rooms, DFS to all"
 
 
----
+--
 
 ## PATTERN 37: Possible Bipartition (LC 886)
 
@@ -4729,18 +4729,18 @@ private boolean bfs(List<List<Integer>> graph, int start, int[] color) {
 POSSIBLE BIPARTITION
         |
         v
-+--------------------+
++----------+
 | Dislikes = edges   |
 | 2-color the graph  |
 | Same color = FAIL  |
 | Bipartite = split  |
-+--------------------+
++----------+
 ```
 
 **Memory phrase:** "Enemies get opposite colors, same color = can't split"
 
 
----
+--
 
 ## PATTERN 38: Find Eventual Safe States (LC 802)
 
@@ -4816,18 +4816,18 @@ private boolean isSafe(int[][] graph, int node, int[] color) {
 EVENTUAL SAFE STATES
          |
          v
-+---------------------+
++-----------+
 | 3-color DFS         |
 | Gray = in progress  |
 | Black = confirmed safe|
 | Gray->Gray = cycle  |
-+---------------------+
++-----------+
 ```
 
 **Memory phrase:** "Black nodes are safe, gray means cycle danger"
 
 
----
+--
 
 ## PATTERN 39: Minimum Height Trees (LC 310)
 
@@ -4910,18 +4910,18 @@ public List<Integer> findMinHeightTrees(int n, int[][] edges) {
 MINIMUM HEIGHT TREES
          |
          v
-+---------------------+
++-----------+
 | Trim leaves (deg 1) |
 | Layer by layer      |
 | Until 1-2 remain    |
 | Those are centers   |
-+---------------------+
++-----------+
 ```
 
 **Memory phrase:** "Peel leaves until center remains"
 
 
----
+--
 
 ## PATTERN 40: Shortest Path with Obstacles Elimination (LC 1293)
 
@@ -5003,18 +5003,18 @@ public int shortestPath(int[][] grid, int k) {
 SHORTEST PATH K OBSTACLES
            |
            v
-+------------------------+
++------------+
 | State = (r, c, k_left) |
 | BFS level = distance   |
 | Obstacle costs 1 k     |
 | 3D visited array       |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "BFS with extra dimension for remaining removals"
 
 
----
+--
 
 ## PATTERN 41: Path With Minimum Effort (LC 1631)
 
@@ -5093,18 +5093,18 @@ public int minimumEffortPath(int[][] heights) {
 PATH MIN EFFORT
       |
       v
-+--------------------+
++----------+
 | Dijkstra variant   |
 | Track MAX edge     |
 | Not sum of edges   |
 | Min-heap by effort |
-+--------------------+
++----------+
 ```
 
 **Memory phrase:** "Dijkstra but max edge weight, not sum"
 
 
----
+--
 
 ## PATTERN 42: Swim in Rising Water (LC 778)
 
@@ -5160,18 +5160,18 @@ public int swimInWater(int[][] grid) {
 SWIM IN RISING WATER
         |
         v
-+---------------------+
++-----------+
 | Dijkstra: max elev  |
 | Or Binary Search+BFS|
 | Time = max cell val |
 | Along the path      |
-+---------------------+
++-----------+
 ```
 
 **Memory phrase:** "Dijkstra tracking max elevation on path"
 
 
----
+--
 
 ## PATTERN 43: All Paths From Source to Target (LC 797)
 
@@ -5230,18 +5230,18 @@ private void dfs(int[][] graph, int node, List<Integer> path, List<List<Integer>
 ALL PATHS SOURCE TO TARGET
            |
            v
-+----------------------+
++-----------+
 | DAG = no cycles      |
 | No visited needed    |
 | Backtrack to find all|
 | Copy path when done  |
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "DAG backtracking - add, recurse, remove"
 
 
----
+--
 
 ## PATTERN 44: Most Stones Removed (LC 947)
 
@@ -5315,18 +5315,18 @@ private void union(int[] parent, int x, int y) {
 MOST STONES REMOVED
         |
         v
-+---------------------+
++-----------+
 | Same row/col = edge |
 | Union-Find groups   |
 | Remove = n - groups |
 | Keep 1 per component|
-+---------------------+
++-----------+
 ```
 
 **Memory phrase:** "Union by row/col, remove = total - components"
 
 
----
+--
 
 ## PATTERN 45: Unique Paths III (LC 980)
 
@@ -5402,18 +5402,18 @@ private void backtrack(int[][] grid, int r, int c, int count) {
 UNIQUE PATHS III
       |
       v
-+---------------------+
++-----------+
 | Count empty cells   |
 | Backtrack all paths |
 | Check count at end  |
 | Must visit ALL      |
-+---------------------+
++-----------+
 ```
 
 **Memory phrase:** "Backtrack, count cells, valid only if visited all"
 
 
----
+--
 
 ## PATTERN 46: Parallel Courses (LC 1136)
 
@@ -5471,7 +5471,7 @@ public int minimumSemesters(int n, int[][] relations) {
             completed++;
             
             for (int next : graph.get(course)) {
-                if (--indegree[next] == 0) {
+                if (-indegree[next] == 0) {
                     queue.offer(next);
                 }
             }
@@ -5488,18 +5488,18 @@ public int minimumSemesters(int n, int[][] relations) {
 PARALLEL COURSES
        |
        v
-+--------------------+
++----------+
 | Kahn's BFS         |
 | Level = semester   |
 | Take all indeg=0   |
 | Count levels       |
-+--------------------+
++----------+
 ```
 
 **Memory phrase:** "Kahn's levels = minimum semesters"
 
 
----
+--
 
 ## PATTERN 47: Redundant Connection II (LC 685) - Directed Graph
 
@@ -5569,23 +5569,23 @@ private int find(int[] parent, int x) {
 REDUNDANT CONNECTION II
           |
           v
-+------------------------+
++------------+
 | Check 2-parent node    |
 | Union-Find for cycle   |
 | 2 parents + cycle: 1st |
 | 2 parents no cycle: 2nd|
 | No 2-parent: cycle edge|
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Two parents or cycle - find the bad edge"
 
----
+--
 
 # UPDATED Quick Reference: All 47 Graph Patterns
 
 | # | Pattern | Technique |
-|---|---------|-----------|
+|--|-----|------|
 | 10-14 | Matrix BFS/DFS | Flood fill, Multi-source |
 | 15-18 | Topo Sort/Cycle | 3-color, Kahn's, Bipartite |
 | 19-24 | Advanced Matrix | Borders, Weighted, Memo |
@@ -5595,7 +5595,7 @@ REDUNDANT CONNECTION II
 | 38-42 | Advanced | Safe states, MHT, 3D BFS |
 | 43-47 | Backtrack/UF | All paths, Stones, Directed |
 
----
+--
 
 *End of Graph Search Patterns Deep Dive - 47 Patterns for L5 MAANG*
 

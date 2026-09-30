@@ -1,21 +1,21 @@
 # Section 04 — Binary Search Patterns Deep Dive (MAANG L5 Coverage)
 
----
+--
 
 # INDEX — Quick Navigation (20 Patterns)
 
 ## Core Concepts
 | Section | Description |
-|---------|-------------|
+|-----|-------|
 | [The "One Sentence"](#the-one-sentence-that-unlocks-all-binary-search-problems) | Unlocks all BS problems |
 | [3 Templates](#the-3-binary-search-templates) | Your weapons |
-| [Decision Tree](#the-master-decision-tree--pick-your-template-in-10-seconds) | Pick your template |
+| [Decision Tree](#the-master-decision-tree-pick-your-template-in-10-seconds) | Pick your template |
 
----
+--
 
 ## Classical Binary Search (0-3)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 0 | [Binary Search](#pattern-0-binary-search-leetcode-704) | 704 |
 | 1 | [Search Insert Position](#pattern-1-search-insert-position-leetcode-35) | 35 |
 | 2 | [First Bad Version](#pattern-2-first-bad-version-leetcode-278) | 278 |
@@ -23,13 +23,13 @@
 
 ## First/Last Position (4-5)
 | # | Pattern | LeetCode |
-|---|---------|----------|
-| 4 | [Find First and Last Position](#pattern-4-find-first-and-last-position-leetcode-34) | 34 |
+|--|-----|-----|
+| 4 | [Find First and Last Position](#pattern-4-find-first-and-last-position-of-element-in-sorted-array-leetcode-34) | 34 |
 | 5 | [Find Peak Element](#pattern-5-find-peak-element-leetcode-162) | 162 |
 
 ## Rotated Array Family (6-9)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 6 | [Search in Rotated Sorted Array](#pattern-6-search-in-rotated-sorted-array-leetcode-33) | 33 |
 | 7 | [Search in Rotated Sorted Array II](#pattern-7-search-in-rotated-sorted-array-ii-leetcode-81) | 81 |
 | 8 | [Find Minimum in Rotated Sorted Array](#pattern-8-find-minimum-in-rotated-sorted-array-leetcode-153) | 153 |
@@ -37,34 +37,34 @@
 
 ## Binary Search on Answer (10-14)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 10 | [Koko Eating Bananas](#pattern-10-koko-eating-bananas-leetcode-875) | 875 |
-| 11 | [Capacity To Ship Packages](#pattern-11-capacity-to-ship-packages-leetcode-1011) | 1011 |
+| 11 | [Capacity To Ship Packages](#pattern-11-capacity-to-ship-packages-within-d-days-leetcode-1011) | 1011 |
 | 12 | [Split Array Largest Sum](#pattern-12-split-array-largest-sum-leetcode-410) | 410 |
 | 13 | [Minimum Number of Days to Make m Bouquets](#pattern-13-minimum-number-of-days-to-make-m-bouquets-leetcode-1482) | 1482 |
 | 14 | [Magnetic Force Between Two Balls](#pattern-14-magnetic-force-between-two-balls-leetcode-1552) | 1552 |
 
 ## 2D Binary Search (15-16)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 15 | [Search a 2D Matrix](#pattern-15-search-a-2d-matrix-leetcode-74) | 74 |
 | 16 | [Search a 2D Matrix II](#pattern-16-search-a-2d-matrix-ii-leetcode-240) | 240 |
 
 ## Advanced Binary Search (17-19)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 17 | [Median of Two Sorted Arrays](#pattern-17-median-of-two-sorted-arrays-leetcode-4) | 4 |
 | 18 | [Find K-th Smallest Pair Distance](#pattern-18-find-k-th-smallest-pair-distance-leetcode-719) | 719 |
-| 19 | [Aggressive Cows / Maximize Minimum Distance](#pattern-19-aggressive-cows-maximize-minimum-distance) | Classic |
+| 19 | [Aggressive Cows / Maximize Minimum Distance](#pattern-19-aggressive-cows--maximize-minimum-distance-classic) | Classic |
 
 ## Reference Sections
 | Section |
-|---------|
+|-----|
 | [MAANG Coverage Map](#maang-coverage-map) |
 | [Pattern Recognition Cheat Sheet](#pattern-recognition-cheat-sheet) |
 | [Mastery Checklist](#mastery-checklist) |
 
----
+--
 
 # The "One Sentence That Unlocks All Binary Search Problems"
 
@@ -76,7 +76,7 @@ That's the entire subject. Every binary search problem — from easy to hard —
 3. **Choose** the right template based on what you're finding
 4. **Shrink** the range correctly until you find the boundary
 
----
+--
 
 ## 📋 THE JUNIOR DEV CHEAT CARD (Memorize This!)
 
@@ -144,7 +144,7 @@ That's the entire subject. Every binary search problem — from easy to hard —
 ╚═══════════════════════════════════════════════════════════════════════════════╝
 ```
 
----
+--
 
 ## 🚀 QUICK START: The 60-Second Binary Search Approach
 
@@ -190,7 +190,7 @@ Example: Find first element >= 5 in [1, 2, 4, 5, 5, 7, 9]
                     First TRUE = Answer!
 ```
 
----
+--
 
 # Zero to Hero: Understanding Binary Search from First Principles
 
@@ -240,7 +240,7 @@ Search Space:  [  FALSE  FALSE  FALSE  |  TRUE  TRUE  TRUE  ]
 - Looking for: minimum/maximum valid answer
 - Examples: LC 875, LC 1011, LC 410
 
----
+--
 
 # The 3 Binary Search Templates
 
@@ -302,7 +302,7 @@ Iteration 3: left=4, right=4, mid=4
              arr[4]=9 == 9, return 4!
 ```
 
----
+--
 
 ## Template 2: Boundary Binary Search (First/Last Position)
 
@@ -372,7 +372,7 @@ When using right = mid:
   - Use mid = left + (right - left) / 2 (floor) - this is safe
 ```
 
----
+--
 
 ## Template 3: Binary Search on Answer (Monotonic Predicate)
 
@@ -433,7 +433,7 @@ For MAXIMUM valid answer:
 - Find last TRUE
 ```
 
----
+--
 
 # The Master Decision Tree — Pick Your Template in 10 Seconds
 
@@ -464,12 +464,12 @@ For MAXIMUM valid answer:
     └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
----
+--
 
 # Template Comparison Table
 
 | Aspect | Template 1 | Template 2 | Template 3 |
-|--------|-----------|-----------|-----------|
+|----|------|------|------|
 | **Loop Condition** | `left <= right` | `left < right` | `left < right` |
 | **Termination** | `left > right` | `left == right` | `left == right` |
 | **Mid Calculation** | Floor | Floor (first) / Ceiling (last) | Floor (min) / Ceiling (max) |
@@ -477,9 +477,9 @@ For MAXIMUM valid answer:
 | **Use Case** | Exact match | First/Last position | Min/Max valid answer |
 | **Search Space** | Array indices | Array indices | Answer range |
 
----
+--
 
----
+--
 
 # Pattern 0: Binary Search (LeetCode 704)
 
@@ -595,7 +595,7 @@ class Solution:
 ## Common Traps
 
 | Trap | Why It's Wrong | Correct Approach |
-|------|----------------|------------------|
+|---|--------|---------|
 | `mid = (left + right) / 2` | Integer overflow when left + right > INT_MAX | `mid = left + (right - left) / 2` |
 | `while (left < right)` | Misses the case when target is at the last remaining position | `while (left <= right)` |
 | `left = mid` or `right = mid` | Can cause infinite loop | `left = mid + 1` and `right = mid - 1` |
@@ -613,7 +613,7 @@ class Solution:
 └── Mantra: "Equal? Found! Less? Go right! More? Go left!"
 ```
 
----
+--
 
 # Pattern 1: Search Insert Position (LeetCode 35)
 
@@ -777,7 +777,7 @@ class Solution {
 ## Common Traps
 
 | Trap | Why It's Wrong | Correct Approach |
-|------|----------------|------------------|
+|---|--------|---------|
 | `right = nums.length - 1` | Can't handle insertion at the end | `right = nums.length` |
 | Using `>` instead of `>=` | Finds wrong boundary | Use `>=` for first position >= target |
 | Returning `mid` | Template 2 converges to `left == right` | Return `left` |
@@ -795,7 +795,7 @@ class Solution {
 └── Mantra: "Find the first seat that fits!"
 ```
 
----
+--
 
 # Pattern 2: First Bad Version (LeetCode 278)
 
@@ -925,7 +925,7 @@ class Solution:
 ## Common Traps
 
 | Trap | Why It's Wrong | Correct Approach |
-|------|----------------|------------------|
+|---|--------|---------|
 | `left = 0` | Versions start from 1, not 0 | `left = 1` |
 | `mid = (left + right) / 2` | Overflow when n is close to INT_MAX | `mid = left + (right - left) / 2` |
 | `right = mid - 1` when bad | Might skip the first bad version | `right = mid` (keep it as candidate) |
@@ -943,7 +943,7 @@ class Solution:
 └── Mantra: "Bad? Could be first, check left. Good? First bad is right."
 ```
 
----
+--
 
 # Pattern 3: Sqrt(x) (LeetCode 69)
 
@@ -1107,7 +1107,7 @@ class Solution:
 ## Common Traps
 
 | Trap | Why It's Wrong | Correct Approach |
-|------|----------------|------------------|
+|---|--------|---------|
 | `mid * mid` without casting | Integer overflow for large x | Use `(long) mid * mid` |
 | `right = x` | Unnecessary large search space | `right = x / 2` (sqrt(x) <= x/2 for x >= 2) |
 | Floor division with `left = mid` | Infinite loop | Use ceiling: `mid = left + (right - left + 1) / 2` |
@@ -1126,7 +1126,7 @@ class Solution:
 └── Mantra: "Find the last number whose square fits!"
 ```
 
----
+--
 
 # Pattern 4: Find First and Last Position of Element in Sorted Array (LeetCode 34)
 
@@ -1353,7 +1353,7 @@ class Solution {
 ## Common Traps
 
 | Trap | Why It's Wrong | Correct Approach |
-|------|----------------|------------------|
+|---|--------|---------|
 | Single binary search | Only finds one occurrence | Need two searches |
 | Not verifying target exists | Returns wrong index | Check `nums[left] == target` |
 | Floor division for last | Infinite loop | Use ceiling: `(right - left + 1) / 2` |
@@ -1372,7 +1372,7 @@ class Solution {
 └── Mantra: "Two searches: first >= target, last <= target"
 ```
 
----
+--
 
 # Pattern 5: Find Peak Element (LeetCode 162)
 
@@ -1545,7 +1545,7 @@ Case 3: Mixed [1, 3, 2, 4, 1]
 ## Common Traps
 
 | Trap | Why It's Wrong | Correct Approach |
-|------|----------------|------------------|
+|---|--------|---------|
 | Checking both neighbors | Unnecessary and can cause out-of-bounds | Only compare `mid` with `mid + 1` |
 | `right = mid - 1` when going down | Might skip the peak at mid | `right = mid` (keep mid as candidate) |
 | Returning when `nums[mid] > nums[mid+1]` | Not at boundary yet | Continue until `left == right` |
@@ -1565,7 +1565,7 @@ Case 3: Mixed [1, 3, 2, 4, 1]
 └── Mantra: "Always climb uphill, you'll reach a peak!"
 ```
 
----
+--
 
 # Pattern 6: Search in Rotated Sorted Array (LeetCode 33)
 
@@ -1774,7 +1774,7 @@ class Solution:
 ## Common Traps
 
 | Trap | Why It's Wrong | Correct Approach |
-|------|----------------|------------------|
+|---|--------|---------|
 | `nums[left] < nums[mid]` | Fails when left == mid (single element) | Use `<=` |
 | `target <= nums[mid]` in left check | Should exclude mid (already checked) | Use `<` |
 | Not checking both boundaries | Target might equal boundary | Check `nums[left] <= target` AND `target < nums[mid]` |
@@ -1794,7 +1794,7 @@ class Solution:
 └── Mantra: "Find sorted half, check if target fits, go there or opposite"
 ```
 
----
+--
 
 # Pattern 7: Search in Rotated Sorted Array II (LeetCode 81)
 
@@ -1848,7 +1848,7 @@ Initial: left=0, right=6
 
 Step 1: nums[left]=2 == nums[right]=2
         Can't determine sorted half!
-        Skip duplicate: right--
+        Skip duplicate: right-
         
          [2, 5, 6, 0, 0, 1, 2]
           L        M     R
@@ -1885,7 +1885,7 @@ Initial: left=0, right=6
           L        M        R
 
 Check: nums[left]=2 == nums[right]=2
-       Skip: left++ (or right--)
+       Skip: left++ (or right-)
        
          [2, 5, 6, 0, 0, 1, 2]
              L     M        R
@@ -1914,7 +1914,7 @@ class Solution {
             // Handle duplicates: can't determine sorted half
             if (nums[left] == nums[mid] && nums[mid] == nums[right]) {
                 left++;
-                right--;
+                right-;
             }
             // Left half is sorted
             else if (nums[left] <= nums[mid]) {
@@ -1988,9 +1988,9 @@ This degrades to linear search.
 ## Common Traps
 
 | Trap | Why It's Wrong | Correct Approach |
-|------|----------------|------------------|
+|---|--------|---------|
 | Using LC 33 solution directly | Fails with duplicates | Add duplicate handling |
-| Only skipping left OR right | Need to shrink from both ends | `left++; right--;` |
+| Only skipping left OR right | Need to shrink from both ends | `left++; right-;` |
 | Checking `nums[left] == nums[mid]` only | Not sufficient | Check all three: left, mid, right |
 
 ## Mind-Map Anchor
@@ -2002,12 +2002,12 @@ This degrades to linear search.
 ├── Template: 1 with duplicate handling
 ├── Key: When nums[left] == nums[mid] == nums[right]
 │        → Can't determine sorted half
-│        → Skip: left++, right--
+│        → Skip: left++, right-
 ├── Worst case: O(n) when all duplicates
 └── Mantra: "Same at boundaries? Skip and retry!"
 ```
 
----
+--
 
 # Pattern 8: Find Minimum in Rotated Sorted Array (LeetCode 153)
 
@@ -2185,7 +2185,7 @@ The issue: nums[mid] > nums[left] is true for BOTH:
 ## Common Traps
 
 | Trap | Why It's Wrong | Correct Approach |
-|------|----------------|------------------|
+|---|--------|---------|
 | Comparing with `nums[left]` | Ambiguous - can't distinguish cases | Compare with `nums[right]` |
 | `right = mid - 1` | Might skip the minimum | `right = mid` (keep as candidate) |
 | Using `left <= right` | Unnecessary, converges at `left == right` | Use `left < right` |
@@ -2205,7 +2205,7 @@ The issue: nums[mid] > nums[left] is true for BOTH:
 └── Mantra: "Compare with right, chase the drop!"
 ```
 
----
+--
 
 # Pattern 9: Find Minimum in Rotated Sorted Array II (LeetCode 154)
 
@@ -2268,7 +2268,7 @@ Initial: left=0, right=4
 
 Step 1: nums[mid]=2 == nums[right]=2
         Can't determine! Skip right duplicate.
-        right--
+        right-
         
          [2, 2, 2, 0, 2]
           L     M  R
@@ -2290,13 +2290,13 @@ Initial: left=0, right=4
           L      M        R
 
 Step 1: nums[mid]=10 == nums[right]=10
-        right--
+        right-
         
          [10, 1, 10, 10, 10]
           L      M    R
 
 Step 2: nums[mid]=10 == nums[right]=10
-        right--
+        right-
         
          [10, 1, 10, 10, 10]
           L   M  R
@@ -2336,7 +2336,7 @@ class Solution {
             } else {
                 // nums[mid] == nums[right], can't determine
                 // Safe to remove right (if it's min, mid is also min)
-                right--;
+                right-;
             }
         }
         
@@ -2364,7 +2364,7 @@ class Solution:
         return nums[left]
 ```
 
-## Why `right--` is Safe
+## Why `right-` is Safe
 
 When `nums[mid] == nums[right]`:
 - If `nums[right]` is the minimum, `nums[mid]` is also the minimum (same value)
@@ -2378,9 +2378,9 @@ When `nums[mid] == nums[right]`:
 ## Common Traps
 
 | Trap | Why It's Wrong | Correct Approach |
-|------|----------------|------------------|
+|---|--------|---------|
 | Using LC 153 solution | Fails with duplicates | Add `nums[mid] == nums[right]` case |
-| `left++` when equal | Might skip minimum | Only `right--` is safe |
+| `left++` when equal | Might skip minimum | Only `right-` is safe |
 | Skipping both ends | Might skip minimum | Only skip one end |
 
 ## Mind-Map Anchor
@@ -2392,12 +2392,12 @@ When `nums[mid] == nums[right]`:
 ├── Template: 2 with duplicate handling
 ├── Key: When nums[mid] == nums[right]
 │        → Can't determine direction
-│        → Safe to do right-- (won't lose min)
+│        → Safe to do right- (won't lose min)
 ├── Worst case: O(n) when all duplicates
 └── Mantra: "Equal at right? Shrink right, keep searching!"
 ```
 
----
+--
 
 # Pattern 10: Koko Eating Bananas (LeetCode 875)
 
@@ -2576,7 +2576,7 @@ class Solution:
 ## Common Traps
 
 | Trap | Why It's Wrong | Correct Approach |
-|------|----------------|------------------|
+|---|--------|---------|
 | `left = 0` | Speed of 0 causes division by zero | `left = 1` |
 | `right = sum(piles)` | Unnecessarily large | `right = max(piles)` |
 | Integer division for hours | Undercounts hours | Use ceiling: `(pile + k - 1) / k` |
@@ -2595,7 +2595,7 @@ class Solution:
 └── Mantra: "Search the answer space, not the array!"
 ```
 
----
+--
 
 # Pattern 11: Capacity To Ship Packages Within D Days (LeetCode 1011)
 
@@ -2774,7 +2774,7 @@ class Solution:
 ## Common Traps
 
 | Trap | Why It's Wrong | Correct Approach |
-|------|----------------|------------------|
+|---|--------|---------|
 | `left = 1` | Can't fit packages larger than capacity | `left = max(weights)` |
 | Starting `daysNeeded = 0` | First package needs day 1 | `daysNeeded = 1` |
 | Forgetting order constraint | Packages must be shipped in order | Process sequentially |
@@ -2793,7 +2793,7 @@ class Solution:
 └── Mantra: "Minimum capacity = max single item!"
 ```
 
----
+--
 
 # Pattern 12: Split Array Largest Sum (LeetCode 410)
 
@@ -2972,7 +2972,7 @@ This is a classic pattern that appears in many problems:
 ## Common Traps
 
 | Trap | Why It's Wrong | Correct Approach |
-|------|----------------|------------------|
+|---|--------|---------|
 | `left = 1` | Max sum must be at least max(nums) | `left = max(nums)` |
 | Counting parts wrong | Start with 1, not 0 | `parts = 1` |
 | `parts >= k` in predicate | Should be `>` | Use `parts > k` |
@@ -2991,7 +2991,7 @@ This is a classic pattern that appears in many problems:
 └── Mantra: "Binary search on the answer, greedy to validate!"
 ```
 
----
+--
 
 # Pattern 13: Minimum Number of Days to Make m Bouquets (LeetCode 1482)
 
@@ -3144,7 +3144,7 @@ class Solution:
 ## Common Traps
 
 | Trap | Why It's Wrong | Correct Approach |
-|------|----------------|------------------|
+|---|--------|---------|
 | Not checking impossibility | m * k > n means impossible | Return -1 early |
 | Integer overflow in `m * k` | Can overflow for large values | Cast to long |
 | Not resetting consecutive | After making a bouquet, reset | `consecutive = 0` after bouquet |
@@ -3164,7 +3164,7 @@ class Solution:
 └── Mantra: "Count consecutive bloomed flowers!"
 ```
 
----
+--
 
 # Pattern 14: Magnetic Force Between Two Balls (LeetCode 1552)
 
@@ -3346,7 +3346,7 @@ class Solution:
 ## Common Traps
 
 | Trap | Why It's Wrong | Correct Approach |
-|------|----------------|------------------|
+|---|--------|---------|
 | Forgetting to sort | Positions may not be sorted | Sort first |
 | Floor division for maximize | Causes infinite loop | Use ceiling: `(right - left + 1) / 2` |
 | `left = mid + 1` for maximize | Skips potential answer | `left = mid` |
@@ -3366,7 +3366,7 @@ class Solution:
 └── Mantra: "Greedy place, maximize the gap!"
 ```
 
----
+--
 
 # Pattern 15: Search a 2D Matrix (LeetCode 74)
 
@@ -3525,7 +3525,7 @@ class Solution:
 ## Common Traps
 
 | Trap | Why It's Wrong | Correct Approach |
-|------|----------------|------------------|
+|---|--------|---------|
 | `row = mid / m` | Should divide by columns, not rows | `row = mid / n` |
 | `right = m * n` | Off by one | `right = m * n - 1` |
 | Two binary searches | Unnecessary complexity | Single binary search on flattened array |
@@ -3544,7 +3544,7 @@ class Solution:
 └── Mantra: "Unroll the matrix, search as 1D!"
 ```
 
----
+--
 
 # Pattern 16: Search a 2D Matrix II (LeetCode 240)
 
@@ -3650,7 +3650,7 @@ class Solution {
             if (value == target) {
                 return true;
             } else if (value > target) {
-                col--;  // Move left (smaller values)
+                col-;  // Move left (smaller values)
             } else {
                 row++;  // Move down (larger values)
             }
@@ -3736,7 +3736,7 @@ From bottom-left corner (also works):
 ## Common Traps
 
 | Trap | Why It's Wrong | Correct Approach |
-|------|----------------|------------------|
+|---|--------|---------|
 | Starting from top-left | Can't decide direction | Start from top-right or bottom-left |
 | Using LC 74 approach | Matrix isn't fully sorted | Use staircase search |
 | `col > 0` in condition | Misses col=0 | Use `col >= 0` |
@@ -3755,7 +3755,7 @@ From bottom-left corner (also works):
 └── Mantra: "Start at corner, staircase down!"
 ```
 
----
+--
 
 # Pattern 17: Median of Two Sorted Arrays (LeetCode 4)
 
@@ -3968,7 +3968,7 @@ class Solution:
 ## Common Traps
 
 | Trap | Why It's Wrong | Correct Approach |
-|------|----------------|------------------|
+|---|--------|---------|
 | Binary search on longer array | Slower and more edge cases | Always search on shorter array |
 | Forgetting boundary cases | i=0 or i=m causes index errors | Use -∞ and +∞ for boundaries |
 | Wrong half length formula | Off by one for odd/even | Use `(m + n + 1) / 2` |
@@ -3989,7 +3989,7 @@ class Solution:
 └── Mantra: "Binary search the perfect cut!"
 ```
 
----
+--
 
 # Pattern 18: Find K-th Smallest Pair Distance (LeetCode 719)
 
@@ -4184,7 +4184,7 @@ class Solution:
 ## Common Traps
 
 | Trap | Why It's Wrong | Correct Approach |
-|------|----------------|------------------|
+|---|--------|---------|
 | Not sorting | Two-pointer counting requires sorted array | Sort first |
 | `count += j - i` | Overcounts (includes i itself) | `count += j - i - 1` |
 | Resetting j for each i | Makes counting O(n²) | Keep j, it never decreases |
@@ -4204,7 +4204,7 @@ class Solution:
 └── Mantra: "Binary search distance, count with two pointers!"
 ```
 
----
+--
 
 # Pattern 19: Aggressive Cows / Maximize Minimum Distance (Classic)
 
@@ -4392,7 +4392,7 @@ def aggressive_cows(stalls: List[int], c: int) -> int:
 ## Common Traps
 
 | Trap | Why It's Wrong | Correct Approach |
-|------|----------------|------------------|
+|---|--------|---------|
 | Floor division with `left = mid` | Infinite loop | Use ceiling: `(right - left + 1) / 2` |
 | `right = mid` for maximize | Wrong direction | `right = mid - 1` |
 | Forgetting to sort | Greedy placement needs sorted positions | Sort first |
@@ -4412,9 +4412,9 @@ def aggressive_cows(stalls: List[int], c: int) -> int:
 └── Mantra: "Greedy place, maximize the gap!"
 ```
 
----
+--
 
----
+--
 
 # MAANG Coverage Map
 
@@ -4501,7 +4501,7 @@ def aggressive_cows(stalls: List[int], c: int) -> int:
 └─────────────────────────────────────────────────────────────────┘
 ```
 
----
+--
 
 # Pattern Recognition Cheat Sheet
 
@@ -4587,7 +4587,7 @@ def aggressive_cows(stalls: List[int], c: int) -> int:
           └─────────────────┘ └─────────────────┘ └─────────────────┘
 ```
 
----
+--
 
 # Common Mistakes and How to Avoid Them
 
@@ -4664,7 +4664,7 @@ if (left < nums.length && nums[left] == target) {
 return -1;
 ```
 
----
+--
 
 # Mastery Checklist
 
@@ -4708,7 +4708,7 @@ After completing each problem, ask yourself:
 4. **Termination**: Why does the loop terminate? What's the final state?
 5. **Optimization**: Is there a way to reduce the search space further?
 
----
+--
 
 # Quick Reference Card
 
@@ -4774,7 +4774,7 @@ After completing each problem, ask yourself:
 ╚═══════════════════════════════════════════════════════════════════════════════╝
 ```
 
----
+--
 
 # Interview Tips
 
@@ -4818,7 +4818,7 @@ After completing each problem, ask yourself:
    - Binary search is already optimal for sorted data
    - Consider memory access patterns for cache efficiency
 
----
+--
 
 # Summary: The Binary Search Mindset
 
@@ -4852,6 +4852,6 @@ After completing each problem, ask yourself:
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
----
+--
 
 *End of Binary Search Patterns Deep Dive*

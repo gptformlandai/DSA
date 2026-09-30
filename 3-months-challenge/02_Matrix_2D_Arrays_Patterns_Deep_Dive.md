@@ -1,7 +1,7 @@
 # Matrix & 2D Arrays Patterns Deep Dive
 ## Junior Dev's Complete Guide to L5 MAANG Matrix Mastery
 
----
+--
 
 # THE MATRIX MINDSET: Before You Code Anything
 
@@ -29,7 +29,7 @@ GRAPH ON MATRIX:
   -> DFS/BFS for islands, paths
 ```
 
----
+--
 
 ## The 4 Direction Arrays (MEMORIZE!)
 
@@ -48,7 +48,7 @@ boolean isValid(int r, int c, int rows, int cols) {
 }
 ```
 
----
+--
 
 # PART 1: TRAVERSAL PATTERNS
 
@@ -79,8 +79,8 @@ Initial: top=0, bottom=2, left=0, right=2
 
 Layer 1:
   Right (top row): 1 → 2 → 3, then top++
-  Down (right col): 6 → 9, then right--
-  Left (bottom row): 8 → 7, then bottom--
+  Down (right col): 6 → 9, then right-
+  Left (bottom row): 8 → 7, then bottom-
   Up (left col): 4, then left++
 
 Now: top=1, bottom=1, left=1, right=1
@@ -114,19 +114,19 @@ public List<Integer> spiralOrder(int[][] matrix) {
         for (int row = top; row <= bottom; row++) {
             result.add(matrix[row][right]);
         }
-        right--;
+        right-;
         
         // Left: traverse bottom row (if still valid)
         if (top <= bottom) {
-            for (int col = right; col >= left; col--) {
+            for (int col = right; col >= left; col-) {
                 result.add(matrix[bottom][col]);
             }
-            bottom--;
+            bottom-;
         }
         
         // Up: traverse left column (if still valid)
         if (left <= right) {
-            for (int row = bottom; row >= top; row--) {
+            for (int row = bottom; row >= top; row-) {
                 result.add(matrix[row][left]);
             }
             left++;
@@ -140,7 +140,7 @@ public List<Integer> spiralOrder(int[][] matrix) {
 ### Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Missing boundary check | Left/Up may traverse invalid | Add `if (top <= bottom)` before Left |
 | Off-by-one in loops | Wrong start/end indices | Draw and trace carefully |
 | Rectangular matrix | Different rows vs cols | Handle non-square matrices |
@@ -151,19 +151,19 @@ public List<Integer> spiralOrder(int[][] matrix) {
 SPIRAL MATRIX
      |
      v
-+------------------------+
++------------+
 | 4 boundaries:          |
 | top, bottom, left,right|
 | Go: Right→Down→Left→Up |
 | Shrink after each dir  |
 | Check validity before  |
 | Left and Up traversals |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Peel the onion: Right-Down-Left-Up, shrink boundaries"
 
----
+--
 
 ## PATTERN 2: Spiral Matrix II (LC 59)
 
@@ -183,8 +183,8 @@ Start: empty 3x3 matrix
 
 Layer 1:
   Right: fill [0][0]=1, [0][1]=2, [0][2]=3, top++
-  Down: fill [1][2]=4, [2][2]=5, right--
-  Left: fill [2][1]=6, [2][0]=7, bottom--
+  Down: fill [1][2]=4, [2][2]=5, right-
+  Left: fill [2][1]=6, [2][0]=7, bottom-
   Up: fill [1][0]=8, left++
 
 Layer 2:
@@ -216,19 +216,19 @@ public int[][] generateMatrix(int n) {
         for (int row = top; row <= bottom; row++) {
             matrix[row][right] = num++;
         }
-        right--;
+        right-;
         
         // Left
         if (top <= bottom) {
-            for (int col = right; col >= left; col--) {
+            for (int col = right; col >= left; col-) {
                 matrix[bottom][col] = num++;
             }
-            bottom--;
+            bottom-;
         }
         
         // Up
         if (left <= right) {
-            for (int row = bottom; row >= top; row--) {
+            for (int row = bottom; row >= top; row-) {
                 matrix[row][left] = num++;
             }
             left++;
@@ -245,17 +245,17 @@ public int[][] generateMatrix(int n) {
 SPIRAL MATRIX II
       |
       v
-+------------------------+
++------------+
 | Same as Spiral I       |
 | But FILL instead of    |
 | READ                   |
 | Use counter num++      |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Same spiral, fill with incrementing counter"
 
----
+--
 
 ## PATTERN 3: Diagonal Traverse (LC 498)
 
@@ -308,7 +308,7 @@ public int[] findDiagonalOrder(int[][] mat) {
                 goingUp = false;
             } else {
                 // Continue up-right
-                row--;
+                row-;
                 col++;
             }
         } else {
@@ -323,7 +323,7 @@ public int[] findDiagonalOrder(int[][] mat) {
             } else {
                 // Continue down-left
                 row++;
-                col--;
+                col-;
             }
         }
     }
@@ -338,18 +338,18 @@ public int[] findDiagonalOrder(int[][] mat) {
 DIAGONAL TRAVERSE
        |
        v
-+------------------------+
++------------+
 | Alternate up-right and |
 | down-left directions   |
 | On boundary: change    |
 | direction + move       |
 | Priority: corner cases |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Zigzag diagonals, boundary triggers direction flip"
 
----
+--
 
 # PART 2: ROTATION & TRANSFORMATION
 
@@ -412,7 +412,7 @@ public void rotate(int[][] matrix) {
             matrix[i][left] = matrix[i][right];
             matrix[i][right] = temp;
             left++;
-            right--;
+            right-;
         }
     }
 }
@@ -421,7 +421,7 @@ public void rotate(int[][] matrix) {
 ### Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Transpose full matrix | Swaps twice = no change | Only swap upper triangle (j > i) |
 | Wrong rotation direction | Counter-clockwise instead | Transpose + reverse ROWS for clockwise |
 
@@ -431,17 +431,17 @@ public void rotate(int[][] matrix) {
 ROTATE 90° CLOCKWISE
          |
          v
-+------------------------+
++------------+
 | Step 1: Transpose      |
 | (swap [i][j] ↔ [j][i]) |
 | Step 2: Reverse rows   |
 | In-place, O(1) space   |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Transpose then reverse rows = 90° clockwise"
 
----
+--
 
 ## PATTERN 5: Set Matrix Zeroes (LC 73)
 
@@ -552,19 +552,19 @@ public void setZeroes(int[][] matrix) {
 SET MATRIX ZEROES
        |
        v
-+------------------------+
++------------+
 | Use first row/col as   |
 | markers (O(1) space)   |
 | 1. Check first row/col |
 | 2. Mark in first row/col|
 | 3. Set zeros (skip 1st)|
 | 4. Handle first row/col|
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "First row/col are markers, handle them last"
 
----
+--
 
 # PART 3: MATRIX SEARCH
 
@@ -628,18 +628,18 @@ public boolean searchMatrix(int[][] matrix, int target) {
 SEARCH 2D MATRIX (SORTED)
            |
            v
-+------------------------+
++------------+
 | Treat as 1D array      |
 | row = mid / cols       |
 | col = mid % cols       |
 | Standard binary search |
 | O(log(m*n)) time       |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Flatten to 1D: row = mid/n, col = mid%n"
 
----
+--
 
 ## PATTERN 7: Search a 2D Matrix II (LC 240)
 
@@ -693,7 +693,7 @@ public boolean searchMatrix(int[][] matrix, int target) {
         if (matrix[row][col] == target) {
             return true;
         } else if (matrix[row][col] > target) {
-            col--;  // Move left
+            col-;  // Move left
         } else {
             row++;  // Move down
         }
@@ -709,18 +709,18 @@ public boolean searchMatrix(int[][] matrix, int target) {
 SEARCH 2D MATRIX II
         |
         v
-+------------------------+
++------------+
 | Start top-right corner |
 | > target: go LEFT      |
 | < target: go DOWN      |
 | O(m + n) time          |
 | "Staircase search"     |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Top-right: bigger go left, smaller go down"
 
----
+--
 
 # PART 4: PREFIX SUM 2D
 
@@ -804,18 +804,18 @@ class NumMatrix {
 2D PREFIX SUM
       |
       v
-+------------------------+
++------------+
 | prefix[i][j] = sum of  |
 | rectangle (0,0)→(i-1,j-1)|
 | Build: add 3, subtract 1|
 | Query: add 2, subtract 2|
 | O(1) per query         |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Build: +top +left -diagonal. Query: +BR -TR -BL +TL"
 
----
+--
 
 # PART 5: MATRIX AS GRAPH (Preview)
 
@@ -888,17 +888,17 @@ private void dfs(char[][] grid, int r, int c) {
 NUMBER OF ISLANDS
        |
        v
-+------------------------+
++------------+
 | For each '1', do DFS   |
 | Mark visited by setting|
 | to '0' (or use visited)|
 | Count DFS starts       |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Each DFS start = one island, mark as you go"
 
----
+--
 
 ## PATTERN 10: Max Area of Island (LC 695)
 
@@ -944,17 +944,17 @@ private int dfs(int[][] grid, int r, int c) {
 MAX AREA OF ISLAND
         |
         v
-+------------------------+
++------------+
 | DFS returns area count |
 | 1 + sum of 4 neighbors |
 | Track maximum area     |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "DFS returns 1 + neighbors, track max"
 
 
----
+--
 
 ## PATTERN 11: Flood Fill (LC 733)
 
@@ -993,17 +993,17 @@ private void dfs(int[][] image, int r, int c, int original, int newColor) {
 FLOOD FILL
     |
     v
-+------------------------+
++------------+
 | DFS from start point   |
 | Change original→new    |
 | Skip if same color     |
 | (avoid infinite loop)  |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Paint bucket tool: DFS and recolor"
 
----
+--
 
 ## PATTERN 12: Rotting Oranges (LC 994)
 
@@ -1087,7 +1087,7 @@ public int orangesRotting(int[][] grid) {
                 if (nr >= 0 && nr < m && nc >= 0 && nc < n && grid[nr][nc] == 1) {
                     grid[nr][nc] = 2;
                     queue.offer(new int[]{nr, nc});
-                    fresh--;
+                    fresh-;
                     rotted = true;
                 }
             }
@@ -1106,18 +1106,18 @@ public int orangesRotting(int[][] grid) {
 ROTTING ORANGES
       |
       v
-+------------------------+
++------------+
 | Multi-source BFS       |
 | Add ALL rotten first   |
 | Level = time unit      |
 | Count fresh, return -1 |
 | if any remain          |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "All rotten in queue first, BFS levels = time"
 
----
+--
 
 ## PATTERN 13: 01 Matrix (LC 542)
 
@@ -1173,17 +1173,17 @@ public int[][] updateMatrix(int[][] mat) {
 01 MATRIX
     |
     v
-+------------------------+
++------------+
 | Multi-source BFS from  |
 | all 0s simultaneously  |
 | Distance = parent + 1  |
 | Update if shorter      |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "BFS from all zeros, distance spreads outward"
 
----
+--
 
 ## PATTERN 14: Valid Sudoku (LC 36)
 
@@ -1237,17 +1237,17 @@ public boolean isValidSudoku(char[][] board) {
 VALID SUDOKU
      |
      v
-+------------------------+
++------------+
 | 9 sets for rows        |
 | 9 sets for columns     |
 | 9 sets for 3x3 boxes   |
 | Box index: (r/3)*3+c/3 |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Box index = (row/3)*3 + col/3"
 
----
+--
 
 ## PATTERN 15: Kth Smallest Element in Sorted Matrix (LC 378)
 
@@ -1288,7 +1288,7 @@ private int countLessOrEqual(int[][] matrix, int target) {
             count += row + 1;  // All elements in this column up to row
             col++;
         } else {
-            row--;
+            row-;
         }
     }
     
@@ -1302,22 +1302,22 @@ private int countLessOrEqual(int[][] matrix, int target) {
 KTH SMALLEST IN MATRIX
           |
           v
-+------------------------+
++------------+
 | Binary search on VALUE |
 | Count elements <= mid  |
 | Use staircase count    |
 | O(n log(max-min))      |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Binary search value, staircase count"
 
----
+--
 
 # QUICK REFERENCE: All 15 Matrix Patterns
 
 | # | Pattern | Key Technique |
-|---|---------|---------------|
+|--|-----|--------|
 | 1 | Spiral Matrix | 4 boundaries, shrink inward |
 | 2 | Spiral Matrix II | Same, but fill |
 | 3 | Diagonal Traverse | Zigzag, boundary direction flip |
@@ -1334,39 +1334,39 @@ KTH SMALLEST IN MATRIX
 | 14 | Valid Sudoku | Row/col/box sets |
 | 15 | Kth Smallest | Binary search on value |
 
----
+--
 
 ## Matrix Pattern Decision Tree
 
 ```
 MATRIX PROBLEM
       |
-      +-- Traversal? --> Spiral/Diagonal/Zigzag patterns
+      +- Traversal? -> Spiral/Diagonal/Zigzag patterns
       |
-      +-- Search? --> Sorted? --> Binary search / Staircase
+      +- Search? -> Sorted? -> Binary search / Staircase
       |
-      +-- Transform? --> Rotate/Transpose/Flip
+      +- Transform? -> Rotate/Transpose/Flip
       |
-      +-- Modify? --> Set Zeroes / Fill patterns
+      +- Modify? -> Set Zeroes / Fill patterns
       |
-      +-- Connected regions? --> DFS/BFS (treat as graph)
+      +- Connected regions? -> DFS/BFS (treat as graph)
       |
-      +-- Range queries? --> 2D Prefix Sum
+      +- Range queries? -> 2D Prefix Sum
 ```
 
----
+--
 
 ## Common Traps Table
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Wrong boundary check | Off-by-one errors | Draw matrix, trace indices |
 | Modifying while iterating | Affects later iterations | Use markers or copy |
 | Rectangular vs square | Assuming n×n | Use m (rows) and n (cols) |
 | Direction arrays wrong | Incorrect neighbors | Test with small example |
 | Forgetting diagonal | 4-dir vs 8-dir | Check problem requirements |
 
----
+--
 
 *End of Matrix & 2D Arrays Deep Dive - 15 Patterns for L5 MAANG*
 

@@ -1,24 +1,24 @@
 # Section 20 — Bit Manipulation Patterns Deep Dive (MAANG L5 Coverage)
 
----
+--
 
 # INDEX — Quick Navigation
 
 ## Core Concepts
 | Section | Description |
-|---------|-------------|
+|-----|-------|
 | [The "One Sentence"](#the-one-sentence-that-unlocks-all-bit-manipulation) | Unlocks all bit problems |
 | [The 4 Bit Operations](#the-4-bit-operations-your-weapons) | Your weapons |
 | [The 6 Magic Formulas](#the-6-magic-formulas-memorize-these) | Must memorize |
 | [Decision Tree](#the-master-decision-tree) | Pick your technique |
 
----
+--
 
 ## Foundational Patterns (0-5)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 0 | [Single Number (XOR)](#pattern-0-single-number-leetcode-136) | 136 |
-| 1 | [Number of 1 Bits](#pattern-1-number-of-1-bits-leetcode-191) | 191 |
+| 1 | [Number of 1 Bits](#pattern-1-number-of-1-bits--hamming-weight-leetcode-191) | 191 |
 | 2 | [Counting Bits](#pattern-2-counting-bits-leetcode-338) | 338 |
 | 3 | [Reverse Bits](#pattern-3-reverse-bits-leetcode-190) | 190 |
 | 4 | [Missing Number](#pattern-4-missing-number-leetcode-268) | 268 |
@@ -27,7 +27,7 @@
 
 ## XOR Patterns (6-9)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 6 | [Single Number II](#pattern-6-single-number-ii-leetcode-137) | 137 |
 | 7 | [Single Number III](#pattern-7-single-number-iii-leetcode-260) | 260 |
 | 8 | [Hamming Distance](#pattern-8-hamming-distance-leetcode-461) | 461 |
@@ -35,21 +35,21 @@
 
 ## Arithmetic with Bits (10-12)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 10 | [Sum of Two Integers](#pattern-10-sum-of-two-integers-leetcode-371) | 371 |
 | 11 | [Divide Two Integers](#pattern-11-divide-two-integers-leetcode-29) | 29 |
 | 12 | [Bitwise AND of Range](#pattern-12-bitwise-and-of-numbers-range-leetcode-201) | 201 |
 
 ## Advanced Patterns (13-15)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 13 | [Subsets (Bitmask)](#pattern-13-subsets-using-bitmask-leetcode-78) | 78 |
 | 14 | [Gray Code](#pattern-14-gray-code-leetcode-89) | 89 |
 | 15 | [Maximum XOR](#pattern-15-maximum-xor-of-two-numbers-leetcode-421) | 421 |
 
 ## Bonus Patterns (16-20) — Extra Safety Net
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 16 | [UTF-8 Validation](#pattern-16-utf-8-validation-leetcode-393) | 393 |
 | 17 | [Integer Replacement](#pattern-17-integer-replacement-leetcode-397) | 397 |
 | 18 | [Binary Watch](#pattern-18-binary-watch-leetcode-401) | 401 |
@@ -58,12 +58,12 @@
 
 ## Reference Sections
 | Section |
-|---------|
+|-----|
 | [MAANG Coverage Map](#maang-coverage-map) |
 | [Bit Manipulation Cheat Sheet](#bit-manipulation-cheat-sheet) |
 | [Mastery Checklist](#mastery-checklist) |
 
----
+--
 
 # The "One Sentence That Unlocks All Bit Manipulation"
 
@@ -75,7 +75,7 @@ That's the entire subject. Every bit manipulation problem is just:
 3. **Combine** or **cancel** them using XOR, OR
 4. **Count** or **extract** the result
 
----
+--
 
 ## 📋 THE JUNIOR DEV CHEAT CARD (Memorize This!)
 
@@ -120,7 +120,7 @@ That's the entire subject. Every bit manipulation problem is just:
 ╚═══════════════════════════════════════════════════════════════════════╝
 ```
 
----
+--
 
 ## 🚀 QUICK START: The 60-Second Bit Manipulation Approach
 
@@ -158,7 +158,7 @@ WHY THIS MATTERS:
 - Array has pairs except TWO uniques? XOR all → get a^b → find differing bit → split!
 ```
 
----
+--
 
 ## 🎯 WORKED EXAMPLE: How a Junior Dev Should Think
 
@@ -209,12 +209,12 @@ boolean isPowerOfTwo(int n) {
 
 **Why n > 0?** Because 0 & (-1) = 0, but 0 is not a power of 2!
 
----
+--
 
 ## The Mental Model: Why Bits Matter
 
 | What You See | What the Computer Sees |
-|--------------|------------------------|
+|-------|------------|
 | Number 13 | `1101` (four switches: ON-ON-OFF-ON) |
 | Number 5 | `0101` (four switches: OFF-ON-OFF-ON) |
 | 13 XOR 5 | `1000` (which switches DIFFER?) |
@@ -223,20 +223,20 @@ boolean isPowerOfTwo(int n) {
 
 **The Insight:** Numbers are just rows of ON/OFF switches. Bit operations ask questions about these switches!
 
----
+--
 
 # The 4 Bit Operations (Your "Weapons")
 
 ## The Big Picture
 
 | Operation | Symbol | Question It Answers | Memory Trick |
-|-----------|--------|---------------------|--------------|
+|------|----|-----------|-------|
 | **AND** | `&` | "Which bits are BOTH 1?" | "Both must agree" |
 | **OR** | `\|` | "Which bits have AT LEAST ONE 1?" | "Either is enough" |
 | **XOR** | `^` | "Which bits are DIFFERENT?" | "Difference detector" |
 | **NOT** | `~` | "Flip all bits" | "Opposite day" |
 
----
+--
 
 ## Operation 1: AND (`&`) — "Both Must Agree"
 
@@ -245,7 +245,7 @@ boolean isPowerOfTwo(int n) {
 ```
   1 1 0 1  (13)
 & 0 1 0 1  (5)
----------
+-----
   0 1 0 1  (5)
 ```
 
@@ -256,7 +256,7 @@ boolean isPowerOfTwo(int n) {
 
 **Memory Trick:** AND is like a strict bouncer — both must have ID (both must be 1).
 
----
+--
 
 ## Operation 2: OR (`|`) — "Either Is Enough"
 
@@ -265,7 +265,7 @@ boolean isPowerOfTwo(int n) {
 ```
   1 1 0 1  (13)
 | 0 1 0 1  (5)
----------
+-----
   1 1 0 1  (13)
 ```
 
@@ -275,7 +275,7 @@ boolean isPowerOfTwo(int n) {
 
 **Memory Trick:** OR is like a lenient bouncer — either one having ID is enough.
 
----
+--
 
 ## Operation 3: XOR (`^`) — "Difference Detector"
 
@@ -284,7 +284,7 @@ boolean isPowerOfTwo(int n) {
 ```
   1 1 0 1  (13)
 ^ 0 1 0 1  (5)
----------
+-----
   1 0 0 0  (8)
 ```
 
@@ -301,7 +301,7 @@ boolean isPowerOfTwo(int n) {
 
 **Memory Trick:** XOR is like a "spot the difference" game — it highlights what's different.
 
----
+--
 
 ## Operation 4: NOT (`~`) — "Opposite Day"
 
@@ -318,7 +318,7 @@ boolean isPowerOfTwo(int n) {
 - **Clear a bit:** `n & ~(1 << i)` clears bit i
 - **Create mask:** `~0` gives all 1s
 
----
+--
 
 ## Shift Operations — "Move the Bits"
 
@@ -344,13 +344,13 @@ Formula: n >> k = n / 2^k (integer division)
 - Left shift = bits move LEFT, number gets BIGGER (multiply)
 - Right shift = bits move RIGHT, number gets SMALLER (divide)
 
----
+--
 
 # The 6 Magic Formulas (MEMORIZE THESE!)
 
 These 6 formulas appear in **90% of bit manipulation problems**. Master them and you've mastered bit manipulation.
 
----
+--
 
 ## Formula 1: Check if i-th bit is set
 
@@ -434,7 +434,7 @@ Result: 0 == 0 → NO, bit 1 is NOT set ✓
 - Check permissions: `(userFlags & READ_PERMISSION) != 0`
 - Iterate through set bits
 
----
+--
 
 ## Formula 2: Set the i-th bit (Turn ON)
 
@@ -521,7 +521,7 @@ Result: No harm done! OR is safe to use even if bit is already set.
 - Mark element as visited: `visited | (1 << index)`
 - Build a number bit by bit
 
----
+--
 
 ## Formula 3: Clear the i-th bit (Turn OFF)
 
@@ -613,7 +613,7 @@ It's like a stencil that blocks only bit i!
 - Unmark element: `visited & ~(1 << index)`
 - Clear specific flags
 
----
+--
 
 ## Formula 4: Toggle the i-th bit (Flip)
 
@@ -704,7 +704,7 @@ So when mask has 1 at position i:
 - Swap without temp: `a ^= b; b ^= a; a ^= b;`
 - Flip specific bits in encryption
 
----
+--
 
 ## Formula 5: Remove the Rightmost Set Bit ⭐⭐⭐
 
@@ -834,12 +834,12 @@ This is why n & (n-1) == 0 means n is a power of 2!
 ### Use Cases (This formula is EVERYWHERE!)
 
 | Problem | How It's Used |
-|---------|---------------|
+|-----|--------|
 | Count set bits | Loop: `while(n) { n &= n-1; count++; }` |
 | Power of 2 | `n > 0 && (n & (n-1)) == 0` |
 | Counting Bits DP | `dp[i] = dp[i & (i-1)] + 1` |
 
----
+--
 
 ## Formula 6: Isolate the Rightmost Set Bit
 
@@ -967,12 +967,12 @@ n & -n = 0 0 0 1 0 0 0   (X & ~X = 0, but 1 & 1 = 1!)
 ### Use Cases
 
 | Problem | How It's Used |
-|---------|---------------|
+|-----|--------|
 | Single Number III | Find a bit where two unique numbers differ |
 | Fenwick Tree | Navigate tree structure |
 | Find bit position | `Integer.numberOfTrailingZeros(n & -n)` |
 
----
+--
 
 # The 6 Formulas - Quick Reference Card
 
@@ -1011,7 +1011,7 @@ n & -n = 0 0 0 1 0 0 0   (X & ~X = 0, but 1 & 1 = 1!)
 └────────────────────────────────────────────────────────────────────┘
 ```
 
----
+--
 
 # The Master Decision Tree
 
@@ -1054,7 +1054,7 @@ When you see a bit manipulation problem, ask:
                                                               └────────────┘
 ```
 
----
+--
 
 # The 5-Question Template (For Every Bit Problem)
 
@@ -1093,7 +1093,7 @@ When you see a bit manipulation problem, ask:
 └────────────────────────────────────────────────────────────────────┘
 ```
 
----
+--
 
 # PATTERN 0: Single Number (LeetCode 136)
 
@@ -1103,7 +1103,7 @@ When you see a bit manipulation problem, ask:
 
 **Instant thought:** "XOR everything! Pairs cancel, unique survives!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -1142,7 +1142,7 @@ The unique number survives!
 
 ```
 A | B | A ^ B
---|---|------
+-|--|---
 0 | 0 |   0    (same → 0)
 0 | 1 |   1    (different → 1)
 1 | 0 |   1    (different → 1)
@@ -1160,7 +1160,7 @@ Key insight: XOR answers "Are these bits DIFFERENT?"
 4. Only the unique number remains
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -1183,7 +1183,7 @@ XOR with 4:
   
     000
   ^ 100
-  -----
+  ---
     100  = 4
   
   result = 4
@@ -1195,7 +1195,7 @@ XOR with 1:
   
     100
   ^ 001
-  -----
+  ---
     101  = 5
   
   result = 5
@@ -1207,7 +1207,7 @@ XOR with 2:
   
     101
   ^ 010
-  -----
+  ---
     111  = 7
   
   result = 7
@@ -1219,7 +1219,7 @@ XOR with 1 (second occurrence):
   
     111
   ^ 001
-  -----
+  ---
     110  = 6
   
   result = 6
@@ -1233,7 +1233,7 @@ XOR with 2 (second occurrence):
   
     110
   ^ 010
-  -----
+  ---
     100  = 4
   
   result = 4
@@ -1248,7 +1248,7 @@ The pairs (1,1) and (2,2) cancelled out!
 Only 4 (the unique number) remains!
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -1266,7 +1266,7 @@ int singleNumber(int[] nums) {
 }
 ```
 
----
+--
 
 ## Why O(1) Space?
 
@@ -1276,17 +1276,17 @@ No HashMap, no sorting, no extra array.
 Just XOR magic!
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Using HashMap | Works but O(n) space | XOR is O(1) space |
 | Sorting first | Works but O(n log n) time | XOR is O(n) time |
 | Forgetting XOR properties | Can't solve without them | Memorize: a^a=0, a^0=a |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1305,7 +1305,7 @@ SINGLE NUMBER
 
 **Memory phrase:** "XOR all, pairs cancel, unique survives"
 
----
+--
 
 # PATTERN 1: Number of 1 Bits / Hamming Weight (LeetCode 191)
 
@@ -1315,7 +1315,7 @@ SINGLE NUMBER
 
 **Instant thought:** "n & (n-1) removes rightmost 1! Count iterations!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -1351,7 +1351,7 @@ n-1   = 1011
 n & (n-1):
     1100
   & 1011
-  ------
+  ---
     1000  ← Rightmost 1 is GONE!
 ```
 
@@ -1383,7 +1383,7 @@ We did 3 operations → 3 ones in original number!
 3. Return count
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -1431,7 +1431,7 @@ n == 0, loop exits
 Return count = 3 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -1448,7 +1448,7 @@ int hammingWeight(int n) {
 }
 ```
 
----
+--
 
 ## Why This is Better Than Checking Each Bit
 
@@ -1462,16 +1462,16 @@ Method 2: n & (n-1) → O(number of 1s)
 n & (n-1) is faster when there are few 1s!
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Using n >> 1 in loop | Works but always 32 iterations | n & (n-1) is faster |
 | Forgetting unsigned | Java int is signed | Use `n != 0` not `n > 0` |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1489,7 +1489,7 @@ COUNT SET BITS
 
 **Memory phrase:** "n & (n-1) kills rightmost 1, count how many kills"
 
----
+--
 
 > "n & (n-1) removes rightmost 1. Count iterations until n = 0."
 
@@ -1497,7 +1497,7 @@ COUNT SET BITS
 
 **n & (n-1) · removes rightmost 1 · count iterations**
 
----
+--
 
 # PATTERN 2: Counting Bits (LeetCode 338)
 
@@ -1507,7 +1507,7 @@ COUNT SET BITS
 
 **Instant thought:** "DP with n & (n-1)! Each number has one more 1 than the number with its rightmost 1 removed!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -1558,7 +1558,7 @@ Example:
 4. Return ans
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -1631,7 +1631,7 @@ i = 5:
 Final Result: [0, 1, 1, 2, 1, 2] ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -1651,7 +1651,7 @@ int[] countBits(int n) {
 }
 ```
 
----
+--
 
 ## Why This is O(n) and Not O(n log n)
 
@@ -1666,17 +1666,17 @@ The DP recurrence:
 We're reusing previously computed results!
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Counting bits for each number separately | O(n × 32) instead of O(n) | Use DP with n & (n-1) |
 | Forgetting base case | ans[0] must be 0 | Array is 0-initialized by default in Java |
 | Off-by-one in array size | Need n+1 elements for 0 to n | Use `new int[n + 1]` |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1696,7 +1696,7 @@ COUNTING BITS (DP)
 
 **Memory phrase:** "Remove one 1, add 1 to that count"
 
----
+--
 
 # PATTERN 3: Reverse Bits (LeetCode 190)
 
@@ -1706,7 +1706,7 @@ COUNTING BITS (DP)
 
 **Instant thought:** "Extract from right, place on left! Use n & 1 to get rightmost bit, shift result left, OR the bit in!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -1771,7 +1771,7 @@ Each iteration:
 3. Return result
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -1867,7 +1867,7 @@ Final Result:
   Verification: bits are in reverse order ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -1901,18 +1901,18 @@ int reverseBits(int n) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Using `>>>` vs `>>` for n | For this problem both work, but `>>>` is safer for unsigned | Use `n >>>= 1` for clarity |
 | Forgetting to process all 32 bits | Leading zeros matter in reversal | Always loop exactly 32 times |
 | Wrong order of operations | Must shift result BEFORE adding new bit | `result <<= 1` comes first |
 | Returning n instead of result | n is destroyed during the loop | Return result |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1934,7 +1934,7 @@ REVERSE BITS
 
 **Memory phrase:** "Extract right, place left, 32 times"
 
----
+--
 
 # PATTERN 4: Missing Number (LeetCode 268)
 
@@ -1944,7 +1944,7 @@ REVERSE BITS
 
 **Instant thought:** "XOR all indices AND all values! Everything pairs up except the missing number!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2011,7 +2011,7 @@ The missing number survives!
 3. Return xor (the missing number)
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -2034,10 +2034,10 @@ i = 0:
   Binary:
     011 (3)
   ^ 000 (0)
-  -------
+  ----
     011
   ^ 011 (3)
-  -------
+  ----
     000 (0)
   
   xor = 0
@@ -2053,10 +2053,10 @@ i = 1:
   Binary:
     000 (0)
   ^ 001 (1)
-  -------
+  ----
     001
   ^ 000 (0)
-  -------
+  ----
     001 (1)
   
   xor = 1
@@ -2072,10 +2072,10 @@ i = 2:
   Binary:
     001 (1)
   ^ 010 (2)
-  -------
+  ----
     011
   ^ 001 (1)
-  -------
+  ----
     010 (2)
   
   xor = 2
@@ -2093,7 +2093,7 @@ Summary of what happened:
   - 2 appeared as index but NOT as value → SURVIVED!
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2123,7 +2123,7 @@ int missingNumber(int[] nums) {
 }
 ```
 
----
+--
 
 ## Why Not Use Sum Formula?
 
@@ -2137,17 +2137,17 @@ Problem: Can OVERFLOW for large n!
 XOR approach: No overflow, always works!
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Forgetting to include n | n is a valid number that could be missing | Start with `xor = nums.length` |
 | Using sum formula | Can overflow for large n | Use XOR instead |
 | Off-by-one errors | Array has n elements, numbers are 0 to n | Loop from 0 to n-1, start xor at n |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2173,7 +2173,7 @@ MISSING NUMBER
 
 **Memory phrase:** "XOR indices and values, pairs cancel, missing survives"
 
----
+--
 
 # PATTERN 5: Power of Two (LeetCode 231)
 
@@ -2183,7 +2183,7 @@ MISSING NUMBER
 
 **Instant thought:** "Power of 2 has exactly ONE bit set! n & (n-1) removes it → result should be 0!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2244,7 +2244,7 @@ Not power of 2 (n = 6):
 3. If both true, n is a power of 2
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -2265,7 +2265,7 @@ Step 2: Calculate n & (n-1)
   Bit-by-bit AND:
     1 0 0 0 0
   & 0 1 1 1 1
-  -----------
+  ------
     0 0 0 0 0 = 0
 
 Step 3: Is result == 0?
@@ -2293,7 +2293,7 @@ Step 2: Calculate n & (n-1)
   Bit-by-bit AND:
     1 1 0
   & 1 0 1
-  -------
+  ----
     1 0 0 = 4
 
 Step 3: Is result == 0?
@@ -2323,7 +2323,7 @@ Note: Without the n > 0 check:
   This would incorrectly return true!
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2349,18 +2349,18 @@ boolean isPowerOfTwo(int n) {
 // - One 1-bit = power of 2
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Forgetting n > 0 check | 0 & (-1) = 0, but 0 isn't power of 2 | Always check n > 0 first |
 | Using n >= 0 | 0 is not a power of 2 | Use n > 0 |
 | Checking n & (n-1) != 0 | Logic is inverted | Check n & (n-1) == 0 |
 | Using while loop to divide by 2 | Works but O(log n) | n & (n-1) is O(1) |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2387,7 +2387,7 @@ POWER OF TWO
 
 **Memory phrase:** "One bit set, n & (n-1) gives zero"
 
----
+--
 
 # PATTERN 5b: Power of Four (LeetCode 342)
 
@@ -2397,7 +2397,7 @@ POWER OF TWO
 
 **Instant thought:** "Power of 4 is power of 2 with the 1-bit at an EVEN position! Use mask 0x55555555!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2475,7 +2475,7 @@ n = 8 (power of 2, NOT power of 4):
 4. If all three true, n is a power of 4
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -2562,7 +2562,7 @@ Step 3: Is n & 0x55555555 != 0?
 Result: TRUE (64 is a power of 4) ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2593,18 +2593,18 @@ boolean isPowerOfFour(int n) {
 // All EVEN!
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Only checking power of 2 | 8 is power of 2 but not power of 4 | Add mask check |
 | Wrong mask value | Using 0xAAAAAAAA checks odd positions | Use 0x55555555 for even |
 | Forgetting n > 0 | 0 would pass the other checks | Always check n > 0 first |
 | Using loop to divide by 4 | Works but O(log n) | Bit operations are O(1) |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2628,7 +2628,7 @@ POWER OF FOUR
 
 **Memory phrase:** "Power of 2 at even position, mask 0x55555555"
 
----
+--
 
 # PATTERN 6: Single Number II (LeetCode 137)
 
@@ -2638,7 +2638,7 @@ POWER OF FOUR
 
 **Instant thought:** "XOR won't work (a^a^a = a)! Count bits at each position, take mod 3!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2715,7 +2715,7 @@ Result: 11 = 3 ✓
 3. Return result
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -2777,7 +2777,7 @@ Final Result:
   Only 3's bits survived!
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2824,7 +2824,7 @@ int singleNumber(int[] nums) {
 }
 ```
 
----
+--
 
 ## Understanding the State Machine (Advanced)
 
@@ -2847,18 +2847,18 @@ The formulas achieve this:
   twos = (twos ^ num) & ~ones
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Using XOR like Single Number I | a^a^a = a, not 0 | Use bit counting mod 3 |
 | Forgetting negative numbers | Bit 31 is sign bit | Algorithm handles it correctly |
 | Using HashMap | Works but O(n) space | Bit counting is O(1) space |
 | Wrong mod value | Must match repetition count | Use % 3 for triples |
 
----
+--
 
 ## Generalizing to k Repetitions
 
@@ -2871,7 +2871,7 @@ If every element appears k times except one:
 This works for any k!
 ```
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2895,7 +2895,7 @@ SINGLE NUMBER II (TRIPLES)
 
 **Memory phrase:** "Count each bit, mod 3, non-zero means unique has it"
 
----
+--
 
 # PATTERN 7: Single Number III (LeetCode 260)
 
@@ -2905,7 +2905,7 @@ SINGLE NUMBER II (TRIPLES)
 
 **Instant thought:** "XOR all gives a^b. Find a differing bit, split array into two groups, XOR each group!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2997,7 +2997,7 @@ Result: [5, 3] ✓
 5. Return [a, b]
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -3013,19 +3013,19 @@ STEP 1: XOR all numbers to get a ^ b
   Binary calculation:
     001 (1)
   ^ 010 (2)
-  -------
+  ----
     011
   ^ 001 (1)
-  -------
+  ----
     010
   ^ 011 (3)
-  -------
+  ----
     001
   ^ 010 (2)
-  -------
+  ----
     011
   ^ 101 (5)
-  -------
+  ----
     110 = 6
   
   xor = 6 = 3 ^ 5
@@ -3086,7 +3086,7 @@ Why it works:
   - 3 and 5 are in DIFFERENT groups → they survive
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -3118,7 +3118,7 @@ int[] singleNumber(int[] nums) {
 }
 ```
 
----
+--
 
 ## Why n & (-n) Isolates Rightmost 1
 
@@ -3140,18 +3140,18 @@ This works because:
   - Only that bit position has 1 in both n and -n
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Trying to use XOR alone | XOR gives a^b, can't separate | Split by differing bit |
 | Using wrong bit isolation | Need rightmost 1 of xor | Use xor & (-xor) |
 | Splitting by wrong condition | Must use the diffBit | Check (num & diffBit) == 0 |
 | Forgetting pairs cancel | Pairs in same group cancel | That's why this works! |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -3179,7 +3179,7 @@ SINGLE NUMBER III (TWO UNIQUES)
 
 **Memory phrase:** "XOR all, find diff bit, split and XOR groups"
 
----
+--
 
 # PATTERN 8: Hamming Distance (LeetCode 461)
 
@@ -3189,7 +3189,7 @@ SINGLE NUMBER III (TWO UNIQUES)
 
 **Instant thought:** "XOR shows differences! XOR the numbers, then count the 1s!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -3219,7 +3219,7 @@ y = 4 = 100
 x ^ y:
   001
 ^ 100
------
+---
   101 = 5
 
 The result has 1s exactly where x and y DIFFER!
@@ -3234,7 +3234,7 @@ Count the 1s in 101 → 2 differences → Hamming distance = 2
 3. Return the count
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -3251,7 +3251,7 @@ STEP 1: XOR to find differing bits
   x ^ y:
     0 0 1
   ^ 1 0 0
-  -------
+  ----
     1 0 1 = 5
   
   xor = 5
@@ -3297,7 +3297,7 @@ Verification:
   Positions 0 and 2 differ → Hamming distance = 2
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -3340,7 +3340,7 @@ int hammingDistance(int x, int y) {
 }
 ```
 
----
+--
 
 ## Why n & (n-1) is Better Than Checking Each Bit
 
@@ -3357,17 +3357,17 @@ Method 2: n & (n-1)
 n & (n-1) is faster when there are few differing bits!
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Forgetting to XOR first | Need to find differences first | Always start with x ^ y |
 | Using subtraction | Hamming distance isn't x - y | Use XOR to find bit differences |
 | Counting wrong bits | Must count 1s in XOR result | Use n & (n-1) or bitCount |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -3392,7 +3392,7 @@ HAMMING DISTANCE
 
 **Memory phrase:** "XOR shows differences, count the 1s"
 
----
+--
 
 # PATTERN 9: Total Hamming Distance (LeetCode 477)
 
@@ -3402,7 +3402,7 @@ HAMMING DISTANCE
 
 **Instant thought:** "Don't compare pairs (O(n²))! Count 0s and 1s at each bit position, multiply them!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -3516,7 +3516,7 @@ Total = 2 + 2 + 2 = 6 ✓ (matches!)
 3. Return total
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -3600,7 +3600,7 @@ Positions 4-31: All bits are 0, so countOnes = 0
 Final Result: total = 6 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -3629,7 +3629,7 @@ int totalHammingDistance(int[] nums) {
 }
 ```
 
----
+--
 
 ## Why This is O(32n) = O(n)
 
@@ -3650,18 +3650,18 @@ For n = 10,000:
   That's 5000x faster!
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Comparing all pairs | O(n²) is too slow | Use per-bit counting |
 | Forgetting to multiply | Need countOnes × countZeros | Each (0,1) pair contributes 1 |
 | Integer overflow | countOnes × countZeros can be large | Use long if needed |
 | Only checking some bits | Numbers can use all 32 bits | Always check all 32 positions |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -3686,7 +3686,7 @@ TOTAL HAMMING DISTANCE
 
 **Memory phrase:** "Per bit: count 0s and 1s, multiply them"
 
----
+--
 
 # PATTERN 10: Sum of Two Integers (LeetCode 371)
 
@@ -3696,7 +3696,7 @@ TOTAL HAMMING DISTANCE
 
 **Instant thought:** "XOR gives sum without carry! AND shifted left gives the carry! Loop until no carry!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -3776,7 +3776,7 @@ Step 3: Add the carry to the sum
 2. Return a (the final sum)
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -3866,7 +3866,7 @@ Final Result: a = 8 ✓
 5 + 3 = 8 (computed without + operator!)
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -3892,7 +3892,7 @@ int getSum(int a, int b) {
 }
 ```
 
----
+--
 
 ## Why This Works for Negative Numbers Too
 
@@ -3908,18 +3908,18 @@ The loop terminates when carry becomes 0.
 Result is correct!
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Forgetting to shift carry | Carry goes to NEXT position | Always use (a & b) << 1 |
 | Wrong loop condition | Loop until no carry | Use while (b != 0) |
 | Infinite loop with negatives | In some languages, can loop forever | Java handles this correctly |
 | Confusing XOR and AND roles | XOR = sum, AND = carry | Remember: XOR adds, AND finds carry |
 
----
+--
 
 ## The Math Behind It
 
@@ -3927,7 +3927,7 @@ Result is correct!
 Binary addition truth table:
 
 A | B | Sum | Carry
---|---|-----|------
+-|--|---|---
 0 | 0 |  0  |   0
 0 | 1 |  1  |   0
 1 | 0 |  1  |   0
@@ -3943,7 +3943,7 @@ So:
   Shift AND left to move carry to correct position
 ```
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -3973,7 +3973,7 @@ SUM WITHOUT + OPERATOR
 
 **Memory phrase:** "XOR for sum, AND-shift for carry, loop until done"
 
----
+--
 
 # PATTERN 11: Divide Two Integers (LeetCode 29)
 
@@ -3983,7 +3983,7 @@ SUM WITHOUT + OPERATOR
 
 **Instant thought:** "Division is repeated subtraction! Use bit shifts to subtract in powers of 2 for efficiency!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -4060,7 +4060,7 @@ Then subtract and add 2^k to result
 4. Apply sign and return
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -4124,7 +4124,7 @@ Final Result: 5 ✓
 43 / 8 = 5 (with remainder 3)
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -4167,7 +4167,7 @@ int divide(int dividend, int divisor) {
 }
 ```
 
----
+--
 
 ## Why We Use Long
 
@@ -4186,19 +4186,19 @@ Solution: Cast to long first, then take abs.
   Math.abs((long) Integer.MIN_VALUE) = 2147483648L ✓
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Integer overflow | MIN_VALUE / -1 overflows | Check and return MAX_VALUE |
 | Using int for abs | abs(MIN_VALUE) overflows | Use long |
 | Infinite loop | If divisor = 0 | Problem guarantees divisor ≠ 0 |
 | Wrong sign handling | Must handle all 4 sign combinations | Use XOR of signs |
 | Shifting too far | temp << 1 can overflow | Check before shifting |
 
----
+--
 
 ## Time Complexity Analysis
 
@@ -4215,7 +4215,7 @@ Example: 1000000 / 3
   Bit shift: ~20 iterations
 ```
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -4243,7 +4243,7 @@ DIVIDE WITHOUT / * %
 
 **Memory phrase:** "Shift divisor up, subtract largest fit, accumulate powers of 2"
 
----
+--
 
 # PATTERN 12: Bitwise AND of Numbers Range (LeetCode 201)
 
@@ -4253,7 +4253,7 @@ DIVIDE WITHOUT / * %
 
 **Instant thought:** "Any bit that changes in the range becomes 0! Find the common prefix of left and right!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -4300,10 +4300,10 @@ Let's see all numbers in between:
 AND them:
   101
 & 110
------
+---
   100
 & 111
------
+---
   100 = 4
 
 Notice: The result is the COMMON PREFIX of left and right!
@@ -4342,7 +4342,7 @@ So: Find where left and right first differ (from the left)
 3. Return the result
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -4400,7 +4400,7 @@ Verification:
   5 & 6 & 7 = 101 & 110 & 111 = 100 = 4 ✓
 ```
 
----
+--
 
 ## Another Example: Larger Range
 
@@ -4441,7 +4441,7 @@ Using our algorithm:
 ═══════════════════════════════════════════════════════════
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -4475,7 +4475,7 @@ int rangeBitwiseAnd(int left, int right) {
 }
 ```
 
----
+--
 
 ## Why the Alternative Works
 
@@ -4498,18 +4498,18 @@ Example: left = 5 (101), right = 7 (111)
   Result: 4 ✓
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | ANDing all numbers in loop | O(right - left) is too slow | Use common prefix approach |
 | Forgetting to shift back | Common prefix is shifted right | Multiply by 2^shift |
 | Using left > right | Should be left < right | Check condition carefully |
 | Integer overflow when shifting | left << shift can overflow | Not an issue for valid inputs |
 
----
+--
 
 ## Time Complexity
 
@@ -4520,7 +4520,7 @@ We shift at most 32 times (for 32-bit integers).
 Much better than O(right - left) which could be billions!
 ```
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -4548,7 +4548,7 @@ BITWISE AND OF RANGE
 
 **Memory phrase:** "Shift until equal, that's the common prefix, shift back"
 
----
+--
 
 # PATTERN 13: Subsets using Bitmask (LeetCode 78)
 
@@ -4558,7 +4558,7 @@ BITWISE AND OF RANGE
 
 **Instant thought:** "Each element is either IN or OUT! Use numbers 0 to 2^n-1 as bitmasks!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -4617,7 +4617,7 @@ So iterating 0 to 2^n - 1 gives us ALL subsets!
 3. Return result
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -4721,7 +4721,7 @@ Final Result: [[], [a], [b], [a,b], [c], [a,c], [b,c], [a,b,c]]
 All 8 subsets generated! ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -4750,7 +4750,7 @@ List<List<Integer>> subsets(int[] nums) {
 }
 ```
 
----
+--
 
 ## Understanding the Bit Check
 
@@ -4771,7 +4771,7 @@ Example: mask = 5 (101), i = 2
   101 & 100 = 100 ≠ 0 → bit 2 is set!
 ```
 
----
+--
 
 ## Bitmask vs Backtracking
 
@@ -4790,18 +4790,18 @@ Backtracking approach:
 Both are valid! Bitmask is often cleaner for simple subset generation.
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Using 2^n directly | Integer overflow for large n | Use 1 << n |
 | Wrong bit check | Must use (mask & (1 << i)) != 0 | Don't forget != 0 |
 | Off-by-one in total | Should be 2^n, not 2^n - 1 | Loop from 0 to total - 1 |
 | Large n | 2^30 is too many subsets | Bitmask works for n ≤ ~20 |
 
----
+--
 
 ## Applications of Bitmask Subsets
 
@@ -4814,7 +4814,7 @@ Both are valid! Bitmask is often cleaner for simple subset generation.
 6. Feature selection in ML
 ```
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -4840,7 +4840,7 @@ SUBSETS WITH BITMASK
 
 **Memory phrase:** "0 to 2^n-1, each bit = include/exclude"
 
----
+--
 
 # PATTERN 14: Gray Code (LeetCode 89)
 
@@ -4850,7 +4850,7 @@ SUBSETS WITH BITMASK
 
 **Instant thought:** "Magic formula: Gray(i) = i XOR (i >> 1)!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -4935,7 +4935,7 @@ Notice: Each consecutive pair differs by exactly 1 bit!
 3. Return result
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -5039,7 +5039,7 @@ In binary: [000, 001, 011, 010, 110, 111, 101, 100]
 Each consecutive pair differs by exactly 1 bit! ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -5069,7 +5069,7 @@ List<Integer> grayCode(int n) {
 }
 ```
 
----
+--
 
 ## Why i ^ (i >> 1) Works (Mathematical Proof)
 
@@ -5093,18 +5093,18 @@ Case 2: i ends in 1 (i = ...01...1)
 Key insight: XOR with shifted self "smooths" the transitions!
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Forgetting the formula | Hard to derive on the spot | Memorize: i ^ (i >> 1) |
 | Using wrong shift direction | Must be right shift | i >> 1, not i << 1 |
 | Off-by-one in total | Should be 2^n codes | Use 1 << n |
 | Returning binary strings | Problem asks for integers | Return the integer values |
 
----
+--
 
 ## Alternative: Reflection Method
 
@@ -5124,7 +5124,7 @@ n=3: Take n=2, prefix with 0: [000, 001, 011, 010]
 This is why it's called "reflected binary code"!
 ```
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -5152,7 +5152,7 @@ GRAY CODE
 
 **Memory phrase:** "i XOR (i >> 1) gives Gray code"
 
----
+--
 
 # PATTERN 15: Maximum XOR of Two Numbers (LeetCode 421)
 
@@ -5162,7 +5162,7 @@ GRAY CODE
 
 **Instant thought:** "Build a Trie of binary representations! For each number, greedily pick opposite bits!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -5265,7 +5265,7 @@ Actually, let me recalculate with correct Trie...
 3. Return max XOR
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -5338,7 +5338,7 @@ After processing all:
 Final Result: 28 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -5356,7 +5356,7 @@ class Solution {
         for (int num : nums) {
             TrieNode node = root;
             // Insert each bit from MSB (bit 31) to LSB (bit 0)
-            for (int i = 31; i >= 0; i--) {
+            for (int i = 31; i >= 0; i-) {
                 int bit = (num >> i) & 1;  // Extract bit i
                 if (node.children[bit] == null) {
                     node.children[bit] = new TrieNode();
@@ -5373,7 +5373,7 @@ class Solution {
             int currXor = 0;
             
             // For each bit, try to go opposite direction
-            for (int i = 31; i >= 0; i--) {
+            for (int i = 31; i >= 0; i-) {
                 int bit = (num >> i) & 1;
                 int oppositeBit = 1 - bit;  // 0→1, 1→0
                 
@@ -5395,7 +5395,7 @@ class Solution {
 }
 ```
 
----
+--
 
 ## Why Greedy Works
 
@@ -5415,7 +5415,7 @@ XOR maximization is greedy-safe because:
 This is why the Trie approach works!
 ```
 
----
+--
 
 ## Time and Space Complexity
 
@@ -5429,18 +5429,18 @@ Space: O(n × 32) = O(n)
   - In practice, many paths are shared
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Processing LSB first | MSB matters more for max | Process from bit 31 down to 0 |
 | Forgetting to check null | Opposite child might not exist | Always check before traversing |
 | Using HashMap instead | Works but slower | Trie is O(1) per bit |
 | Not handling negative numbers | Bit 31 is sign bit | Algorithm handles it correctly |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -5468,12 +5468,12 @@ MAXIMUM XOR (TRIE)
 
 **Memory phrase:** "Trie of bits, greedily pick opposite, maximize from MSB"
 
----
+--
 
 # MAANG Coverage Map
 
 | Pattern | Problem | Company Tags | Difficulty |
-|---------|---------|--------------|------------|
+|-----|-----|-------|------|
 | 0 | Single Number | Amazon, Google, Facebook | Easy |
 | 1 | Number of 1 Bits | Microsoft, Apple | Easy |
 | 2 | Counting Bits | Google, Amazon | Easy |
@@ -5492,14 +5492,14 @@ MAXIMUM XOR (TRIE)
 | 14 | Gray Code | Amazon, Microsoft | Medium |
 | 15 | Maximum XOR | Google, Amazon | Medium |
 
----
+--
 
 # Bit Manipulation Cheat Sheet
 
 ## The 6 Magic Formulas
 
 | Formula | What It Does | Use Case |
-|---------|--------------|----------|
+|-----|-------|-----|
 | `n & (1 << i)` | Check if bit i is set | Test specific bit |
 | `n \| (1 << i)` | Set bit i | Turn on a bit |
 | `n & ~(1 << i)` | Clear bit i | Turn off a bit |
@@ -5510,7 +5510,7 @@ MAXIMUM XOR (TRIE)
 ## XOR Properties
 
 | Property | Formula | Use Case |
-|----------|---------|----------|
+|-----|-----|-----|
 | Self-cancel | `a ^ a = 0` | Find unique element |
 | Identity | `a ^ 0 = a` | No change |
 | Commutative | `a ^ b = b ^ a` | Order doesn't matter |
@@ -5518,7 +5518,7 @@ MAXIMUM XOR (TRIE)
 ## Quick Patterns
 
 | Problem Type | Technique |
-|--------------|-----------|
+|-------|------|
 | Find unique (others appear 2x) | XOR all |
 | Find unique (others appear 3x) | Count bits mod 3 |
 | Find two uniques | XOR all, split by diff bit |
@@ -5528,7 +5528,7 @@ MAXIMUM XOR (TRIE)
 | Add without + | XOR + (AND << 1) loop |
 | Common prefix in range | Shift until equal |
 
----
+--
 
 # Mastery Checklist
 
@@ -5553,18 +5553,18 @@ MAXIMUM XOR (TRIE)
 - [ ] Gray Code (i ^ (i >> 1))
 - [ ] Divide without operators (bit shifts)
 
----
+--
 
 # Common Mistakes
 
 | Mistake | Why It's Wrong | Fix |
-|---------|----------------|-----|
+|-----|--------|---|
 | Forgetting `n > 0` in power of 2 | 0 & (0-1) = 0, but 0 is not power of 2 | Always check `n > 0` |
 | Using `>>` for negative numbers | Sign bit gets extended | Use `>>>` for unsigned shift |
 | Integer overflow in shifts | `1 << 31` overflows | Use `1L << i` for long |
 | Forgetting two's complement | `~n = -(n+1)`, not just flipped bits | Remember negative representation |
 
----
+--
 
 # Interview Explanation Template
 
@@ -5580,7 +5580,7 @@ When explaining bit manipulation:
 
 5. **Mention edge cases:** "We handle negative numbers correctly because XOR works on all bits including sign bit."
 
----
+--
 
 # The Final Mental Model
 
@@ -5608,13 +5608,13 @@ When explaining bit manipulation:
 
 **Remember:** Every bit problem asks "Which bits matter?" and "How do I isolate/combine them?"
 
----
+--
 
 # BONUS PATTERNS (Nice-to-Have for Extra Safety)
 
 These patterns are less frequently asked but good to know for complete coverage.
 
----
+--
 
 ## PATTERN 16: UTF-8 Validation (LeetCode 393)
 
@@ -5624,7 +5624,7 @@ These patterns are less frequently asked but good to know for complete coverage.
 
 **Instant thought:** "Count leading 1s to determine byte length! Then verify continuation bytes start with 10!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -5686,7 +5686,7 @@ To check if byte starts with specific pattern:
 3. Return true if remaining == 0 at end (all characters complete)
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -5736,7 +5736,7 @@ All characters are complete!
 Result: true ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -5768,7 +5768,7 @@ boolean validUtf8(int[] data) {
             if ((num >> 6) != 0b10) {
                 return false;
             }
-            remaining--;
+            remaining-;
         }
     }
     
@@ -5777,18 +5777,18 @@ boolean validUtf8(int[] data) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Not checking continuation bytes | 10xxxxxx is required | Verify (num >> 6) == 0b10 |
 | Accepting 5+ byte sequences | UTF-8 max is 4 bytes | Reject patterns like 111110xx |
 | Not checking end state | Incomplete character at end | Return remaining == 0 |
 | Using wrong bit masks | Easy to mess up shifts | Double-check shift amounts |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -5815,7 +5815,7 @@ UTF-8 VALIDATION
 
 **Memory phrase:** "Count leading 1s for length, verify 10 continuations"
 
----
+--
 
 ## PATTERN 17: Integer Replacement (LeetCode 397)
 
@@ -5825,7 +5825,7 @@ UTF-8 VALIDATION
 
 **Instant thought:** "Even → divide by 2. Odd → check second bit to decide +1 or -1!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -5899,7 +5899,7 @@ Exception: n = 3
 2. Return count
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -5974,7 +5974,7 @@ n = 4 → 2 → 1 (2 more operations)
 Final Result: 3 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -5990,7 +5990,7 @@ int integerReplacement(int n) {
         } else if (num == 3 || ((num >> 1) & 1) == 0) {
             // Odd with second bit 0, OR n == 3: subtract 1
             // This creates more trailing zeros (usually)
-            num--;
+            num-;
         } else {
             // Odd with second bit 1: add 1
             // This creates pattern ...100...0 (more trailing zeros)
@@ -6003,7 +6003,7 @@ int integerReplacement(int n) {
 }
 ```
 
----
+--
 
 ## Why the n == 3 Exception?
 
@@ -6021,18 +6021,18 @@ Why? Because 3 - 1 = 2 = 10 (one operation to reach 1)
 This is the only exception to the second bit rule.
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Integer overflow | n + 1 at MAX_VALUE overflows | Use long |
 | Forgetting n == 3 exception | Second bit rule fails for 3 | Special case it |
 | Always choosing -1 for odd | Not optimal for ...11 patterns | Check second bit |
 | Using recursion without memo | Exponential time | Use iterative or memoize |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -6046,9 +6046,9 @@ INTEGER REPLACEMENT
 │ Even: n >>= 1 (divide by 2)             │
 │                                         │
 │ Odd: Check second bit                   │
-│   - Second bit = 0: n-- (creates ...00) │
+│   - Second bit = 0: n- (creates ...00) │
 │   - Second bit = 1: n++ (creates ...00) │
-│   - Exception: n == 3, always n--       │
+│   - Exception: n == 3, always n-       │
 │                                         │
 │ Why? More trailing zeros = fewer ops    │
 │                                         │
@@ -6060,7 +6060,7 @@ INTEGER REPLACEMENT
 
 **Memory phrase:** "Even divide, odd check second bit, 3 is special"
 
----
+--
 
 ## PATTERN 18: Binary Watch (LeetCode 401)
 
@@ -6070,7 +6070,7 @@ INTEGER REPLACEMENT
 
 **Instant thought:** "Brute force all valid times! Count set bits in hour + minute, check if equals target!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -6135,7 +6135,7 @@ Total LEDs on = bitCount(hour) + bitCount(minute)
 2. Return result
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -6195,7 +6195,7 @@ Final Result includes times like:
   "3:00", "5:00", "6:00", "9:00", "10:00", ...
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -6250,18 +6250,18 @@ int countBits(int n) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Wrong time format | Minutes need leading zero | Use "%d:%02d" format |
 | Invalid hours/minutes | Hour > 11 or minute > 59 | Loop bounds handle this |
 | Forgetting edge cases | turnedOn = 0 → only "0:00" | Algorithm handles it |
 | Overcomplicating | Trying to generate combinations | Brute force is simpler |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -6287,7 +6287,7 @@ BINARY WATCH
 
 **Memory phrase:** "Brute force hours × minutes, count bits, filter by total"
 
----
+--
 
 ## PATTERN 19: Complement of Base 10 Integer (LeetCode 1009)
 
@@ -6297,7 +6297,7 @@ BINARY WATCH
 
 **Instant thought:** "Create a mask of all 1s with same bit length, then XOR!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -6370,7 +6370,7 @@ mask = 7 = 111 ✓
 3. Return n XOR mask
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -6454,7 +6454,7 @@ Verification:
   complement = 0101 = 5 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -6505,7 +6505,7 @@ int bitwiseComplement(int n) {
 }
 ```
 
----
+--
 
 ## Why n == 0 is Special
 
@@ -6523,18 +6523,18 @@ Our mask-building loop doesn't work for 0:
 Actually, it works! But it's clearer to handle explicitly.
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Using ~n directly | Flips all 32 bits, not just significant | Use XOR with mask |
 | Forgetting n == 0 | Edge case needs special handling | Return 1 for n == 0 |
 | Wrong mask building | Must have same bit length as n | Use while (mask < n) |
 | Integer overflow | mask << 1 can overflow | Not an issue for valid inputs |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -6564,7 +6564,7 @@ COMPLEMENT OF BASE 10
 
 **Memory phrase:** "Build all-1s mask, XOR to flip, handle zero"
 
----
+--
 
 ## PATTERN 20: Concatenation of Consecutive Binary Numbers (LeetCode 1680)
 
@@ -6574,7 +6574,7 @@ COMPLEMENT OF BASE 10
 
 **Instant thought:** "Track bit length! Shift result left by length, OR with current number!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -6639,7 +6639,7 @@ When i is a power of 2, increment the bit length.
 3. Return result
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -6719,7 +6719,7 @@ Using our algorithm with mod at each step:
 ═══════════════════════════════════════════════════════════
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -6761,7 +6761,7 @@ Example: result = 6 (110), i = 3 (11), length = 2
   We've concatenated "110" + "11" = "11011"
 ```
 
----
+--
 
 ## Why Power of 2 Detection Works
 
@@ -6781,18 +6781,18 @@ i & (i-1) == 0 detects powers of 2:
   4 & 3 = 0 ✓ (power of 2)
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Integer overflow | Result grows exponentially | Use long, mod at each step |
 | Forgetting mod | Result exceeds int range | Apply % MOD after each operation |
 | Wrong bit length | Must track when length increases | Check power of 2 |
 | Building string | Too slow and memory-intensive | Use shift and OR |
 
----
+--
 
 ## Time and Space Complexity
 
@@ -6806,7 +6806,7 @@ Space: O(1)
   - No string building
 ```
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -6834,12 +6834,12 @@ CONCATENATION OF BINARY NUMBERS
 
 **Memory phrase:** "Track bit length, shift and OR, mod at each step"
 
----
+--
 
 # Updated MAANG Coverage Map (Complete)
 
 | Pattern | Problem | LeetCode | Difficulty | Frequency |
-|---------|---------|----------|------------|-----------|
+|-----|-----|-----|------|------|
 | 0 | Single Number | 136 | Easy | 🔥🔥🔥 |
 | 1 | Number of 1 Bits | 191 | Easy | 🔥🔥🔥 |
 | 2 | Counting Bits | 338 | Easy | 🔥🔥 |
@@ -6864,7 +6864,7 @@ CONCATENATION OF BINARY NUMBERS
 | 19 | Complement of Base 10 | 1009 | Easy | 🔥 |
 | 20 | Concatenation Binary | 1680 | Medium | 🔥 |
 
----
+--
 
 # Final Mastery Checklist (Complete L5+ Coverage)
 

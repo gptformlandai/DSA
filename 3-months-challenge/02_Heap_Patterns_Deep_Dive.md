@@ -1,23 +1,23 @@
 # Section 14 — Heap & Priority Queue Patterns Deep Dive (MAANG L5 Coverage)
 
----
+--
 
 # INDEX — Quick Navigation
 
 ## Core Concepts
 | Section | Description |
-|---------|-------------|
+|-----|-------|
 | [The "One Sentence"](#the-one-sentence-that-unlocks-all-heap-problems) | Unlocks all heap problems |
 | [Heap Mechanics](#heap-mechanics-how-it-actually-works) | Visual understanding of heap operations |
 | [The 4 Heap Patterns](#the-4-heap-patterns-your-weapons) | Your weapons |
 | [Min vs Max Heap](#the-min-vs-max-heap-decision) | When to use which |
 | [The 5-Question Template](#the-5-question-template-for-every-heap-problem) | Solve any heap problem |
 
----
+--
 
 ## Top K Family (Patterns 0-3)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 0 | [Kth Largest Element](#pattern-0-kth-largest-element-in-array-leetcode-215) | 215 |
 | 1 | [Top K Frequent Elements](#pattern-1-top-k-frequent-elements-leetcode-347) | 347 |
 | 2 | [K Closest Points to Origin](#pattern-2-k-closest-points-to-origin-leetcode-973) | 973 |
@@ -25,20 +25,20 @@
 
 ## K-Way Merge Family (Patterns 4-6)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 4 | [Merge K Sorted Lists](#pattern-4-merge-k-sorted-lists-leetcode-23) | 23 |
 | 5 | [Find K Pairs with Smallest Sums](#pattern-5-find-k-pairs-with-smallest-sums-leetcode-373) | 373 |
 | 6 | [Smallest Range Covering K Lists](#pattern-6-smallest-range-covering-elements-from-k-lists-leetcode-632) | 632 |
 
 ## Two Heaps Family (Patterns 7-8)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 7 | [Find Median from Data Stream](#pattern-7-find-median-from-data-stream-leetcode-295) | 295 |
 | 8 | [Sliding Window Median](#pattern-8-sliding-window-median-leetcode-480) | 480 |
 
 ## Scheduling & Greedy Family (Patterns 9-13)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 9 | [Task Scheduler](#pattern-9-task-scheduler-leetcode-621) | 621 |
 | 10 | [Reorganize String](#pattern-10-reorganize-string-leetcode-767) | 767 |
 | 11 | [Rearrange String K Distance Apart](#pattern-11-rearrange-string-k-distance-apart-leetcode-358) | 358 |
@@ -47,12 +47,12 @@
 
 ## Special Patterns (Pattern 14)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 14 | [Ugly Number II](#pattern-14-ugly-number-ii-leetcode-264) | 264 |
 
 ## Bonus Patterns (15-18) — Additional MAANG Coverage
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 15 | [Kth Largest in Stream](#pattern-15-kth-largest-element-in-a-stream-leetcode-703) | 703 |
 | 16 | [Last Stone Weight](#pattern-16-last-stone-weight-leetcode-1046) | 1046 |
 | 17 | [Design Twitter](#pattern-17-design-twitter-leetcode-355) | 355 |
@@ -60,12 +60,12 @@
 
 ## Reference Sections
 | Section |
-|---------|
+|-----|
 | [MAANG Coverage Map](#maang-coverage-map) |
 | [Heap Cheat Sheet](#heap-cheat-sheet) |
 | [Mastery Checklist](#mastery-checklist) |
 
----
+--
 
 # The "One Sentence That Unlocks All Heap Problems"
 
@@ -76,7 +76,7 @@ That's the entire subject. Every heap problem is just:
 2. **Maintain candidates** — add new ones, remove processed ones
 3. **Query the best** — peek or poll the top
 
----
+--
 
 ## 📋 THE JUNIOR DEV CHEAT CARD (Memorize This!)
 
@@ -129,19 +129,19 @@ That's the entire subject. Every heap problem is just:
 ╚═══════════════════════════════════════════════════════════════════════╝
 ```
 
----
+--
 
 ## The Mental Model: Why Heaps Exist
 
 | Without Heap | With Heap |
-|--------------|-----------|
+|-------|------|
 | "Find min" → scan all O(n) | "Find min" → peek O(1) |
 | "Find min after insert" → scan again O(n) | "Find min after insert" → O(log n) |
 | "Find min after delete" → scan again O(n) | "Find min after delete" → O(log n) |
 
 **The Insight:** When you need the "best" repeatedly and data keeps changing, heap gives you O(log n) updates instead of O(n) scans!
 
----
+--
 
 # Heap Mechanics (How It Actually Works)
 
@@ -163,12 +163,12 @@ Visual Tree:              Array Representation:
 ## The Heap Property
 
 | Min-Heap | Max-Heap |
-|----------|----------|
+|-----|-----|
 | Parent ≤ Children | Parent ≥ Children |
 | Root = Smallest | Root = Largest |
 | `new PriorityQueue<>()` | `new PriorityQueue<>(Collections.reverseOrder())` |
 
----
+--
 
 ## The Two Core Operations: Bubble Up & Bubble Down
 
@@ -205,7 +205,7 @@ Done! 5 is now at root (smallest).
 
 **Time:** O(log n) — at most tree height swaps
 
----
+--
 
 ### Operation 2: REMOVE MIN/MAX (Bubble Down / Sift Down)
 
@@ -233,7 +233,7 @@ Done! 10 is now at root (new smallest).
 
 **Time:** O(log n) — at most tree height swaps
 
----
+--
 
 ## Visual Summary of Heap Operations
 
@@ -256,20 +256,20 @@ Done! 10 is now at root (new smallest).
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
----
+--
 
 # The 4 Heap Patterns (Your "Weapons")
 
 ## Pattern Overview
 
 | Pattern | When to Use | Heap Type | Example Problems |
-|---------|-------------|-----------|------------------|
+|-----|-------|------|---------|
 | **Top K** | Find k largest/smallest/closest | Opposite heap (min for largest) | Kth Largest, Top K Frequent |
 | **K-Way Merge** | Merge k sorted sequences | Min-heap of k heads | Merge K Lists, Smallest Range |
 | **Two Heaps** | Track median or split data | Max-heap + Min-heap | Median Stream, Sliding Median |
 | **Greedy Scheduling** | Optimal ordering with constraints | Max-heap by priority | Task Scheduler, Reorganize String |
 
----
+--
 
 ## Pattern 1: Top K — "Keep the Best K"
 
@@ -299,13 +299,13 @@ Kth largest (k=3) = heap.peek() = 5
 ### The Rule
 
 | Want | Use | Why |
-|------|-----|-----|
+|---|---|---|
 | K Largest | Min-heap size K | Kicks out small ones, keeps large |
 | K Smallest | Max-heap size K | Kicks out large ones, keeps small |
 | Kth Largest | Min-heap size K, peek | Root is smallest among K largest = Kth largest |
 | Kth Smallest | Max-heap size K, peek | Root is largest among K smallest = Kth smallest |
 
----
+--
 
 ## Pattern 2: K-Way Merge — "Best of K Streams"
 
@@ -336,7 +336,7 @@ Output: [1, 2, 3, 4, 5, 6, 7, 8, 9]
 - Each element is pushed and popped exactly once
 - Time: O(N log K) where N = total elements
 
----
+--
 
 ## Pattern 3: Two Heaps — "Split the World in Half"
 
@@ -363,7 +363,7 @@ The two heaps meet at the middle!
 2. Size difference ≤ 1
 3. Left can have one extra (for odd count)
 
----
+--
 
 ## Pattern 4: Greedy Scheduling — "Always Pick the Best Available"
 
@@ -383,7 +383,7 @@ Time 3: Pick A (available again), A:1 remaining
 ...
 ```
 
----
+--
 
 # The Min vs Max Heap Decision
 
@@ -416,7 +416,7 @@ Time 3: Pick A (available again), A:1 remaining
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
----
+--
 
 # Java PriorityQueue Cheat Sheet
 
@@ -443,13 +443,13 @@ heap.size();        // Number of elements, O(1)
 heap.isEmpty();     // Check if empty, O(1)
 ```
 
----
+--
 
 # The 5-Question Template (For Every Heap Problem)
 
 This template is your **mental checklist** before writing any heap code. Walk through each question, and the solution reveals itself!
 
----
+--
 
 ## 🚀 QUICK START: The 60-Second Heap Approach
 
@@ -513,11 +513,11 @@ Your answer tells you which heap to use:
 - "The smallest should leave" → MIN-heap (smallest at root, easy to remove)
 - "The largest should leave" → MAX-heap (largest at root, easy to remove)
 
----
+--
 
 ## 📖 Now the Detailed Template (For Deep Understanding)
 
----
+--
 
 ## Question 1: WHAT IS "BEST"?
 
@@ -555,7 +555,7 @@ Before coding, complete this sentence:
 - "I need quick access to the element with the **smallest value** because I want to **kick it out and keep large ones**."
 - "I need quick access to the element with the **earliest end time** because I want to **reuse that room first**."
 
----
+--
 
 ## Question 2: WHICH HEAP TYPE?
 
@@ -641,7 +641,7 @@ Imagine a VIP room with only K spots:
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
----
+--
 
 ## Question 3: WHAT GOES IN THE HEAP?
 
@@ -692,7 +692,7 @@ Imagine a VIP room with only K spots:
 // ⚠️ WARNING: a - b can OVERFLOW! Use Integer.compare for safety!
 ```
 
----
+--
 
 ## Question 4: WHEN TO ADD / REMOVE?
 
@@ -771,7 +771,7 @@ Imagine a VIP room with only K spots:
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
----
+--
 
 ## 🎯 WORKED EXAMPLE: How a Junior Dev Should Think
 
@@ -849,7 +849,7 @@ int findKthLargest(int[] nums, int k) {
 }
 ```
 
----
+--
 
 ## Question 5: EDGE CASES?
 
@@ -896,7 +896,7 @@ int findKthLargest(int[] nums, int k) {
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
----
+--
 
 ## The Complete Mental Walkthrough
 
@@ -938,11 +938,11 @@ Before coding ANY heap problem, fill in this template:
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
----
+--
 
 # TOP K FAMILY
 
----
+--
 
 # PATTERN 0: Kth Largest Element in Array (LeetCode 215)
 
@@ -952,7 +952,7 @@ Before coding ANY heap problem, fill in this template:
 
 **Instant thought:** "Opposite heap of size K! Kth LARGEST → MIN-heap!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -1016,7 +1016,7 @@ Why? Because there are exactly K-1 people LARGER than the bouncer
 3. At the end, heap root = Kth largest
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -1092,7 +1092,7 @@ The bouncer (5) is the smallest among the K=2 largest elements.
 That makes 5 the Kth largest!
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -1113,7 +1113,7 @@ int findKthLargest(int[] nums, int k) {
 }
 ```
 
----
+--
 
 ## Why O(n log k)?
 
@@ -1128,17 +1128,17 @@ Compare to sorting: O(n log n)
 When k << n, this is MUCH better!
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Using MAX-heap | Would need to poll k times | Use MIN-heap size k |
 | Forgetting size check | Heap grows unbounded | Check `size > k` after each add |
 | Using wrong heap type | Java default is min-heap | For max-heap: `Collections.reverseOrder()` |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1157,7 +1157,7 @@ KTH LARGEST
 
 **Memory phrase:** "Kth LARGEST → MIN-heap size K → bouncer is the answer"
 
----
+--
 
 # PATTERN 1: Top K Frequent Elements (LeetCode 347)
 
@@ -1167,7 +1167,7 @@ KTH LARGEST
 
 **Instant thought:** "Two steps: Count with HashMap, then Top K with min-heap by frequency!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -1209,7 +1209,7 @@ Bouncer is the element with LOWEST frequency in VIP.
 After processing all, VIP room has K most frequent!
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -1256,7 +1256,7 @@ Final heap: [(2, freq=2), (1, freq=3)]
 Extract elements: [1, 2] ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -1290,17 +1290,17 @@ int[] topKFrequent(int[] nums, int k) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Storing frequency in heap | Need to return elements, not frequencies | Store elements, compare by freq |
 | Wrong comparator | `b - a` gives max-heap | `a - b` for min-heap |
 | Forgetting HashMap step | Can't know frequencies | Always count first |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1318,10 +1318,10 @@ TOP K FREQUENT
 
 **Memory phrase:** "Count with map, top K with min-heap by frequency"
 
----
+--
 
 | Question | Answer |
-|----------|--------|
+|-----|----|
 | 1. What is "best"? | Lowest frequency (to kick out) |
 | 2. Which heap? | MIN-heap by frequency (keep high freq) |
 | 3. What goes in? | The element (compare by its frequency) |
@@ -1386,7 +1386,7 @@ Result: [1, 2] ✓
 
 **HashMap freq · min-heap by freq · kick low freq**
 
----
+--
 
 # PATTERN 2: K Closest Points to Origin (LeetCode 973)
 
@@ -1396,7 +1396,7 @@ Result: [1, 2] ✓
 
 **Instant thought:** "MAX-heap by distance, size K! Kick farthest, keep closest!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -1472,7 +1472,7 @@ This is the OPPOSITE of what you might first think!
 3. At the end, heap contains K closest points
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -1528,7 +1528,7 @@ Verification:
   [5,-1]: d² = 26 (kicked out, too far)
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -1553,18 +1553,18 @@ int[][] kClosest(int[][] points, int k) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Using MIN-heap | Would kick out CLOSEST points! | Use MAX-heap by distance |
 | Using sqrt for distance | Unnecessary computation | Compare d² directly |
 | `a - b` comparator | That's min-heap! | Use `b - a` for max-heap |
 | Integer overflow in distance | x² + y² can overflow | Use `(long)x*x + (long)y*y` for large coords |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1584,7 +1584,7 @@ K CLOSEST POINTS
 
 **Memory phrase:** "K CLOSEST → MAX-heap by distance → kick far, keep close"
 
----
+--
 
 # PATTERN 3: Kth Smallest Element in Sorted Matrix (LeetCode 378)
 
@@ -1594,7 +1594,7 @@ K CLOSEST POINTS
 
 **Instant thought:** "Min-heap BFS from (0,0)! Expand right and down, poll K times!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -1673,7 +1673,7 @@ After K polls, we've found the Kth smallest!
 4. The Kth polled element is the answer!
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -1758,7 +1758,7 @@ Verification:
                     5th smallest = 11 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -1804,18 +1804,18 @@ int kthSmallest(int[][] matrix, int k) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Forgetting visited array | Same cell added multiple times | Track visited cells |
 | Only expanding one direction | Miss valid candidates | Expand BOTH right and down |
 | Returning after first poll | That's just the minimum | Poll K times |
 | Using max-heap | Would give largest first | Use min-heap for smallest |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1835,11 +1835,11 @@ KTH SMALLEST IN SORTED MATRIX
 
 **Memory phrase:** "Sorted matrix → min-heap BFS → expand right & down → poll K times"
 
----
+--
 
 # K-WAY MERGE FAMILY
 
----
+--
 
 # PATTERN 4: Merge K Sorted Lists (LeetCode 23)
 
@@ -1849,7 +1849,7 @@ KTH SMALLEST IN SORTED MATRIX
 
 **Instant thought:** "Min-heap of K heads! Poll smallest, push its next!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -1923,7 +1923,7 @@ Min-heap of K heads:
 3. Return the merged list
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -2024,7 +2024,7 @@ Step 9:
 Final Output: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2064,7 +2064,7 @@ ListNode mergeKLists(ListNode[] lists) {
 }
 ```
 
----
+--
 
 ## Why O(N log K)?
 
@@ -2084,18 +2084,18 @@ Compare to naive approach (merge 2 at a time):
 The heap keeps size bounded to K, making each operation O(log K)!
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Forgetting null check | NullPointerException on empty lists | Check `head != null` before adding |
 | Not pushing .next | Only get first elements | Always push `smallest.next` if exists |
 | Using max-heap | Would give largest first | Use min-heap (default in Java) |
 | Modifying original lists | May cause issues | This approach is fine (just relinks) |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2115,7 +2115,7 @@ MERGE K SORTED LISTS
 
 **Memory phrase:** "K heads in heap → poll smallest → push its next → O(N log K)"
 
----
+--
 
 # PATTERN 5: Find K Pairs with Smallest Sums (LeetCode 373)
 
@@ -2125,7 +2125,7 @@ MERGE K SORTED LISTS
 
 **Instant thought:** "Virtual sorted matrix! Min-heap BFS starting from first column!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2207,7 +2207,7 @@ This avoids the need for a visited array!
 3. Return result
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -2267,7 +2267,7 @@ Final Result: [(1,2), (1,4), (1,6)] ✓
 Sums: [3, 5, 7] — the 3 smallest!
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2307,7 +2307,7 @@ List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
 }
 ```
 
----
+--
 
 ## Why Only Expand Right (Not Down)?
 
@@ -2327,18 +2327,18 @@ Think of it as K parallel "streams" (one per row), and we're
 doing a K-way merge of these streams!
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Expanding both right and down | Duplicates without visited array | Only expand right, seed all rows |
 | Not limiting initial heap size | Unnecessary work if k < nums1.length | Use `min(nums1.length, k)` |
 | Forgetting empty array check | NullPointerException | Check lengths first |
 | Using wrong indices | Off-by-one errors | Carefully track i and j |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2358,7 +2358,7 @@ K PAIRS WITH SMALLEST SUMS
 
 **Memory phrase:** "Virtual matrix → seed first column → expand right only → K-way merge"
 
----
+--
 
 # PATTERN 6: Smallest Range Covering Elements from K Lists (LeetCode 632)
 
@@ -2368,7 +2368,7 @@ K PAIRS WITH SMALLEST SUMS
 
 **Instant thought:** "Min-heap + track max! Range = [heap.min, currentMax]. Advance min to shrink!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2449,7 +2449,7 @@ When any list is exhausted, we stop — can't maintain coverage anymore.
 3. Return the best range found
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -2595,7 +2595,7 @@ Verification:
   Size = 4 (smallest possible!)
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2646,18 +2646,18 @@ int[] smallestRange(List<List<Integer>> nums) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Forgetting to track max | Can't compute range without it | Update max when adding to heap |
 | Not stopping when list exhausted | Invalid range (missing a list) | Break when any list runs out |
 | Trying to shrink by moving max | Can only shrink by moving min | Always advance the minimum |
 | Wrong comparison for "better" | Off-by-one or wrong direction | Use `<` for strictly smaller range |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2678,11 +2678,11 @@ SMALLEST RANGE COVERING K LISTS
 
 **Memory phrase:** "Min-heap + track max → range = [min, max] → advance min to shrink"
 
----
+--
 
 # TWO HEAPS FAMILY
 
----
+--
 
 # PATTERN 7: Find Median from Data Stream (LeetCode 295)
 
@@ -2692,7 +2692,7 @@ SMALLEST RANGE COVERING K LISTS
 
 **Instant thought:** "Two heaps! Max-heap for left half, min-heap for right half!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2774,7 +2774,7 @@ Finding median:
 - Else → median = (left.peek() + right.peek()) / 2 (even count)
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -2858,7 +2858,7 @@ Final state:
   Median = 5 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2903,7 +2903,7 @@ class MedianFinder {
 }
 ```
 
----
+--
 
 ## Why This Works
 
@@ -2920,18 +2920,18 @@ For even count:
   Both same size → median is average of left.peek() and right.peek()
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Using two min-heaps | Left needs max-heap | `Collections.reverseOrder()` |
 | Wrong balance condition | Off-by-one errors | left can have AT MOST 1 extra |
 | Integer division | (5+8)/2 = 6, not 6.5 | Use `/ 2.0` for double |
 | Empty heap check | NullPointerException | Check `left.isEmpty()` first |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2950,7 +2950,7 @@ FIND MEDIAN FROM STREAM
 
 **Memory phrase:** "Max-heap left, min-heap right, balance and peek for median"
 
----
+--
 
 Add 15:
   15 > 5, goes to right
@@ -2994,7 +2994,7 @@ Sorted: [1, 3, 5, 8, 15] → Median = 5 ✓
 
 **max-heap left · min-heap right · meet at median · rebalance**
 
----
+--
 
 # PATTERN 8: Sliding Window Median (LeetCode 480)
 
@@ -3004,7 +3004,7 @@ Sorted: [1, 3, 5, 8, 15] → Median = 5 ✓
 
 **Instant thought:** "Two heaps (like Pattern 7) + lazy deletion! Mark removed, clean when at top!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -3086,7 +3086,7 @@ This gives us O(log n) amortized removal instead of O(n)!
 4. Return all medians
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -3193,7 +3193,7 @@ Median = left.peek() = 3 ✓
 Result: [1, -1, -1, 3] ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -3244,7 +3244,7 @@ double[] medianSlidingWindow(int[] nums, int k) {
             balance++;
         } else {
             right.offer(incoming);
-            balance--;
+            balance-;
         }
         
         // Rebalance based on logical sizes
@@ -3269,7 +3269,7 @@ double[] medianSlidingWindow(int[] nums, int k) {
 }
 ```
 
----
+--
 
 ## Why Track Balance?
 
@@ -3288,18 +3288,18 @@ If balance > 0: right is short, give to right
 If balance = 0: already balanced
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Using heap.size() for balance | Includes ghost elements | Track logical balance |
 | Forgetting to clean up tops | Median from invalid element | Always clean after rebalance |
 | Integer overflow in median | (a + b) can overflow | Use `(double)a + b` or `a + (b-a)/2.0` |
 | Not handling duplicates | Same value removed multiple times | Use count in toRemove map |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -3324,11 +3324,11 @@ SLIDING WINDOW MEDIAN
 
 **Memory phrase:** "Two heaps + lazy deletion → mark removed → clean tops → track balance"
 
----
+--
 
 # SCHEDULING & GREEDY FAMILY
 
----
+--
 
 # PATTERN 9: Task Scheduler (LeetCode 621)
 
@@ -3338,7 +3338,7 @@ SLIDING WINDOW MEDIAN
 
 **Instant thought:** "Max-heap by count + cooldown queue! Always pick highest count available!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -3423,7 +3423,7 @@ The flow:
 4. Return total time
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -3540,7 +3540,7 @@ Both heap and cooldown empty → DONE!
 Total time: 8 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -3588,7 +3588,7 @@ int leastInterval(char[] tasks, int n) {
 }
 ```
 
----
+--
 
 ## Why Greedy (Max Count First) Works
 
@@ -3606,18 +3606,18 @@ By always picking the highest count:
   - Minimize total idle time
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Using min-heap | Would pick lowest count first | Use max-heap (reverseOrder) |
 | Forgetting cooldown check | Tasks never return to heap | Check cooldown at each time step |
 | Wrong available time | Off-by-one error | Available at `time + n + 1` |
 | Not handling idle | Infinite loop | Increment time even when idle |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -3641,7 +3641,7 @@ TASK SCHEDULER
 
 **Memory phrase:** "Max-heap by count + cooldown queue → greedy picks highest → idle when empty"
 
----
+--
 
 # PATTERN 10: Reorganize String (LeetCode 767)
 
@@ -3651,7 +3651,7 @@ TASK SCHEDULER
 
 **Instant thought:** "Max-heap by frequency + hold previous! Greedy picks highest, holds for one turn!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -3747,7 +3747,7 @@ When is it impossible?
 5. Return result
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -3814,7 +3814,7 @@ Heap empty AND prev is null → DONE!
 Result: "aba" ✓
 ```
 
----
+--
 
 **Example of IMPOSSIBLE case:** `s = "aaab"`
 
@@ -3837,7 +3837,7 @@ Step 4: Heap is EMPTY but prev = (1,'a') exists!
         Return "" (IMPOSSIBLE!)
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -3874,7 +3874,7 @@ String reorganizeString(String s) {
         // Poll highest frequency char
         int[] curr = maxHeap.poll();
         result.append((char) (curr[1] + 'a'));
-        curr[0]--;  // Decrement count
+        curr[0]-;  // Decrement count
         
         // Add previous back to heap (its cooldown is over)
         if (prev != null) {
@@ -3892,18 +3892,18 @@ String reorganizeString(String s) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Not holding previous | Same char can be picked twice in a row | Always hold prev for one turn |
 | Forgetting to add prev back | Characters get lost | Add prev back before setting new prev |
 | Wrong impossible check | Return wrong answer | Check if heap empty but prev exists |
 | Using min-heap | Would pick lowest frequency first | Use max-heap (b[0] - a[0]) |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -3930,7 +3930,7 @@ REORGANIZE STRING
 
 **Memory phrase:** "Max-heap by freq + hold previous → greedy picks highest → impossible if stuck"
 
----
+--
 
 # PATTERN 11: Rearrange String K Distance Apart (LeetCode 358)
 
@@ -3940,7 +3940,7 @@ REORGANIZE STRING
 
 **Instant thought:** "Generalized Pattern 10! Max-heap + cooldown queue of size K!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -4028,7 +4028,7 @@ Example with k=3:
    Else return "" (impossible)
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -4150,7 +4150,7 @@ Verification:
   'c' at positions 2, 5 → distance = 3 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -4184,7 +4184,7 @@ String rearrangeString(String s, int k) {
         // Poll highest frequency
         int[] curr = maxHeap.poll();
         result.append((char) (curr[1] + 'a'));
-        curr[0]--;  // Decrement count
+        curr[0]-;  // Decrement count
         
         // Add to cooldown
         cooldown.offer(curr);
@@ -4203,18 +4203,18 @@ String rearrangeString(String s, int k) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Using k=1 logic | k=1 means adjacent OK | Handle k <= 1 as edge case |
 | Wrong queue size check | Off-by-one | Release when size >= k |
 | Forgetting count > 0 check | Adding exhausted chars to heap | Only add if count > 0 |
 | Not checking result length | May return partial result | Verify length == s.length() |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -4238,7 +4238,7 @@ REARRANGE K DISTANCE APART
 
 **Memory phrase:** "Max-heap + cooldown queue size K → release after K steps → back to heap"
 
----
+--
 
 # PATTERN 12: Meeting Rooms II (LeetCode 253)
 
@@ -4248,7 +4248,7 @@ REARRANGE K DISTANCE APART
 
 **Instant thought:** "Sort by start time + min-heap of end times! Reuse room if start >= earliest end!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -4260,9 +4260,9 @@ Input: intervals = [[0,30], [5,10], [15,20]]
 Find the minimum number of meeting rooms needed.
 
 Timeline visualization:
-  Room 1: |-------- Meeting [0,30] --------|
-  Room 2:      |--[5,10]--|
-                          |--[15,20]--|
+  Room 1: |---- Meeting [0,30] ----|
+  Room 2:      |-[5,10]-|
+                          |-[15,20]-|
 
 Meeting [5,10] overlaps with [0,30] → needs new room
 Meeting [15,20] doesn't overlap with [5,10] (starts after it ends)
@@ -4342,7 +4342,7 @@ The heap size at any point = number of rooms in use!
 4. Return heap size (= number of rooms needed)
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -4400,7 +4400,7 @@ Final heap size: 2
 Answer: 2 rooms needed ✓
 ```
 
----
+--
 
 **Another example:** `intervals = [[0,5], [1,2], [1,3], [2,4]]`
 
@@ -4415,7 +4415,7 @@ Process [2,4]: heap=[2,3,5], 2<=2, reuse! → heap=[3,4,5], rooms=3
 Answer: 3 rooms ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -4448,7 +4448,7 @@ int minMeetingRooms(int[][] intervals) {
 }
 ```
 
----
+--
 
 ## Why This Works
 
@@ -4468,18 +4468,18 @@ Note: We only check the EARLIEST end time because:
   - If the earliest has ended, we reuse that room (doesn't matter which)
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Forgetting to sort | Meetings processed in wrong order | Sort by start time first |
 | Using `<` instead of `<=` | Room free at exact end time | Use `<=` (end=10, start=10 is OK) |
 | Sorting by end time | Wrong algorithm | Sort by START time |
 | Not handling empty input | NullPointerException | Check length == 0 |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -4503,7 +4503,7 @@ MEETING ROOMS II
 
 **Memory phrase:** "Sort by start → min-heap of ends → reuse if end <= start → heap size = rooms"
 
----
+--
 
 # PATTERN 13: IPO (LeetCode 502)
 
@@ -4513,7 +4513,7 @@ MEETING ROOMS II
 
 **Instant thought:** "Two heaps! Min-heap by capital (unlock projects), max-heap by profit (pick best)!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -4594,7 +4594,7 @@ We need to answer two questions efficiently:
    → Poll the best one
 
 The flow:
-  [Min-heap by capital] ---(unlock when affordable)---> [Max-heap by profit]
+  [Min-heap by capital] --(unlock when affordable)--> [Max-heap by profit]
                                                               |
                                                               v
                                                         Pick best profit
@@ -4619,7 +4619,7 @@ The flow:
 4. Return final capital
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -4676,7 +4676,7 @@ Picked 2 projects (k=2), done!
 Final capital: 4 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -4720,7 +4720,7 @@ int findMaximizedCapital(int k, int w, int[] profits, int[] capital) {
 }
 ```
 
----
+--
 
 ## Why Greedy Works
 
@@ -4738,18 +4738,18 @@ The order of picking doesn't matter for projects with the same
 capital requirement — we just want the highest profit ones.
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Single heap | Can't efficiently find affordable + best profit | Use two heaps |
 | Not unlocking in a loop | Miss multiple affordable projects | Use while loop, not if |
 | Forgetting early termination | Infinite loop if no affordable | Check if byProfit is empty |
 | Wrong heap order | Pick wrong projects | Min by capital, max by profit |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -4774,11 +4774,11 @@ IPO (MAXIMIZE CAPITAL)
 
 **Memory phrase:** "Min-heap capital (unlock) → max-heap profit (pick best) → capital grows → more unlock"
 
----
+--
 
 # SPECIAL PATTERNS
 
----
+--
 
 # PATTERN 14: Ugly Number II (LeetCode 264)
 
@@ -4788,7 +4788,7 @@ IPO (MAXIMIZE CAPITAL)
 
 **Instant thought:** "Min-heap + generate candidates! Each ugly number spawns 3 more (×2, ×3, ×5)!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -4882,7 +4882,7 @@ Why Set?
 4. The nth polled number is the answer
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -4989,7 +4989,7 @@ The 10th ugly number is 12 ✓
 Sequence so far: 1, 2, 3, 4, 5, 6, 8, 9, 10, 12
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -5030,7 +5030,7 @@ int nthUglyNumber(int n) {
 }
 ```
 
----
+--
 
 ## Why Use Long?
 
@@ -5043,18 +5043,18 @@ Intermediate values can exceed Integer.MAX_VALUE (2^31 - 1).
 Using Long prevents overflow during multiplication.
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Using int | Overflow for large n | Use Long |
 | No duplicate check | Same number counted multiple times | Use HashSet |
 | Wrong loop count | Off-by-one error | Poll exactly n times |
 | Forgetting to add 1 | Missing the first ugly number | Initialize with 1 |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -5078,12 +5078,12 @@ UGLY NUMBER II
 
 **Memory phrase:** "Min-heap + Set → each ugly spawns ×2, ×3, ×5 → poll n times"
 
----
+--
 
 # MAANG Coverage Map
 
 | Pattern | Problem | LeetCode | Difficulty | Frequency |
-|---------|---------|----------|------------|-----------|
+|-----|-----|-----|------|------|
 | 0 | Kth Largest Element | 215 | Medium | 🔥🔥🔥 |
 | 1 | Top K Frequent Elements | 347 | Medium | 🔥🔥🔥 |
 | 2 | K Closest Points | 973 | Medium | 🔥🔥🔥 |
@@ -5100,7 +5100,7 @@ UGLY NUMBER II
 | 13 | IPO | 502 | Hard | 🔥🔥 |
 | 14 | Ugly Number II | 264 | Medium | 🔥🔥 |
 
----
+--
 
 # Heap Cheat Sheet
 
@@ -5127,7 +5127,7 @@ heap.isEmpty();   // Check empty: O(1)
 ## The 4 Patterns Quick Reference
 
 | Pattern | Heap Type | Key Insight |
-|---------|-----------|-------------|
+|-----|------|-------|
 | **Top K** | Opposite (min for K largest) | Kick out unwanted, keep wanted |
 | **K-Way Merge** | Min-heap of K heads | Always process global minimum |
 | **Two Heaps** | Max-heap + Min-heap | Split at median |
@@ -5136,13 +5136,13 @@ heap.isEmpty();   // Check empty: O(1)
 ## Common Mistakes
 
 | Mistake | Why It's Wrong | Fix |
-|---------|----------------|-----|
+|-----|--------|---|
 | `(a, b) -> a - b` | Integer overflow | Use `Integer.compare(a, b)` |
 | Max-heap for K largest | Kicks out large ones! | Use min-heap size K |
 | Forgetting to rebalance two heaps | Median becomes wrong | Always rebalance after insert |
 | Not handling empty heap | NullPointerException | Check `isEmpty()` before `peek()/poll()` |
 
----
+--
 
 # Mastery Checklist
 
@@ -5166,7 +5166,7 @@ heap.isEmpty();   // Check empty: O(1)
 - [ ] K Pairs Smallest Sums (virtual matrix BFS)
 - [ ] Ugly Number II (generate + min-heap)
 
----
+--
 
 # The Final Mental Model
 
@@ -5198,7 +5198,7 @@ heap.isEmpty();   // Check empty: O(1)
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
----
+--
 
 # Interview Explanation Template
 
@@ -5214,15 +5214,15 @@ When explaining heap solutions:
 
 5. **Mention edge cases:** "I handle [empty input / k=0 / k>n / duplicates] by [specific handling]."
 
----
+--
 
 **Remember:** A heap answers ONE question instantly: "What is the BEST candidate RIGHT NOW?" Define "best" correctly, and the solution follows!
 
----
+--
 
 # BONUS PATTERNS (Additional MAANG Coverage)
 
----
+--
 
 ## PATTERN 15: Kth Largest Element in a Stream (LeetCode 703)
 
@@ -5232,7 +5232,7 @@ When explaining heap solutions:
 
 **Instant thought:** "Persistent min-heap of size K! Same as Pattern 0, but heap persists across add() calls!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -5295,7 +5295,7 @@ add(val):
   3. Return heap.peek() (Kth largest)
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -5358,7 +5358,7 @@ add(4):
   (4 wasn't big enough)
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -5389,18 +5389,18 @@ class KthLargest {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Using max-heap | Would need to poll k times | Use min-heap size k |
 | Not reusing add() in constructor | Duplicate logic | Call add() for each initial element |
 | Forgetting size check | Heap grows unbounded | Check size > k after each add |
 | Returning after poll | Wrong element | Return peek(), not the polled value |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -5424,7 +5424,7 @@ KTH LARGEST IN STREAM
 
 **Memory phrase:** "Persistent VIP room → add, kick if full, peek = Kth largest"
 
----
+--
 
 ## PATTERN 16: Last Stone Weight (LeetCode 1046)
 
@@ -5434,7 +5434,7 @@ KTH LARGEST IN STREAM
 
 **Instant thought:** "Max-heap! Poll two largest, push difference if non-zero!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -5504,7 +5504,7 @@ Imagine a sumo tournament where:
    Else return the last stone's weight
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -5567,7 +5567,7 @@ Heap size = 1, stop!
 Return heap.peek() = 1 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -5599,18 +5599,18 @@ int lastStoneWeight(int[] stones) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Using min-heap | Would pick smallest, not largest | Use max-heap (reverseOrder) |
 | Pushing when a == b | Creates phantom 0-weight stone | Only push if a != b |
 | Not checking empty | NullPointerException | Return 0 if heap empty |
 | Wrong subtraction order | Negative weight | Always do larger - smaller (a - b since a >= b) |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -5633,7 +5633,7 @@ LAST STONE WEIGHT
 
 **Memory phrase:** "Max-heap → poll two heaviest → push difference → repeat until done"
 
----
+--
 
 ## PATTERN 17: Design Twitter (LeetCode 355)
 
@@ -5643,7 +5643,7 @@ LAST STONE WEIGHT
 
 **Instant thought:** "K-way merge! Each user's tweets are a sorted stream. Max-heap by timestamp!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -5718,7 +5718,7 @@ Think of each user as a news channel with their own timeline:
 5. Return the tweet IDs
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -5769,7 +5769,7 @@ Result: [102, 202, 201, 101] ✓
 (Most recent first: 102 at t=3, then 202 at t=2, etc.)
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -5841,7 +5841,7 @@ class Twitter {
 }
 ```
 
----
+--
 
 ## Optimization: True K-Way Merge
 
@@ -5855,18 +5855,18 @@ then expand as we poll (like Pattern 4: Merge K Sorted Lists).
 This is O(K log K) for K users instead of O(N log N) for N total tweets.
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Forgetting self's tweets | User should see own tweets | Include userId in feed |
 | Using min-heap | Would get oldest first | Use max-heap (b[0] - a[0]) |
 | Allowing self-follow | Duplicate tweets in feed | Check followerId != followeeId |
 | Not handling missing users | NullPointerException | Use containsKey checks |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -5891,7 +5891,7 @@ DESIGN TWITTER
 
 **Memory phrase:** "K-way merge of tweet streams → max-heap by timestamp → top 10"
 
----
+--
 
 ## PATTERN 18: Single-Threaded CPU (LeetCode 1834)
 
@@ -5901,7 +5901,7 @@ DESIGN TWITTER
 
 **Instant thought:** "Sort by arrival + min-heap by processing time! Two-phase: unlock by time, pick by duration!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -5951,7 +5951,7 @@ Imagine a receptionist handling requests:
 │      - Min-heap to quickly get shortest task                        │
 │                                                                      │
 │   Flow:                                                              │
-│   [Waiting Room] ---(time passes)---> [Ready Queue] ---> [Process]  │
+│   [Waiting Room] --(time passes)--> [Ready Queue] --> [Process]  │
 │                                                                      │
 └─────────────────────────────────────────────────────────────────────┘
 ```
@@ -5995,7 +5995,7 @@ The flow:
 6. Return result
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -6084,7 +6084,7 @@ All tasks processed!
 Result: [0, 2, 3, 1] ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -6133,7 +6133,7 @@ int[] getOrder(int[][] tasks) {
 }
 ```
 
----
+--
 
 ## Why Handle Empty Ready Queue?
 
@@ -6150,18 +6150,18 @@ Example:
   We jump time to 200 (next arrival) instead of incrementing by 1.
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Forgetting original index | Can't return correct order | Store index in task tuple |
 | Not handling time jump | Infinite loop when queue empty | Jump to next arrival time |
 | Wrong tie-breaker | Wrong task selected | Compare by index when processing times equal |
 | Sorting by processing time | Wrong arrival order | Sort by enqueue time first |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -6185,12 +6185,12 @@ SINGLE-THREADED CPU
 
 **Memory phrase:** "Sort by arrival → min-heap by duration → jump time if empty → process shortest"
 
----
+--
 
 # Updated MAANG Coverage Map (Complete L5)
 
 | Pattern | Problem | LeetCode | Difficulty | Frequency |
-|---------|---------|----------|------------|-----------|
+|-----|-----|-----|------|------|
 | **Top K Family** |
 | 0 | Kth Largest Element | 215 | Medium | 🔥🔥🔥 |
 | 1 | Top K Frequent Elements | 347 | Medium | 🔥🔥🔥 |
@@ -6217,7 +6217,7 @@ SINGLE-THREADED CPU
 | 17 | Design Twitter | 355 | Medium | 🔥🔥 |
 | 18 | Single-Threaded CPU | 1834 | Medium | 🔥🔥 |
 
----
+--
 
 # Final Mastery Checklist (Complete L5+ Coverage)
 
@@ -6246,7 +6246,7 @@ SINGLE-THREADED CPU
 - [ ] Design Twitter (K-way merge design)
 - [ ] Single-Threaded CPU (sort + available heap)
 
----
+--
 
 # The Ultimate Heap Decision Flowchart
 
@@ -6285,6 +6285,6 @@ SINGLE-THREADED CPU
                                                      └─────────────┘
 ```
 
----
+--
 
 **You are now L5 MAANG ready for Heap & Priority Queue!** 🚀

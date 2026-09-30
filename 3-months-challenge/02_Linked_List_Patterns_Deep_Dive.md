@@ -1,22 +1,22 @@
 # Section 11 — Linked List Patterns Deep Dive (MAANG L5 Coverage)
 
----
+--
 
 # INDEX — Quick Navigation (23 Patterns)
 
 ## Core Concepts
 | Section | Description |
-|---------|-------------|
+|-----|-------|
 | [The "One Sentence"](#the-one-sentence-that-unlocks-all-linked-list-problems) | Unlocks all LL problems |
 | [5 Pointer Setups](#the-5-pointer-setups-your-configurations) | Your configurations |
 | [4 Core Moves](#the-4-core-moves-your-actions) | Your actions |
-| [Decision Tree](#the-master-decision-tree--pick-your-weapon-in-10-seconds) | Pick your weapon |
+| [Decision Tree](#the-master-decision-tree-pick-your-weapon-in-10-seconds) | Pick your weapon |
 
----
+--
 
 ## Reversal Family (0-3)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 0 | [Reverse Linked List](#pattern-0-reverse-linked-list-leetcode-206) | 206 |
 | 1 | [Reverse Linked List II](#pattern-1-reverse-linked-list-ii-leetcode-92) | 92 |
 | 2 | [Reverse Nodes in k-Group](#pattern-2-reverse-nodes-in-k-group-leetcode-25) | 25 |
@@ -24,27 +24,27 @@
 
 ## Cycle Family (4-5)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 4 | [Linked List Cycle](#pattern-4-linked-list-cycle-leetcode-141) | 141 |
 | 5 | [Linked List Cycle II](#pattern-5-linked-list-cycle-ii-leetcode-142) | 142 |
 
 ## Position Finding (6-8)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 6 | [Middle of Linked List](#pattern-6-middle-of-linked-list-leetcode-876) | 876 |
 | 7 | [Remove Nth from End](#pattern-7-remove-nth-node-from-end-leetcode-19) | 19 |
 | 8 | [Intersection of Two Lists](#pattern-8-intersection-of-two-linked-lists-leetcode-160) | 160 |
 
 ## Merge & Sort Family (9-11)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 9 | [Merge Two Sorted Lists](#pattern-9-merge-two-sorted-lists-leetcode-21) | 21 |
 | 10 | [Merge K Sorted Lists](#pattern-10-merge-k-sorted-lists-leetcode-23) | 23 |
 | 11 | [Sort List](#pattern-11-sort-list-leetcode-148) | 148 |
 
 ## Structural Manipulation (12-15, 22)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 12 | [Reorder List](#pattern-12-reorder-list-leetcode-143) | 143 |
 | 13 | [Palindrome Linked List](#pattern-13-palindrome-linked-list-leetcode-234) | 234 |
 | 14 | [Partition List](#pattern-14-partition-list-leetcode-86) | 86 |
@@ -53,30 +53,30 @@
 
 ## Removal & Deduplication (16-17)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 16 | [Remove Duplicates I](#pattern-16-remove-duplicates-from-sorted-list-leetcode-83) | 83 |
 | 17 | [Remove Duplicates II](#pattern-17-remove-duplicates-from-sorted-list-ii-leetcode-82) | 82 |
 
 ## Math on Lists (18-19)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 18 | [Add Two Numbers](#pattern-18-add-two-numbers-leetcode-2) | 2 |
 | 19 | [Add Two Numbers II](#pattern-19-add-two-numbers-ii-leetcode-445) | 445 |
 
 ## Advanced / Design (20-21)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 20 | [Copy List with Random Pointer](#pattern-20-copy-list-with-random-pointer-leetcode-138) | 138 |
 | 21 | [LRU Cache](#pattern-21-lru-cache-leetcode-146) | 146 |
 
 ## Reference Sections
 | Section |
-|---------|
+|-----|
 | [MAANG Coverage Map](#updated-maang-coverage-map) |
 | [Pattern Recognition Cheat Sheet](#pattern-recognition-cheat-sheet) |
 | [Mastery Checklist](#mastery-checklist) |
 
----
+--
 
 # The "One Sentence That Unlocks All Linked List Problems"
 
@@ -88,7 +88,7 @@ That's the entire subject. Every linked list problem — from easy to hard — i
 3. **Redirect** pointers in the right order
 4. **Move** forward correctly
 
----
+--
 
 ## 📋 THE JUNIOR DEV CHEAT CARD (Memorize This!)
 
@@ -150,7 +150,7 @@ That's the entire subject. Every linked list problem — from easy to hard — i
 ╚═══════════════════════════════════════════════════════════════════════╝
 ```
 
----
+--
 
 ## 🚀 QUICK START: The 60-Second Linked List Approach
 
@@ -197,7 +197,7 @@ next = curr.next;      // Save the next node FIRST
 curr.next = prev;      // NOW safe to redirect
 ```
 
----
+--
 
 ## 🎯 WORKED EXAMPLE: How a Junior Dev Should Think
 
@@ -267,7 +267,7 @@ Step 4: next=null, 4→3, prev=4, curr=null
 curr is null, loop ends. Return prev (which is 4, the new head).
 ```
 
----
+--
 
 ### Another Example: "Find if linked list has a cycle"
 
@@ -293,19 +293,19 @@ boolean hasCycle(ListNode head) {
 }
 ```
 
----
+--
 
 ## The Mental Model: Linked Lists vs Arrays vs Trees
 
 | Data Structure | Mental Model | Core Question |
-|----------------|--------------|---------------|
+|--------|-------|--------|
 | **Array** | A row of numbered boxes | "Which INDEX do I need?" |
 | **Tree** | A family tree (parent/children) | "What do I need from ABOVE vs BELOW?" |
 | **Linked List** | A chain of handholding people | "Who should hold whose hand next?" |
 
 **The Linked List Insight:** You can't jump to position 5. You must walk from the start. But you CAN instantly change who's holding whose hand (redirect pointers) — that's the superpower!
 
----
+--
 
 ## Why Linked Lists Feel Hard (And How to Fix It)
 
@@ -316,13 +316,13 @@ boolean hasCycle(ListNode head) {
 2. What SHOULD `curr` point to AFTER this step?
 3. Will I lose access to anything if I change it? (If yes, SAVE it first!)
 
----
+--
 
 # The 5 Pointer Setups (Your "Configurations")
 
 Think of these as your **5 weapons**. Every linked list problem uses one (or a combination). Learn to recognize which weapon to draw!
 
----
+--
 
 ## Setup 1: The Reversal Setup (prev, curr, next)
 
@@ -381,7 +381,7 @@ return prev;  // prev is the new head!
 
 **Memory Trick:** "Save, Flip, March, March" or "SFMM"
 
----
+--
 
 ## Setup 2: The Fast-Slow Setup (Tortoise & Hare)
 
@@ -447,7 +447,7 @@ Why? The math works out: F = (cycle_length - a)
 Both pointers travel F steps to reach the entry point.
 ```
 
----
+--
 
 ## Setup 3: The Runner/Gap Setup (Head Start)
 
@@ -514,7 +514,7 @@ return slow;  // slow is at Nth from end
 
 **Memory Trick:** "Head start N, then march together, fast hits null = slow at target"
 
----
+--
 
 ## Setup 4: The Dummy Head Setup (Fake First Node)
 
@@ -566,7 +566,7 @@ return dummy.next;  // Return the REAL head
 
 **Memory Trick:** "When in doubt, dummy it out!"
 
----
+--
 
 ## Setup 5: The Two-List Setup (Two Fingers Walking)
 
@@ -625,20 +625,20 @@ return dummy.next;
 
 **Memory Trick:** "Two fingers, compare, attach smaller, advance that finger"
 
----
+--
 
 # The 4 Core Moves (Your "Actions")
 
 Every pointer manipulation is one of these 4 moves. Master these and you can solve ANY linked list problem!
 
 | Move | What It Does | Code | Visual | When to Use |
-|------|--------------|------|--------|-------------|
+|---|-------|---|----|-------|
 | **REDIRECT** | Change where a pointer points | `curr.next = prev` | `A → B` becomes `A ← B` | Reversing |
 | **SKIP** | Jump over a node | `prev.next = curr.next` | `A → B → C` becomes `A ──→ C` | Deleting |
 | **ATTACH** | Connect to another node | `tail.next = node` | `A` + `B` = `A → B` | Merging, building |
 | **SWAP** | Exchange two nodes | Multiple redirects | `A ⇄ B` | Swapping pairs |
 
----
+--
 
 ## Move 1: REDIRECT (Flip the Arrow)
 
@@ -663,7 +663,7 @@ A.next = X;                // Now safe to redirect
 // savedB still points to B
 ```
 
----
+--
 
 ## Move 2: SKIP (Jump Over a Node)
 
@@ -679,7 +679,7 @@ Code: A.next = A.next.next
 
 **Use Case:** Deleting a node when you have access to the node BEFORE it.
 
----
+--
 
 ## Move 3: ATTACH (Connect Two Nodes)
 
@@ -695,7 +695,7 @@ Code: tail.next = newNode
 
 **Use Case:** Building result lists, merging.
 
----
+--
 
 ## Move 4: SWAP (Exchange Two Nodes)
 
@@ -713,7 +713,7 @@ Steps:
 
 **Use Case:** Swap pairs, certain reordering problems.
 
----
+--
 
 # The Master Decision Tree — Pick Your Weapon in 10 Seconds
 
@@ -758,20 +758,20 @@ When you see a linked list problem, ask these questions IN ORDER:
                                                           └────────────┘ └──────────┘
 ```
 
----
+--
 
 ## Compound Patterns (Multiple Techniques Combined)
 
 Some problems require COMBINING techniques. Recognize these patterns:
 
 | Problem | Techniques Combined | Pattern |
-|---------|---------------------|---------|
+|-----|-----------|-----|
 | **Reorder List** | Middle + Reverse + Interleave | 12 |
 | **Palindrome** | Middle + Reverse + Compare | 13 |
 | **Sort List** | Middle + Recurse + Merge | 11 |
 | **Cycle Entry** | Fast-Slow + Reset + Walk | 5 |
 
----
+--
 
 # The 6-Question Template (Ask For EVERY Pattern)
 
@@ -819,7 +819,7 @@ Before writing ANY code, answer these 6 questions:
 └────────────────────────────────────────────────────────────────────┘
 ```
 
----
+--
 
 # The #1 Linked List Mistake: "Save Before You Break"
 
@@ -870,14 +870,14 @@ RIGHT:
   curr.next = prev  →  curr → [B] → [A]  (C still accessible via next!)
 ```
 
----
+--
 
 # Quick Reference Card
 
 ## The 5 Setups at a Glance
 
 | Setup | Pointers | Trigger Words | Memory Trick |
-|-------|----------|---------------|--------------|
+|----|-----|--------|-------|
 | Reversal | `prev, curr, next` | "reverse", "flip" | "Save, Flip, March, March" |
 | Fast-Slow | `slow, fast` | "middle", "cycle" | "1 and 2, meet means loop" |
 | Runner | `slow, fast` (gap) | "from end", "Nth last" | "Head start, march together" |
@@ -887,13 +887,13 @@ RIGHT:
 ## The 4 Moves at a Glance
 
 | Move | Code | Use For |
-|------|------|---------|
+|---|---|-----|
 | Redirect | `A.next = X` | Reversing |
 | Skip | `A.next = A.next.next` | Deleting |
 | Attach | `tail.next = node` | Building |
 | Swap | Multiple redirects | Exchanging |
 
----
+--
 
 # PATTERN 0: Reverse Linked List (LeetCode 206)
 
@@ -903,7 +903,7 @@ RIGHT:
 
 **Instant thought:** "Reversal Setup: prev, curr, next — redirect arrows!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -976,7 +976,7 @@ next: Saved reference to curr.next
 3. Return prev (it's now pointing to the old tail = new head)
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -1051,7 +1051,7 @@ Return prev = 3 (the new head!)
 Output: 3 → 2 → 1 → null ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -1079,7 +1079,7 @@ ListNode reverseList(ListNode head) {
 }
 ```
 
----
+--
 
 ## The Golden Rule: SAVE BEFORE YOU BREAK!
 
@@ -1094,27 +1094,27 @@ curr.next = prev;           // Redirect
 curr = next;                // Move using saved value
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Not saving next | Lose rest of list | `next = curr.next` FIRST |
 | Returning head | Head is now the tail! | Return `prev` |
 | Wrong loop condition | Off-by-one | `while (curr != null)` |
 
----
+--
 
 ## Edge Cases
 
 | Case | What Happens |
-|------|--------------|
+|---|-------|
 | Empty list (`null`) | Loop never runs, return `prev` (null) ✓ |
 | Single node | One iteration, returns that node ✓ |
 | Two nodes | Two iterations, works correctly ✓ |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1133,12 +1133,12 @@ REVERSE LINKED LIST
 
 **Memory phrase:** "Save next, flip arrow, move forward, return prev"
 
----
+--
 
 ## 🔄 Variations & Twists
 
 | Variation | Twist |
-|-----------|-------|
+|------|----|
 | Reverse recursively | O(n) space due to call stack |
 | Reverse in groups | Pattern 2 (k-Group) |
 | Reverse a segment | Pattern 1 (Reverse II) |
@@ -1147,7 +1147,7 @@ REVERSE LINKED LIST
 
 **`prev, curr, next` · save before break · flip arrow · return prev**
 
----
+--
 
 # PATTERN 1: Reverse Linked List II (LeetCode 92)
 
@@ -1157,7 +1157,7 @@ REVERSE LINKED LIST
 
 **Instant thought:** "Reversal Setup + Anchors (conn, tail) — find the node BEFORE the segment, mark the first node of segment, reverse, reconnect!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -1235,7 +1235,7 @@ What if left = 1? (Reverse from the very beginning)
 6. Return dummy.next
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -1368,7 +1368,7 @@ Return dummy.next = node 1
 Output: 1 → 4 → 3 → 2 → 5 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -1409,30 +1409,30 @@ ListNode reverseBetween(ListNode head, int left, int right) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Forgetting to save `tail` before reversing | After reversal, you can't find where segment started! | `tail = conn.next` BEFORE the reversal loop |
 | Off-by-one finding `conn` | conn should be at position left-1, not left | Loop condition: `i < left` (not `i <= left`) |
 | Not using dummy head | If left=1, there's no node before segment | Always use dummy: `dummy.next = head` |
 | Wrong number of iterations | Reversing too many or too few nodes | Exactly `right - left + 1` iterations |
 | Forgetting to reconnect both ends | List becomes disconnected | Both `conn.next = prev` AND `tail.next = curr` |
 
----
+--
 
 ## Edge Cases
 
 | Case | What Happens |
-|------|--------------|
+|---|-------|
 | `left = 1` | Dummy handles it — conn = dummy |
 | `left = right` | Reverse 1 node = no change (still works) |
 | `right = length` | tail.next = null (curr is null after loop) |
 | Single node list | If left=right=1, returns same node |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1453,7 +1453,7 @@ REVERSE LINKED LIST II
 
 **Memory phrase:** "Dummy, conn, tail, reverse, reconnect both ends"
 
----
+--
 
 # PATTERN 2: Reverse Nodes in k-Group (LeetCode 25)
 
@@ -1463,7 +1463,7 @@ REVERSE LINKED LIST II
 
 **Instant thought:** "Pattern 1 in a loop! For each group: count k, reverse, reconnect, move to next group."
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -1542,7 +1542,7 @@ After reversing group [A,B,C] with k=3:
 3. Return dummy.next
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -1678,7 +1678,7 @@ Return dummy.next = node 2
 Output: 2 → 1 → 4 → 3 → 5 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -1734,30 +1734,30 @@ ListNode reverseKGroup(ListNode head, int k) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Not checking if k nodes exist | Reverses partial groups incorrectly | Count k nodes first, break if `kth == null` |
 | Wrong groupPrev update | Loses track of where to reconnect | `groupPrev = groupPrev.next` (old first, now last) |
 | Setting prev = null in reversal | Last node of group points to null instead of groupNext | Set `prev = groupNext` before reversing |
 | Off-by-one in counting | Reverses wrong number of nodes | Count exactly k times: `for (i = 0; i < k; ...)` |
 | Forgetting dummy head | Can't handle k=1 or reversing from head | Always use dummy |
 
----
+--
 
 ## Edge Cases
 
 | Case | What Happens |
-|------|--------------|
+|---|-------|
 | `k = 1` | No reversal needed (each group is 1 node) |
 | `k > length` | No reversal (kth becomes null immediately) |
 | `k = length` | Entire list reversed once |
 | Empty list | Loop never runs, returns null |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1779,7 +1779,7 @@ REVERSE K-GROUP
 
 **Memory phrase:** "Count k, reverse group, reconnect, advance groupPrev, repeat"
 
----
+--
 
 # PATTERN 3: Swap Nodes in Pairs (LeetCode 24)
 
@@ -1789,7 +1789,7 @@ REVERSE K-GROUP
 
 **Instant thought:** "This is k-Group with k=2! Or simpler: for each pair, do 3 pointer redirects."
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -1864,7 +1864,7 @@ What if we need to swap the first pair?
 3. Return dummy.next
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -1981,7 +1981,7 @@ Return dummy.next = node 2
 Output: 2 → 1 → 4 → 3 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2020,29 +2020,29 @@ ListNode swapPairs(ListNode head) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Wrong redirect order | Lose access to nodes before redirecting | Do first.next first, then second.next, then prev.next |
 | Moving prev incorrectly | prev should be at first (now second in pair) | `prev = first` not `prev = second` |
 | Not checking both conditions | NPE if only one node left | Check `prev.next != null && prev.next.next != null` |
 | Forgetting dummy head | Can't swap first pair | Always use dummy |
 
----
+--
 
 ## Edge Cases
 
 | Case | What Happens |
-|------|--------------|
+|---|-------|
 | Empty list | Loop never runs, returns null |
 | Single node | prev.next.next is null, loop never runs |
 | Odd number of nodes | Last node stays in place |
 | Two nodes | One swap, returns second → first |
 
----
+--
 
 ## Alternative: Using k-Group with k=2
 
@@ -2051,7 +2051,7 @@ ListNode swapPairs(ListNode head) {
 // But the direct approach above is simpler and more efficient.
 ```
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2073,7 +2073,7 @@ SWAP PAIRS
 
 **Memory phrase:** "First→past, Second→first, Prev→second, move prev to first"
 
----
+--
 
 # PATTERN 4: Linked List Cycle (LeetCode 141)
 
@@ -2083,7 +2083,7 @@ SWAP PAIRS
 
 **Instant thought:** "Fast-Slow pointers! If they meet → cycle. If fast hits null → no cycle."
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2163,7 +2163,7 @@ Fast ALWAYS catches slow within C steps (cycle length).
 4. If fast reaches null → no cycle
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -2241,7 +2241,7 @@ Step 1:
 Loop exits, return FALSE — no cycle!
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2266,7 +2266,7 @@ boolean hasCycle(ListNode head) {
 }
 ```
 
----
+--
 
 ## Why Check `fast != null && fast.next != null`?
 
@@ -2280,17 +2280,17 @@ For this to be safe:
 If either is null → we've reached the end → no cycle!
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Only checking `fast != null` | `fast.next.next` crashes if `fast.next` is null | Check both conditions |
 | Comparing values instead of references | Two nodes can have same value but be different | Use `slow == fast` (reference equality) |
 | Moving before comparing | Might miss the meeting point | Compare AFTER moving |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2309,7 +2309,7 @@ LINKED LIST CYCLE
 
 **Memory phrase:** "Fast catches slow in a cycle, hits null if no cycle"
 
----
+--
 
 ```java
 // WRONG: Checking in wrong order
@@ -2323,7 +2323,7 @@ while (fast != null && fast.next != null)
 
 **slow=1, fast=2 · meet = cycle · null = no cycle**
 
----
+--
 
 # PATTERN 5: Linked List Cycle II (LeetCode 142)
 
@@ -2333,7 +2333,7 @@ while (fast != null && fast.next != null)
 
 **Instant thought:** "Floyd's Algorithm Phase 2! First detect cycle (fast-slow meet), then reset slow to head and move both at speed 1 — they meet at cycle entry!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2423,7 +2423,7 @@ PHASE 2: Find cycle entry
   4. Return that node
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -2507,7 +2507,7 @@ Step 2:
 Return node 3 (the cycle entry) ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2545,29 +2545,29 @@ ListNode detectCycle(ListNode head) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Forgetting to reset slow to head | Phase 2 won't work — both start at meeting point | `slow = head` after detecting cycle |
 | Moving fast at speed 2 in Phase 2 | They won't meet at entry | Both must move at speed 1 in Phase 2 |
 | Returning meeting point instead of entry | Meeting point ≠ cycle entry | Continue to Phase 2 to find actual entry |
 | Not handling no-cycle case | Returns garbage | Return null if fast reaches null |
 
----
+--
 
 ## Edge Cases
 
 | Case | What Happens |
-|------|--------------|
+|---|-------|
 | No cycle | Fast reaches null, return null |
 | Cycle at head | Entry = head, Phase 2 returns immediately |
 | Single node with self-loop | Entry = that node |
 | Two nodes with cycle | Works correctly |
 
----
+--
 
 ## Why Phase 2 Works: Intuitive Explanation
 
@@ -2595,7 +2595,7 @@ And F steps from head also reaches the entry!
 So both pointers meet at the entry. QED.
 ```
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2617,7 +2617,7 @@ LINKED LIST CYCLE II
 
 **Memory phrase:** "Phase 1: detect (fast=2). Phase 2: reset slow to head, both speed 1, meet at entry."
 
----
+--
 
 # PATTERN 6: Middle of Linked List (LeetCode 876)
 
@@ -2627,7 +2627,7 @@ LINKED LIST CYCLE II
 
 **Instant thought:** "Fast-Slow! When fast reaches the end, slow is at the middle."
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2705,7 +2705,7 @@ Slow is at position n/2 = the middle!
 4. Return slow
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -2795,7 +2795,7 @@ Step 3:
 Return slow = 3 (the second middle) ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2818,7 +2818,7 @@ ListNode middleNode(ListNode head) {
 }
 ```
 
----
+--
 
 ## Getting the FIRST Middle (Left-Middle)
 
@@ -2845,27 +2845,27 @@ ListNode getLeftMiddle(ListNode head) {
 // Returns 2 (left-middle) instead of 3 (right-middle)
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Only checking `fast != null` | `fast.next.next` crashes if `fast.next` is null | Check both `fast != null && fast.next != null` |
 | Wrong order of conditions | `fast.next != null && fast != null` causes NPE | Check `fast != null` FIRST |
 | Confusing left vs right middle | Different problems want different middles | Know which one you need |
 
----
+--
 
 ## Edge Cases
 
 | Case | What Happens |
-|------|--------------|
+|---|-------|
 | Single node | Loop never runs, returns head |
 | Two nodes | One iteration, returns second node |
 | Empty list | Would crash — add null check if needed |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2888,7 +2888,7 @@ MIDDLE OF LINKED LIST
 
 **Memory phrase:** "Slow by 1, fast by 2, fast finishes → slow at middle"
 
----
+--
 
 # PATTERN 7: Remove Nth Node from End (LeetCode 19)
 
@@ -2898,7 +2898,7 @@ MIDDLE OF LINKED LIST
 
 **Instant thought:** "Runner/Gap technique! Give fast a head start of n+1, then move both. When fast hits null, slow is right BEFORE the target."
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2973,7 +2973,7 @@ What if n = list length? (Remove the first node)
 7. Return dummy.next
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -3063,7 +3063,7 @@ Return dummy.next = node 1
 Output: 1 → 2 → 3 → 5 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -3099,28 +3099,28 @@ ListNode removeNthFromEnd(ListNode head, int n) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Gap of n instead of n+1 | slow lands AT target, can't delete | Use gap of n+1: `for (i = 0; i <= n; ...)` |
 | Not using dummy head | Can't handle removing head node | Always use dummy |
 | Off-by-one in gap creation | Wrong node gets deleted | Trace through with small example |
 | Forgetting to return dummy.next | Returns wrong head if head was removed | Always return `dummy.next` |
 
----
+--
 
 ## Edge Cases
 
 | Case | What Happens |
-|------|--------------|
+|---|-------|
 | n = list length | Remove head, dummy handles it |
 | n = 1 | Remove last node |
 | Single node, n=1 | Remove only node, return null |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -3141,7 +3141,7 @@ REMOVE NTH FROM END
 
 **Memory phrase:** "Dummy, gap of n+1, move together, slow before target, skip it"
 
----
+--
 
 # PATTERN 8: Intersection of Two Linked Lists (LeetCode 160)
 
@@ -3151,7 +3151,7 @@ REMOVE NTH FROM END
 
 **Instant thought:** "Two pointers with path swapping! When one reaches null, switch to the other list's head. They'll meet at intersection!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -3237,7 +3237,7 @@ Both are at the same position in the shared part!
 6. Return pA (or pB, they're the same)
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -3322,7 +3322,7 @@ Step 7:
 Return node 6 (the intersection) ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -3351,29 +3351,29 @@ ListNode getIntersectionNode(ListNode headA, ListNode headB) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Comparing values instead of references | Two nodes can have same value but be different | Use `pA == pB` (reference equality) |
 | Switching before reaching null | Switches too early, wrong distance | Switch when `pA == null`, not `pA.next == null` |
 | Infinite loop if no intersection | Both keep switching forever | The math guarantees they meet at null if no intersection |
 | Not handling null inputs | NPE on empty lists | Check `headA == null || headB == null` first |
 
----
+--
 
 ## Edge Cases
 
 | Case | What Happens |
-|------|--------------|
+|---|-------|
 | No intersection | Both reach null at same time, return null |
 | Same list (headA == headB) | Return headA immediately |
 | One list is empty | Return null |
 | Intersection at head | Works correctly |
 
----
+--
 
 ## Why Not Just Compare Lengths?
 
@@ -3387,7 +3387,7 @@ ListNode getIntersectionNode(ListNode headA, ListNode headB) {
 // - Same O(m+n) time complexity
 ```
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -3408,7 +3408,7 @@ INTERSECTION OF TWO LISTS
 
 **Memory phrase:** "Walk both paths, switch at end, meet at intersection"
 
----
+--
 
 # PATTERN 9: Merge Two Sorted Lists (LeetCode 21)
 
@@ -3418,7 +3418,7 @@ INTERSECTION OF TWO LISTS
 
 **Instant thought:** "Dummy head + two pointers! Compare heads, attach smaller, advance that pointer. Attach remainder at end."
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -3489,7 +3489,7 @@ We need THREE pointers:
 4. Return dummy.next
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -3599,7 +3599,7 @@ Return dummy.next = node 1
 Output: 1 → 2 → 3 → 4 → 5 → 6 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -3634,29 +3634,29 @@ ListNode mergeTwoLists(ListNode list1, ListNode list2) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Forgetting to advance tail | All nodes point to same place | `tail = tail.next` after each attach |
 | Creating new nodes | Wastes memory, not needed | Just redirect pointers |
 | Complex remainder handling | Unnecessary complexity | `tail.next = (list1 != null) ? list1 : list2` |
 | Not using dummy | Special case for first node | Always use dummy for merge |
 
----
+--
 
 ## Edge Cases
 
 | Case | What Happens |
-|------|--------------|
+|---|-------|
 | One list empty | Attach the other list entirely |
 | Both lists empty | Return null (dummy.next = null) |
 | Lists of different lengths | Remainder attached at end |
 | Duplicate values | `<=` ensures stable merge |
 
----
+--
 
 ## Time & Space Complexity
 
@@ -3669,7 +3669,7 @@ Space: O(1)
        - NOT creating new nodes, just redirecting
 ```
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -3692,7 +3692,7 @@ MERGE TWO SORTED LISTS
 
 **Memory phrase:** "Compare heads, attach smaller, advance, attach remainder"
 
----
+--
 
 # PATTERN 10: Merge K Sorted Lists (LeetCode 23)
 
@@ -3702,7 +3702,7 @@ MERGE TWO SORTED LISTS
 
 **Instant thought:** "Min-Heap of heads (O(n log k)) OR Divide & Conquer (merge pairs recursively)!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -3784,7 +3784,7 @@ This is like merge sort, but on lists instead of elements!
 6. Merge the two resulting lists (Pattern 9!)
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step) — Min-Heap
 
@@ -3902,7 +3902,7 @@ Heap empty, return dummy.next
 Output: 1 → 1 → 2 → 3 → 4 → 4 → 5 → 6 ✓
 ```
 
----
+--
 
 ## The Code — Approach 1: Min-Heap (With Line-by-Line Explanation)
 
@@ -3942,7 +3942,7 @@ ListNode mergeKLists(ListNode[] lists) {
 }
 ```
 
----
+--
 
 ## The Code — Approach 2: Divide & Conquer (With Line-by-Line Explanation)
 
@@ -3991,28 +3991,28 @@ ListNode mergeTwoLists(ListNode l1, ListNode l2) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Adding null to heap | NPE when comparing | Check `if (head != null)` before adding |
 | Wrong comparator | Max-heap instead of min-heap | Use `(a, b) -> a.val - b.val` for min-heap |
 | Forgetting to add next node | Loses rest of that list | `if (smallest.next != null) heap.offer(...)` |
 | Off-by-one in divide & conquer | Wrong split | `mid = left + (right - left) / 2` |
 
----
+--
 
 ## Complexity Comparison
 
 | Approach | Time | Space |
-|----------|------|-------|
+|-----|---|----|
 | Min-Heap | O(n log k) | O(k) for heap |
 | Divide & Conquer | O(n log k) | O(log k) for recursion stack |
 | Naive (compare all k) | O(n × k) | O(1) |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -4037,7 +4037,7 @@ MERGE K SORTED LISTS
 
 **Memory phrase:** "Heap of heads, extract min, add next" OR "Merge pairs, halve k, repeat"
 
----
+--
 
 # PATTERN 11: Sort List (LeetCode 148)
 
@@ -4047,7 +4047,7 @@ MERGE K SORTED LISTS
 
 **Instant thought:** "Merge Sort! Find middle (Pattern 6), split, recursively sort both halves, merge (Pattern 9)."
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -4125,7 +4125,7 @@ To get left-middle: start fast at head.next, not head
 7. Return merged result
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -4227,7 +4227,7 @@ Step 4: Merge(2 → 4, 1 → 3)
 Return: 1 → 2 → 3 → 4 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -4290,18 +4290,18 @@ ListNode merge(ListNode l1, ListNode l2) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Using `fast = head` for getMid | Gets right-middle, causes infinite recursion for 2-node lists | Use `fast = head.next` for left-middle |
 | Forgetting to cut the list | Both halves point to same nodes | `mid.next = null` after finding middle |
 | Not handling base case | Infinite recursion | Check `head == null || head.next == null` |
 | Wrong merge implementation | Unsorted result | Use Pattern 9 correctly |
 
----
+--
 
 ## Time & Space Complexity
 
@@ -4315,18 +4315,18 @@ Space: O(log n) for recursion stack
        - Can be made O(1) with bottom-up iterative merge sort
 ```
 
----
+--
 
 ## Edge Cases
 
 | Case | What Happens |
-|------|--------------|
+|---|-------|
 | Empty list | Returns null (base case) |
 | Single node | Returns that node (base case) |
 | Two nodes | Split into two single nodes, merge |
 | Already sorted | Still O(n log n), no optimization |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -4348,7 +4348,7 @@ SORT LIST (Merge Sort)
 
 **Memory phrase:** "Find middle, cut, sort both, merge — use left-middle!"
 
----
+--
 
 # PATTERN 12: Reorder List (LeetCode 143)
 
@@ -4358,7 +4358,7 @@ SORT LIST (Merge Sort)
 
 **Instant thought:** "Three patterns combined! Find middle (Pattern 6), reverse second half (Pattern 0), interleave the two halves."
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -4412,7 +4412,7 @@ Reorder List = Pattern 6 + Pattern 0 + Interleave
 4. Interleave: take one from first, one from second, repeat
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -4502,7 +4502,7 @@ Step 3: Interleave
 Output: 1 → 5 → 2 → 4 → 3 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -4553,29 +4553,29 @@ ListNode reverse(ListNode head) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Wrong middle for even lists | Interleaving breaks | Use `fast.next != null && fast.next.next != null` |
 | Forgetting to cut first half | Creates cycle | `slow.next = null` after finding middle |
 | Not saving tmp pointers | Lose access to rest of lists | Save `tmp1` and `tmp2` before redirecting |
 | Loop condition `first != null` | First half might be longer | Use `while (second != null)` |
 
----
+--
 
 ## Edge Cases
 
 | Case | What Happens |
-|------|--------------|
+|---|-------|
 | Empty list | Return immediately |
 | Single node | Return immediately |
 | Two nodes | Swap them |
 | Odd length | Middle node stays in place |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -4598,7 +4598,7 @@ REORDER LIST
 
 **Memory phrase:** "Middle, reverse second, interleave — save before redirect!"
 
----
+--
 
 # PATTERN 13: Palindrome Linked List (LeetCode 234)
 
@@ -4608,7 +4608,7 @@ REORDER LIST
 
 **Instant thought:** "Same as Pattern 12! Find middle, reverse second half, compare both halves."
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -4662,7 +4662,7 @@ Palindrome = Pattern 6 + Pattern 0 + Compare
 5. Return true if all values matched, false otherwise
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -4751,7 +4751,7 @@ Step 3: Compare
 Return: false ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -4804,29 +4804,29 @@ ListNode reverse(ListNode head) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Comparing wrong halves | First half might be longer | Use `while (p2 != null)` — p2 is shorter or equal |
 | Returning immediately on mismatch | Might want to restore list first | Save result, restore, then return |
 | Wrong middle for odd lists | Middle node compared with itself | It's fine — middle node is in second half |
 
----
+--
 
 ## Edge Cases
 
 | Case | What Happens |
-|------|--------------|
+|---|-------|
 | Empty list | Return true |
 | Single node | Return true |
 | Two same nodes | Return true |
 | Two different nodes | Return false |
 | Odd length palindrome | Middle node is in second half, works correctly |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -4848,7 +4848,7 @@ PALINDROME LINKED LIST
 
 **Memory phrase:** "Middle, reverse second, compare — same as reorder but compare!"
 
----
+--
 
 # PATTERN 14: Partition List (LeetCode 86)
 
@@ -4858,7 +4858,7 @@ PALINDROME LINKED LIST
 
 **Instant thought:** "Two dummy heads! Build two separate chains (less and greater), then connect them."
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -4921,7 +4921,7 @@ With dummy heads:
 6. Return lessHead.next
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -5035,7 +5035,7 @@ Return lessHead.next = 1
 Output: 1 → 2 → 2 → 4 → 3 → 5 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -5075,28 +5075,28 @@ ListNode partition(ListNode head, int x) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Forgetting `greater.next = null` | Creates a cycle! Last greater node might point to a less node | Always terminate: `greater.next = null` |
 | Using one dummy head | Can't build two separate chains | Use TWO dummy heads |
 | Not preserving order | Problem requires relative order preserved | Just append to chains, don't sort |
 
----
+--
 
 ## Edge Cases
 
 | Case | What Happens |
-|------|--------------|
+|---|-------|
 | All nodes < x | Greater chain empty, return less chain |
 | All nodes >= x | Less chain empty, return greater chain |
 | Empty list | Return null |
 | x larger than all values | All go to less chain |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -5119,7 +5119,7 @@ PARTITION LIST
 
 **Memory phrase:** "Two dummies, distribute by value, terminate greater, connect"
 
----
+--
 
 # PATTERN 15: Odd Even Linked List (LeetCode 328)
 
@@ -5129,7 +5129,7 @@ PARTITION LIST
 
 **Instant thought:** "Two pointers alternating! Build odd chain and even chain, then connect odd→even."
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -5216,7 +5216,7 @@ So we save it at the start: evenHead = head.next
 6. Return head
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -5315,7 +5315,7 @@ Return head = 1
 Output: 1 → 3 → 5 → 2 → 4 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -5347,29 +5347,29 @@ ListNode oddEvenList(ListNode head) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Forgetting to save evenHead | Can't connect chains at the end | `evenHead = even` at the start |
 | Wrong loop condition | NPE or wrong termination | `while (even != null && even.next != null)` |
 | Confusing position vs value | Problem is about position, not value | Position 1,3,5 are odd; 2,4,6 are even |
 | Not handling null head | NPE | Check `if (head == null)` first |
 
----
+--
 
 ## Edge Cases
 
 | Case | What Happens |
-|------|--------------|
+|---|-------|
 | Empty list | Return null |
 | Single node | Return that node (no even nodes) |
 | Two nodes | Swap them: 1→2 becomes 1→2 (no change needed) |
 | Three nodes | 1→2→3 becomes 1→3→2 |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -5393,7 +5393,7 @@ ODD EVEN LINKED LIST
 
 **Memory phrase:** "Odd skips even, even skips odd, connect at end"
 
----
+--
 
 # PATTERN 16: Remove Duplicates from Sorted List (LeetCode 83)
 
@@ -5403,7 +5403,7 @@ ODD EVEN LINKED LIST
 
 **Instant thought:** "Sorted means duplicates are adjacent! Skip nodes with same value as current."
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -5473,7 +5473,7 @@ So: DON'T move after skipping. Check again.
 3. Return head
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -5556,7 +5556,7 @@ Return head = 1
 Output: 1 → 2 → 3 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -5581,28 +5581,28 @@ ListNode deleteDuplicates(ListNode head) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Moving curr after skipping | Might miss consecutive duplicates | Only move in the `else` branch |
 | Using `while (curr.next != null)` only | NPE if head is null | Check `curr != null && curr.next != null` |
 | Creating new nodes | Unnecessary, just redirect pointers | Use `curr.next = curr.next.next` |
 
----
+--
 
 ## Edge Cases
 
 | Case | What Happens |
-|------|--------------|
+|---|-------|
 | Empty list | Return null |
 | Single node | Return that node |
 | All duplicates | Return single node |
 | No duplicates | Return original list |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -5623,7 +5623,7 @@ REMOVE DUPLICATES (SORTED)
 
 **Memory phrase:** "Same? Skip and stay. Different? Move forward."
 
----
+--
 
 # PATTERN 17: Remove Duplicates from Sorted List II (LeetCode 82)
 
@@ -5633,7 +5633,7 @@ REMOVE DUPLICATES (SORTED)
 
 **Instant thought:** "Unlike Pattern 16, remove ALL copies! Need dummy + prev pointer to skip entire duplicate sequences."
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -5713,7 +5713,7 @@ What if the head itself is a duplicate?
 4. Return dummy.next
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -5836,7 +5836,7 @@ Return dummy.next = 1
 Output: 1 → 2 → 5 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -5872,29 +5872,29 @@ ListNode deleteDuplicates(ListNode head) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Only skipping one duplicate (Pattern 16) | Need to skip ALL copies | Use inner while loop to skip entire sequence |
 | Forgetting dummy head | Can't handle duplicate at head | Always use dummy |
 | Moving prev when duplicates found | prev should stay at last unique | Only move prev in the `else` branch |
 | Off-by-one in inner loop | Might skip too few or too many | Inner loop stops when `head.val != head.next.val` |
 
----
+--
 
 ## Edge Cases
 
 | Case | What Happens |
-|------|--------------|
+|---|-------|
 | Empty list | Return null |
 | All duplicates | Return null (dummy.next = null) |
 | No duplicates | Return original list |
 | Duplicates at head | Dummy handles it |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -5917,7 +5917,7 @@ REMOVE DUPLICATES II (ALL COPIES)
 
 **Memory phrase:** "Duplicate? Skip ALL, prev stays. Unique? Move prev."
 
----
+--
 
 # PATTERN 18: Add Two Numbers (LeetCode 2)
 
@@ -5927,7 +5927,7 @@ REMOVE DUPLICATES II (ALL COPIES)
 
 **Instant thought:** "Reverse order = easy! Add digit by digit with carry, like elementary school addition."
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -5951,7 +5951,7 @@ This is actually EASIER than normal order!
 Normal addition (elementary school):
     342
   + 465
-  -----
+  ---
     807
 
 We add from RIGHT to LEFT (least significant first).
@@ -5998,7 +5998,7 @@ Done! (carry is 0)
 4. Return dummy.next
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -6093,7 +6093,7 @@ Step 3: l1=null, l2=null, but carry=1!
 Output: 0 → 0 → 1 ✓ (represents 100 = 99 + 1)
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -6136,28 +6136,28 @@ ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Stopping when both lists are null | Misses final carry! | Include `carry != 0` in loop condition |
 | Forgetting to handle different lengths | One list might be longer | Check each list separately with `if (l1 != null)` |
 | Integer overflow | sum can be at most 9+9+1=19, fits in int | Not an issue for single digits |
 
----
+--
 
 ## Edge Cases
 
 | Case | What Happens |
-|------|--------------|
+|---|-------|
 | Different lengths | Shorter list treated as having 0s |
 | Final carry | Creates extra node (e.g., 99+1=100) |
 | One list empty | Just copy the other list (with carry) |
 | Both empty | Return 0 (if carry is 0) |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -6180,7 +6180,7 @@ ADD TWO NUMBERS (REVERSE ORDER)
 
 **Memory phrase:** "Add digits + carry, new carry = sum/10, digit = sum%10, don't forget final carry!"
 
----
+--
 
 # PATTERN 19: Add Two Numbers II (LeetCode 445)
 
@@ -6190,7 +6190,7 @@ ADD TWO NUMBERS (REVERSE ORDER)
 
 **Instant thought:** "Normal order = hard! Use STACKS to access digits from the end, or REVERSE both lists first."
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -6270,7 +6270,7 @@ Result: 7 → 8 → 0 → 7 ✓
 5. Return head
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step) — Stack Approach
 
@@ -6362,7 +6362,7 @@ Return head = 7
 Output: 7 → 8 → 0 → 7 ✓ (represents 7807)
 ```
 
----
+--
 
 ## The Code — Approach 1: Stacks (With Line-by-Line Explanation)
 
@@ -6405,7 +6405,7 @@ ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 }
 ```
 
----
+--
 
 ## The Code — Approach 2: Reverse (With Line-by-Line Explanation)
 
@@ -6453,26 +6453,26 @@ ListNode reverse(ListNode head) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Using Pattern 18 directly | Digits are in wrong order | Use stacks or reverse first |
 | Appending instead of prepending (stack approach) | Result would be reversed | Prepend: `node.next = head; head = node` |
 | Forgetting final carry | Missing most significant digit | Include `carry != 0` in loop condition |
 
----
+--
 
 ## Complexity Comparison
 
 | Approach | Time | Space |
-|----------|------|-------|
+|-----|---|----|
 | Stacks | O(n + m) | O(n + m) for stacks |
 | Reverse | O(n + m) | O(1) extra (modifies input) |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -6497,12 +6497,12 @@ ADD TWO NUMBERS II (NORMAL ORDER)
 
 **Memory phrase:** "Normal order? Use stacks and prepend, or reverse everything!"
 
----
+--
 
 # UPDATED MAANG Coverage Map
 
 | # | Problem | LeetCode | Pattern Family | Difficulty |
-|---|---------|----------|----------------|------------|
+|--|-----|-----|--------|------|
 | 0 | Reverse Linked List | 206 | Reversal | Easy |
 | 1 | Reverse Linked List II | 92 | Reversal | Medium |
 | 2 | Reverse Nodes in k-Group | 25 | Reversal | Hard |
@@ -6527,14 +6527,14 @@ ADD TWO NUMBERS II (NORMAL ORDER)
 | **21** | **LRU Cache** | **146** | **Design (DLL + HashMap)** | **Medium** |
 | **22** | **Rotate List** | **61** | **Structural** | **Medium** |
 
----
+--
 
 # Pattern Recognition Cheat Sheet
 
 ## By Problem Type
 
 | When you see... | Think... | Pattern # |
-|-----------------|----------|-----------|
+|---------|-----|------|
 | "Reverse" | prev, curr, next | 0, 1, 2, 3 |
 | "Cycle" / "Loop" | Fast-Slow (Tortoise & Hare) | 4, 5 |
 | "Middle" | Fast-Slow | 6 |
@@ -6556,14 +6556,14 @@ ADD TWO NUMBERS II (NORMAL ORDER)
 ## The 5 Setups Quick Reference
 
 | Setup | Pointers | Use For |
-|-------|----------|---------|
+|----|-----|-----|
 | Reversal | `prev, curr, next` | Flipping arrows |
 | Fast-Slow | `slow, fast` | Middle, cycle |
 | Runner | `slow, fast` (gap) | Nth from end |
 | Dummy | `dummy → head` | Merge, delete head |
 | Two-List | `p1, p2` | Merge, intersect |
 
----
+--
 
 # Mastery Checklist
 
@@ -6591,19 +6591,19 @@ ADD TWO NUMBERS II (NORMAL ORDER)
 - [ ] Add Two Numbers (Pattern 18) — Digit by digit
 - [ ] Add Two Numbers II (Pattern 19) — Stacks or reverse
 
----
+--
 
 # The 5 Most Common Mistakes
 
 | Mistake | Why It's Wrong | Fix |
-|---------|----------------|-----|
+|-----|--------|---|
 | Not saving `next` before redirect | Lose rest of list forever | `next = curr.next` FIRST |
 | Wrong null check order | NPE on `fast.next` | `fast != null && fast.next != null` |
 | Forgetting dummy head | Can't handle delete/change head | Always use dummy for merge/delete |
 | Gap of n instead of n+1 | Land AT target, not before | Advance n+1 for removal |
 | Not terminating chains | Creates cycles | `greater.next = null` in partition |
 
----
+--
 
 # PATTERN 20: Copy List with Random Pointer (LeetCode 138)
 
@@ -6613,7 +6613,7 @@ ADD TWO NUMBERS II (NORMAL ORDER)
 
 **Instant thought:** "HashMap (easy) or Interweaving (O(1) space)! The challenge is setting random pointers when copy nodes don't exist yet."
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -6694,7 +6694,7 @@ Step 3: SEPARATE
 3. SEPARATE: Extract copy list, restore original list
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step) — Interweaving
 
@@ -6776,7 +6776,7 @@ Return A' (head of copy list)
 Output: Deep copy with correct random pointers ✓
 ```
 
----
+--
 
 ## The Code — Interweaving (O(1) Space)
 
@@ -6824,7 +6824,7 @@ Node copyRandomList(Node head) {
 }
 ```
 
----
+--
 
 ## The Code — HashMap (Easier to Understand)
 
@@ -6855,26 +6855,26 @@ Node copyRandomList(Node head) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Setting random before interweaving | Copy nodes don't exist yet | Interweave first, then set random |
 | Forgetting to restore original list | Interviewer might require it | Separate step restores originals |
 | NPE on null random | Not all nodes have random pointers | Check `if (curr.random != null)` |
 
----
+--
 
 ## Complexity Comparison
 
 | Approach | Time | Space |
-|----------|------|-------|
+|-----|---|----|
 | HashMap | O(n) | O(n) for map |
 | Interweaving | O(n) | O(1) extra |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -6899,7 +6899,7 @@ COPY LIST WITH RANDOM POINTER
 
 **Memory phrase:** "Interweave, set random via .next, separate"
 
----
+--
 
 # PATTERN 21: LRU Cache (LeetCode 146)
 
@@ -6909,7 +6909,7 @@ COPY LIST WITH RANDOM POINTER
 
 **Instant thought:** "HashMap + Doubly Linked List! Map for O(1) lookup, DLL for O(1) add/remove and maintaining order."
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -6997,7 +6997,7 @@ With dummies:
   HEAD ⟷ [real nodes] ⟷ TAIL
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -7087,7 +7087,7 @@ Final State:
   List: HEAD ⟷ [3:3] ⟷ [1:1] ⟷ TAIL
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -7175,18 +7175,18 @@ class LRUCache {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Using singly linked list | Can't remove node in O(1) without prev | Use doubly linked list |
 | Not storing key in node | Can't remove from map when evicting | Node must have key field |
 | Not using dummy head/tail | Edge cases become messy | Always use dummies |
 | Forgetting to move to head on get | get() should mark as recently used | Always move to head |
 
----
+--
 
 ## Why Doubly Linked List?
 
@@ -7200,7 +7200,7 @@ Doubly Linked: Node X has X.prev
                  X.next.prev = X.prev
 ```
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -7225,7 +7225,7 @@ LRU CACHE
 
 **Memory phrase:** "Map for lookup, DLL for order, head=recent, tail=LRU, node stores key"
 
----
+--
 
 # PATTERN 22: Rotate List (LeetCode 61)
 
@@ -7235,7 +7235,7 @@ LRU CACHE
 
 **Instant thought:** "Make it circular, then cut at the right place! Find length, connect tail to head, find new tail, cut."
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -7294,7 +7294,7 @@ Always use: k = k % length
 9. Return new head
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -7364,7 +7364,7 @@ Return newHead = node 4
 Output: 4 → 5 → 1 → 2 → 3 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -7408,30 +7408,30 @@ ListNode rotateRight(ListNode head, int k) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Not handling k >= length | Unnecessary rotations or wrong result | Use `k = k % length` |
 | Off-by-one finding new tail | Cut at wrong position | New tail is at `length - k - 1` steps |
 | Forgetting to cut | Returns circular list | `newTail.next = null` |
 | Not handling k = 0 after mod | Unnecessary work | Check `if (k == 0) return head` |
 
----
+--
 
 ## Edge Cases
 
 | Case | What Happens |
-|------|--------------|
+|---|-------|
 | Empty list | Return null |
 | Single node | Return that node (no rotation possible) |
 | k = 0 | Return original list |
 | k = length | No rotation (k % length = 0) |
 | k > length | Use k % length |
 
----
+--
 
 ## Alternative Thinking
 
@@ -7450,7 +7450,7 @@ Another way to think about it:
   Reconnect: [4,5] + [1,2,3] = 4 → 5 → 1 → 2 → 3
 ```
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -7470,7 +7470,7 @@ ROTATE LIST
 
 **Memory phrase:** "Find length, mod k, make circular, find new tail, cut"
 
----
+--
 
 # UPDATED MAANG Coverage Map
 
@@ -7482,6 +7482,6 @@ When explaining a linked list solution:
 4. **Mention edge cases:** "For empty list, I return null. For single node..."
 5. **State complexity:** "Time is O(n), space is O(1) since we only use pointers."
 
----
+--
 
 **Prev →** `01_Linked_List_Patterns.md`  ·  **Next →** `../12_Recursion_Backtracking/01_Recursion_Backtracking.md`

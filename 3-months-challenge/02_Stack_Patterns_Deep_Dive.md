@@ -1,23 +1,22 @@
 # Section 9 — Stack Patterns Deep Dive (MAANG L5 Coverage)
 
----
+--
 
 # INDEX — Quick Navigation
 
 ## Core Concepts
 | Section | Description |
-|---------|-------------|
+|-----|-------|
 | [The "One Sentence"](#the-one-sentence-that-unlocks-all-stack-problems) | Unlocks all stack problems |
-| [Zero to Hero](#-zero-to-hero-understanding-stacks-from-scratch) | **START HERE if confused!** |
+| [Zero to Hero](#zero-to-hero-understanding-stacks-from-scratch) | **START HERE if confused!** |
 | [The 5 Stack Types](#the-5-stack-types-your-weapons) | Your weapons |
-| [Stack Mechanics](#stack-mechanics-how-to-think) | Visual understanding |
 | [The 6-Question Template](#the-6-question-template-for-every-stack-problem) | Solve any stack problem |
 
----
+--
 
 ## Matching Stack Family (Patterns 0-4)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 0 | [Valid Parentheses](#pattern-0-valid-parentheses-leetcode-20) | 20 |
 | 1 | [Longest Valid Parentheses](#pattern-1-longest-valid-parentheses-leetcode-32) | 32 |
 | 2 | [Minimum Add to Make Valid](#pattern-2-minimum-add-to-make-parentheses-valid-leetcode-921) | 921 |
@@ -26,7 +25,7 @@
 
 ## Monotonic Stack Family (Patterns 5-12)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 5 | [Daily Temperatures](#pattern-5-daily-temperatures-leetcode-739) | 739 |
 | 6 | [Next Greater Element I](#pattern-6-next-greater-element-i-leetcode-496) | 496 |
 | 7 | [Next Greater Element II](#pattern-7-next-greater-element-ii-leetcode-503) | 503 |
@@ -38,7 +37,7 @@
 
 ## Expression Evaluation Family (Patterns 13-17)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 13 | [Decode String](#pattern-13-decode-string-leetcode-394) | 394 |
 | 14 | [Basic Calculator](#pattern-14-basic-calculator-leetcode-224) | 224 |
 | 15 | [Basic Calculator II](#pattern-15-basic-calculator-ii-leetcode-227) | 227 |
@@ -47,7 +46,7 @@
 
 ## String Manipulation Family (Patterns 18-22)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 18 | [Simplify Path](#pattern-18-simplify-path-leetcode-71) | 71 |
 | 19 | [Remove All Adjacent Duplicates](#pattern-19-remove-all-adjacent-duplicates-leetcode-1047) | 1047 |
 | 20 | [Remove All Adjacent Duplicates II](#pattern-20-remove-all-adjacent-duplicates-ii-leetcode-1209) | 1209 |
@@ -56,18 +55,16 @@
 
 ## Advanced Patterns (Patterns 23-24)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 23 | [132 Pattern](#pattern-23-132-pattern-leetcode-456) | 456 |
 | 24 | [Sum of Subarray Ranges](#pattern-24-sum-of-subarray-ranges-leetcode-2104) | 2104 |
 
 ## Reference Sections
 | Section |
-|---------|
-| [MAANG Coverage Map](#maang-coverage-map) |
-| [Stack Cheat Sheet](#stack-cheat-sheet) |
-| [Mastery Checklist](#mastery-checklist) |
+|-----|
+| [MAANG Coverage Map](#maang-coverage-map-complete-l5) |
 
----
+--
 
 # The "One Sentence That Unlocks All Stack Problems"
 
@@ -79,13 +76,13 @@ That's the entire subject. Every stack problem is just:
 3. **UNDO** — process nested structures inside-out
 4. **EVALUATE** — defer operations until you have enough info
 
----
+--
 
 # 🌟 ZERO TO HERO: Understanding Stacks From Scratch
 
 **If you're a junior dev and stacks feel confusing, START HERE.**
 
----
+--
 
 ## What IS a Stack? (The Real-World Analogy)
 
@@ -109,7 +106,7 @@ Imagine a **stack of plates** in a cafeteria:
 - The LAST plate you put on top is the FIRST one you take off
 - You can't grab a plate from the middle!
 
----
+--
 
 ## Why Do We Need Stacks in Coding?
 
@@ -144,7 +141,7 @@ How do we solve this efficiently?
 We need to "remember" elements that haven't found their answer yet!
 ```
 
----
+--
 
 ## The 3 Stack Operations (That's ALL You Need!)
 
@@ -165,7 +162,7 @@ stack.isEmpty();  // CHECK if empty: returns false
 
 **That's it!** Push, Pop, Peek. Everything else is just combining these.
 
----
+--
 
 ## The 4 Types of Stack Problems (With Plain English)
 
@@ -189,7 +186,7 @@ Step 3: See ')' → pop → got '[', but ')' doesn't match '[' → INVALID!
 Answer: false
 ```
 
----
+--
 
 ### Type 2: NEXT GREATER/SMALLER (Monotonic Stack)
 
@@ -269,7 +266,7 @@ If we stored indices: stack = [6, 7]
   → AND we can calculate: day 7 - day 5 = 2 days apart
 ```
 
----
+--
 
 ### Type 3: DECODE/EVALUATE (Context Stack)
 
@@ -306,7 +303,7 @@ See ']': Coming back up! POP → got (number=3, prevString="")
 Answer: "accaccacc"
 ```
 
----
+--
 
 ### Type 4: AREA/HISTOGRAM (Boundary Stack)
 
@@ -348,7 +345,7 @@ End: Process remaining bars with sentinel (height 0)
 Answer: 10
 ```
 
----
+--
 
 ## The "Aha!" Moment Summary
 
@@ -368,7 +365,7 @@ Answer: 10
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
----
+--
 
 ## The Universal Stack Template (Copy This!)
 
@@ -394,7 +391,7 @@ while (!stack.isEmpty()) {
 }
 ```
 
----
+--
 
 ## 📋 THE JUNIOR DEV CHEAT CARD (Memorize This!)
 
@@ -451,7 +448,7 @@ while (!stack.isEmpty()) {
 ╚═══════════════════════════════════════════════════════════════════════╝
 ```
 
----
+--
 
 ## 🚀 QUICK START: The 60-Second Stack Approach
 
@@ -494,7 +491,7 @@ the while loop doesn't run n times per iteration!
 It runs at most n times TOTAL across all iterations.
 ```
 
----
+--
 
 ## 🎯 WORKED EXAMPLE: How a Junior Dev Should Think
 
@@ -557,7 +554,7 @@ i=7 (73): 73<76, push 7 → stack=[6,7]
 Final: result = [1, 1, 4, 2, 1, 1, 0, 0] ✓
 ```
 
----
+--
 
 # The 5 Stack Types (Your "Weapons")
 
@@ -585,7 +582,7 @@ Stack empty at end → VALID!
 - Matching HTML/XML tags
 - Balanced expressions
 
----
+--
 
 ## Type 2: MONOTONIC STACK
 
@@ -628,7 +625,7 @@ Stack empty at end → VALID!
 - Stock Span
 - Largest Rectangle in Histogram
 
----
+--
 
 ## Type 3: INDEX STACK
 
@@ -650,7 +647,7 @@ stack.push(i);  // Store index
 - Largest Rectangle (width calculation)
 - Any problem asking "how far" or "how many"
 
----
+--
 
 ## Type 4: CONTEXT STACK
 
@@ -678,7 +675,7 @@ Result: "accaccacc"
 - Basic Calculator (parentheses)
 - Nested structures
 
----
+--
 
 ## Type 5: BOUNDARY STACK
 
@@ -704,13 +701,13 @@ When we pop, we know the boundaries!
 - Maximal Rectangle in Matrix
 - Trapping Rain Water
 
----
+--
 
 # The 6-Question Template (For Every Stack Problem)
 
 This template is your **mental checklist** before writing any stack code. Walk through each question, and the solution reveals itself!
 
----
+--
 
 ## Question 1: WHAT TYPE OF STACK PROBLEM?
 
@@ -745,7 +742,7 @@ Before coding, complete this sentence:
 - "This problem is asking me to find the **next greater element** which means I need a **monotonic decreasing** stack."
 - "This problem is asking me to **match brackets** which means I need a **matching** stack."
 
----
+--
 
 ## Question 2: WHAT SHOULD I STORE IN THE STACK?
 
@@ -794,7 +791,7 @@ Before coding, complete this sentence:
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
----
+--
 
 ## Question 3: WHEN DO I PUSH?
 
@@ -827,7 +824,7 @@ Before coding, complete this sentence:
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
----
+--
 
 ## Question 4: WHEN DO I POP?
 
@@ -880,7 +877,7 @@ The popped elements (3, 5) found their answer (6).
 The remaining elements (10, 7) are still waiting.
 ```
 
----
+--
 
 ## Question 5: WHAT DO I DO WHEN I POP?
 
@@ -915,7 +912,7 @@ The remaining elements (10, 7) are still waiting.
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
----
+--
 
 ## Question 6: WHAT ABOUT ELEMENTS LEFT IN STACK?
 
@@ -949,7 +946,7 @@ The remaining elements (10, 7) are still waiting.
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
----
+--
 
 ## 🎯 COMPLETE WORKED EXAMPLE: Largest Rectangle in Histogram
 
@@ -998,7 +995,7 @@ int largestRectangleArea(int[] heights) {
 }
 ```
 
----
+--
 
 ## The Complete Mental Walkthrough
 
@@ -1032,11 +1029,11 @@ Before coding ANY stack problem, fill in this template:
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
----
+--
 
 # MATCHING STACK FAMILY
 
----
+--
 
 # PATTERN 0: Valid Parentheses (LeetCode 20)
 
@@ -1046,7 +1043,7 @@ Before coding ANY stack problem, fill in this template:
 
 **Instant thought:** "I need to match openers with closers in REVERSE order → STACK!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -1085,7 +1082,7 @@ MOST RECENT = LAST IN = Stack's specialty!
 3. At the end? → All openers should be matched (stack empty)
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -1149,7 +1146,7 @@ Character ')':
 RESULT: false ✗
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -1185,7 +1182,7 @@ boolean isValid(String s) {
 }
 ```
 
----
+--
 
 ## Cleaner Version (Push Expected Closer)
 
@@ -1210,28 +1207,28 @@ boolean isValid(String s) {
 
 **Why this is cleaner:** No need for separate matching logic!
 
----
+--
 
 ## Common Traps
 
 | Trap | Example | Why It Fails |
-|------|---------|--------------|
+|---|-----|-------|
 | Returning true too early | `"(()"` | Stack not empty at end! |
 | Forgetting empty check | `")"` | Pop from empty stack! |
 | Wrong order | `"([)]"` | Closers must match in order |
 
----
+--
 
 ## Variations
 
 | Problem | Twist | Key Change |
-|---------|-------|------------|
+|-----|----|------|
 | Valid Parentheses | Basic matching | Just match |
 | Longest Valid | Find longest valid substring | Store indices, track length |
 | Min Add to Make Valid | Count insertions needed | Count unmatched |
 | Remove Invalid | Remove minimum to make valid | BFS/backtracking |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1250,7 +1247,7 @@ VALID PARENTHESES
 
 **Memory phrase:** "Push open, pop close, match recent, empty end"
 
----
+--
 
 # PATTERN 1: Longest Valid Parentheses (LeetCode 32)
 
@@ -1260,7 +1257,7 @@ VALID PARENTHESES
 
 **Instant thought:** "I need to track POSITIONS to calculate LENGTH → Store INDICES!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -1318,7 +1315,7 @@ Length = current_index - stack_top
 4. Track maximum length
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -1363,7 +1360,7 @@ i=5, char=')':
 RESULT: 4 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -1396,7 +1393,7 @@ int longestValidParentheses(String s) {
 }
 ```
 
----
+--
 
 ## Why -1 as Base Boundary?
 
@@ -1415,17 +1412,17 @@ With -1:
            Length = 1 - (-1) = 2 ✓
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why It's Wrong | Fix |
-|------|----------------|-----|
+|---|--------|---|
 | Forgetting -1 base | Can't calculate length for valid prefix | Always start with -1 |
 | Storing characters | Can't calculate length | Store indices |
 | Not updating boundary | Miss valid substrings after unmatched ')' | Push unmatched ')' index |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1445,7 +1442,7 @@ LONGEST VALID PARENTHESES
 
 **Memory phrase:** "Index stack, -1 base, pop and measure, empty means new boundary"
 
----
+--
 
 # PATTERN 2: Minimum Add to Make Parentheses Valid (LeetCode 921)
 
@@ -1455,7 +1452,7 @@ LONGEST VALID PARENTHESES
 
 **Instant thought:** "Count unmatched openers and closers separately!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -1496,7 +1493,7 @@ Answer = count of unmatched '(' + count of unmatched ')'
 5. Answer = unmatchedOpen + unmatchedClose
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -1511,7 +1508,7 @@ char '(':
 
 char ')':
   It's a closer! Is there an unmatched '('? YES (unmatchedOpen = 1)
-  Match them! unmatchedOpen--
+  Match them! unmatchedOpen-
   unmatchedOpen = 0, unmatchedClose = 0
 
 char ')':
@@ -1532,7 +1529,7 @@ char '(': unmatchedOpen = 3
 Answer = 3 + 0 = 3 (need to add 3 closing parentheses)
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -1546,7 +1543,7 @@ int minAddToMakeValid(String s) {
             unmatchedOpen++;  // New opener, waiting for closer
         } else {
             if (unmatchedOpen > 0) {
-                unmatchedOpen--;  // Found a match!
+                unmatchedOpen-;  // Found a match!
             } else {
                 unmatchedClose++;  // No opener to match this closer
             }
@@ -1559,16 +1556,16 @@ int minAddToMakeValid(String s) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Example | Why Wrong |
-|------|---------|-----------|
+|---|-----|------|
 | Only counting one type | `"(()"` | Miss unmatched openers |
 | Using stack | Overkill | Just need counts! |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1586,7 +1583,7 @@ MIN ADD TO MAKE VALID
 
 **Memory phrase:** "Count unmatched opens + unmatched closes"
 
----
+--
 
 # PATTERN 3: Score of Parentheses (LeetCode 856)
 
@@ -1596,7 +1593,7 @@ MIN ADD TO MAKE VALID
 
 **Instant thought:** "Track score at each depth level → Stack of scores!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -1646,7 +1643,7 @@ Stack tracks the score at each depth!
 4. Final answer is stack.pop()
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -1702,7 +1699,7 @@ stack = [0]
 Answer = 2 ✓ (which is 1 + 1)
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -1732,16 +1729,16 @@ int scoreOfParentheses(String s) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Example | Why Wrong |
-|------|---------|-----------|
+|---|-----|------|
 | Forgetting "()" = 1 | Inner score 0 | Use `max(2*inner, 1)` |
 | Not adding to outer | "()()" should be 2 | `outer + ...` |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1761,7 +1758,7 @@ SCORE OF PARENTHESES
 
 **Memory phrase:** "Stack of depth scores, () is 1, (A) is 2A, AB is A+B"
 
----
+--
 
 # PATTERN 4: Remove Invalid Parentheses (LeetCode 301)
 
@@ -1771,7 +1768,7 @@ SCORE OF PARENTHESES
 
 **Instant thought:** "BFS for minimum removals, or count mismatches then backtrack!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -1813,7 +1810,7 @@ Stop at first level where valid strings are found!
 4. Return all valid strings found at that level
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -1853,7 +1850,7 @@ Result: ["()"]
 (Note: "()" appears twice but we use Set to dedupe)
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -1898,24 +1895,24 @@ private boolean isValid(String s) {
     int balance = 0;
     for (char c : s.toCharArray()) {
         if (c == '(') balance++;
-        else if (c == ')') balance--;
+        else if (c == ')') balance-;
         if (balance < 0) return false;  // More ')' than '('
     }
     return balance == 0;
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Example | Why Wrong |
-|------|---------|-----------|
+|---|-----|------|
 | Not using visited set | Duplicate processing | Exponential time |
 | Continuing after found | Goes to deeper levels | Not minimum removals |
 | Removing non-parentheses | "a)b(" → "ab(" | Only remove '(' or ')' |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1934,11 +1931,11 @@ REMOVE INVALID PARENTHESES
 
 **Memory phrase:** "BFS levels = removals, stop at first valid, dedupe with Set"
 
----
+--
 
 # MONOTONIC STACK FAMILY
 
----
+--
 
 # PATTERN 5: Daily Temperatures (LeetCode 739)
 
@@ -1948,7 +1945,7 @@ REMOVE INVALID PARENTHESES
 
 **Instant thought:** "Next Greater Element problem → Monotonic DECREASING stack!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2003,7 +2000,7 @@ When 72 arrives: 72 > 69 ✓, 72 > 71 ✓, 72 < 75 ✗
 Pop 69 and 71 (found answer), 75 keeps waiting.
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -2071,7 +2068,7 @@ End: Days 6,7 never found warmer → stays 0
 FINAL: [1, 1, 4, 2, 1, 1, 0, 0] ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2096,7 +2093,7 @@ int[] dailyTemperatures(int[] temps) {
 }
 ```
 
----
+--
 
 ## Why O(n)?
 
@@ -2105,16 +2102,16 @@ Each index: pushed ONCE, popped AT MOST ONCE
 Total = n pushes + n pops = 2n = O(n)
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong |
-|------|-----------|
+|---|------|
 | Store temps not indices | Can't calculate distance |
 | Increasing stack | Wrong! Need decreasing for "next greater" |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2133,7 +2130,7 @@ DAILY TEMPERATURES
 
 **Memory phrase:** "Decreasing stack, store indices, pop when bigger"
 
----
+--
 
 # PATTERN 6: Next Greater Element I (LeetCode 496)
 
@@ -2143,7 +2140,7 @@ DAILY TEMPERATURES
 
 **Instant thought:** "Build NGE map from nums2, then lookup for nums1!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2183,7 +2180,7 @@ We just need to know WHAT the next greater element IS.
 So we can store values directly and use a HashMap!
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -2221,7 +2218,7 @@ Lookup for nums1:
 Result: [-1, 3, -1] ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2250,16 +2247,16 @@ int[] nextGreaterElement(int[] nums1, int[] nums2) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong |
-|------|-----------|
+|---|------|
 | Storing indices | Don't need distance, just values |
 | Searching nums2 for each nums1 | O(n²), use map for O(n) |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2278,7 +2275,7 @@ NEXT GREATER ELEMENT I
 
 **Memory phrase:** "Build map from nums2, lookup for nums1"
 
----
+--
 
 # PATTERN 7: Next Greater Element II (LeetCode 503)
 
@@ -2288,7 +2285,7 @@ NEXT GREATER ELEMENT I
 
 **Instant thought:** "Process array TWICE (2n elements) with modulo!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2320,7 +2317,7 @@ Use i % n to get actual index:
 Only PUSH in first pass (i < n) to avoid duplicates!
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -2370,7 +2367,7 @@ Index 1 (value 2) never found greater → stays -1
 FINAL: [2, -1, 2] ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2400,17 +2397,17 @@ int[] nextGreaterElements(int[] nums) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong |
-|------|-----------|
+|---|------|
 | Only one pass | Miss wrap-around cases |
 | Push in second pass | Duplicate indices in stack |
 | Forget `i % n` | Index out of bounds |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2428,7 +2425,7 @@ NEXT GREATER ELEMENT II (CIRCULAR)
 
 **Memory phrase:** "2n iterations, modulo index, push only first pass"
 
----
+--
 
 # PATTERN 8: Next Greater Element III (LeetCode 556)
 
@@ -2438,7 +2435,7 @@ NEXT GREATER ELEMENT II (CIRCULAR)
 
 **Instant thought:** "Find rightmost ascending pair, swap with smallest larger digit, reverse suffix!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2495,7 +2492,7 @@ Step 3: Reverse suffix after index 1
   Result: 13222344 ✓
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -2557,7 +2554,7 @@ Verify: 13222344 > 12443322 ✓
         Is smallest such number ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2569,7 +2566,7 @@ public int nextGreaterElement(int n) {
     // Step 1: Find rightmost ascending pair
     int i = len - 2;
     while (i >= 0 && digits[i] >= digits[i + 1]) {
-        i--;
+        i-;
     }
     
     // No ascending pair found → no greater permutation
@@ -2578,7 +2575,7 @@ public int nextGreaterElement(int n) {
     // Step 2: Find smallest digit > digits[i] in suffix
     int j = len - 1;
     while (digits[j] <= digits[i]) {
-        j--;
+        j-;
     }
     
     // Step 3: Swap
@@ -2600,22 +2597,22 @@ private void swap(char[] arr, int i, int j) {
 
 private void reverse(char[] arr, int left, int right) {
     while (left < right) {
-        swap(arr, left++, right--);
+        swap(arr, left++, right-);
     }
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Not handling "no answer" | All digits descending | Return -1 if i < 0 |
 | Integer overflow | Result > INT_MAX | Use long, check bounds |
 | Wrong swap target | Must be smallest LARGER | Scan from right |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2636,7 +2633,7 @@ NEXT GREATER ELEMENT III
 
 **Memory phrase:** "Find ascending, swap with smallest larger, reverse suffix"
 
----
+--
 
 # PATTERN 9: Largest Rectangle in Histogram (LeetCode 84)
 
@@ -2646,7 +2643,7 @@ NEXT GREATER ELEMENT III
 
 **Instant thought:** "For each bar, find boundaries → Monotonic INCREASING stack!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2716,7 +2713,7 @@ for (int i = 0; i <= n; i++) {  // <= n, not < n
     int h = (i == n) ? 0 : heights[i];  // Sentinel
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -2778,7 +2775,7 @@ i=6, h=0 (SENTINEL):
 FINAL: maxArea = 10 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2811,18 +2808,18 @@ int largestRectangleArea(int[] heights) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Fix |
-|------|-----|
+|---|---|
 | Forgetting sentinel | Use `i <= n` with height 0 |
 | Wrong width formula | `width = i - stack.peek() - 1` |
 | Empty stack crash | Check `stack.isEmpty() ? i : ...` |
 | Decreasing stack | Must be INCREASING! |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2863,7 +2860,7 @@ If stack is empty after pop:
 
 **increasing stack · sentinel 0 at end · pop gives both boundaries · width = i - top - 1**
 
----
+--
 
 # PATTERN 10: Trapping Rain Water (LeetCode 42)
 
@@ -2873,7 +2870,7 @@ If stack is empty after pop:
 
 **Instant thought:** "Find valleys between walls → Stack approach!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2923,7 +2920,7 @@ When we pop index 'bottom':
   water = width × height
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -2958,7 +2955,7 @@ i=3, h=2:
 FINAL: water = 1 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2986,16 +2983,16 @@ int trap(int[] height) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong |
-|------|-----------|
+|---|------|
 | Forget empty check after pop | No left wall = can't trap |
 | Wrong height formula | Must subtract bottom height |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -3014,7 +3011,7 @@ TRAPPING RAIN WATER
 
 **Memory phrase:** "Pop bottom, peek left, current right, water = width × (min walls - bottom)"
 
----
+--
 
 # PATTERN 11: Online Stock Span (LeetCode 901)
 
@@ -3024,7 +3021,7 @@ TRAPPING RAIN WATER
 
 **Instant thought:** "Absorb smaller elements' spans → Decreasing stack with (price, span)!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -3062,7 +3059,7 @@ Day 5 (75):
   Stack: [(100,1), (80,1), (75,4)]
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -3112,7 +3109,7 @@ Price 85:
 Results: [1, 1, 1, 2, 1, 4, 6] ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -3139,7 +3136,7 @@ class StockSpanner {
 }
 ```
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -3157,7 +3154,7 @@ STOCK SPAN
 
 **Memory phrase:** "Store price+span, absorb smaller, add their spans"
 
----
+--
 
 # PATTERN 12: Sum of Subarray Minimums (LeetCode 907)
 
@@ -3167,7 +3164,7 @@ STOCK SPAN
 
 **Instant thought:** "Count how many subarrays each element is minimum of!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -3226,7 +3223,7 @@ For element 1 at index 1:
 (The 6 subarrays: [3,1], [3,1,2], [3,1,2,4], [1], [1,2], [1,2,4])
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -3285,7 +3282,7 @@ i=3: arr[3] × left[3] × right[3] = 4 × 1 × 1 = 4
 Sum = 3 + 6 + 4 + 4 = 17 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -3310,7 +3307,7 @@ int sumSubarrayMins(int[] arr) {
     stack.clear();
     
     // Find next smaller (use > to handle duplicates differently)
-    for (int i = n - 1; i >= 0; i--) {
+    for (int i = n - 1; i >= 0; i-) {
         while (!stack.isEmpty() && arr[stack.peek()] > arr[i]) {
             stack.pop();
         }
@@ -3328,7 +3325,7 @@ int sumSubarrayMins(int[] arr) {
 }
 ```
 
----
+--
 
 ## Handling Duplicates
 
@@ -3346,7 +3343,7 @@ Solution: Use >= for one direction, > for the other
   This ensures each subarray is counted exactly once.
 ```
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -3366,11 +3363,11 @@ SUM OF SUBARRAY MINIMUMS
 
 **Memory phrase:** "Count subarrays where each is min: left × right"
 
----
+--
 
 # EXPRESSION EVALUATION FAMILY
 
----
+--
 
 # PATTERN 13: Decode String (LeetCode 394)
 
@@ -3380,7 +3377,7 @@ SUM OF SUBARRAY MINIMUMS
 
 **Instant thought:** "Nested structure → Save state on '[', restore on ']' → CONTEXT stack!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -3434,7 +3431,7 @@ So we use TWO stacks (or one stack of pairs):
 4. See letter? Append to current string
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -3519,7 +3516,7 @@ char ']':
 FINAL: "accaccacc" ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -3561,17 +3558,17 @@ String decodeString(String s) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Example | Fix |
-|------|---------|-----|
+|---|-----|---|
 | Single-digit only | "12[a]" should repeat 12 times | `k = k*10 + digit` |
 | Forgetting to reset | After '[', k and current must reset | Reset both! |
 | Wrong combine order | Should be `prev + inner.repeat(k)` | Append to previous |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -3590,7 +3587,7 @@ DECODE STRING
 
 **Memory phrase:** "Push on open, pop on close, combine = prev + inner.repeat(k)"
 
----
+--
 
 # PATTERN 14: Basic Calculator (LeetCode 224)
 
@@ -3600,7 +3597,7 @@ DECODE STRING
 
 **Instant thought:** "Track result and sign, save state on '(', restore on ')'!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -3649,7 +3646,7 @@ When we see ')':
 7. End: don't forget the last number!
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -3700,7 +3697,7 @@ char ')':
 End: result + sign*num = 0 + 1*0 = 0 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -3751,16 +3748,16 @@ int calculate(String s) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Example | Fix |
-|------|---------|-----|
+|---|-----|---|
 | Forgetting last number | "1+2" → miss the 2 | `return result + sign*num` |
 | Wrong order in stack | Push result then sign | Pop sign first, then result |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -3779,7 +3776,7 @@ BASIC CALCULATOR
 
 **Memory phrase:** "Push result+sign on '(', pop and combine on ')'"
 
----
+--
 
 # PATTERN 15: Basic Calculator II (LeetCode 227)
 
@@ -3789,7 +3786,7 @@ BASIC CALCULATOR
 
 **Instant thought:** "Apply PREVIOUS operator when you see new operator!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -3838,7 +3835,7 @@ Example: "3+2*2"
 4. At end, sum all values in stack
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -3871,7 +3868,7 @@ End of string:
 Sum stack: 3 + 4 = 7 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -3910,17 +3907,17 @@ int calculate(String s) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Example | Fix |
-|------|---------|-----|
+|---|-----|---|
 | Applying current operator | Should apply PREVIOUS | Track `op` separately |
 | Missing end of string | Last number not processed | Check `i == s.length()-1` |
 | Integer division | -3/2 should be -1, not -2 | Java does truncate toward zero |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -3940,7 +3937,7 @@ BASIC CALCULATOR II
 
 **Memory phrase:** "Apply PREVIOUS operator, +/- push, */ compute immediately"
 
----
+--
         result += stack.pop();
     }
     return result;
@@ -3951,7 +3948,7 @@ BASIC CALCULATOR II
 
 **apply PREVIOUS operator · +/- push · */ apply immediately · sum stack at end**
 
----
+--
 
 # PATTERN 16: Basic Calculator III (LeetCode 772)
 
@@ -3961,7 +3958,7 @@ BASIC CALCULATOR II
 
 **Instant thought:** "Combine Calculator I (parentheses) + Calculator II (precedence)!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -3993,7 +3990,7 @@ For + - * /:
   - Use Calculator II approach (apply previous operator)
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -4032,7 +4029,7 @@ End of string:
 Sum stack: 20 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -4083,17 +4080,17 @@ class Solution {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Not handling nested parens | "(1+(2*3))" fails | Recursion handles nesting |
 | Local index variable | Loses position after recursion | Use instance variable |
 | Forgetting to break on ')' | Continues past closing paren | Break when c == ')' |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -4115,7 +4112,7 @@ BASIC CALCULATOR III
 
 **Memory phrase:** "Recurse on '(', return on ')', apply previous operator"
 
----
+--
 
 # PATTERN 17: Evaluate Reverse Polish Notation (LeetCode 150)
 
@@ -4125,7 +4122,7 @@ BASIC CALCULATOR III
 
 **Instant thought:** "Numbers go on stack, operators pop two and push result!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -4166,7 +4163,7 @@ No need to worry about precedence or parentheses!
 3. At end, stack has exactly one element = answer
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -4202,7 +4199,7 @@ Token "+":
 Result: 6 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -4233,16 +4230,16 @@ int evalRPN(String[] tokens) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Example | Fix |
-|------|---------|-----|
+|---|-----|---|
 | Wrong operand order | "6 2 /" should be 6/2=3, not 2/6 | Pop b first, then a |
 | Negative numbers | "-3" is a number, not operator | Check if it's in "+-*/" |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -4261,7 +4258,7 @@ EVALUATE RPN
 
 **Memory phrase:** "Push numbers, pop two for operators, order matters (a op b)"
 
----
+--
 
 # PATTERN 18: Simplify Path (LeetCode 71)
 
@@ -4271,7 +4268,7 @@ EVALUATE RPN
 
 **Instant thought:** "Stack of directory names! '..' pops, '.' does nothing"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -4303,7 +4300,7 @@ Result: "/c"
 3. Join stack with "/" prefix
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -4331,7 +4328,7 @@ Process each part:
 Join with "/": "/home/bar" ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -4361,17 +4358,17 @@ public String simplifyPath(String path) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Popping empty stack | ".." at root | Check `!stack.isEmpty()` |
 | Forgetting empty parts | "//" creates empty strings | Skip empty strings |
 | Wrong join order | Stack is LIFO | Insert at beginning or use Deque |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -4391,7 +4388,7 @@ SIMPLIFY PATH
 
 **Memory phrase:** "Split by /, stack dirs, .. pops, . ignores, join with /"
 
----
+--
 
 # PATTERN 19: Remove All Adjacent Duplicates (LeetCode 1047)
 
@@ -4401,7 +4398,7 @@ SIMPLIFY PATH
 
 **Instant thought:** "Stack! Push if different from top, pop if same"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -4434,7 +4431,7 @@ When we remove a pair, the characters that were separated might become adjacent!
 Result: "ca" ✓
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -4484,7 +4481,7 @@ char 'a':
 Build result from stack: "ca" ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -4507,16 +4504,16 @@ public String removeDuplicates(String s) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Using actual Stack | Need to convert to String | Use StringBuilder |
 | Checking after push | Should check before | Check, then push or pop |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -4534,7 +4531,7 @@ REMOVE ADJACENT DUPLICATES
 
 **Memory phrase:** "Same as top = pop, different = push"
 
----
+--
 
 # PATTERN 20: Remove All Adjacent Duplicates II (LeetCode 1209)
 
@@ -4544,7 +4541,7 @@ REMOVE ADJACENT DUPLICATES
 
 **Instant thought:** "Stack of (char, count) pairs! Pop when count reaches k"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -4573,7 +4570,7 @@ When new char matches top, increment count.
 When new char differs, push new entry.
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -4625,7 +4622,7 @@ char 'a':
 Build result: "" (empty string) ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -4662,17 +4659,17 @@ public String removeDuplicates(String s, int k) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Only storing char | Can't track count | Store (char, count) pairs |
 | Forgetting to pop at k | Groups not removed | Check count == k after increment |
 | Wrong result order | Stack is LIFO | Insert at beginning |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -4691,7 +4688,7 @@ REMOVE K ADJACENT DUPLICATES
 
 **Memory phrase:** "Stack of (char, count), pop when count hits k"
 
----
+--
 
 # PATTERN 21: Remove K Digits (LeetCode 402)
 
@@ -4701,7 +4698,7 @@ REMOVE K ADJACENT DUPLICATES
 
 **Instant thought:** "Greedy + monotonic stack! Remove larger digits to make smaller number!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -4739,14 +4736,14 @@ This is exactly what a MONOTONIC INCREASING stack does!
 1. For each digit:
    - While stack not empty AND k > 0 AND stack top > current digit:
      - Pop (remove the larger digit)
-     - k--
+     - k-
    - Push current digit
 2. If k > 0 after loop, remove from end (stack is increasing, so end has largest)
 3. Remove leading zeros
 4. Handle empty result
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -4790,7 +4787,7 @@ Digit '9':
 Result: "1219" ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -4802,7 +4799,7 @@ String removeKdigits(String num, int k) {
         // Remove larger digits before current (greedy)
         while (!stack.isEmpty() && k > 0 && stack.peek() > digit) {
             stack.pop();
-            k--;
+            k-;
         }
         stack.push(digit);
     }
@@ -4810,7 +4807,7 @@ String removeKdigits(String num, int k) {
     // If k > 0, remove from end (largest digits in increasing stack)
     while (k > 0) {
         stack.pop();
-        k--;
+        k-;
     }
     
     // Build result (stack is reversed, so build from bottom)
@@ -4828,17 +4825,17 @@ String removeKdigits(String num, int k) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Example | Fix |
-|------|---------|-----|
+|---|-----|---|
 | Forgetting k > 0 after loop | "12345", k=2 → should be "123" | Remove k from end |
 | Leading zeros | "10200", k=1 → "200" not "0200" | Strip leading zeros |
 | Empty result | "10", k=2 → "0" not "" | Return "0" if empty |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -4857,7 +4854,7 @@ REMOVE K DIGITS
 
 **Memory phrase:** "Increasing stack, pop larger, strip zeros, handle empty"
 
----
+--
 
 # PATTERN 22: Asteroid Collision (LeetCode 735)
 
@@ -4867,7 +4864,7 @@ REMOVE K DIGITS
 
 **Instant thought:** "Stack simulation! Positive = right, negative = left, collision when opposite!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -4916,7 +4913,7 @@ No collision when:
    - If current survived, push it
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -4958,7 +4955,7 @@ Asteroid -8:
 Result: [] ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -4994,24 +4991,24 @@ int[] asteroidCollision(int[] asteroids) {
     
     // Convert stack to array (reverse order)
     int[] result = new int[stack.size()];
-    for (int i = result.length - 1; i >= 0; i--) {
+    for (int i = result.length - 1; i >= 0; i-) {
         result[i] = stack.pop();
     }
     return result;
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Example | Fix |
-|------|---------|-----|
+|---|-----|---|
 | Wrong collision condition | Both negative don't collide | Only when top > 0 AND current < 0 |
 | Forgetting equal case | [8, -8] → both explode | Check `==` separately |
 | Wrong output order | Stack is LIFO | Reverse when building result |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -5031,7 +5028,7 @@ ASTEROID COLLISION
 
 **Memory phrase:** "Collision when opposite directions, bigger wins, equal both die"
 
----
+--
 
 # PATTERN 23: 132 Pattern (LeetCode 456)
 
@@ -5041,7 +5038,7 @@ ASTEROID COLLISION
 
 **Instant thought:** "Scan from RIGHT, track max 'k' value seen after a larger 'j'!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -5088,7 +5085,7 @@ When we find nums[i] < third:
 5. If no pattern found, return false
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -5117,7 +5114,7 @@ i=1, nums[1]=1:
 Return true ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -5128,7 +5125,7 @@ boolean find132pattern(int[] nums) {
     int third = Integer.MIN_VALUE;  // The "k" value (second largest)
     
     // Scan from right to left
-    for (int i = n - 1; i >= 0; i--) {
+    for (int i = n - 1; i >= 0; i-) {
         // If current < third, we found the pattern!
         // (current is "i", third is "k", something in stack was "j")
         if (nums[i] < third) {
@@ -5148,7 +5145,7 @@ boolean find132pattern(int[] nums) {
 }
 ```
 
----
+--
 
 ## Why Scan from Right?
 
@@ -5165,17 +5162,17 @@ If we scan from right:
 Much simpler!
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Example | Fix |
-|------|---------|-----|
+|---|-----|---|
 | Scanning left to right | Much harder | Scan right to left |
 | Wrong third update | Should be largest valid k | Update when popping |
 | Checking wrong condition | nums[i] < third, not <= | Strict inequality |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -5195,7 +5192,7 @@ Much simpler!
 
 **Memory phrase:** "Right to left, stack is j, third is k, found when current < third"
 
----
+--
 
 # PATTERN 24: Sum of Subarray Ranges (LeetCode 2104)
 
@@ -5205,7 +5202,7 @@ Much simpler!
 
 **Instant thought:** "Sum of all maxes - Sum of all mins! Use monotonic stack twice"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -5250,7 +5247,7 @@ Contribution as min = nums[i] * left[i] * right[i]
 Answer = sum of max contributions - sum of min contributions
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -5312,7 +5309,7 @@ Sum of mins = 3 + 4 + 3 = 10
 Answer = Sum of maxes - Sum of mins = 14 - 10 = 4 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -5360,17 +5357,17 @@ private boolean compare(int stackVal, int currVal, boolean findMax) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Double counting | Same subarray counted twice | Use < vs <= carefully |
 | Integer overflow | Large sums | Use long |
 | Wrong comparison | Max vs min have opposite logic | Parameterize comparison |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -5394,12 +5391,12 @@ SUM OF SUBARRAY RANGES
 
 **Memory phrase:** "Sum of ranges = sum of maxes - sum of mins, use monotonic stack twice"
 
----
+--
 
 # MAANG Coverage Map (Complete L5)
 
 | Pattern | Problem | LeetCode | Difficulty | Frequency |
-|---------|---------|----------|------------|-----------|
+|-----|-----|-----|------|------|
 | **Matching** |
 | 0 | Valid Parentheses | 20 | Easy | 🔥🔥🔥 |
 | 1 | Longest Valid Parentheses | 32 | Hard | 🔥🔥 |
@@ -5424,7 +5421,7 @@ SUM OF SUBARRAY RANGES
 | **Advanced** |
 | 23 | 132 Pattern | 456 | Medium | 🔥🔥 |
 
----
+--
 
 # Mastery Checklist
 
@@ -5452,7 +5449,7 @@ SUM OF SUBARRAY RANGES
 - [ ] 132 Pattern (reverse scan)
 - [ ] Min Add to Make Valid (counting)
 
----
+--
 
 # The Final Mental Model
 
@@ -5474,6 +5471,6 @@ SUM OF SUBARRAY RANGES
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
----
+--
 
 **Remember:** A stack remembers HISTORY in reverse order. Use it when you need to UNDO, MATCH, or find the NEAREST thing!

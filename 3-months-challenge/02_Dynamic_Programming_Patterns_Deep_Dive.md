@@ -1,7 +1,7 @@
 # Dynamic Programming Patterns Deep Dive
 ## Junior Dev's Complete Guide to L5 MAANG DP Mastery
 
----
+--
 
 # THE DP MINDSET: Before You Code Anything
 
@@ -33,7 +33,7 @@ BOTTOM-UP (Tabulation):
 - Fill dp[] table iteratively
 ```
 
----
+--
 
 # PART 1: 1D DYNAMIC PROGRAMMING (Week 17)
 
@@ -55,7 +55,7 @@ for (int i = 1; i < n; i++) {
 return dp[n-1];
 ```
 
----
+--
 
 ## PATTERN 1: Climbing Stairs (LC 70)
 
@@ -109,17 +109,17 @@ public int climbStairs(int n) {
 CLIMBING STAIRS
       |
       v
-+------------------+
++---------+
 | dp[i] = ways to i|
 | = dp[i-1]+dp[i-2]|
 | Fibonacci pattern|
 | O(1) space ok    |
-+------------------+
++---------+
 ```
 
 **Memory phrase:** "Fibonacci - sum of previous two ways"
 
----
+--
 
 ## PATTERN 2: House Robber (LC 198)
 
@@ -172,17 +172,17 @@ public int rob(int[] nums) {
 HOUSE ROBBER
      |
      v
-+-------------------+
++----------+
 | Take or Skip      |
 | dp[i] = max of:   |
 |   skip: dp[i-1]   |
 |   take: dp[i-2]+v |
-+-------------------+
++----------+
 ```
 
 **Memory phrase:** "Take current + skip one, or skip current"
 
----
+--
 
 ## PATTERN 3: House Robber II (LC 213) - Circular
 
@@ -228,17 +228,17 @@ private int robLinear(int[] nums, int start, int end) {
 HOUSE ROBBER II (CIRCULAR)
            |
            v
-+----------------------+
++-----------+
 | Circular = 2 cases   |
 | Case 1: skip last    |
 | Case 2: skip first   |
 | Answer = max of both |
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "Circular = two linear runs, exclude one end each"
 
----
+--
 
 ## PATTERN 4: Jump Game (LC 55)
 
@@ -287,17 +287,17 @@ public boolean canJump(int[] nums) {
 JUMP GAME
     |
     v
-+------------------+
++---------+
 | Track farthest   |
 | If i > farthest  |
 |   -> stuck!      |
 | Greedy approach  |
-+------------------+
++---------+
 ```
 
 **Memory phrase:** "Track farthest reach, stuck if i > farthest"
 
----
+--
 
 ## PATTERN 5: Jump Game II (LC 45)
 
@@ -357,17 +357,17 @@ public int jump(int[] nums) {
 JUMP GAME II
      |
      v
-+--------------------+
++----------+
 | BFS-like levels    |
 | currentEnd = level |
 | farthest = next lvl|
 | Jump when i==end   |
-+--------------------+
++----------+
 ```
 
 **Memory phrase:** "Level ends, must jump, update to farthest"
 
----
+--
 
 ## PATTERN 6: Decode Ways (LC 91)
 
@@ -439,17 +439,17 @@ public int numDecodings(String s) {
 DECODE WAYS
      |
      v
-+--------------------+
++----------+
 | 1 digit: 1-9 valid |
 | 2 digits: 10-26    |
 | dp[i] = sum of both|
 | Watch for '0'!     |
-+--------------------+
++----------+
 ```
 
 **Memory phrase:** "Single digit + double digit, watch for zeros"
 
----
+--
 
 ## PATTERN 7: Maximum Subarray (LC 53) - Kadane's
 
@@ -504,18 +504,18 @@ public int maxSubArray(int[] nums) {
 KADANE'S ALGORITHM
        |
        v
-+--------------------+
++----------+
 | Start fresh or     |
 | extend previous    |
 | curr = max(a[i],   |
 |   curr + a[i])     |
 | Track global max   |
-+--------------------+
++----------+
 ```
 
 **Memory phrase:** "Extend or restart, track global max"
 
----
+--
 
 ## PATTERN 8: Maximum Product Subarray (LC 152)
 
@@ -572,17 +572,17 @@ public int maxProduct(int[] nums) {
 MAX PRODUCT SUBARRAY
         |
         v
-+---------------------+
++-----------+
 | Track MAX and MIN   |
 | Negative flips them |
 | Swap on negative    |
 | Result = global max |
-+---------------------+
++-----------+
 ```
 
 **Memory phrase:** "Track both max and min, swap on negative"
 
----
+--
 
 ## PATTERN 9: Perfect Squares (LC 279)
 
@@ -634,18 +634,18 @@ public int numSquares(int n) {
 PERFECT SQUARES
       |
       v
-+--------------------+
++----------+
 | Unbounded knapsack |
 | Try all squares<=i |
 | dp[i] = min count  |
 | dp[i-sq*sq] + 1    |
-+--------------------+
++----------+
 ```
 
 **Memory phrase:** "Try all squares, take minimum + 1"
 
 
----
+--
 
 # PART 2: KNAPSACK DYNAMIC PROGRAMMING (Week 18)
 
@@ -673,7 +673,7 @@ for (int i = 1; i <= n; i++) {
 }
 ```
 
----
+--
 
 ## PATTERN 10: 0/1 Knapsack (Classic)
 
@@ -708,7 +708,7 @@ public int knapsack(int[] weights, int[] values, int capacity) {
     
     for (int i = 0; i < n; i++) {
         // Traverse RIGHT to LEFT for 0/1 (each item once)
-        for (int w = capacity; w >= weights[i]; w--) {
+        for (int w = capacity; w >= weights[i]; w-) {
             dp[w] = Math.max(dp[w], dp[w - weights[i]] + values[i]);
         }
     }
@@ -723,18 +723,18 @@ public int knapsack(int[] weights, int[] values, int capacity) {
 0/1 KNAPSACK
      |
      v
-+---------------------+
++-----------+
 | Take or skip item   |
 | dp[w] = max of:     |
 |   skip: dp[w]       |
 |   take: dp[w-wt]+val|
 | RIGHT to LEFT!      |
-+---------------------+
++-----------+
 ```
 
 **Memory phrase:** "Take or skip, right to left for 0/1"
 
----
+--
 
 ## PATTERN 11: Partition Equal Subset Sum (LC 416)
 
@@ -777,7 +777,7 @@ public boolean canPartition(int[] nums) {
     dp[0] = true;
     
     for (int num : nums) {
-        for (int j = target; j >= num; j--) {  // Right to left!
+        for (int j = target; j >= num; j-) {  // Right to left!
             dp[j] = dp[j] || dp[j - num];
         }
     }
@@ -792,17 +792,17 @@ public boolean canPartition(int[] nums) {
 PARTITION EQUAL SUBSET
          |
          v
-+----------------------+
++-----------+
 | Sum must be even     |
 | Target = sum / 2     |
 | 0/1 knapsack boolean |
 | Can we make target?  |
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "Half the sum, 0/1 knapsack for existence"
 
----
+--
 
 ## PATTERN 12: Target Sum (LC 494)
 
@@ -837,7 +837,7 @@ public int findTargetSumWays(int[] nums, int target) {
     dp[0] = 1;
     
     for (int num : nums) {
-        for (int j = subsetSum; j >= num; j--) {
+        for (int j = subsetSum; j >= num; j-) {
             dp[j] += dp[j - num];
         }
     }
@@ -852,17 +852,17 @@ public int findTargetSumWays(int[] nums, int target) {
 TARGET SUM
     |
     v
-+---------------------+
++-----------+
 | P - N = target      |
 | P = (sum+target)/2  |
 | Count subsets = P   |
 | 0/1 knapsack count  |
-+---------------------+
++-----------+
 ```
 
 **Memory phrase:** "Transform to subset sum, count ways"
 
----
+--
 
 ## PATTERN 13: Coin Change (LC 322) - Unbounded
 
@@ -916,17 +916,17 @@ public int coinChange(int[] coins, int amount) {
 COIN CHANGE (MIN)
        |
        v
-+--------------------+
++----------+
 | Unbounded knapsack |
 | dp[i] = min coins  |
 | Try all coins <= i |
 | LEFT to RIGHT!     |
-+--------------------+
++----------+
 ```
 
 **Memory phrase:** "Unbounded = left to right, minimize coins"
 
----
+--
 
 ## PATTERN 14: Coin Change II (LC 518) - Count Ways
 
@@ -978,17 +978,17 @@ public int change(int amount, int[] coins) {
 COIN CHANGE II (COUNT)
          |
          v
-+----------------------+
++-----------+
 | Count combinations   |
 | NOT permutations     |
 | Outer: coins         |
 | Inner: amounts (L->R)|
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "Coin-by-coin outer loop avoids permutation counting"
 
----
+--
 
 ## PATTERN 15: Ones and Zeroes (LC 474)
 
@@ -1011,8 +1011,8 @@ public int findMaxForm(String[] strs, int m, int n) {
         }
         
         // 0/1 knapsack: right to left in both dimensions
-        for (int i = m; i >= zeros; i--) {
-            for (int j = n; j >= ones; j--) {
+        for (int i = m; i >= zeros; i-) {
+            for (int j = n; j >= ones; j-) {
                 dp[i][j] = Math.max(dp[i][j], dp[i-zeros][j-ones] + 1);
             }
         }
@@ -1028,18 +1028,18 @@ public int findMaxForm(String[] strs, int m, int n) {
 ONES AND ZEROES
       |
       v
-+---------------------+
++-----------+
 | 2D 0/1 knapsack     |
 | Two capacities: m,n |
 | Count 0s and 1s     |
 | Right to left both  |
-+---------------------+
++-----------+
 ```
 
 **Memory phrase:** "Two constraints = 2D knapsack"
 
 
----
+--
 
 # PART 3: 2D DYNAMIC PROGRAMMING (Week 19)
 
@@ -1053,7 +1053,7 @@ ONES AND ZEROES
 //   - Intervals: dp[i][j] for range [i..j]
 ```
 
----
+--
 
 ## PATTERN 16: Unique Paths (LC 62)
 
@@ -1102,17 +1102,17 @@ public int uniquePaths(int m, int n) {
 UNIQUE PATHS
      |
      v
-+------------------+
++---------+
 | dp[i][j] = paths |
 | = above + left   |
 | First row/col = 1|
 | O(n) space ok    |
-+------------------+
++---------+
 ```
 
 **Memory phrase:** "Paths = from above + from left"
 
----
+--
 
 ## PATTERN 17: Minimum Path Sum (LC 64)
 
@@ -1163,16 +1163,16 @@ public int minPathSum(int[][] grid) {
 MIN PATH SUM
      |
      v
-+--------------------+
++----------+
 | dp[i][j] = cost +  |
 | min(above, left)   |
 | In-place possible  |
-+--------------------+
++----------+
 ```
 
 **Memory phrase:** "Current + min of above and left"
 
----
+--
 
 ## PATTERN 18: Longest Common Subsequence (LC 1143)
 
@@ -1226,16 +1226,16 @@ public int longestCommonSubsequence(String text1, String text2) {
 LCS
  |
  v
-+---------------------+
++-----------+
 | Match: diagonal + 1 |
 | No match: max(↑, ←) |
 | dp[m][n] = answer   |
-+---------------------+
++-----------+
 ```
 
 **Memory phrase:** "Match = diagonal+1, else max of up and left"
 
----
+--
 
 ## PATTERN 19: Edit Distance (LC 72)
 
@@ -1302,17 +1302,17 @@ public int minDistance(String word1, String word2) {
 EDIT DISTANCE
       |
       v
-+----------------------+
++-----------+
 | Match: diagonal (0)  |
 | Replace: diag + 1    |
 | Delete: up + 1       |
 | Insert: left + 1     |
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "Match=free, else min of replace/delete/insert + 1"
 
----
+--
 
 ## PATTERN 20: Longest Palindromic Subsequence (LC 516)
 
@@ -1362,17 +1362,17 @@ public int longestPalindromeSubseq(String s) {
 LONGEST PALINDROME SUBSEQ
            |
            v
-+------------------------+
++------------+
 | Method 1: LCS(s, rev)  |
 | Method 2: Interval DP  |
 | Match ends: inner + 2  |
 | No match: max(shrink)  |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "LCS with reverse, or interval DP"
 
----
+--
 
 ## PATTERN 21: Maximal Square (LC 221)
 
@@ -1428,18 +1428,18 @@ public int maximalSquare(char[][] matrix) {
 MAXIMAL SQUARE
       |
       v
-+---------------------+
++-----------+
 | dp[i][j] = side len |
 | = min(↖,↑,←) + 1    |
 | Only if cell = '1'  |
 | Area = side * side  |
-+---------------------+
++-----------+
 ```
 
 **Memory phrase:** "Square limited by smallest neighbor + 1"
 
 
----
+--
 
 # PART 4: LIS PATTERN (Week 20)
 
@@ -1491,17 +1491,17 @@ public int lengthOfLIS(int[] nums) {
 LIS
  |
  v
-+------------------------+
++------------+
 | tails[i] = smallest    |
 | tail of LIS length i+1 |
 | Binary search position |
 | Extend or replace      |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Tails array, binary search, extend or replace"
 
----
+--
 
 ## PATTERN 23: Russian Doll Envelopes (LC 354)
 
@@ -1532,7 +1532,7 @@ public int maxEnvelopes(int[][] envelopes) {
 **Memory phrase:** "Sort width ASC, same width height DESC, LIS on heights"
 
 
----
+--
 
 # PART 5: INTERVAL DP (Week 21)
 
@@ -1553,7 +1553,7 @@ for (int len = 2; len <= n; len++) {
 }
 ```
 
----
+--
 
 ## PATTERN 24: Burst Balloons (LC 312)
 
@@ -1615,17 +1615,17 @@ public int maxCoins(int[] nums) {
 BURST BALLOONS
       |
       v
-+----------------------+
++-----------+
 | Think LAST to burst  |
 | Add boundary 1s      |
 | dp[i][j] = max coins |
 | Try all k as last    |
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "Last balloon to burst, boundaries become neighbors"
 
----
+--
 
 ## PATTERN 25: Palindrome Partitioning II (LC 132)
 
@@ -1642,7 +1642,7 @@ public int minCut(String s) {
     boolean[][] isPalin = new boolean[n][n];
     
     // Precompute palindromes
-    for (int i = n - 1; i >= 0; i--) {
+    for (int i = n - 1; i >= 0; i-) {
         for (int j = i; j < n; j++) {
             if (s.charAt(i) == s.charAt(j) && (j - i < 2 || isPalin[i+1][j-1])) {
                 isPalin[i][j] = true;
@@ -1676,17 +1676,17 @@ public int minCut(String s) {
 PALINDROME PARTITION II
           |
           v
-+------------------------+
++------------+
 | Precompute isPalin[][] |
 | dp[i] = min cuts 0..i  |
 | If [j..i] palindrome   |
 | dp[i] = dp[j-1] + 1    |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Precompute palindromes, then min cuts DP"
 
----
+--
 
 ## PATTERN 26: Stone Game (LC 877)
 
@@ -1725,18 +1725,18 @@ public boolean stoneGame(int[] piles) {
 STONE GAME
     |
     v
-+---------------------+
++-----------+
 | dp[i][j] = advantage|
 | Take left or right  |
 | Subtract opponent's |
 | best response       |
-+---------------------+
++-----------+
 ```
 
 **Memory phrase:** "Your pick minus opponent's best = advantage"
 
 
----
+--
 
 # PART 6: BITMASK DP + STATE MACHINE DP (Week 22)
 
@@ -1758,7 +1758,7 @@ int newMask = mask & ~(1 << i);
 int count = Integer.bitCount(mask);
 ```
 
----
+--
 
 ## PATTERN 27: Partition to K Equal Sum Subsets (LC 698) - Bitmask
 
@@ -1803,17 +1803,17 @@ public boolean canPartitionKSubsets(int[] nums, int k) {
 PARTITION K SUBSETS (BITMASK)
              |
              v
-+------------------------+
++------------+
 | mask = which nums used |
 | dp[mask] = current sum |
 |   mod target           |
 | All used & sum=0 = yes |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Bitmask tracks used, dp tracks sum mod target"
 
----
+--
 
 ## PATTERN 28: Traveling Salesman Problem (TSP)
 
@@ -1883,17 +1883,17 @@ public int tsp(int[][] dist) {
 TSP (BITMASK DP)
       |
       v
-+------------------------+
++------------+
 | dp[mask][i] = min cost |
 | mask = visited cities  |
 | i = current city       |
 | Add return to start    |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Mask = visited, track last city, add return cost"
 
----
+--
 
 # STATE MACHINE DP: Stock Problems
 
@@ -1903,7 +1903,7 @@ Model problem as states with transitions. For stocks:
 - State: (day, holding stock?, cooldown?, transactions left)
 - Transitions: buy, sell, rest
 
----
+--
 
 ## PATTERN 29: Best Time to Buy and Sell Stock (LC 121)
 
@@ -1930,7 +1930,7 @@ public int maxProfit(int[] prices) {
 
 **Memory phrase:** "Track min, profit = current - min"
 
----
+--
 
 ## PATTERN 30: Best Time to Buy and Sell Stock II (LC 122)
 
@@ -1955,7 +1955,7 @@ public int maxProfit(int[] prices) {
 
 **Memory phrase:** "Add all upward slopes"
 
----
+--
 
 ## PATTERN 31: Best Time to Buy and Sell Stock III (LC 123)
 
@@ -1997,18 +1997,18 @@ public int maxProfit(int[] prices) {
 STOCK III (2 TRANSACTIONS)
            |
            v
-+------------------------+
++------------+
 | 4 states: b1,s1,b2,s2  |
 | buy1 = max(-price)     |
 | sell1 = buy1 + price   |
 | buy2 = sell1 - price   |
 | sell2 = buy2 + price   |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Chain: buy1 -> sell1 -> buy2 -> sell2"
 
----
+--
 
 ## PATTERN 32: Best Time to Buy and Sell Stock IV (LC 188)
 
@@ -2053,17 +2053,17 @@ public int maxProfit(int k, int[] prices) {
 STOCK IV (K TRANSACTIONS)
            |
            v
-+------------------------+
++------------+
 | buy[i] = after i-th buy|
 | sell[i] = after i-th   |
 | sell                   |
 | Chain transitions      |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "K buy-sell pairs, chain them"
 
----
+--
 
 ## PATTERN 33: Best Time to Buy and Sell Stock with Cooldown (LC 309)
 
@@ -2105,22 +2105,22 @@ public int maxProfit(int[] prices) {
 STOCK WITH COOLDOWN
         |
         v
-+----------------------+
++-----------+
 | hold: have stock     |
 | sold: just sold      |
 | rest: can buy        |
 | sold -> rest (cool)  |
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "Three states: hold, sold, rest. Sold must rest."
 
----
+--
 
 # QUICK REFERENCE: DP Pattern Categories
 
 | Category | Patterns | Key Insight |
-|----------|----------|-------------|
+|-----|-----|-------|
 | 1D DP | Climbing, Robber, Jump | dp[i] depends on dp[i-1], dp[i-2] |
 | Knapsack | Partition, Coins, Target | Take or skip, 0/1 vs unbounded |
 | 2D DP | Grid, LCS, Edit | dp[i][j] for two parameters |
@@ -2129,12 +2129,12 @@ STOCK WITH COOLDOWN
 | Bitmask | TSP, Partition K | Mask = which items used |
 | State Machine | Stocks | States + transitions |
 
----
+--
 
 *End of Dynamic Programming Patterns Deep Dive*
 
 
----
+--
 
 # PART 7: ADDITIONAL HIGH-PRIORITY PATTERNS
 
@@ -2193,17 +2193,17 @@ public boolean wordBreak(String s, List<String> wordDict) {
 WORD BREAK
     |
     v
-+---------------------+
++-----------+
 | dp[i] = segmentable |
 | Try all splits j    |
 | dp[j] && s[j..i] in |
 | dictionary          |
-+---------------------+
++-----------+
 ```
 
 **Memory phrase:** "Try all splits, check prefix valid AND suffix in dict"
 
----
+--
 
 ## PATTERN 35: Regular Expression Matching (LC 10)
 
@@ -2279,18 +2279,18 @@ public boolean isMatch(String s, String p) {
 REGEX MATCHING
       |
       v
-+------------------------+
++------------+
 | . = any single char    |
 | * = zero or more of    |
 |     previous char      |
 | dp[i][j] = match?      |
 | * : skip or consume    |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Star means zero (skip 2) or more (consume and stay)"
 
----
+--
 
 ## PATTERN 36: Wildcard Matching (LC 44)
 
@@ -2331,12 +2331,12 @@ Answer: true
 WILDCARD MATCHING
        |
        v
-+----------------------+
++-----------+
 | ? = any single char  |
 | * = any sequence     |
 | * : empty OR consume |
 | dp[i][j-1] || dp[i-1][j]|
-+----------------------+
++-----------+
 ```
 
 ### The Code
@@ -2378,17 +2378,17 @@ public boolean isMatch(String s, String p) {
 WILDCARD MATCHING
        |
        v
-+----------------------+
++-----------+
 | ? = any single char  |
 | * = any sequence     |
 | * : empty OR consume |
 | dp[i][j-1] || dp[i-1][j]|
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "Star = empty (left) or consume one (up)"
 
----
+--
 
 ## PATTERN 37: Distinct Subsequences (LC 115)
 
@@ -2444,17 +2444,17 @@ public int numDistinct(String s, String t) {
 DISTINCT SUBSEQUENCES
          |
          v
-+------------------------+
++------------+
 | dp[i][j] = count       |
 | Always: skip s[i]      |
 | Match: + use s[i]      |
 | dp[i-1][j] + dp[i-1][j-1]|
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Always can skip, match adds diagonal"
 
----
+--
 
 ## PATTERN 38: Interleaving String (LC 97)
 
@@ -2487,13 +2487,13 @@ Trace: a(s1) + a(s2) + x(s2) + a(s1) + b(s1) + y(s2)
 INTERLEAVING STRING
         |
         v
-+------------------------+
++------------+
 | dp[i][j] = can form    |
 | s3[0..i+j-1]           |
 | From s1[0..i-1] and    |
 | s2[0..j-1]             |
 | Take from s1 OR s2     |
-+------------------------+
++------------+
 ```
 
 ### The Code
@@ -2534,18 +2534,18 @@ public boolean isInterleave(String s1, String s2, String s3) {
 INTERLEAVING STRING
         |
         v
-+------------------------+
++------------+
 | dp[i][j] = can form    |
 | s3[0..i+j-1]           |
 | From s1[0..i-1] and    |
 | s2[0..j-1]             |
 | Take from s1 OR s2     |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Each char from s1 or s2, must match s3"
 
----
+--
 
 ## PATTERN 39: Triangle (LC 120)
 
@@ -2580,7 +2580,7 @@ public int minimumTotal(List<List<Integer>> triangle) {
     int[] dp = new int[n + 1];
     
     // Bottom-up
-    for (int i = n - 1; i >= 0; i--) {
+    for (int i = n - 1; i >= 0; i-) {
         for (int j = 0; j <= i; j++) {
             dp[j] = triangle.get(i).get(j) + Math.min(dp[j], dp[j + 1]);
         }
@@ -2596,17 +2596,17 @@ public int minimumTotal(List<List<Integer>> triangle) {
 TRIANGLE
    |
    v
-+--------------------+
++----------+
 | Bottom-up DP       |
 | dp[j] = curr +     |
 | min(dp[j], dp[j+1])|
 | O(n) space         |
-+--------------------+
++----------+
 ```
 
 **Memory phrase:** "Bottom-up, pick min of two children"
 
----
+--
 
 ## PATTERN 40: Dungeon Game (LC 174)
 
@@ -2647,13 +2647,13 @@ Answer: 7 (need 7 HP to start)
 DUNGEON GAME
      |
      v
-+----------------------+
++-----------+
 | Reverse DP!          |
 | Start from princess  |
 | dp[i][j] = min HP    |
 | needed to reach end  |
 | At least 1 HP always |
-+----------------------+
++-----------+
 ```
 
 ### The Code
@@ -2667,8 +2667,8 @@ public int calculateMinimumHP(int[][] dungeon) {
     for (int[] row : dp) Arrays.fill(row, Integer.MAX_VALUE);
     dp[m][n - 1] = dp[m - 1][n] = 1;  // Need at least 1 HP to survive
     
-    for (int i = m - 1; i >= 0; i--) {
-        for (int j = n - 1; j >= 0; j--) {
+    for (int i = m - 1; i >= 0; i-) {
+        for (int j = n - 1; j >= 0; j-) {
             int minHpNeeded = Math.min(dp[i + 1][j], dp[i][j + 1]) - dungeon[i][j];
             dp[i][j] = Math.max(1, minHpNeeded);  // At least 1 HP
         }
@@ -2684,19 +2684,19 @@ public int calculateMinimumHP(int[][] dungeon) {
 DUNGEON GAME
      |
      v
-+----------------------+
++-----------+
 | Reverse DP!          |
 | Start from princess  |
 | dp[i][j] = min HP    |
 | needed to reach end  |
 | At least 1 HP always |
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "Work backwards, need at least 1 HP"
 
 
----
+--
 
 ## PATTERN 41: Unique Paths II (LC 63) - With Obstacles
 
@@ -2754,15 +2754,15 @@ public int uniquePathsWithObstacles(int[][] grid) {
 UNIQUE PATHS II
       |
       v
-+--------------------+
++----------+
 | Same as Unique I   |
 | Obstacle cell = 0  |
 | dp[j] = 0 if block |
 | Else dp[j] += left |
-+--------------------+
++----------+
 ```
 
----
+--
 
 ## PATTERN 42: Number of LIS (LC 673)
 
@@ -2797,12 +2797,12 @@ Answer: 2
 NUMBER OF LIS
       |
       v
-+----------------------+
++-----------+
 | Track len[] AND cnt[]|
 | Longer: reset count  |
 | Same len: add count  |
 | Sum counts at maxLen |
-+----------------------+
++-----------+
 ```
 
 ### The Code
@@ -2840,7 +2840,7 @@ public int findNumberOfLIS(int[] nums) {
 
 **Memory phrase:** "Two arrays: length and count"
 
----
+--
 
 ## PATTERN 43: Longest Valid Parentheses (LC 32)
 
@@ -2871,12 +2871,12 @@ Answer: 4
 LONGEST VALID PARENS
         |
         v
-+----------------------+
++-----------+
 | dp[i] = valid length |
 | ending at i          |
 | Case 1: ...()        |
 | Case 2: ...))        |
-+----------------------+
++-----------+
 ```
 
 ### The Code (DP approach)
@@ -2912,17 +2912,17 @@ public int longestValidParentheses(String s) {
 LONGEST VALID PARENS
         |
         v
-+----------------------+
++-----------+
 | dp[i] = valid length |
 | ending at i          |
 | Case 1: ...()        |
 | Case 2: ...))        |
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "Two cases: () pair or )) with matching ("
 
----
+--
 
 ## PATTERN 44: Delete and Earn (LC 740)
 
@@ -2959,12 +2959,12 @@ Answer: 6 (take 2 and 4)
 DELETE AND EARN
       |
       v
-+----------------------+
++-----------+
 | count[v] = sum of v  |
 | House Robber on it   |
 | Can't take adjacent  |
 | values (not indices) |
-+----------------------+
++-----------+
 ```
 
 ### The Code
@@ -2991,7 +2991,7 @@ public int deleteAndEarn(int[] nums) {
 
 **Memory phrase:** "Transform to House Robber on value sums"
 
----
+--
 
 ## PATTERN 45: Min Cost Climbing Stairs (LC 746)
 
@@ -3026,13 +3026,13 @@ Answer: min(15, 30) = 15
 MIN COST CLIMBING
        |
        v
-+---------------------+
++-----------+
 | dp[i] = min cost to |
 | reach step i        |
 | = min(i-1, i-2) +   |
 | cost[i]             |
 | Answer: min of last2|
-+---------------------+
++-----------+
 ```
 
 ### The Code
@@ -3054,7 +3054,7 @@ public int minCostClimbingStairs(int[] cost) {
 
 **Memory phrase:** "Min of previous two + current cost"
 
----
+--
 
 ## PATTERN 46: Stock with Transaction Fee (LC 714)
 
@@ -3104,12 +3104,12 @@ Answer: 8
 STOCK WITH FEE
       |
       v
-+--------------------+
++----------+
 | cash = not holding |
 | hold = holding     |
 | Sell: +price - fee |
 | Buy: -price        |
-+--------------------+
++----------+
 ```
 
 ### The Code
@@ -3130,7 +3130,7 @@ public int maxProfit(int[] prices, int fee) {
 
 **Memory phrase:** "Subtract fee when selling"
 
----
+--
 
 ## PATTERN 47: Paint House (LC 256)
 
@@ -3175,12 +3175,12 @@ Answer: min(21, 10, 37) = 10
 PAINT HOUSE
     |
     v
-+----------------------+
++-----------+
 | dp[c] = min cost     |
 | ending with color c  |
 | Each color takes min |
 | of OTHER two colors  |
-+----------------------+
++-----------+
 ```
 
 ### The Code
@@ -3205,7 +3205,7 @@ public int minCost(int[][] costs) {
 
 **Memory phrase:** "Each color takes min of other two colors"
 
----
+--
 
 ## PATTERN 48: Matrix Chain Multiplication
 
@@ -3240,14 +3240,14 @@ Answer: 4500
 MATRIX CHAIN MULT
        |
        v
-+----------------------+
++-----------+
 | dp[i][j] = min cost  |
 | to multiply i..j     |
 | Try all split k      |
 | cost = left + right  |
 | + dims[i]*dims[k+1]  |
 |   *dims[j+1]         |
-+----------------------+
++-----------+
 ```
 
 ### The Code
@@ -3276,7 +3276,7 @@ public int matrixChainOrder(int[] dims) {
 
 **Memory phrase:** "Try all split points, cost = left + right + multiply"
 
----
+--
 
 ## PATTERN 49: Stone Game II (LC 1140)
 
@@ -3313,14 +3313,14 @@ Answer: 10 (Alice takes optimally)
 STONE GAME II
       |
       v
-+----------------------+
++-----------+
 | dp[i][M] = max stones|
 | from position i with |
 | current M value      |
 | Try X = 1 to 2M      |
 | My score = total -   |
 | opponent's best      |
-+----------------------+
++-----------+
 ```
 
 ### The Code
@@ -3329,7 +3329,7 @@ STONE GAME II
 public int stoneGameII(int[] piles) {
     int n = piles.length;
     int[] suffix = new int[n + 1];
-    for (int i = n - 1; i >= 0; i--) {
+    for (int i = n - 1; i >= 0; i-) {
         suffix[i] = suffix[i + 1] + piles[i];
     }
     
@@ -3355,7 +3355,7 @@ private int dfs(int[] piles, int[] suffix, int i, int M, int[][] memo) {
 
 **Memory phrase:** "Suffix sum - opponent's best = my best"
 
----
+--
 
 ## PATTERN 50: Cherry Pickup (LC 741)
 
@@ -3390,13 +3390,13 @@ Answer: 5
 CHERRY PICKUP
       |
       v
-+------------------------+
++------------+
 | Two people walk together|
 | dp[r1][c1][r2]         |
 | c2 = r1+c1-r2 (same steps)|
 | Same cell: count once  |
 | -1 = blocked           |
-+------------------------+
++------------+
 ```
 
 ### The Key Insight
@@ -3438,12 +3438,12 @@ public int cherryPickup(int[][] grid) {
 
 **Memory phrase:** "Two people walking together, don't double count same cell"
 
----
+--
 
 # UPDATED Quick Reference: All 50 DP Patterns
 
 | Category | Patterns | Count |
-|----------|----------|-------|
+|-----|-----|----|
 | 1D DP | Climbing, Robber, Jump, Decode, Kadane, Word Break | 12 |
 | Knapsack | 0/1, Partition, Target, Coins, Ones/Zeros | 6 |
 | 2D DP | Paths, LCS, Edit, Regex, Wildcard, Interleave | 12 |
@@ -3452,7 +3452,7 @@ public int cherryPickup(int[][] grid) {
 | Bitmask | TSP, Partition K | 2 |
 | State Machine | Stocks I-IV, Cooldown, Fee, Paint | 9 |
 
----
+--
 
 *End of Dynamic Programming Patterns Deep Dive - 50 Patterns for L5 MAANG*
 

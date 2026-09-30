@@ -1,63 +1,63 @@
 # Section 13 — Tree Patterns Through ONE Recursion Template (FAANG Deep Dive)
 
----
+--
 
 # 📑 INDEX — Quick Navigation (50 Patterns)
 
 ## 🎯 Core Concepts
 | Section | Line |
-|---------|------|
-| [The "One Sentence That Unlocks All Tree Problems"](#-the-one-sentence-that-unlocks-all-tree-problems) | 85 |
-| [The TWO Pipes (DOWN & UP)](#-the-two-pipes--the-entire-subject-in-two-lines) | 92 |
+|-----|---|
+| [The "One Sentence That Unlocks All Tree Problems"](#the-one-sentence-that-unlocks-all-tree-problems) | 85 |
+| [The TWO Pipes (DOWN & UP)](#the-two-pipes-the-entire-subject-in-two-lines) | 92 |
 | [The ONE Template (6 Steps)](#the-one-template-that-rules-all-tree-problems) | 115 |
 
----
+--
 
 ## 🌳 Foundation Patterns (0-17)
 
 | # | Pattern | LeetCode | Line |
-|---|---------|----------|------|
-| 0 | [Maximum Depth](#pattern-0-the-foundation--maximum-depth) | 104 | 104 |
+|--|-----|-----|---|
+| 0 | [Maximum Depth](#pattern-0-the-foundation-maximum-depth) | 104 | 104 |
 | 1 | [Diameter of Binary Tree](#pattern-1-diameter-of-binary-tree) | 543 | 177 |
-| 2 | [Count Good Nodes](#pattern-2-count-good-nodes-the-down-pipe--parameter-pattern) | 1448 | 282 |
-| 3 | [Invert / Same Tree / Is Mirror](#pattern-3-the-structural-trio--invert-same-tree-is-mirror) | 226, 100, 101 | 385 |
+| 2 | [Count Good Nodes](#pattern-2-count-good-nodes-the-down-pipe-parameter-pattern) | 1448 | 282 |
+| 3 | [Invert / Same Tree / Is Mirror](#pattern-3-the-structural-trio-invert-same-tree-is-mirror) | 226, 100, 101 | 385 |
 | 4 | [Lowest Common Ancestor (LCA)](#pattern-4-lowest-common-ancestor-lca) | 236 | 475 |
 | 5 | [Inorder Successor in BST](#pattern-5-inorder-successor-in-a-bst-the-next-bigger-node) | 285 | 565 |
 | 6 | [Largest BST Subtree](#pattern-6-largest-bst-subtree-the-multi-value-return-pattern) | 333 | 634 |
-| 7 | [Distance Between Two Nodes](#pattern-7-distance-between-two-nodes-lca--depth-composed) | 1740 | 708 |
+| 7 | [Distance Between Two Nodes](#pattern-7-distance-between-two-nodes-lca-depth-composed) | 1740 | 708 |
 | 8 | [Maximum Path Sum](#pattern-8-maximum-path-sum-diameters-richer-twin) | 124 | 791 |
-| 9 | [Balanced Binary Tree](#pattern-9-balanced-binary-tree-the-height--a-flag-bundle-mini-version) | 110 | 836 |
-| 10 | [Path Sum II (Backtracking)](#pattern-10-path-sum-ii-the-backtracking-pattern--the-one-true-mutation) | 113 | 875 |
-| 11 | [Validate BST](#pattern-11-validate-bst-the-range-pushed-down-pattern--good-nodes-twin) | 98 | 924 |
-| 12 | [BFS / Level-Order Family](#pattern-12-bfs--level-order-family-the-other-traversal-mode) | 102 | 969 |
-| 13 | [Kth Smallest in BST](#pattern-13-kth-smallest-in-a-bst-inorder--counter-early-stop) | 230 | 1049 |
-| 14 | [Serialize & Deserialize](#pattern-14-serialize--deserialize-preorder-encode--queue-decode) | 297 | 1096 |
-| 15 | [Build from Preorder + Inorder](#pattern-15-build-tree-from-preorder--inorder-root-splits-the-arrays) | 105 | 1161 |
-| 16 | [Path Sum III & Subtree of Another](#pattern-16-path-sum-iii--subtree-of-another-tree-nested-dfs--prefix-on-a-path) | 437, 572 | 1211 |
-| 17 | [Tree Views (Vertical/Right-Side)](#pattern-17-tree-views-coordinate-pushed-down--right-side-vertical-topbottom) | 199, 987 | 1277 |
+| 9 | [Balanced Binary Tree](#pattern-9-balanced-binary-tree-the-height-a-flag-bundle-mini-version) | 110 | 836 |
+| 10 | [Path Sum II (Backtracking)](#pattern-10-path-sum-ii-the-backtracking-pattern-the-one-true-mutation) | 113 | 875 |
+| 11 | [Validate BST](#pattern-11-validate-bst-the-range-pushed-down-pattern-good-nodes-twin) | 98 | 924 |
+| 12 | [BFS / Level-Order Family](#pattern-12-bfs-level-order-family-the-other-traversal-mode) | 102 | 969 |
+| 13 | [Kth Smallest in BST](#pattern-13-kth-smallest-in-a-bst-inorder-counter-early-stop) | 230 | 1049 |
+| 14 | [Serialize & Deserialize](#pattern-14-serialize-deserialize-preorder-encode-queue-decode) | 297 | 1096 |
+| 15 | [Build from Preorder + Inorder](#pattern-15-build-tree-from-preorder-inorder-root-splits-the-arrays) | 105 | 1161 |
+| 16 | [Path Sum III & Subtree of Another](#pattern-16-path-sum-iii-subtree-of-another-tree-nested-dfs-prefix-on-a-path) | 437, 572 | 1211 |
+| 17 | [Tree Views (Vertical/Right-Side)](#pattern-17-tree-views-coordinate-pushed-down-right-side-vertical-topbottom) | 199, 987 | 1277 |
 
----
+--
 
 ## 🆕 Extended Patterns (18-50) — L5 Complete Coverage
 
 ### BST Core Operations
 | # | Pattern | LeetCode | Line |
-|---|---------|----------|------|
+|--|-----|-----|---|
 | 18 | [BST Search](#pattern-18-bst-search-the-foundation-of-bst-operations) | 700 | 1531 |
 | 19 | [BST Insert](#pattern-19-bst-insert-find-the-right-spot) | 701 | 1572 |
 | 20 | [BST Delete](#pattern-20-bst-delete-the-three-cases) | 450 | 1614 |
 
 ### Tree DP Patterns
 | # | Pattern | LeetCode | Line |
-|---|---------|----------|------|
+|--|-----|-----|---|
 | 21 | [House Robber III](#pattern-21-house-robber-iii-the-bundle-return-pattern) | 337 | 1691 |
 | 22 | [Binary Tree Cameras](#pattern-22-binary-tree-cameras-3-state-tree-dp) | 968 | 1759 |
 | 23 | [Distribute Coins](#pattern-23-distribute-coins-in-binary-tree-flow-counting) | 979 | 1839 |
 
 ### BFS Variants
 | # | Pattern | LeetCode | Line |
-|---|---------|----------|------|
-| 24 | [Maximum Width](#pattern-24-maximum-width-of-binary-tree-bfs--index-tracking) | 662 | 1905 |
+|--|-----|-----|---|
+| 24 | [Maximum Width](#pattern-24-maximum-width-of-binary-tree-bfs-index-tracking) | 662 | 1905 |
 | 25 | [Next Right Pointers](#pattern-25-populating-next-right-pointers-level-linking) | 116/117 | 1989 |
 | 26 | [Boundary Traversal](#pattern-26-boundary-of-binary-tree-three-part-traversal) | 545 | 2064 |
 | 27 | [Left Side View](#pattern-27-left-side-view-mirror-of-right-side-view) | — | 2135 |
@@ -65,54 +65,54 @@
 
 ### Traversal & Path Patterns
 | # | Pattern | LeetCode | Line |
-|---|---------|----------|------|
+|--|-----|-----|---|
 | 28 | [Diagonal Traversal](#pattern-28-diagonal-traversal-coordinate-variant) | — | 2195 |
 | 29 | [Merge Two Trees](#pattern-29-merge-two-binary-trees-parallel-traversal) | 617 | 2232 |
 | 31 | [Longest Univalue Path](#pattern-31-longest-univalue-path-diameter-variant) | 687 | 2309 |
-| 32 | [LCA of Deepest Leaves](#pattern-32-lca-of-deepest-leaves-depth--lca-combined) | 1123 | 2354 |
+| 32 | [LCA of Deepest Leaves](#pattern-32-lca-of-deepest-leaves-depth-lca-combined) | 1123 | 2354 |
 | 33 | [Max Product Split](#pattern-33-maximum-product-of-splitted-binary-tree-total-sum-trick) | 1339 | 2399 |
-| 34 | [Pseudo-Palindromic Paths](#pattern-34-pseudo-palindromic-paths-backtracking--bit-trick) | 1457 | 2442 |
+| 34 | [Pseudo-Palindromic Paths](#pattern-34-pseudo-palindromic-paths-backtracking-bit-trick) | 1457 | 2442 |
 | 35 | [Delete Nodes & Return Forest](#pattern-35-delete-nodes-and-return-forest-post-order-with-set) | 1110 | 2487 |
 | 36 | [Sum Root to Leaf Numbers](#pattern-36-sum-root-to-leaf-numbers-path-value-accumulation) | 129 | 2537 |
 
 ### BST Construction & Manipulation
 | # | Pattern | LeetCode | Line |
-|---|---------|----------|------|
-| 37 | [Sorted List to BST](#pattern-37-convert-sorted-list-to-bst-two-pointer--recursion) | 109 | 2574 |
-| 38 | [Two Sum IV - BST](#pattern-38-two-sum-iv---input-is-bst-inorder--two-pointers) | 653 | 2616 |
-| 39 | [Balance a BST](#pattern-39-balance-a-bst-inorder--array--rebuild) | 1382 | 2657 |
+|--|-----|-----|---|
+| 37 | [Sorted List to BST](#pattern-37-convert-sorted-list-to-bst-two-pointer-recursion) | 109 | 2574 |
+| 38 | [Two Sum IV - BST](#pattern-38-two-sum-iv-input-is-bst-inorder-two-pointers) | 653 | 2616 |
+| 39 | [Balance a BST](#pattern-39-balance-a-bst-inorder-array-rebuild) | 1382 | 2657 |
 | 40 | [Unique BSTs (Count)](#pattern-40-unique-binary-search-trees-catalan-number-dp) | 96 | 2702 |
 | 41 | [Unique BSTs (Generate)](#pattern-41-unique-binary-search-trees-ii-generate-all-bsts) | 95 | 2753 |
 
 ### Advanced Patterns
 | # | Pattern | LeetCode | Line |
-|---|---------|----------|------|
-| 42 | [Sum of Distances (Re-rooting)](#pattern-42-sum-of-distances-in-tree-re-rooting-dp--advanced) | 834 | 2804 |
+|--|-----|-----|---|
+| 42 | [Sum of Distances (Re-rooting)](#pattern-42-sum-of-distances-in-tree-re-rooting-dp-advanced) | 834 | 2804 |
 | 43 | [Recover BST](#pattern-43-recover-binary-search-tree-inorder-anomaly-detection) | 99 | 2881 |
 | 44 | [Trim BST](#pattern-44-trim-a-bst-range-pruning) | 669 | 2940 |
 | 45 | [All Nodes Distance K](#pattern-45-all-nodes-distance-k-bfs-from-target) | 863 | 2981 |
 | 46 | [Flatten to Linked List](#pattern-46-flatten-binary-tree-to-linked-list-preorder-rewiring) | 114 | 3053 |
 | 47 | [BST from Preorder](#pattern-47-construct-bst-from-preorder-range-validation) | 1008 | 3109 |
 | 48 | [Range Sum of BST](#pattern-48-range-sum-of-bst-bst-pruned-search) | 938 | 3149 |
-| 49 | [Min Difference in BST](#pattern-49-minimum-difference-in-bst-inorder--track-previous) | 530 | 3186 |
+| 49 | [Min Difference in BST](#pattern-49-minimum-difference-in-bst-inorder-track-previous) | 530 | 3186 |
 | 50 | [Closest BST Value](#pattern-50-closest-bst-value-bst-binary-search) | 270 | 3226 |
 
----
+--
 
 ## 📚 Reference Sections
 | Section | Line |
-|---------|------|
-| [Master Decision Tree](#-the-master-decision-tree--pick-your-weapon-in-10-seconds) | 1327 |
-| [MAANG Coverage Map](#-updated-maang-coverage-map) | 3261 |
-| [Pattern Recognition Cheat Sheet](#-master-pattern-recognition-cheat-sheet) | 3323 |
-| [Final Mastery Checklist](#-final-mastery-checklist) | 3357 |
+|-----|---|
+| [Master Decision Tree](#the-master-decision-tree-pick-your-weapon-in-10-seconds) | 1327 |
+| [MAANG Coverage Map](#updated-maang-coverage-map) | 3261 |
+| [Pattern Recognition Cheat Sheet](#master-pattern-recognition-cheat-sheet) | 3323 |
+| [Final Mastery Checklist](#final-mastery-checklist) | 3357 |
 
----
+--
 
 ## 🔍 Quick Find by Problem Type
 
 | If you need to... | Go to Pattern # |
-|-------------------|-----------------|
+|----------|---------|
 | Find depth/height | 0, 9 |
 | Find diameter/longest path | 1, 8, 31 |
 | Count nodes with ancestor condition | 2 |
@@ -129,14 +129,14 @@
 | Tree views | 17, 26, 27, 28 |
 | Distance problems | 7, 42, 45 |
 
----
+--
 
 > **How to use this file (read this first — and yes, this line is for the podcast too):**
 > This document is written to be **read out loud**. You will drop it into NotebookLM, generate a podcast, and listen on loop. So everything here is spoken in plain sentences, in a repeating rhythm, so your brain forms a **mind map by repetition**.
 >
 > Every single pattern below is explained through the **exact same 6-step skeleton**. That repetition is intentional. After a handful of patterns, your brain will already be *predicting* the next step before the narrator says it. That is what "becoming a pro" actually feels like — the structure becomes muscle memory. There are **50 patterns** here, but they're really just a few reusable *moves* wearing different costumes.
 
----
+--
 
 ## 🧠 The "One Sentence That Unlocks All Tree Problems"
 
@@ -144,7 +144,7 @@
 
 That's it. Once you figure out which direction the information flows, the code writes itself.
 
----
+--
 
 ## 🎯 The TWO Pipes — The Entire Subject in Two Lines
 
@@ -166,7 +166,7 @@ Need ancestor info?  → Push it DOWN as a parameter  → Work in PRE-order
 Need descendant info? → Pull it UP as a return value → Work in POST-order
 ```
 
----
+--
 
 ## The ONE Template That Rules All Tree Problems
 
@@ -213,7 +213,7 @@ For each pattern you will hear the same 8 beats:
 
 Let's build you into a pro. One template, many faces.
 
----
+--
 
 ## 🔑 The 6 Questions You Ask EVERY Time
 
@@ -230,7 +230,7 @@ Your goal is **not** to memorize each problem. Your goal is to **figure out** th
 
 If you learn to ask these questions, you can walk up to ANY tree problem you've never seen, ask them in order, and the code writes itself.
 
----
+--
 
 # PATTERN 0: The Foundation — Maximum Depth
 
@@ -405,7 +405,7 @@ Returning `1` for the base case instead of `0`. Remember: `null` is NOTHING — 
 ## Mind-map anchor
 **`null→0` · `max(left,right)` · `+1 for me`**
 
----
+--
 
 # PATTERN 1: Diameter of Binary Tree
 
@@ -632,7 +632,7 @@ Returning `leftH + rightH` to your parent instead of `1 + max(leftH, rightH)`. I
 ## Mind-map anchor
 **`answer = left+right` · `return = 1+max` · "path can't fork"**
 
----
+--
 
 # PATTERN 2: Count Good Nodes (the DOWN pipe / parameter pattern)
 
@@ -837,7 +837,7 @@ Trying to compute "good" in POST-order (after children). You can't — goodness 
 ## ⚡ DOWN vs. UP — The Twin Comparison
 
 | Pattern | Needs info from... | Pipe | Work happens in... |
-|---------|-------------------|------|-------------------|
+|-----|----------|---|----------|
 | **Good Nodes** | ANCESTORS | DOWN (parameter) | PRE-order |
 | **Diameter / Depth** | DESCENDANTS | UP (return) | POST-order |
 
@@ -848,7 +848,7 @@ Trying to compute "good" in POST-order (after children). You can't — goodness 
 ## Mind-map anchor
 **`carry maxSoFar down` · `judge in pre-order` · "ancestor ⇒ parameter"**
 
----
+--
 
 # PATTERN 3: The Structural Trio — Invert, Same Tree, Is Mirror
 
@@ -957,7 +957,7 @@ BEFORE vs AFTER:
 Every left-right pair is swapped at every level!
 ```
 
----
+--
 
 ## 3B. Same Tree & 3C. Is Mirror (parallel two-node recursion)
 
@@ -1118,7 +1118,7 @@ Checking `a.val == b.val` **before** the null checks. If one node is null, `a.va
 ## Mind-map anchor for the whole trio
 **Invert = "swap kids" · Same = "L-L, R-R" · Mirror = "L-R, R-L (the cross)"**
 
----
+--
 
 # PATTERN 4: Lowest Common Ancestor (LCA)
 
@@ -1329,7 +1329,7 @@ Writing `if (left != null) return left;` BEFORE checking if right is also non-nu
 ## Mind-map anchor
 **`node==target ⇒ return node` · "both sides non-null ⇒ I'm LCA" · else bubble up**
 
----
+--
 
 # PATTERN 5: Inorder Successor in a BST ("the next bigger node")
 
@@ -1511,7 +1511,7 @@ Forgetting the **no-right-subtree** case in Flavor B (people always remember "go
 ## Mind-map anchor
 **"next in sorted line" · `right? leftmost-of-right` · `no right? climb up-right` · A: `remember last >p`**
 
----
+--
 
 # PATTERN 6: Largest BST Subtree (the MULTI-VALUE RETURN pattern)
 
@@ -1585,7 +1585,7 @@ Wrong identity for the null bundle. Using `min=+∞, max=−∞` for empty is wh
 ## Mind-map anchor
 **"return a bundle {isBST,size,min,max}" · check `L.max < val < R.min` · null = `+∞/−∞` identity**
 
----
+--
 
 # PATTERN 7: Distance Between Two Nodes (LCA + depth, composed)
 
@@ -1668,7 +1668,7 @@ Measuring depths from the **root** but forgetting the `− 2 × depth(LCA)` corr
 ## Mind-map anchor
 **"up to LCA, then down" · `dist = dLCA→p + dLCA→q` · reuse LCA + depth**
 
----
+--
 
 # PATTERN 8: Maximum Path Sum (Diameter's richer twin)
 
@@ -1864,7 +1864,7 @@ Initializing `maxSum = 0`. If every node is negative (e.g. all `-3`), the answer
 ## Mind-map anchor
 **"Diameter with values" · `clamp max(0,child)` · answer=both, return=one**
 
----
+--
 
 # PATTERN 9: Balanced Binary Tree (the "height + a flag" bundle, mini version)
 
@@ -2021,7 +2021,7 @@ This dual-meaning return turns O(n²) into O(n)!
 ## Mind-map anchor
 **"height OR −1 flag" · `abs(L−R)>1 ⇒ −1` · single post-order pass**
 
----
+--
 
 # PATTERN 10: Path Sum II (the BACKTRACKING pattern — the one true mutation)
 
@@ -2187,7 +2187,7 @@ Final Result: [[5, 4, 11, 2]]
 ## Mind-map anchor
 **"add → explore → remove" · snapshot a COPY at leaf · undo once, after both kids**
 
----
+--
 
 # PATTERN 11: Validate BST (the RANGE-pushed-DOWN pattern — Good Nodes' twin)
 
@@ -2354,7 +2354,7 @@ Comparing only `node.left.val < node.val < node.right.val` locally — this pass
 ## Mind-map anchor
 **"push (low,high) down" · left ⇒ high=val, right ⇒ low=val · "ancestor ⇒ parameter" (again)**
 
----
+--
 
 # PATTERN 12: BFS / Level-Order Family (the OTHER traversal mode)
 
@@ -2374,11 +2374,11 @@ while (!q.isEmpty()) {
     int size = q.size();                 // FREEZE this level's node count
     for (int i = 0; i < size; i++) {     // process exactly one level
         TreeNode node = q.poll();
-        // ---- do per-node work here (this is the only part that changes) ----
+        // -- do per-node work here (this is the only part that changes) --
         if (node.left  != null) q.offer(node.left);
         if (node.right != null) q.offer(node.right);
     }
-    // ---- do per-level work here (e.g., close off a level's list) ----
+    // -- do per-level work here (e.g., close off a level's list) --
 }
 ```
 
@@ -2572,7 +2572,7 @@ Forgetting to freeze `size` before the inner loop. If you loop `while (!q.isEmpt
 ## Mind-map anchor
 **"queue + freeze size" · per-node vs per-level lines · "nearest/level ⇒ BFS"**
 
----
+--
 
 # PATTERN 13: Kth Smallest in a BST (INORDER + counter, early-stop)
 
@@ -2605,7 +2605,7 @@ int kthSmallest(TreeNode root, int k) {
 void inorder(TreeNode node, int[] state) {
     if (node == null || state[0] == 0) return;   // 2. base + early stop
     inorder(node.left, state);                   // 4. left (smaller values first)
-    if (--state[0] == 0) { state[1] = node.val; return; } // 4. visit
+    if (-state[0] == 0) { state[1] = node.val; return; } // 4. visit
     inorder(node.right, state);                  // 4. right (larger values)
 }
 ```
@@ -2659,7 +2659,7 @@ Step 4: inorder(1)
   Go LEFT → inorder(null) → return
   
   VISIT node 1:
-    --state[0] → state = [2, -1]
+    -state[0] → state = [2, -1]
     Is state[0]==0? NO, continue
   
   Go RIGHT → inorder(null) → return
@@ -2668,7 +2668,7 @@ Step 4: inorder(1)
 
 Step 5: Back at node 2
   VISIT node 2:
-    --state[0] → state = [1, -1]
+    -state[0] → state = [1, -1]
     Is state[0]==0? NO, continue
   
   Go RIGHT → inorder(null) → return
@@ -2677,7 +2677,7 @@ Step 5: Back at node 2
 
 Step 6: Back at node 3
   VISIT node 3:
-    --state[0] → state = [0, -1]
+    -state[0] → state = [0, -1]
     Is state[0]==0? YES! ✓
     state[1] = 3 → state = [0, 3]
     RETURN immediately! (early stop)
@@ -2737,7 +2737,7 @@ Reverse inorder: [6, 5, 4, 3, 2, 1]
 
 Just change the order:
   inorder(node.right, state);  // RIGHT first
-  if (--state[0] == 0) ...     // visit
+  if (-state[0] == 0) ...     // visit
   inorder(node.left, state);   // LEFT last
 
 Final: 3rd Smallest = 3
@@ -2749,7 +2749,7 @@ Collecting the *entire* inorder list then indexing `list.get(k-1)` — correct b
 ## Mind-map anchor
 **"inorder = sorted" · countdown k, stop at 0 · reverse for k-th largest**
 
----
+--
 
 # PATTERN 14: Serialize & Deserialize (PREORDER encode + queue decode)
 
@@ -2991,7 +2991,7 @@ Omitting null markers — then you can't tell a leaf from an internal node, and 
 ## Mind-map anchor
 **"preorder + null markers" · token queue rebuild · encode/decode mirror**
 
----
+--
 
 # PATTERN 15: Build Tree from Preorder + Inorder (ROOT splits the arrays)
 
@@ -3214,7 +3214,7 @@ Building right before left — the shared preorder cursor then advances in the w
 ## Mind-map anchor
 **"preorder = root, inorder = split" · left before right · hashmap for O(n)**
 
----
+--
 
 # PATTERN 16: Path Sum III & Subtree of Another Tree (NESTED DFS / prefix on a path)
 
@@ -3250,7 +3250,7 @@ Count paths going **downward** (parent→child, not necessarily root-to-leaf) th
 2. **BASE CASE — Ask:** *"Stop?"* **Answer:** `node == null` → contribute 0. **Why:** Nothing to add.
 3. **PRE-ORDER — Ask:** *"Work before kids?"* **Answer:** `runningSum += node.val`; add `count += map.getOrDefault(runningSum − target, 0)`; then `map[runningSum]++`. **Why:** A path ending here with the target sum corresponds to some ancestor prefix equal to `runningSum − target`. Record my own prefix so my descendants can use it.
 4. **GO LEFT / RIGHT — Ask:** *"Hand down?"* **Answer:** Recurse both with the updated `runningSum` and shared map.
-5. **POST-ORDER — Ask:** *"Cleanup?"* **Answer:** `map[runningSum]--` — **backtrack** the prefix. **Why:** My prefix is only valid for *my* subtree; siblings must not see it. (Same backtracking discipline as Path Sum II — undo the shared-map mutation on the way up.)
+5. **POST-ORDER — Ask:** *"Cleanup?"* **Answer:** `map[runningSum]-` — **backtrack** the prefix. **Why:** My prefix is only valid for *my* subtree; siblings must not see it. (Same backtracking discipline as Path Sum II — undo the shared-map mutation on the way up.)
 6. **RETURN:** the count from my subtree.
 
 ```java
@@ -3280,7 +3280,7 @@ Forgetting `prefix.put(0L, 1)` (misses paths that start at the root), or forgett
 ## Mind-map anchor
 **Subtree = "DFS inside DFS (Same-Tree)" · PathSumIII = "prefix map + seed 0 + backtrack"**
 
----
+--
 
 # PATTERN 17: Tree Views (COORDINATE pushed DOWN — right-side, vertical, top/bottom)
 
@@ -3330,7 +3330,7 @@ Vertical order: not breaking ties correctly. When two nodes share a column, orde
 ## Mind-map anchor
 **"carry (row,col) down" · left ⇒ col−1, right ⇒ col+1 · group by coordinate · right-view = right-first DFS**
 
----
+--
 
 ## 🎯 The Master Decision Tree — Pick Your Weapon in 10 Seconds
 
@@ -3384,7 +3384,7 @@ Ask yourself these questions **in order**:
 → Try to **COMPOSE** patterns you already know
 *Example: Distance = LCA + Depth*
 
----
+--
 
 ## 🔑 The Two Pipes — The Whole Subject in Two Lines
 
@@ -3397,12 +3397,12 @@ And the special cases:
 - **Backtracking** = a shared object that uses the DOWN pipe on entry and UNDOES itself on exit
 - **BFS** = the SIDEWAYS pipe: a queue that moves across a level instead of up/down
 
----
+--
 
 ## 📊 The One-Table Pattern Map
 
 | # | Pattern | Direction | Return vs Answer | Key Move |
-|---|---------|-----------|------------------|----------|
+|--|-----|------|---------|-----|
 | 0 | Max Depth | UP | same | `1 + max(L,R)` |
 | 1 | Diameter | UP | **different** | answer=`L+R`, return=`1+max` |
 | 2 | Good Nodes | **DOWN** | — | carry `maxSoFar` down |
@@ -3425,7 +3425,7 @@ And the special cases:
 | 16 | Path Sum III | **DOWN + backtrack** | — | prefix map + seed 0 |
 | 17 | Tree Views | **DOWN (coord)** | — | carry `(row,col)`, group |
 
----
+--
 
 ## 🎤 The 60-Second Interview Script
 
@@ -3447,12 +3447,12 @@ Memorize this and say it when you see a tree problem:
 >
 > And if it's a **BST and about order**, I lean on inorder-equals-sorted."
 
----
+--
 
 ## 🔥 Common Mistakes — Loop This Until It's Automatic
 
 | Mistake | The Fix |
-|---------|---------|
+|-----|-----|
 | Base case returns `1` for null | Return `0` — null is NOTHING |
 | Diameter: returning `L+R` to parent | Return `1+max(L,R)` — path can't fork |
 | Max Path Sum: init to `0` | Init to `MIN_VALUE` — all nodes might be negative |
@@ -3470,7 +3470,7 @@ Memorize this and say it when you see a tree problem:
 | Build from Pre+In: wrong order | Build **left before right** (cursor order) |
 | Tree Views: wrong tie-break | Break column ties by **row, then value** |
 
----
+--
 
 ## 🏆 Your Mastery Checklist
 
@@ -3493,12 +3493,12 @@ You've mastered tree patterns when you can:
 - [ ] Explain how backtracking (Path Sum II) differs from post-order combining
 - [ ] Recite the 60-second interview script cold
 
----
+--
 
 ## 📚 MAANG Coverage Map — Which Pattern Owns Each Problem
 
 | Classic MAANG question | Pattern # | LeetCode |
-|---|---|---|
+|--|--|--|
 | Maximum Depth | 0 | 104 |
 | Diameter of Binary Tree | 1 | 543 |
 | Count Good Nodes | 2 | 1448 |
@@ -3530,11 +3530,11 @@ You've mastered tree patterns when you can:
 
 > If a new problem isn't on this list, it's almost always a **remix** of one of these patterns. Run the Master Decision Tree and you'll land on the right one.
 
----
+--
 
 # 🆕 EXTENDED PATTERNS (18-30) — Complete L5 Coverage
 
----
+--
 
 # PATTERN 18: BST Search (The Foundation of BST Operations)
 
@@ -3575,7 +3575,7 @@ TreeNode searchBST(TreeNode node, int target) {
 ## Mind-map anchor
 **`target < val → left` · `target > val → right` · O(h) not O(n)**
 
----
+--
 
 # PATTERN 19: BST Insert (Find the Right Spot)
 
@@ -3617,7 +3617,7 @@ Forgetting to REASSIGN: `insertIntoBST(node.left, val)` without `node.left = ...
 ## Mind-map anchor
 **`null → new node` · `node.left = recurse(...)` · reassignment attaches**
 
----
+--
 
 # PATTERN 20: BST Delete (The Three Cases)
 
@@ -3694,7 +3694,7 @@ Forgetting that after swapping with successor, you must DELETE the successor fro
 ## Mind-map anchor
 **3 cases: leaf/one-child/two-children · successor = leftmost of right · swap then delete**
 
----
+--
 
 # PATTERN 21: House Robber III (The Bundle Return Pattern)
 
@@ -3762,7 +3762,7 @@ int[] dfs(TreeNode node) {
 ## Mind-map anchor
 **return [rob, skip] · robMe = val + kids.skip · skipMe = max of each kid**
 
----
+--
 
 # PATTERN 22: Binary Tree Cameras (3-State Tree DP)
 
@@ -3842,7 +3842,7 @@ Forgetting to check if ROOT needs a camera at the end! If root returns 0, add on
 ## Mind-map anchor
 **3 states: 0=needs, 1=has, 2=covered · child needs → I place · greedy: cameras low**
 
----
+--
 
 # PATTERN 23: Distribute Coins in Binary Tree (Flow Counting)
 
@@ -3908,7 +3908,7 @@ int dfs(TreeNode node) {
 ## Mind-map anchor
 **excess = val + kids - 1 · moves += |left| + |right| · flow counting**
 
----
+--
 
 # PATTERN 24: Maximum Width of Binary Tree (BFS + Index Tracking)
 
@@ -3992,7 +3992,7 @@ Integer overflow! Indices can get huge (2^depth). Normalize by subtracting the f
 ## Mind-map anchor
 **heap indexing: left=2i, right=2i+1 · width = last - first + 1 · normalize per level**
 
----
+--
 
 # PATTERN 25: Populating Next Right Pointers (Level Linking)
 
@@ -4067,7 +4067,7 @@ Node connect(Node root) {
 ## Mind-map anchor
 **BFS: link within level · O(1): use next to traverse, link children · left.next = right**
 
----
+--
 
 # PATTERN 26: Boundary of Binary Tree (Three-Part Traversal)
 
@@ -4138,7 +4138,7 @@ boolean isLeaf(TreeNode node) {
 ## Mind-map anchor
 **3 parts: left-down + leaves + right-up · exclude leaves from boundaries · reverse right**
 
----
+--
 
 # PATTERN 27: Left Side View (Mirror of Right Side View)
 
@@ -4198,7 +4198,7 @@ List<Integer> leftSideView(TreeNode root) {
 ## Mind-map anchor
 **left-first DFS · or BFS i==0 · mirror of right view**
 
----
+--
 
 # PATTERN 28: Diagonal Traversal (Coordinate Variant)
 
@@ -4235,7 +4235,7 @@ void dfs(TreeNode node, int diagonal, Map<Integer, List<Integer>> map) {
 ## Mind-map anchor
 **left = diagonal+1 · right = same diagonal · group by diagonal**
 
----
+--
 
 # PATTERN 29: Merge Two Binary Trees (Parallel Traversal)
 
@@ -4269,7 +4269,7 @@ TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
 ## Mind-map anchor
 **parallel walk · null returns other · both exist = sum**
 
----
+--
 
 # PATTERN 30: Average of Levels (BFS Aggregation)
 
@@ -4312,7 +4312,7 @@ List<Double> averageOfLevels(TreeNode root) {
 ## Mind-map anchor
 **BFS + freeze size · sum / count per level · same skeleton**
 
----
+--
 
 # PATTERN 31: Longest Univalue Path (Diameter Variant)
 
@@ -4357,7 +4357,7 @@ int dfs(TreeNode node) {
 ## Mind-map anchor
 **diameter variant · arm = 0 if values differ · answer = both arms, return = one arm**
 
----
+--
 
 # PATTERN 32: LCA of Deepest Leaves (Depth + LCA Combined)
 
@@ -4402,7 +4402,7 @@ class Result {
 ## Mind-map anchor
 **return (node, depth) · deeper side wins · equal depths = I'm LCA**
 
----
+--
 
 # PATTERN 33: Maximum Product of Splitted Binary Tree (Total Sum Trick)
 
@@ -4445,7 +4445,7 @@ long getSum(TreeNode node) {
 ## Mind-map anchor
 **two passes · product = S × (total - S) · mod 1e9+7**
 
----
+--
 
 # PATTERN 34: Pseudo-Palindromic Paths (Backtracking + Bit Trick)
 
@@ -4490,7 +4490,7 @@ void dfs(TreeNode node, int path) {
 ## Mind-map anchor
 **XOR toggles bits · at most 1 bit = palindrome · (n & n-1) == 0**
 
----
+--
 
 # PATTERN 35: Delete Nodes and Return Forest (Post-Order with Set)
 
@@ -4540,7 +4540,7 @@ TreeNode dfs(TreeNode node, Set<Integer> toDelete, List<TreeNode> forest) {
 ## Mind-map anchor
 **post-order · deleted → children are new roots · return null to sever link**
 
----
+--
 
 # PATTERN 36: Sum Root to Leaf Numbers (Path Value Accumulation)
 
@@ -4577,7 +4577,7 @@ int dfs(TreeNode node, int currentNum) {
 ## Mind-map anchor
 **carry number down · num = num*10 + val · sum at leaves**
 
----
+--
 
 # PATTERN 37: Convert Sorted List to BST (Two-Pointer + Recursion)
 
@@ -4619,7 +4619,7 @@ TreeNode sortedListToBST(ListNode head) {
 ## Mind-map anchor
 **slow/fast finds middle · middle = root · cut and recurse**
 
----
+--
 
 # PATTERN 38: Two Sum IV - Input is BST (Inorder + Two Pointers)
 
@@ -4641,7 +4641,7 @@ boolean findTarget(TreeNode root, int k) {
         int sum = sorted.get(left) + sorted.get(right);
         if (sum == k) return true;
         if (sum < k) left++;
-        else right--;
+        else right-;
     }
     return false;
 }
@@ -4660,7 +4660,7 @@ void inorder(TreeNode node, List<Integer> list) {
 ## Mind-map anchor
 **inorder → sorted · two-pointer technique · O(n) space**
 
----
+--
 
 # PATTERN 39: Balance a BST (Inorder → Array → Rebuild)
 
@@ -4705,7 +4705,7 @@ TreeNode buildBST(List<Integer> nums, int left, int right) {
 ## Mind-map anchor
 **inorder → sorted array → middle = root → recurse**
 
----
+--
 
 # PATTERN 40: Unique Binary Search Trees (Catalan Number DP)
 
@@ -4756,7 +4756,7 @@ Answer: **5** unique BSTs ✓
 ## Mind-map anchor
 **Catalan number · dp[n] = Σ dp[i-1] × dp[n-i] · dp[0] = dp[1] = 1**
 
----
+--
 
 # PATTERN 41: Unique Binary Search Trees II (Generate All BSTs)
 
@@ -4807,7 +4807,7 @@ List<TreeNode> generate(int start, int end) {
 ## Mind-map anchor
 **generate left × right · nested loops to combine · return list of trees**
 
----
+--
 
 # PATTERN 42: Sum of Distances in Tree (Re-rooting DP — Advanced)
 
@@ -4884,7 +4884,7 @@ void dfs2(int node, int parent, int n) {
 ## Mind-map anchor
 **re-rooting DP · two passes · answer[child] = answer[parent] + n - 2×count[child]**
 
----
+--
 
 # PATTERN 43: Recover Binary Search Tree (Inorder Anomaly Detection)
 
@@ -4943,7 +4943,7 @@ Inorder: 3 → 2 → 1
 ## Mind-map anchor
 **inorder anomaly · first = prev of first anomaly · second = curr of last anomaly · swap values**
 
----
+--
 
 # PATTERN 44: Trim a BST (Range Pruning)
 
@@ -4984,7 +4984,7 @@ TreeNode trimBST(TreeNode node, int low, int high) {
 ## Mind-map anchor
 **val < low → skip left subtree · val > high → skip right subtree · in range → trim both**
 
----
+--
 
 # PATTERN 45: All Nodes Distance K (BFS from Target)
 
@@ -5056,7 +5056,7 @@ void buildParentMap(TreeNode node, TreeNode par, Map<TreeNode, TreeNode> map) {
 ## Mind-map anchor
 **parent map · BFS from target · go up/down/sideways · visited set**
 
----
+--
 
 # PATTERN 46: Flatten Binary Tree to Linked List (Preorder Rewiring)
 
@@ -5112,7 +5112,7 @@ void flatten(TreeNode root) {
 ## Mind-map anchor
 **reverse preorder · right = prev · or stack: push right, left, peek for next**
 
----
+--
 
 # PATTERN 47: Construct BST from Preorder (Range Validation)
 
@@ -5152,7 +5152,7 @@ TreeNode build(int[] preorder, int min, int max) {
 ## Mind-map anchor
 **preorder: root first · range bounds · left < val < right**
 
----
+--
 
 # PATTERN 48: Range Sum of BST (BST Pruned Search)
 
@@ -5189,7 +5189,7 @@ int rangeSumBST(TreeNode node, int low, int high) {
 ## Mind-map anchor
 **BST pruning · val < low → go right · val > high → go left · in range → add + both**
 
----
+--
 
 # PATTERN 49: Minimum Difference in BST (Inorder + Track Previous)
 
@@ -5229,7 +5229,7 @@ void inorder(TreeNode node) {
 ## Mind-map anchor
 **inorder = sorted · min diff = adjacent · track prev**
 
----
+--
 
 # PATTERN 50: Closest BST Value (BST Binary Search)
 
@@ -5264,12 +5264,12 @@ int closestValue(TreeNode root, double target) {
 ## Mind-map anchor
 **BST search + track closest · update if closer · O(h)**
 
----
+--
 
 # 📊 UPDATED MAANG Coverage Map
 
 | Problem | Pattern | LeetCode |
-|---------|---------|----------|
+|-----|-----|-----|
 | Maximum Depth | 0 (pure UP) | 104 |
 | Diameter | 1 (answer vs return) | 543 |
 | Good Nodes | 2 (DOWN pipe) | 1448 |
@@ -5326,14 +5326,14 @@ int closestValue(TreeNode root, double target) {
 | Vertical Order | 13-variant (BFS + col) | 314 |
 | Right Side View | 27-mirror | 199 |
 
----
+--
 
 # 🧠 MASTER PATTERN RECOGNITION CHEAT SHEET
 
 ## By Question Type
 
 | When you see... | Think... | Pattern # |
-|-----------------|----------|-----------|
+|---------|-----|------|
 | "Maximum/minimum depth" | Pure UP pipe | 0 |
 | "Diameter/longest path" | Answer vs Return split | 1, 31 |
 | "Count nodes with condition from root" | DOWN pipe (carry max/min) | 2 |
@@ -5360,7 +5360,7 @@ int closestValue(TreeNode root, double target) {
 | "Flatten to list" | Reverse preorder | 46 |
 | "Count unique structures" | Catalan number | 40, 41 |
 
----
+--
 
 # 🏆 FINAL MASTERY CHECKLIST
 
@@ -5398,6 +5398,6 @@ int closestValue(TreeNode root, double target) {
 - [ ] Sorted Array/List to BST
 - [ ] Unique BSTs (Catalan)
 
----
+--
 
 **Prev →** `01_Tree_Algorithms.md`  ·  **Next →** `../14_Heap/01_Heap_Patterns.md`

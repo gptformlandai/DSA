@@ -1,52 +1,52 @@
 # Section 6 — Prefix Sum Patterns Deep Dive (MAANG L5 Coverage)
 
----
+--
 
 # INDEX — Quick Navigation
 
 ## Core Concepts
 | Section | Description |
-|---------|-------------|
+|-----|-------|
 | [The "One Sentence"](#the-one-sentence-that-unlocks-all-prefix-sum-problems) | Unlocks all prefix sum problems |
-| [Zero to Hero](#-zero-to-hero-understanding-prefix-sums-from-scratch) | **START HERE if confused!** |
+| [Zero to Hero](#zero-to-hero-understanding-prefix-sums-from-scratch) | **START HERE if confused!** |
 | [The 3 Prefix Sum Techniques](#the-3-prefix-sum-techniques-your-weapons) | Your weapons |
-| [Junior Dev Cheat Card](#-the-junior-dev-cheat-card-memorize-this) | Memorizable summary |
-| [Quick Start](#-quick-start-the-60-second-prefix-sum-approach) | 60-second approach |
+| [Junior Dev Cheat Card](#the-junior-dev-cheat-card-memorize-this) | Memorizable summary |
+| [Quick Start](#quick-start-the-60-second-prefix-sum-approach) | 60-second approach |
 | [Master Decision Tree](#the-master-decision-tree) | Which technique to use |
 
----
+--
 
 ## Foundational Patterns (Patterns 0-3)
 | # | Pattern | LeetCode |
-|---|---------|----------|
-| 0 | [Range Sum Query - Immutable](#pattern-0-range-sum-query---immutable-leetcode-303) | 303 |
+|--|-----|-----|
+| 0 | [Range Sum Query - Immutable](#pattern-0-range-sum-query-immutable-leetcode-303) | 303 |
 | 1 | [Subarray Sum Equals K](#pattern-1-subarray-sum-equals-k-leetcode-560) | 560 |
 | 2 | [Continuous Subarray Sum](#pattern-2-continuous-subarray-sum-leetcode-523) | 523 |
 | 3 | [Subarray Sums Divisible by K](#pattern-3-subarray-sums-divisible-by-k-leetcode-974) | 974 |
 
 ## Length-Based Patterns (Patterns 4-5)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 4 | [Longest Subarray With Sum Divisible by K](#pattern-4-longest-subarray-with-sum-divisible-by-k) | - |
 | 5 | [Smallest Subarray With Sum Divisible by K](#pattern-5-smallest-subarray-with-sum-divisible-by-k) | - |
 
 ## Counting Patterns (Patterns 6-8)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 6 | [Count Subarrays With Equal 0s, 1s, and 2s](#pattern-6-count-subarrays-with-equal-0s-1s-and-2s) | - |
 | 7 | [Binary Subarrays With Sum](#pattern-7-binary-subarrays-with-sum-leetcode-930) | 930 |
 | 8 | [Count Number of Nice Subarrays](#pattern-8-count-number-of-nice-subarrays-leetcode-1248) | 1248 |
 
 ## Advanced Patterns (Patterns 9-11)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 9 | [Subarray Sums in Circular Array](#pattern-9-subarray-sums-in-circular-array) | - |
-| 10 | [Range Sum Query 2D - Immutable](#pattern-10-range-sum-query-2d---immutable-leetcode-304) | 304 |
+| 10 | [Range Sum Query 2D - Immutable](#pattern-10-range-sum-query-2d-immutable-leetcode-304) | 304 |
 | 11 | [Number of Submatrices That Sum to Target](#pattern-11-number-of-submatrices-that-sum-to-target-leetcode-1074) | 1074 |
 
 ## MAANG Favorites (Patterns 12-15)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 12 | [Product of Array Except Self](#pattern-12-product-of-array-except-self-leetcode-238) | 238 |
 | 13 | [Maximum Size Subarray Sum Equals K](#pattern-13-maximum-size-subarray-sum-equals-k-leetcode-325) | 325 |
 | 14 | [Contiguous Array](#pattern-14-contiguous-array-leetcode-525) | 525 |
@@ -54,12 +54,11 @@
 
 ## Reference Sections
 | Section |
-|---------|
-| [MAANG Coverage Map](#maang-coverage-map) |
-| [Prefix Sum Cheat Sheet](#prefix-sum-cheat-sheet) |
-| [Mastery Checklist](#mastery-checklist) |
+|-----|
+| [The "One Sentence"](#the-one-sentence-that-unlocks-all-prefix-sum-problems) |
+| [Zero to Hero](#zero-to-hero-understanding-prefix-sums-from-scratch) |
 
----
+--
 
 # The "One Sentence That Unlocks All Prefix Sum Problems"
 
@@ -71,13 +70,13 @@ That's the entire subject. Every prefix sum problem is just:
 3. **DIVISIBILITY** — find subarrays divisible by K using modulo trick
 4. **TRANSFORMATION** — convert the problem (0→-1, count→sum) then apply prefix sum
 
----
+--
 
 # 🌟 ZERO TO HERO: Understanding Prefix Sums From Scratch
 
 **If you're a junior dev and prefix sums feel confusing, START HERE.**
 
----
+--
 
 ## What IS a Prefix Sum? (The Real-World Analogy)
 
@@ -108,7 +107,7 @@ Check: $50 + $30 + $70 = $150 ✓
 
 **You didn't need to add up each day — just ONE subtraction!**
 
----
+--
 
 ## Why Do We Need Prefix Sums?
 
@@ -129,7 +128,7 @@ Query 3: Sum from index 4 to 7?  → 5 + 9 + 2 + 6 = 22
 
 **With Prefix Sum:** Each query takes O(1) → 10,000 queries = O(10,000) = FAST!
 
----
+--
 
 ## The 2 Key Formulas (Memorize These!)
 
@@ -175,7 +174,7 @@ sum(2, 4) = prefix[4] - prefix[1]
 Check: nums[2] + nums[3] + nums[4] = 4 + 1 + 5 = 10 ✓
 ```
 
----
+--
 
 ## The HashMap Trick (The REAL Power of Prefix Sum)
 
@@ -207,7 +206,7 @@ At index 2: prefix = 6
             3 exists (at index 1)! Found subarray [3]!
 ```
 
----
+--
 
 ## The Modulo Trick (For Divisibility Problems)
 
@@ -238,7 +237,7 @@ Any pair forms a subarray divisible by 5!
 - etc.
 ```
 
----
+--
 
 ## The 0/1 Transformation Trick
 
@@ -259,7 +258,7 @@ After transform: [-1,1,-1,1] sums to 0!
 
 This transforms a counting problem into a sum problem!
 
----
+--
 
 # 📋 THE JUNIOR DEV CHEAT CARD (Memorize This!)
 
@@ -334,7 +333,7 @@ This transforms a counting problem into a sum problem!
 ╚═══════════════════════════════════════════════════════════════════════╝
 ```
 
----
+--
 
 # 🚀 QUICK START: The 60-Second Prefix Sum Approach
 
@@ -370,7 +369,7 @@ If YES → Use prefix sum!
    → sum = prefix[r2][c2] - prefix[r1-1][c2] - prefix[r2][c1-1] + prefix[r1-1][c1-1]
 ```
 
----
+--
 
 # The Master Decision Tree
 
@@ -414,7 +413,7 @@ If YES → Use prefix sum!
                             └────────────────┘
 ```
 
----
+--
 
 # The 3 Prefix Sum Techniques (Your "Weapons")
 
@@ -461,7 +460,7 @@ sum(2, 4) = "sum of elements 2,3,4"
           = 14 - 4 = 10 ✓
 ```
 
----
+--
 
 ## Technique 2: PREFIX SUM + HASHMAP (Subarray Sum = K)
 
@@ -546,7 +545,7 @@ nums = [1, 2, 3], k = 3
                  Subarray from index 2 to 2: [3]
 ```
 
----
+--
 
 ## Technique 3: PREFIX SUM + MODULO (Divisibility)
 
@@ -636,9 +635,9 @@ Pairs with same remainder:
   - etc.
 ```
 
----
+--
 
----
+--
 
 # PATTERN 0: Range Sum Query - Immutable (LeetCode 303)
 
@@ -648,7 +647,7 @@ Pairs with same remainder:
 
 **Instant thought:** "Basic Prefix Sum! Build once, query O(1)"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -690,7 +689,7 @@ For 10,000 queries on array of 10,000 elements:
    - Else: return prefix[j] - prefix[i-1]
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -737,7 +736,7 @@ Query: sumRange(0, 5)
 ═══════════════════════════════════════════════════════════
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -791,17 +790,17 @@ class NumArray {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Off-by-one in query | `prefix[j] - prefix[i]` misses element at i | Use `prefix[j] - prefix[i-1]` or padding |
 | Not handling i=0 | `prefix[-1]` is out of bounds | Check `if (i == 0)` or use padding |
 | Integer overflow | Large sums exceed int range | Use `long[]` for prefix array |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -820,16 +819,16 @@ RANGE SUM QUERY
 
 **Memory phrase:** "Build once, query forever — subtract prefixes for any range"
 
----
+--
 
 ## Complexity Analysis
 
 | Operation | Time | Space |
-|-----------|------|-------|
+|------|---|----|
 | Constructor | O(n) | O(n) |
 | sumRange | O(1) | O(1) |
 
----
+--
 
 # PATTERN 1: Subarray Sum Equals K (LeetCode 560)
 
@@ -839,7 +838,7 @@ RANGE SUM QUERY
 
 **Instant thought:** "Prefix Sum + HashMap! Store prefix sums, look for (prefix - K)"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -898,7 +897,7 @@ HashMap answers this in O(1)!
 3. Return count
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -973,7 +972,7 @@ Subarrays found:
 2. [3]    → sum = 3 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -1005,18 +1004,18 @@ public int subarraySum(int[] nums, int k) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Forgetting `map.put(0, 1)` | Miss subarrays starting at index 0 | Always initialize with `{0: 1}` |
 | Adding to map BEFORE checking | Count same prefix twice, wrong answer | Check FIRST, then add to map |
 | Using `map.get()` without default | NullPointerException if key missing | Use `getOrDefault(key, 0)` |
 | Assuming positive numbers only | Algorithm works for negatives too! | No change needed, it just works |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1037,16 +1036,16 @@ SUBARRAY SUM = K
 
 **Memory phrase:** "Running prefix, look for (prefix - K) in map, init with {0:1}"
 
----
+--
 
 ## Complexity Analysis
 
 | Metric | Value | Why |
-|--------|-------|-----|
+|----|----|---|
 | Time | O(n) | Single pass through array |
 | Space | O(n) | HashMap stores up to n prefix sums |
 
----
+--
 
 # PATTERN 2: Continuous Subarray Sum (LeetCode 523)
 
@@ -1056,7 +1055,7 @@ SUBARRAY SUM = K
 
 **Instant thought:** "Prefix Sum + Modulo! Same remainder = divisible difference"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -1125,7 +1124,7 @@ Example: remainders at indices [0, 3, 5] are all the same
 First occurrence maximizes length!
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -1176,7 +1175,7 @@ Process index 2, nums[2] = 4:
 ═══════════════════════════════════════════════════════════
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -1213,18 +1212,18 @@ public boolean checkSubarraySum(int[] nums, int k) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Updating map when remainder exists | Lose first occurrence, might miss valid subarray | Only store if NOT already in map |
 | Forgetting length >= 2 check | Problem requires at least 2 elements | Check `i - map.get(remainder) >= 2` |
 | Not handling k = 0 | Division by zero | Special case: if k=0, check for sum=0 |
 | Negative remainders | Java's % can return negative | Use `((prefix % k) + k) % k` |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1246,7 +1245,7 @@ DIVISIBLE BY K (exists?)
 
 **Memory phrase:** "Same remainder means divisible — store first index, check length"
 
----
+--
 
 # PATTERN 3: Subarray Sums Divisible by K (LeetCode 974)
 
@@ -1256,7 +1255,7 @@ DIVISIBLE BY K (exists?)
 
 **Instant thought:** "Prefix Sum + Modulo + Counting! Same remainder pairs form divisible subarrays"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -1308,7 +1307,7 @@ OR: As we scan, for each new remainder r:
 3. Return count
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -1396,7 +1395,7 @@ Process nums[5] = 1:
 Final Answer: count = 7 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -1429,17 +1428,17 @@ public int subarraysDivByK(int[] nums, int k) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Not handling negative remainders | `-7 % 5 = -2` in Java, not `3` | Use `((prefix % k) + k) % k` |
 | Forgetting `{0: 1}` initialization | Miss subarrays starting at index 0 | Always init with `{0: 1}` |
 | Confusing with Pattern 2 | Pattern 2 checks existence, this counts | Different logic: count vs boolean |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1460,7 +1459,7 @@ COUNT DIVISIBLE BY K
 
 **Memory phrase:** "Same remainder = divisible pair — count as you go, handle negatives"
 
----
+--
 
 # PATTERN 4: Longest Subarray With Sum Divisible by K
 
@@ -1470,7 +1469,7 @@ COUNT DIVISIBLE BY K
 
 **Instant thought:** "Prefix Sum + Modulo + First Index! Store first occurrence of each remainder"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -1518,7 +1517,7 @@ First occurrence (index 2) gives longest subarray!
 3. Return maxLen
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -1587,7 +1586,7 @@ i=5, nums[5]=5:
 Final Answer: maxLen = 4 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -1623,17 +1622,17 @@ public int longestSubarrayDivByK(int[] nums, int k) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Updating map when remainder exists | Lose first occurrence, get shorter length | Only store if NOT in map |
 | Using `{0: 0}` instead of `{0: -1}` | Off-by-one in length calculation | Use `{0: -1}` for correct length |
 | Forgetting negative remainder handling | Wrong remainder for negative prefix sums | Use `((prefix % k) + k) % k` |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1654,7 +1653,7 @@ LONGEST DIVISIBLE BY K
 
 **Memory phrase:** "First occurrence for longest — don't update existing remainders"
 
----
+--
 
 # PATTERN 5: Smallest Subarray With Sum Divisible by K
 
@@ -1664,7 +1663,7 @@ LONGEST DIVISIBLE BY K
 
 **Instant thought:** "Prefix Sum + Modulo + Last Index! Store most recent occurrence"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -1709,7 +1708,7 @@ Last occurrence (index 5) gives shortest subarray ending at 8!
 3. Return minLen (or 0/-1 if not found)
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -1779,7 +1778,7 @@ i=5, nums[5]=5:
 Final Answer: minLen = 1 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -1812,16 +1811,16 @@ public int smallestSubarrayDivByK(int[] nums, int k) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Not updating map (like longest pattern) | Miss shorter subarrays | ALWAYS update to latest index |
 | Returning MAX_VALUE when not found | Invalid answer | Return -1 or handle appropriately |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1843,7 +1842,7 @@ SHORTEST DIVISIBLE BY K
 
 **Memory phrase:** "Last occurrence for shortest — always update the map"
 
----
+--
 
 ## Longest vs Shortest: The Key Difference
 
@@ -1863,7 +1862,7 @@ SHORTEST DIVISIBLE BY K
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
----
+--
 
 # PATTERN 6: Count Subarrays With Equal 0s, 1s, and 2s
 
@@ -1873,7 +1872,7 @@ SHORTEST DIVISIBLE BY K
 
 **Instant thought:** "Transform to differences! Track (count0-count1, count1-count2) pairs"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -1926,7 +1925,7 @@ Why? The DIFFERENCE in differences is zero!
 3. Return count
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -1999,7 +1998,7 @@ i=5, arr[5]=2:
 Final Answer: count = 5 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2066,17 +2065,17 @@ public int countSubarraysWithEqual012(int[] arr) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Tracking three separate counts | Can't use HashMap efficiently | Track differences instead |
 | Forgetting initial state (0,0) | Miss subarrays starting at index 0 | Init map with `{(0,0): 1}` |
 | Integer overflow in key encoding | Large differences cause collision | Use long or string keys |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2097,7 +2096,7 @@ EQUAL 0s, 1s, 2s
 
 **Memory phrase:** "Equal counts = same difference pair — track (c0-c1, c1-c2)"
 
----
+--
 
 # PATTERN 7: Binary Subarrays With Sum (LeetCode 930)
 
@@ -2107,7 +2106,7 @@ EQUAL 0s, 1s, 2s
 
 **Instant thought:** "Prefix Sum + HashMap! Binary array is just a special case"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2149,7 +2148,7 @@ Same as Pattern 1:
 3. Return count
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -2208,7 +2207,7 @@ i=4, nums[4]=1:
 Final Answer: count = 4 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2233,16 +2232,16 @@ public int numSubarraysWithSum(int[] nums, int goal) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Overcomplicating for binary | It's just sum = K in disguise | Use standard prefix sum + HashMap |
 | Forgetting goal = 0 case | Need subarrays with all 0s | Algorithm handles it naturally |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2262,7 +2261,7 @@ BINARY SUBARRAYS WITH SUM
 
 **Memory phrase:** "Binary sum = count of ones — use standard prefix sum"
 
----
+--
 
 # PATTERN 8: Count Number of Nice Subarrays (LeetCode 1248)
 
@@ -2272,7 +2271,7 @@ BINARY SUBARRAYS WITH SUM
 
 **Instant thought:** "Transform! Replace odd→1, even→0, then it's binary sum = K"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2311,7 +2310,7 @@ This is Pattern 7 (Binary Subarrays With Sum)!
 3. Return count
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -2372,7 +2371,7 @@ i=4, nums[4]=1 (odd):
 Final Answer: count = 2 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2398,16 +2397,16 @@ public int numberOfSubarrays(int[] nums, int k) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Creating new transformed array | Wastes O(n) space | Just use `num % 2` inline |
 | Checking `num % 2 == 1` for odd | Negative numbers: `-3 % 2 = -1` | Use `num % 2 != 0` or `num & 1` |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2427,7 +2426,7 @@ NICE SUBARRAYS (K ODDS)
 
 **Memory phrase:** "Count odds = sum of parities — transform inline with num % 2"
 
----
+--
 
 # PATTERN 9: Subarray Sums in Circular Array
 
@@ -2437,7 +2436,7 @@ NICE SUBARRAYS (K ODDS)
 
 **Instant thought:** "Two cases! Max normal subarray OR total - min subarray"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2489,7 +2488,7 @@ If all numbers are negative:
 But empty subarray isn't valid! So if maxSubarray < 0, return maxSubarray.
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -2545,7 +2544,7 @@ Step 5: Return answer
          = max(7, 10) = 10 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2581,17 +2580,17 @@ public int maxSubarraySumCircular(int[] nums) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Forgetting all-negative case | `total - minSum = 0` (empty subarray) | Check if `maxSum < 0`, return `maxSum` |
 | Using prefix sum instead of Kadane | Works but more complex | Kadane is simpler for this |
 | Not considering both cases | Miss optimal circular subarray | Always compute both and take max |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2614,7 +2613,7 @@ CIRCULAR SUBARRAY SUM
 
 **Memory phrase:** "Circular max = max(normal, total - min) — watch all-negative edge case"
 
----
+--
 
 # PATTERN 10: Range Sum Query 2D - Immutable (LeetCode 304)
 
@@ -2624,7 +2623,7 @@ CIRCULAR SUBARRAY SUM
 
 **Instant thought:** "2D Prefix Sum! Inclusion-exclusion principle"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2688,7 +2687,7 @@ To get sum of rectangle (r1,c1) to (r2,c2):
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -2737,7 +2736,7 @@ sum = prefix[5][4] - prefix[2][4] - prefix[5][1] + prefix[2][1]
 ═══════════════════════════════════════════════════════════
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2777,17 +2776,17 @@ class NumMatrix {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Off-by-one errors | 0-indexed vs 1-indexed confusion | Use padding (m+1, n+1) array |
 | Wrong inclusion-exclusion | Signs mixed up | Draw the diagram, verify formula |
 | Not handling empty matrix | NullPointerException | Check matrix.length > 0 |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2808,7 +2807,7 @@ class NumMatrix {
 
 **Memory phrase:** "2D prefix = current + above + left - corner; query = whole - top - left + corner"
 
----
+--
 
 # PATTERN 11: Number of Submatrices That Sum to Target (LeetCode 1074)
 
@@ -2818,7 +2817,7 @@ class NumMatrix {
 
 **Instant thought:** "Fix two rows, reduce to 1D prefix sum problem!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2878,7 +2877,7 @@ This is Pattern 1 (Subarray Sum Equals K)!
 2. Return total count
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -2952,7 +2951,7 @@ r1 = 2:
 Total count = 2 + 0 + 0 + 0 + 0 + 2 = 4 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -3000,26 +2999,26 @@ private int countSubarraySum(int[] nums, int target) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Not resetting compressed array | Accumulates across different r1 | Reset for each new r1 |
 | O(m²n²) brute force | Too slow for large matrices | Use dimension reduction |
 | Forgetting to add row incrementally | Recomputing from scratch each time | Add row r2 to existing compressed |
 
----
+--
 
 ## Complexity Analysis
 
 | Metric | Value | Why |
-|--------|-------|-----|
+|----|----|---|
 | Time | O(m² × n) | m² row pairs, O(n) for each 1D problem |
 | Space | O(n) | Compressed array + HashMap |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -3040,7 +3039,7 @@ COUNT SUBMATRICES = TARGET
 
 **Memory phrase:** "Fix two rows, compress columns, solve 1D — dimension reduction!"
 
----
+--
 
 # PATTERN 12: Product of Array Except Self (LeetCode 238)
 
@@ -3050,7 +3049,7 @@ COUNT SUBMATRICES = TARGET
 
 **Instant thought:** "Prefix and Suffix Products! Build left products and right products"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -3093,7 +3092,7 @@ result[i] = left[i] × right[i]
 Space optimization: Use result array for left, then multiply right on the fly
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -3142,7 +3141,7 @@ result:  [24, 12,  8,  6] ✓
 ═══════════════════════════════════════════════════════════
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -3159,7 +3158,7 @@ public int[] productExceptSelf(int[] nums) {
     
     // Step 2: Multiply by right products (on the fly)
     int rightProduct = 1;  // Nothing after last index
-    for (int i = n - 1; i >= 0; i--) {
+    for (int i = n - 1; i >= 0; i-) {
         result[i] *= rightProduct;
         rightProduct *= nums[i];
     }
@@ -3168,17 +3167,17 @@ public int[] productExceptSelf(int[] nums) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Using division | Fails when array contains 0 | Use prefix/suffix products |
 | Off-by-one in products | Include current element | left[i] excludes nums[i] |
 | Forgetting edge cases | Single element array | Handle n=1 case |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -3199,7 +3198,7 @@ PRODUCT EXCEPT SELF
 
 **Memory phrase:** "Left products × Right products — no division needed"
 
----
+--
 
 # PATTERN 13: Maximum Size Subarray Sum Equals K (LeetCode 325)
 
@@ -3209,7 +3208,7 @@ PRODUCT EXCEPT SELF
 
 **Instant thought:** "Prefix Sum + HashMap storing FIRST occurrence!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -3254,7 +3253,7 @@ First occurrence (index 2) gives longest subarray!
 3. Return maxLen
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -3313,7 +3312,7 @@ i=4, nums[4]=3:
 Final Answer: maxLen = 4 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -3345,17 +3344,17 @@ public int maxSubArrayLen(int[] nums, int k) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Updating map when prefix exists | Lose first occurrence, get shorter length | Use `putIfAbsent` |
 | Using `{0: 0}` instead of `{0: -1}` | Off-by-one in length calculation | Use `{0: -1}` |
 | Confusing with count pattern | Count uses `{0: 1}`, length uses `{0: -1}` | Different initialization! |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -3375,7 +3374,7 @@ LONGEST SUBARRAY SUM = K
 
 **Memory phrase:** "First occurrence for longest — putIfAbsent, init {0: -1}"
 
----
+--
 
 # PATTERN 14: Contiguous Array (LeetCode 525)
 
@@ -3385,7 +3384,7 @@ LONGEST SUBARRAY SUM = K
 
 **Instant thought:** "Transform 0→-1! Then find longest subarray with sum = 0"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -3430,7 +3429,7 @@ This is Pattern 13 with k = 0!
 4. Return max length
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -3513,7 +3512,7 @@ i=6, nums[6]=0 (treat as -1):
 Final Answer: maxLen = 6 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -3546,17 +3545,17 @@ public int findMaxLength(int[] nums) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Not transforming 0 to -1 | Can't use prefix sum for equal counts | Transform: 0 → -1 |
 | Looking for (prefix - k) | k = 0, so just look for prefix itself | Same prefix = sum 0 between |
 | Updating existing prefix | Lose first occurrence | Only store if not present |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -3578,7 +3577,7 @@ EQUAL 0s AND 1s
 
 **Memory phrase:** "0 becomes -1, equal counts means sum zero, same prefix = valid subarray"
 
----
+--
 
 # PATTERN 15: Find Pivot Index (LeetCode 724)
 
@@ -3588,7 +3587,7 @@ EQUAL 0s AND 1s
 
 **Instant thought:** "Total sum - left sum - pivot = right sum, check if left = right"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -3635,7 +3634,7 @@ Condition: leftSum == total - leftSum - nums[i]
 4. Return -1 (no pivot found)
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -3691,7 +3690,7 @@ Verification:
   Equal! ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -3741,17 +3740,17 @@ public int pivotIndex(int[] nums) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Including pivot in left or right | Pivot is excluded from both sides | rightSum = total - leftSum - nums[i] |
 | Updating leftSum before check | Wrong leftSum for current index | Check first, then update |
 | Returning 0 when no pivot | -1 is the correct "not found" value | Return -1 |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -3773,4 +3772,4 @@ FIND PIVOT INDEX
 
 **Memory phrase:** "Total minus left minus pivot equals right — check if left equals right"
 
----
+--

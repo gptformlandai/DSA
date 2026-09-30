@@ -1,7 +1,7 @@
 # Greedy & Intervals Patterns Deep Dive
 ## Junior Dev's Complete Guide to L5 MAANG Greedy Mastery
 
----
+--
 
 # THE GREEDY MINDSET: Before You Code Anything
 
@@ -28,7 +28,7 @@ DP: Consider ALL choices, pick best
 Greedy is FASTER but only works for specific problems!
 ```
 
----
+--
 
 # PART 1: INTERVAL PATTERNS
 
@@ -44,7 +44,7 @@ Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
 Arrays.sort(intervals, (a, b) -> a[1] - b[1]);
 ```
 
----
+--
 
 ## PATTERN 1: Merge Intervals (LC 56)
 
@@ -115,17 +115,17 @@ public int[][] merge(int[][] intervals) {
 MERGE INTERVALS
       |
       v
-+---------------------+
++-----------+
 | Sort by START       |
 | If start <= prevEnd |
 |   -> Merge (max end)|
 | Else add new        |
-+---------------------+
++-----------+
 ```
 
 **Memory phrase:** "Sort by start, merge if overlaps, extend end"
 
----
+--
 
 ## PATTERN 2: Insert Interval (LC 57)
 
@@ -191,17 +191,17 @@ public int[][] insert(int[][] intervals, int[] newInterval) {
 INSERT INTERVAL
       |
       v
-+---------------------+
++-----------+
 | Phase 1: Before     |
 | Phase 2: Merge      |
 | Phase 3: After      |
 | No sorting needed!  |
-+---------------------+
++-----------+
 ```
 
 **Memory phrase:** "Before, merge, after - three phases"
 
----
+--
 
 ## PATTERN 3: Non-overlapping Intervals (LC 435)
 
@@ -267,17 +267,17 @@ public int eraseOverlapIntervals(int[][] intervals) {
 NON-OVERLAPPING INTERVALS
           |
           v
-+------------------------+
++------------+
 | Sort by END time!      |
 | Pick earliest ending   |
 | Skip if overlaps       |
 | Removed = total - kept |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Sort by end, pick non-overlapping, count removals"
 
----
+--
 
 ## PATTERN 4: Meeting Rooms (LC 252)
 
@@ -321,17 +321,17 @@ public boolean canAttendMeetings(int[][] intervals) {
 MEETING ROOMS I
       |
       v
-+------------------+
++---------+
 | Sort by start    |
 | Check: start <   |
 | prev end = overlap|
 | Any overlap = NO |
-+------------------+
++---------+
 ```
 
 **Memory phrase:** "Sort, check adjacent overlap"
 
----
+--
 
 ## PATTERN 5: Meeting Rooms II (LC 253)
 
@@ -417,18 +417,18 @@ public int minMeetingRooms(int[][] intervals) {
 MEETING ROOMS II
        |
        v
-+----------------------+
++-----------+
 | Method 1: Min-heap   |
 |   of end times       |
 | Method 2: Sweep line |
 |   sort starts & ends |
 | Count max concurrent |
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "Min-heap of ends, or sweep line with two pointers"
 
----
+--
 
 ## PATTERN 6: Minimum Arrows to Burst Balloons (LC 452)
 
@@ -481,17 +481,17 @@ public int findMinArrowPoints(int[][] points) {
 MIN ARROWS BALLOONS
         |
         v
-+----------------------+
++-----------+
 | Sort by END          |
 | Arrow at first end   |
 | New arrow if start > |
 | current arrow pos    |
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "Sort by end, shoot at end, new arrow if not covered"
 
----
+--
 
 ## PATTERN 7: Interval List Intersections (LC 986)
 
@@ -555,18 +555,18 @@ public int[][] intervalIntersection(int[][] A, int[][] B) {
 INTERVAL INTERSECTIONS
          |
          v
-+------------------------+
++------------+
 | Two pointers           |
 | Intersection =         |
 | [max start, min end]   |
 | Move smaller end ptr   |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Max start, min end, move smaller end pointer"
 
 
----
+--
 
 # PART 2: GREEDY PATTERNS
 
@@ -640,18 +640,18 @@ public int canCompleteCircuit(int[] gas, int[] cost) {
 GAS STATION
     |
     v
-+----------------------+
++-----------+
 | If total >= 0,       |
 | solution exists      |
 | If tank < 0 at i,    |
 | start from i+1       |
 | One pass solution!   |
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "Total check, reset start when tank goes negative"
 
----
+--
 
 ## PATTERN 9: Candy (LC 135)
 
@@ -699,7 +699,7 @@ public int candy(int[] ratings) {
     }
     
     // Right to left: handle decreasing sequences
-    for (int i = n - 2; i >= 0; i--) {
+    for (int i = n - 2; i >= 0; i-) {
         if (ratings[i] > ratings[i+1]) {
             candy[i] = Math.max(candy[i], candy[i+1] + 1);
         }
@@ -717,19 +717,19 @@ public int candy(int[] ratings) {
 CANDY
   |
   v
-+----------------------+
++-----------+
 | Two passes!          |
 | L->R: if > left,     |
 |   candy = left + 1   |
 | R->L: if > right,    |
 |   candy = max(curr,  |
 |   right + 1)         |
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "Two passes: left-to-right, right-to-left, take max"
 
----
+--
 
 ## PATTERN 10: Partition Labels (LC 763)
 
@@ -796,18 +796,18 @@ public List<Integer> partitionLabels(String s) {
 PARTITION LABELS
        |
        v
-+----------------------+
++-----------+
 | Track last[] of each |
 | char                 |
 | Extend end to include|
 | all occurrences      |
 | Cut when i == end    |
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "Last occurrence map, extend end, cut when i reaches end"
 
----
+--
 
 ## PATTERN 11: Jump Game (LC 55) - Greedy
 
@@ -837,17 +837,17 @@ public boolean canJump(int[] nums) {
 JUMP GAME
     |
     v
-+------------------+
++---------+
 | Track farthest   |
 | If i > farthest  |
 |   -> unreachable |
 | Update farthest  |
-+------------------+
++---------+
 ```
 
 **Memory phrase:** "Track farthest, fail if i > farthest"
 
----
+--
 
 ## PATTERN 12: Jump Game II (LC 45) - Greedy
 
@@ -900,17 +900,17 @@ public int jump(int[] nums) {
 JUMP GAME II
      |
      v
-+--------------------+
++----------+
 | Track currentEnd   |
 | Track farthest     |
 | Jump when i == end |
 | Update end to far  |
-+--------------------+
++----------+
 ```
 
 **Memory phrase:** "Level-by-level BFS, jump at level end"
 
----
+--
 
 ## PATTERN 13: Task Scheduler (LC 621)
 
@@ -966,18 +966,18 @@ public int leastInterval(char[] tasks, int n) {
 TASK SCHEDULER
       |
       v
-+------------------------+
++------------+
 | Find max frequency     |
 | Gaps = (max-1) * (n+1) |
 | + tasks with max freq  |
 | Answer = max(formula,  |
 |   total tasks)         |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Max freq determines gaps, fill with others"
 
----
+--
 
 ## PATTERN 14: Queue Reconstruction by Height (LC 406)
 
@@ -1029,17 +1029,17 @@ public int[][] reconstructQueue(int[][] people) {
 QUEUE RECONSTRUCTION
          |
          v
-+------------------------+
++------------+
 | Sort: height DESC      |
 | Same height: k ASC     |
 | Insert at index k      |
 | Taller people first!   |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Tallest first, insert at k position"
 
----
+--
 
 ## PATTERN 15: Minimum Platforms (GFG)
 
@@ -1076,12 +1076,12 @@ Answer: 3 platforms
 MINIMUM PLATFORMS
        |
        v
-+----------------------+
++-----------+
 | Sort arrivals        |
 | Sort departures      |
 | Two pointers sweep   |
 | Track max concurrent |
-+----------------------+
++-----------+
 ```
 
 ### The Code
@@ -1099,7 +1099,7 @@ public int findPlatform(int[] arr, int[] dep) {
             platforms++;
             i++;
         } else {
-            platforms--;
+            platforms-;
             j++;
         }
         maxPlatforms = Math.max(maxPlatforms, platforms);
@@ -1111,7 +1111,7 @@ public int findPlatform(int[] arr, int[] dep) {
 
 **Memory phrase:** "Sweep line: arrival adds, departure removes"
 
----
+--
 
 ## PATTERN 16: Activity Selection (GFG)
 
@@ -1150,12 +1150,12 @@ Selected: 4 activities
 ACTIVITY SELECTION
        |
        v
-+----------------------+
++-----------+
 | Sort by END time     |
 | Pick if start >= end |
 | Update lastEnd       |
 | Classic greedy!      |
-+----------------------+
++-----------+
 ```
 
 ### The Code
@@ -1186,7 +1186,7 @@ public int maxActivities(int[] start, int[] end) {
 
 **Memory phrase:** "Sort by end, pick if start >= last end"
 
----
+--
 
 ## PATTERN 17: Job Sequencing (GFG)
 
@@ -1231,7 +1231,7 @@ public int[] jobSequencing(int[][] jobs) {
     
     for (int[] job : jobs) {
         // Find latest available slot <= deadline
-        for (int j = job[0]; j > 0; j--) {
+        for (int j = job[0]; j > 0; j-) {
             if (slots[j] == -1) {
                 slots[j] = job[1];
                 count++;
@@ -1251,18 +1251,18 @@ public int[] jobSequencing(int[][] jobs) {
 JOB SEQUENCING
       |
       v
-+------------------------+
++------------+
 | Sort by profit DESC    |
 | For each job, find     |
 | latest slot <= deadline|
 | Assign if slot free    |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Highest profit first, latest available slot"
 
 
----
+--
 
 # PART 3: ADDITIONAL HIGH-PRIORITY GREEDY PATTERNS
 
@@ -1281,8 +1281,8 @@ people = [3, 2, 2, 1], limit = 3
 Sort: [1, 2, 2, 3]
 
 Two pointers:
-left=0 (1), right=3 (3): 1+3=4 > 3, only 3 fits -> boats=1, right--
-left=0 (1), right=2 (2): 1+2=3 <= 3, both fit -> boats=2, left++, right--
+left=0 (1), right=3 (3): 1+3=4 > 3, only 3 fits -> boats=1, right-
+left=0 (1), right=2 (2): 1+2=3 <= 3, both fit -> boats=2, left++, right-
 left=1 (2), right=1: left >= right, done
 
 Answer: 2 boats
@@ -1300,7 +1300,7 @@ public int numRescueBoats(int[] people, int limit) {
         if (people[left] + people[right] <= limit) {
             left++;  // Light person fits with heavy
         }
-        right--;  // Heavy person always goes
+        right-;  // Heavy person always goes
         boats++;
     }
     
@@ -1314,17 +1314,17 @@ public int numRescueBoats(int[] people, int limit) {
 BOATS TO SAVE PEOPLE
         |
         v
-+----------------------+
++-----------+
 | Sort weights         |
 | Two pointers         |
 | Try pair light+heavy |
 | Heavy always goes    |
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "Sort, pair lightest with heaviest if fits"
 
----
+--
 
 ## PATTERN 19: Assign Cookies (LC 455)
 
@@ -1358,12 +1358,12 @@ Answer: 1 child satisfied
 ASSIGN COOKIES
       |
       v
-+----------------------+
++-----------+
 | Sort greed factors   |
 | Sort cookie sizes    |
 | Match smallest first |
 | Move cookie ptr always|
-+----------------------+
++-----------+
 ```
 
 ### The Code
@@ -1388,7 +1388,7 @@ public int findContentChildren(int[] g, int[] s) {
 
 **Memory phrase:** "Sort both, smallest cookie to smallest greed"
 
----
+--
 
 ## PATTERN 20: Lemonade Change (LC 860)
 
@@ -1423,12 +1423,12 @@ public boolean lemonadeChange(int[] bills) {
             fives++;
         } else if (bill == 10) {
             if (fives == 0) return false;
-            fives--;
+            fives-;
             tens++;
         } else {  // bill == 20
             if (tens > 0 && fives > 0) {
-                tens--;
-                fives--;
+                tens-;
+                fives-;
             } else if (fives >= 3) {
                 fives -= 3;
             } else {
@@ -1447,17 +1447,17 @@ public boolean lemonadeChange(int[] bills) {
 LEMONADE CHANGE
       |
       v
-+----------------------+
++-----------+
 | Track fives and tens |
 | For $20: prefer      |
 | $10+$5 over 3x$5     |
 | Greedy: use larger   |
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "Track bills, prefer larger denominations for change"
 
----
+--
 
 ## PATTERN 21: Maximum Units on a Truck (LC 1710)
 
@@ -1488,12 +1488,12 @@ Answer: 8 units
 MAX UNITS TRUCK
       |
       v
-+----------------------+
++-----------+
 | Sort by units DESC   |
 | Take as many as fit  |
 | Greedy: best value   |
 | first                |
-+----------------------+
++-----------+
 ```
 
 ### The Code
@@ -1518,7 +1518,7 @@ public int maximumUnits(int[][] boxTypes, int truckSize) {
 
 **Memory phrase:** "Sort by value, take as many as possible"
 
----
+--
 
 ## PATTERN 22: Minimum Cost to Connect Sticks (LC 1167)
 
@@ -1567,17 +1567,17 @@ public int connectSticks(int[] sticks) {
 CONNECT STICKS
       |
       v
-+----------------------+
++-----------+
 | Min-heap             |
 | Always combine two   |
 | smallest             |
 | Add combined back    |
-+----------------------+
++-----------+
 ```
 
 **Memory phrase:** "Min-heap, combine smallest two, repeat"
 
----
+--
 
 ## PATTERN 23: Reorganize String (LC 767)
 
@@ -1612,12 +1612,12 @@ Result: "aba"
 REORGANIZE STRING
         |
         v
-+------------------------+
++------------+
 | Max-heap by frequency  |
 | Take top 2, place both |
 | Put back if count > 0  |
 | Fail if last count > 1 |
-+------------------------+
++------------+
 ```
 
 ### The Code
@@ -1642,8 +1642,8 @@ public String reorganizeString(String s) {
         result.append((char)(first[1] + 'a'));
         result.append((char)(second[1] + 'a'));
         
-        if (--first[0] > 0) heap.offer(first);
-        if (--second[0] > 0) heap.offer(second);
+        if (-first[0] > 0) heap.offer(first);
+        if (-second[0] > 0) heap.offer(second);
     }
     
     if (!heap.isEmpty()) {
@@ -1662,17 +1662,17 @@ public String reorganizeString(String s) {
 REORGANIZE STRING
         |
         v
-+------------------------+
++------------+
 | Max-heap by frequency  |
 | Take top 2, place both |
 | Put back if count > 0  |
 | Fail if last count > 1 |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Max-heap, alternate top two frequencies"
 
----
+--
 
 ## PATTERN 24: Two City Scheduling (LC 1029)
 
@@ -1730,22 +1730,22 @@ public int twoCitySchedCost(int[][] costs) {
 TWO CITY SCHEDULING
         |
         v
-+------------------------+
++------------+
 | Sort by (costA-costB)  |
 | First n -> city A      |
 | Last n -> city B       |
 | Greedy by difference   |
-+------------------------+
++------------+
 ```
 
 **Memory phrase:** "Sort by cost difference, split in half"
 
----
+--
 
 # QUICK REFERENCE: All 24 Greedy & Interval Patterns
 
 | # | Pattern | Key Technique |
-|---|---------|---------------|
+|--|-----|--------|
 | 1 | Merge Intervals | Sort by start, merge overlaps |
 | 2 | Insert Interval | Three phases: before, merge, after |
 | 3 | Non-overlapping | Sort by END, greedy select |
@@ -1771,7 +1771,7 @@ TWO CITY SCHEDULING
 | 23 | Reorganize String | Max-heap, alternate top 2 |
 | 24 | Two City Scheduling | Sort by cost difference |
 
----
+--
 
 ## Greedy vs DP Decision Tree
 
@@ -1789,7 +1789,7 @@ Can I make a LOCAL choice that's always optimal?
         - Subsequences: all combinations
 ```
 
----
+--
 
 *End of Greedy & Intervals Patterns Deep Dive - 24 Patterns for L5 MAANG*
 

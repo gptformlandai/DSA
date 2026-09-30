@@ -1,45 +1,45 @@
 # The Backtracking Playbook: Seven Core Patterns
 ### A First-Principles Blueprint for Depth, Breadth, and State-Space Pruning
 
----
+--
 
 # INDEX — Quick Navigation
 
 ## Core Concepts
 | Section | Description |
-|---------|-------------|
-| [The One Sentence That Unlocks Everything](#-the-one-sentence-that-unlocks-everything) | The core insight |
-| [The Mental Model: Two Questions](#-the-mental-model-two-questions-every-single-time) | What to ask before coding |
-| [The Golden Rule: Undo Must Mirror Do](#-the-golden-rule-the-undo-must-mirror-the-do) | Non-negotiable rule |
+|-----|-------|
+| [The One Sentence That Unlocks Everything](#the-one-sentence-that-unlocks-everything) | The core insight |
+| [The Mental Model: Two Questions](#the-mental-model-two-questions-every-single-time) | What to ask before coding |
+| [The Golden Rule: Undo Must Mirror Do](#the-golden-rule-the-undo-must-mirror-the-do) | Non-negotiable rule |
 | [The Master Blueprint](#the-master-blueprint-the-universal-backtracking-engine) | Universal engine |
 
 ## Patterns (1-10)
 | # | Pattern | LeetCode | Key Technique |
-|---|---------|----------|---------------|
-| 1 | [Subsets (Power Set)](#-pattern-1-subsets-power-set) | 78 | Include/Exclude |
-| 2 | [Combination Sum](#-pattern-2-combination-sum-running-budget--unbounded-reuse) | 39 | Reuse allowed |
-| 3 | [Permutations](#-pattern-3-permutations-the-slot-filling--pool-search-model) | 46 | Used array |
-| 4 | [Generate Parentheses](#-pattern-4-generate-parentheses-prefix-balance--quota-model) | 22 | Open/Close balance |
-| 5 | [Letter Combinations](#-pattern-5-letter-combinations-of-a-phone-number-multi-dial-lock) | 17 | Multiple pools |
-| 6 | [Palindrome Partitioning](#️-pattern-6-palindrome-partitioning-the-ribbon-knife-cutter) | 131 | Substring slicing |
-| 7 | [Restore IP Addresses](#-pattern-7-restore-ip-addresses-depth-bounded-ribbon-cutter) | 93 | Constraint pruning |
-| 8 | [Word Search](#-pattern-8-word-search-lc-79-) | 79 | Grid DFS + masking |
-| 9 | [N-Queens](#-pattern-9-n-queens-lc-51--n-queens-ii-lc-52-) | 51/52 | Diagonal tracking |
-| 10 | [Sudoku Solver](#-pattern-10-sudoku-solver-lc-37-) | 37 | Boolean early exit |
-| 11 | [Partition K Equal Sum](#-pattern-11-partition-to-k-equal-sum-subsets-lc-698--matchsticks-to-square-lc-473-) | 698/473 | Sort DESC + bucket pruning |
-| 12 | [Expression Add Operators](#-pattern-12-expression-add-operators-lc-282-) | 282 | Prev tracking for multiply |
+|--|-----|-----|--------|
+| 1 | [Subsets (Power Set)](#pattern-1-subsets-power-set) | 78 | Include/Exclude |
+| 2 | [Combination Sum](#pattern-2-combination-sum-running-budget-unbounded-reuse) | 39 | Reuse allowed |
+| 3 | [Permutations](#pattern-3-permutations-the-slot-filling-pool-search-model) | 46 | Used array |
+| 4 | [Generate Parentheses](#pattern-4-generate-parentheses-prefix-balance-quota-model) | 22 | Open/Close balance |
+| 5 | [Letter Combinations](#pattern-5-letter-combinations-of-a-phone-number-multi-dial-lock) | 17 | Multiple pools |
+| 6 | [Palindrome Partitioning](#pattern-6-palindrome-partitioning-the-ribbon-knife-cutter) | 131 | Substring slicing |
+| 7 | [Restore IP Addresses](#pattern-7-restore-ip-addresses-depth-bounded-ribbon-cutter) | 93 | Constraint pruning |
+| 8 | [Word Search](#pattern-8-word-search-lc-79) | 79 | Grid DFS + masking |
+| 9 | [N-Queens](#pattern-9-n-queens-lc-51-n-queens-ii-lc-52) | 51/52 | Diagonal tracking |
+| 10 | [Sudoku Solver](#pattern-10-sudoku-solver-lc-37) | 37 | Boolean early exit |
+| 11 | [Partition K Equal Sum](#pattern-11-partition-to-k-equal-sum-subsets-lc-698-matchsticks-to-square-lc-473) | 698/473 | Sort DESC + bucket pruning |
+| 12 | [Expression Add Operators](#pattern-12-expression-add-operators-lc-282) | 282 | Prev tracking for multiply |
 
 ## Reference Sections
 | Section | Description |
-|---------|-------------|
-| [Master Comparison Table](#-master-comparison-table-plain-english) | All patterns side-by-side |
-| [The Ultimate Cheat Sheet](#-the-ultimate-cheat-sheet-pattern-recognition-in-10-seconds) | 10-second pattern recognition |
-| [The 5 Most Common Mistakes](#-the-5-most-common-mistakes-and-how-to-avoid-them) | Avoid these traps |
-| [How to Explain in Interview](#-how-to-explain-your-solution-in-an-interview) | Communication template |
-| [Mastery Checklist](#-youve-mastered-backtracking-when-you-can) | Self-assessment |
-| [Pattern Family Tree](#-the-pattern-family-tree) | How patterns relate |
+|-----|-------|
+| [Master Comparison Table](#master-comparison-table-plain-english) | All patterns side-by-side |
+| [The Ultimate Cheat Sheet](#the-ultimate-cheat-sheet-pattern-recognition-in-10-seconds) | 10-second pattern recognition |
+| [The 5 Most Common Mistakes](#the-5-most-common-mistakes-and-how-to-avoid-them) | Avoid these traps |
+| [How to Explain in Interview](#how-to-explain-your-solution-in-an-interview) | Communication template |
+| [Mastery Checklist](#youve-mastered-backtracking-when-you-can) | Self-assessment |
+| [Pattern Family Tree](#the-pattern-family-tree) | How patterns relate |
 
----
+--
 
 ## 🧠 The "One Sentence That Unlocks Everything"
 
@@ -47,7 +47,7 @@
 
 Think of it like this: You're filling out a form with multiple blanks. For each blank, you try every possible answer. If you realize later that your choice made the form invalid, you **erase** that answer and try the next one. That's it. That's backtracking.
 
----
+--
 
 ## 🎯 The Mental Model: Two Questions, Every Single Time
 
@@ -69,7 +69,7 @@ This is your **CANDIDATE POOL** (the horizontal axis — trying alternatives)
 
 **The entire pattern emerges from these two questions.**
 
----
+--
 
 ## 🔑 The Golden Rule: The "Undo" Must Mirror the "Do"
 
@@ -80,7 +80,7 @@ Whatever you MARK before recursing, you UNMARK after returning.
 
 This is non-negotiable. If you forget this, your algorithm is broken.
 
----
+--
 
 ## The Master Blueprint: The Universal Backtracking Engine
 
@@ -91,7 +91,7 @@ To master backtracking without memorizing boilerplate code, you must separate **
 ```text
                      Current Decision Frame: Level K
                                     |
-          +-------------------------+-------------------------+
+          +-------------+-------------+
           |                                                   |
    VERTICAL VECTOR (↓)                                 HORIZONTAL VECTOR (→)
    "Progress through Time / Slots"                     "Test Alternate Realities"
@@ -104,7 +104,7 @@ To master backtracking without memorizing boilerplate code, you must separate **
    UNCHOOSE (The Backtrack)                                   |
    - Invert the exact mutation done in Choose                 |
    - Slate restored to 100% identical state                   |
-          +---------------------------------------------------+
+          +--------------------------+
 ```
 
 ### The Four Universal Rules
@@ -130,7 +130,7 @@ This is where most people get confused:
 * **Forward Only (start from `i + 1` or `i`):** Use when **order doesn't matter** (Subsets, Combinations). You only look at items ahead. This prevents duplicates like [3, 2] when [2, 3] already exists.
 * **Reset to 0:** Use when **order matters** (Permutations) or when **each slot has its own pool** (Phone Keypad). You need to look at ALL items again, using `used[]` to skip items already picked.
 
----
+--
 
 ## 🎒 Pattern 1: Subsets (Power Set)
 
@@ -140,7 +140,7 @@ This is where most people get confused:
 
 **Instant thought:** "Binary choice per element! Take or skip each item!"
 
----
+--
 
 ### The Mental Model (Before Coding!)
 
@@ -206,7 +206,7 @@ For n elements:
    b. EXCLUDE: Just recurse with index+1 (don't add anything)
 ```
 
----
+--
 
 ### Visual Dry Run (Decision Tree)
 
@@ -288,7 +288,7 @@ Call: recurse(index=0, path=[])
 Final results: [[], [2], [1], [1,2]] ✓
 ```
 
----
+--
 
 ### The Code (With Line-by-Line Explanation)
 
@@ -321,7 +321,7 @@ private void backtrack(int[] nums, int index, List<Integer> path,
 }
 ```
 
----
+--
 
 ### The Golden Rule: UNDO Must Mirror DO
 
@@ -334,7 +334,7 @@ path.remove(path.size() - 1); // UNDO: Remove item (MUST mirror the DO!)
 // If you forget the UNDO, your path accumulates garbage!
 ```
 
----
+--
 
 ### Why `new ArrayList<>(path)`?
 
@@ -349,17 +349,17 @@ result.add(new ArrayList<>(path));  // Each entry is independent
 // If we don't copy, all results will be the final state of path!
 ```
 
----
+--
 
 ### Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Not copying path | All results point to same list | `new ArrayList<>(path)` |
 | Forgetting UNDO | Path accumulates garbage | Always remove after recurse |
 | Wrong base case | Miss subsets or infinite loop | `index == nums.length` |
 
----
+--
 
 ### Mind-Map Anchor
 
@@ -379,7 +379,7 @@ SUBSETS (POWER SET)
 
 **Memory phrase:** "Take or skip each item, undo after recursing, copy to result"
 
----
+--
 }
 ```
 
@@ -407,7 +407,7 @@ Root: recurse(idx=0) | path=[]
 Final Result: [[1, 2], [1], [2], []] (Total: 2^2 = 4 subsets)
 ```
 
----
+--
 
 ## 💰 Pattern 2: Combination Sum (Running Budget & Unbounded Reuse)
 
@@ -417,7 +417,7 @@ Final Result: [[1, 2], [1], [2], []] (Total: 2^2 = 4 subsets)
 
 **Instant thought:** "Budget shrinks, position can stay → Combination Sum pattern!"
 
----
+--
 
 ### The Mental Model (Before Coding!)
 
@@ -479,7 +479,7 @@ index stays → BUT → target shrinks → GUARANTEED termination
    b. SKIP: Recurse with index+1 (never use this coin again)
 ```
 
----
+--
 
 ### Visual Dry Run (Decision Tree)
 
@@ -561,7 +561,7 @@ Call: recurse(index=0, budget=5, path=[])
 Final results: [[2, 3]] ✓
 ```
 
----
+--
 
 ### The Code (With Line-by-Line Explanation)
 
@@ -600,7 +600,7 @@ private void backtrack(int[] candidates, int index, int target,
 }
 ```
 
----
+--
 
 ### The Golden Rule: UNDO Must Mirror DO
 
@@ -615,7 +615,7 @@ path.remove(path.size() - 1);                   // UNDO: Remove coin
 // This allows REUSE of the same coin!
 ```
 
----
+--
 
 ### Why `index` stays the same (Reuse) vs `index + 1` (No Reuse)?
 
@@ -629,18 +629,18 @@ backtrack(candidates, index + 1, target - val, ...);  // Move forward
 //                    ^^^^^^^^^ NEXT index = can't reuse this coin
 ```
 
----
+--
 
 ### Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Using `index + 1` for reuse | Can't use same coin twice | Use `index` (stay) for unlimited reuse |
 | Forgetting `target < 0` check | Infinite recursion | Add base case for over-budget |
 | Not copying path | All results point to same list | `new ArrayList<>(path)` |
 | Forgetting UNDO | Path accumulates garbage | Always remove after recurse |
 
----
+--
 
 ### Mind-Map Anchor
 
@@ -660,7 +660,7 @@ COMBINATION SUM
 
 **Memory phrase:** "Stay to reuse, move to refuse, budget always shrinks"
 
----
+--
 
 ### ⚠️ The Trap: Combination Sum II (Single-Use with Duplicates)
 
@@ -682,7 +682,7 @@ recurse(candidates, index + 1, target - candidates[index], path, result);
 if (i > start && candidates[i] == candidates[i-1]) continue;
 ```
 
----
+--
 
 ## 🪑 Pattern 3: Permutations (The Slot-Filling & Pool Search Model)
 
@@ -692,7 +692,7 @@ if (i > start && candidates[i] == candidates[i-1]) continue;
 
 **Instant thought:** "Reset to 0 + used[] bouncer → Permutations pattern!"
 
----
+--
 
 ### The Mental Model (Before Coding!)
 
@@ -764,7 +764,7 @@ That's why we RESET to 0 for each new chair!
       - UNDO: Remove from path, unmark as used
 ```
 
----
+--
 
 ### Visual Dry Run (Decision Tree)
 
@@ -860,7 +860,7 @@ Call: backtrack(path=[], used=[F,F])
 Final results: [[1, 2], [2, 1]] ✓
 ```
 
----
+--
 
 ### The Code (With Line-by-Line Explanation)
 
@@ -905,7 +905,7 @@ private void backtrack(int[] nums, boolean[] used,
 }
 ```
 
----
+--
 
 ### The Golden Rule: UNDO Must Mirror DO (TWO things to undo!)
 
@@ -923,7 +923,7 @@ used[i] = false;               // 2. Unmark as used
 // Forgetting EITHER undo breaks the algorithm!
 ```
 
----
+--
 
 ### Why `used[]` Array? (The Bouncer Analogy)
 
@@ -940,18 +940,18 @@ for (int i = 0; i < nums.length; i++) {
 }
 ```
 
----
+--
 
 ### Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Forgetting `used[]` array | Same element used multiple times | Add `boolean[] used` |
 | Not resetting to 0 | Miss permutations like [2,1] | Loop always starts at i=0 |
 | Only undoing path | `used[]` stays corrupted | Undo BOTH: path AND used |
 | Not copying path | All results point to same list | `new ArrayList<>(path)` |
 
----
+--
 
 ### Mind-Map Anchor
 
@@ -972,7 +972,7 @@ PERMUTATIONS
 
 **Memory phrase:** "Reset to zero, bouncer says no, undo both mark and add"
 
----
+--
 
 ### ⚠️ The Trap: Permutations II (Duplicates)
 
@@ -1002,7 +1002,7 @@ if (i > 0 && nums[i] == nums[i-1] && !used[i-1]) continue;
 - If `used[i-1] == true`: Older twin IS seated → younger twin CAN sit (they're in different chairs)
 - If `used[i-1] == false`: Older twin is NOT seated → younger twin CANNOT sit (would create duplicate)
 
----
+--
 
 ## 🔗 Pattern 4: Generate Parentheses (Prefix Balance & Quota Model)
 
@@ -1012,7 +1012,7 @@ if (i > 0 && nums[i] == nums[i-1] && !used[i-1]) continue;
 
 **Instant thought:** "Two counters (open/close) with balance constraint → Parentheses pattern!"
 
----
+--
 
 ### The Mental Model (Before Coding!)
 
@@ -1078,7 +1078,7 @@ These two rules GUARANTEE every generated string is valid!
    b. If close < open: Add ')', recurse with close+1, then REMOVE (undo!)
 ```
 
----
+--
 
 ### Visual Dry Run (Decision Tree)
 
@@ -1180,7 +1180,7 @@ Call: backtrack(path="", open=0, close=0)
 Final results: ["(())", "()()"] ✓
 ```
 
----
+--
 
 ### The Code (With Line-by-Line Explanation)
 
@@ -1219,7 +1219,7 @@ private void backtrack(int n, int open, int close,
 }
 ```
 
----
+--
 
 ### The Golden Rule: BOTH Branches Must UNDO!
 
@@ -1240,7 +1240,7 @@ path.deleteCharAt(path.length() - 1);  // UNDO!
 // Both branches ADD, so both branches must UNDO!
 ```
 
----
+--
 
 ### Why `close < open` and not `close < n`?
 
@@ -1257,18 +1257,18 @@ path.deleteCharAt(path.length() - 1);  // UNDO!
 // This guarantees the string is valid at every step!
 ```
 
----
+--
 
 ### Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Using `close < n` | Allows invalid sequences like ")(" | Use `close < open` |
 | Forgetting UNDO in both branches | Path accumulates garbage | Both branches must undo |
 | Using `path.length() == n` | Only half the string | Use `path.length() == 2 * n` |
 | Not converting StringBuilder | Result contains StringBuilder refs | Use `path.toString()` |
 
----
+--
 
 ### Mind-Map Anchor
 
@@ -1288,7 +1288,7 @@ GENERATE PARENTHESES
 
 **Memory phrase:** "Open if quota left, close if debt exists, undo both branches"
 
----
+--
 
 ### ⚠️ The Trap: Multiple Bracket Types
 
@@ -1306,7 +1306,7 @@ GENERATE PARENTHESES
 ```
 ```
 
----
+--
 
 ## 📱 Pattern 5: Letter Combinations of a Phone Number (Multi-Dial Lock)
 
@@ -1316,7 +1316,7 @@ GENERATE PARENTHESES
 
 **Instant thought:** "Independent pools + reset to 0 → Phone Keypad pattern!"
 
----
+--
 
 ### The Mental Model (Before Coding!)
 
@@ -1390,7 +1390,7 @@ Phone Keypad: Each dial has its OWN INDEPENDENT pool
       - REMOVE letter (undo!)
 ```
 
----
+--
 
 ### Visual Dry Run (Decision Tree)
 
@@ -1478,7 +1478,7 @@ Call: backtrack(digitIdx=0, path="")
 Final results: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"] ✓
 ```
 
----
+--
 
 ### The Code (With Line-by-Line Explanation)
 
@@ -1525,7 +1525,7 @@ private void backtrack(String digits, int digitIdx,
 }
 ```
 
----
+--
 
 ### The Golden Rule: UNDO Must Mirror DO
 
@@ -1539,7 +1539,7 @@ path.deleteCharAt(path.length() - 1); // UNDO: Remove letter
 // No need for used[] because pools don't overlap!
 ```
 
----
+--
 
 ### Why Reset to Letter 0 of Each Dial?
 
@@ -1554,18 +1554,18 @@ path.deleteCharAt(path.length() - 1); // UNDO: Remove letter
 // of the SAME pool. Here, each dial has its OWN pool.
 ```
 
----
+--
 
 ### Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Forgetting empty input check | Crashes or returns [""] | Check `digits.isEmpty()` |
 | Using `used[]` array | Unnecessary, pools are independent | Remove `used[]` |
 | Wrong keypad mapping | Wrong letters for digits | Double-check KEYPAD array |
 | Forgetting UNDO | Path accumulates garbage | Always deleteCharAt after recurse |
 
----
+--
 
 ### Mind-Map Anchor
 
@@ -1586,7 +1586,7 @@ PHONE KEYPAD
 
 **Memory phrase:** "Each dial has its own pool, no bouncer needed, reset to first letter"
 
----
+--
 
 ### ⚠️ The Twist: Dictionary Word Filter (Boggle / T9)
 
@@ -1602,7 +1602,7 @@ if (!trie.startsWith(path.toString())) return; // PRUNE! No word starts with thi
 ```
 ```
 
----
+--
 
 ## ✂️ Pattern 6: Palindrome Partitioning (The Ribbon Knife Cutter)
 
@@ -1612,7 +1612,7 @@ if (!trie.startsWith(path.toString())) return; // PRUNE! No word starts with thi
 
 **Instant thought:** "Contiguous slicing with validation → Partitioning pattern!"
 
----
+--
 
 ### The Mental Model (Before Coding!)
 
@@ -1680,7 +1680,7 @@ Partitioning: "Where do I cut this contiguous string?"
    c. If NO: Skip this cut position (can't make invalid piece)
 ```
 
----
+--
 
 ### Visual Dry Run (Decision Tree)
 
@@ -1786,7 +1786,7 @@ Call: backtrack(start=0, path=[])
 Final results: [["a", "a", "b"], ["aa", "b"]] ✓
 ```
 
----
+--
 
 ### The Code (With Line-by-Line Explanation)
 
@@ -1830,13 +1830,13 @@ private void backtrack(String s, int start,
 
 private boolean isPalindrome(String s, int left, int right) {
     while (left < right) {
-        if (s.charAt(left++) != s.charAt(right--)) return false;
+        if (s.charAt(left++) != s.charAt(right-)) return false;
     }
     return true;
 }
 ```
 
----
+--
 
 ### The Golden Rule: UNDO Must Mirror DO
 
@@ -1851,7 +1851,7 @@ path.remove(path.size() - 1);         // UNDO: Remove piece
 // No gaps allowed in partitioning!
 ```
 
----
+--
 
 ### Why `start` becomes `i + 1`?
 
@@ -1869,18 +1869,18 @@ path.remove(path.size() - 1);         // UNDO: Remove piece
 // This ensures NO GAPS and NO OVERLAPS!
 ```
 
----
+--
 
 ### Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Forgetting palindrome check | Invalid partitions included | Check `isPalindrome` before cutting |
 | Using `i` instead of `i + 1` for next start | Infinite loop or wrong pieces | `backtrack(s, i + 1, ...)` |
 | Not copying path | All results point to same list | `new ArrayList<>(path)` |
 | Forgetting UNDO | Path accumulates garbage | Always remove after recurse |
 
----
+--
 
 ### Mind-Map Anchor
 
@@ -1900,7 +1900,7 @@ PALINDROME PARTITIONING
 
 **Memory phrase:** "Cut only if palindrome, next piece starts right after, no gaps allowed"
 
----
+--
 
 ### ⚠️ The Trap: Palindrome Partitioning II (Minimum Cuts)
 
@@ -1914,12 +1914,12 @@ PALINDROME PARTITIONING
 dp[i] = min(dp[j] + 1) for all j where s[j+1...i] is palindrome
 ```
 
----
+--
 
 ### 🔗 The Family of "Slicing" Problems
 
 | Problem | The "Bouncer" Check | Same Pattern! |
-|---------|---------------------|---------------|
+|-----|-----------|--------|
 | Palindrome Partitioning | `isPalindrome(slice)` | ✓ |
 | Word Break II | `dictionary.contains(slice)` | ✓ |
 | Restore IP Addresses | `isValidOctet(slice)` | ✓ |
@@ -1927,7 +1927,7 @@ dp[i] = min(dp[j] + 1) for all j where s[j+1...i] is palindrome
 **They're ALL the same pattern with different validation functions!**
 ```
 
----
+--
 
 ## 🌐 Pattern 7: Restore IP Addresses (Depth-Bounded Ribbon Cutter)
 
@@ -1937,7 +1937,7 @@ dp[i] = min(dp[j] + 1) for all j where s[j+1...i] is palindrome
 
 **Instant thought:** "Partitioning + fixed depth + capacity pruning → Restore IP pattern!"
 
----
+--
 
 ### The Mental Model (Before Coding!)
 
@@ -2000,7 +2000,7 @@ Restore IP:              EXACTLY 4 pieces
    c. If both YES: Add segment, recurse, then REMOVE (undo!)
 ```
 
----
+--
 
 ### Visual Dry Run (Decision Tree)
 
@@ -2122,7 +2122,7 @@ Call: backtrack(start=0, path=[])
 Final results: ["255.255.11.135", "255.255.111.35"] ✓
 ```
 
----
+--
 
 ### The Code (With Line-by-Line Explanation)
 
@@ -2199,7 +2199,7 @@ private boolean isValidSegment(String segment) {
 }
 ```
 
----
+--
 
 ### The Golden Rule: UNDO Must Mirror DO
 
@@ -2213,7 +2213,7 @@ path.remove(path.size() - 1);           // UNDO: Remove segment
 // After trying length 1, we undo and try length 2, etc.
 ```
 
----
+--
 
 ### Why Pigeonhole Pruning is Critical
 
@@ -2236,7 +2236,7 @@ if (remainingChars < remainingSegments * 1) continue;
 // 10 > 9 → IMPOSSIBLE! Prune immediately.
 ```
 
----
+--
 
 ### The Leading Zero Trap
 
@@ -2255,19 +2255,19 @@ private boolean isValidSegment(String segment) {
 }
 ```
 
----
+--
 
 ### Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Forgetting `start == s.length()` check | Accept incomplete IPs | Check both conditions in base case |
 | Allowing leading zeros | "01.01.01.01" is invalid | Check `segment.charAt(0) == '0'` |
 | No pigeonhole pruning | TLE on long strings | Add capacity checks |
 | Forgetting UNDO | Path accumulates garbage | Always remove after recurse |
 | Using `>` instead of `>=` for 255 | Reject valid "255" | Use `val <= 255` |
 
----
+--
 
 ### Mind-Map Anchor
 
@@ -2288,12 +2288,12 @@ RESTORE IP ADDRESSES
 **Memory phrase:** "Four segments, no leading zeros, pigeonhole prune early, join with dots"
 ```
 
----
+--
 
 ## 🎯 Master Comparison Table (Plain English)
 
 | Problem | What's the "Slot"? | Going Down (↓) | Where to Look Next | Going Sideways (→) | What to Undo |
-| :--- | :--- | :--- | :--- | :--- | :--- |
+| :-- | :-- | :-- | :-- | :-- | :-- |
 | **Subsets** | Item #i | Add item, move to next | Forward only | Skip item, move to next | Remove last from path |
 | **Combination Sum** | Budget left | Add coin, stay here (reuse!) | Same spot or forward | Skip coin, move to next | Remove last from path |
 | **Permutations** | Chair #slot | Seat person, next chair | **Start from 0 again** | Try next person, same chair | Remove last + unmark used |
@@ -2305,7 +2305,7 @@ RESTORE IP ADDRESSES
 | **N-Queens** | Row #row | Place queen, next row | All columns in next row | Try next column, same row | Remove from 3 sets |
 | **Sudoku** | Empty cell | Place digit, next empty | All empty cells | Try next digit 1-9 | Remove digit (set to '.') |
 
----
+--
 
 ## 🧠 The Ultimate Cheat Sheet: Pattern Recognition in 10 Seconds
 
@@ -2340,7 +2340,7 @@ No duplicates  → Standard pattern
 Has duplicates → Sort first + skip twins at same level
 ```
 
----
+--
 
 ## 🔥 The 5 Most Common Mistakes (And How to Avoid Them)
 
@@ -2394,7 +2394,7 @@ if (i > start && nums[i] == nums[i-1]) continue;
 Arrays.sort(nums);  // [1, 1, 2] → now duplicate check works
 ```
 
----
+--
 
 ## 🎓 How to Explain Your Solution in an Interview
 
@@ -2416,7 +2416,7 @@ When explaining your backtracking solution, use this simple structure:
 > 
 > The time is O([explain]) because [simple reason]."
 
----
+--
 
 ## 🏆 You've Mastered Backtracking When You Can:
 
@@ -2431,19 +2431,19 @@ When explaining your backtracking solution, use this simple structure:
 - [ ] Track diagonal attacks with r-c and r+c (N-Queens)
 - [ ] Return boolean to stop early when only one solution needed (Sudoku)
 
----
+--
 
 ## 🔗 The Pattern Family Tree
 
 ```
                         BACKTRACKING
                              |
-        +--------------------+--------------------+--------------------+
+        +----------+----------+----------+
         |                    |                    |                    |
    SELECTION            ARRANGEMENT          PARTITIONING          CONSTRAINT
    (Include/Exclude)    (Order Matters)      (Cut String)          SATISFACTION
         |                    |                    |                    |
-   +----+----+          +----+----+          +----+----+          +----+----+
+   +--+--+          +--+--+          +--+--+          +--+--+
    |         |          |         |          |         |          |         |
 Subsets  Combination  Perms   Phone      Palindrome  IP       N-Queens  Sudoku
          Sum                  Keypad     Partition   Restore
@@ -2453,7 +2453,7 @@ Forward   Stay/Move   Reset    Reset      Slice     Slice     Row-by-   Find
 Only      (reuse?)    to 0     to 0       Forward   + Bounds  Row+3Sets Empty+
                                                                Check    3Zones
 
-                    +--------------------+
+                    +----------+
                     |                    |
                 GRID-BASED           SINGLE
                 EXPLORATION          SOLUTION
@@ -2467,7 +2467,7 @@ Only      (reuse?)    to 0     to 0       Forward   + Bounds  Row+3Sets Empty+
 
 **Remember:** Every backtracking problem is just a variation of these core patterns. Master the patterns, and you can solve ANY backtracking problem!
 
----
+--
 
 ## 🔍 Pattern 8: Word Search (LC 79) ⭐⭐
 
@@ -2477,7 +2477,7 @@ Only      (reuse?)    to 0     to 0       Forward   + Bounds  Row+3Sets Empty+
 
 **Instant thought:** "Grid DFS with in-place cell masking → Word Search pattern!"
 
----
+--
 
 ### The Mental Model (Before Coding!)
 
@@ -2554,7 +2554,7 @@ Alternative: XOR trick
    f. Return false (this path didn't work)
 ```
 
----
+--
 
 ### Visual Dry Run (Step-by-Step Grid State)
 
@@ -2686,7 +2686,7 @@ Result: TRUE (word "ABCCED" found!)
 ═══════════════════════════════════════════════════════════
 ```
 
----
+--
 
 ### The Code (With Line-by-Line Explanation)
 
@@ -2748,7 +2748,7 @@ private boolean dfs(char[][] board, String word, int r, int c, int idx) {
 }
 ```
 
----
+--
 
 ### Alternative: Using Direction Array (Cleaner Code)
 
@@ -2779,7 +2779,7 @@ private boolean dfs(char[][] board, String word, int r, int c, int idx) {
 }
 ```
 
----
+--
 
 ### The Golden Rule: Match, Mark, Explore, Restore
 
@@ -2800,7 +2800,7 @@ boolean found = dfs(...UP...) || dfs(...DOWN...) || dfs(...LEFT...) || dfs(...RI
 board[r][c] = temp;
 ```
 
----
+--
 
 ### Why Short-Circuit OR (||) Matters
 
@@ -2816,12 +2816,12 @@ boolean found = dfs(UP) | dfs(DOWN) | dfs(LEFT) | dfs(RIGHT);
 // This would explore ALL directions even after finding the word! SLOW!
 ```
 
----
+--
 
 ### Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Forgetting to restore cell | Other paths can't use this cell | Always `board[r][c] = temp` after recursion |
 | Using `visited[][]` array | Extra O(m×n) space | Use in-place masking with sentinel |
 | Not checking bounds first | ArrayIndexOutOfBounds | Check bounds before accessing `board[r][c]` |
@@ -2829,7 +2829,7 @@ boolean found = dfs(UP) | dfs(DOWN) | dfs(LEFT) | dfs(RIGHT);
 | Using `|` instead of `||` | Explores all paths even after success | Use `||` for short-circuit |
 | Not restoring before early return | Grid left corrupted | Restore in ALL return paths |
 
----
+--
 
 ### Mind-Map Anchor
 
@@ -2850,7 +2850,7 @@ WORD SEARCH (GRID DFS)
 
 **Memory phrase:** "Match, mark, explore, restore"
 
----
+--
 
 ### ⚠️ The Trap: Word Search II (Multiple Words)
 
@@ -2867,7 +2867,7 @@ WORD SEARCH (GRID DFS)
 // If it's a complete word → add to results
 ```
 
----
+--
 
 ## ♛ Pattern 9: N-Queens (LC 51) & N-Queens II (LC 52) ⭐⭐
 
@@ -2877,7 +2877,7 @@ WORD SEARCH (GRID DFS)
 
 **Instant thought:** "Row-by-row placement with 3-set conflict tracking → N-Queens pattern!"
 
----
+--
 
 ### The Mental Model (Before Coding!)
 
@@ -2982,7 +2982,7 @@ THREE SETS = COMPLETE ATTACK COVERAGE!
       - UNDO: Remove from all three sets
 ```
 
----
+--
 
 ### Visual Dry Run (4×4 Board)
 
@@ -3117,7 +3117,7 @@ Q . . .            . . . Q
 ═══════════════════════════════════════════════════════════
 ```
 
----
+--
 
 ### The Code: N-Queens I (Return All Board Configurations)
 
@@ -3192,7 +3192,7 @@ private List<String> buildBoard(int[] queens, int n) {
 }
 ```
 
----
+--
 
 ### The Code: N-Queens II (Just Count Solutions)
 
@@ -3236,7 +3236,7 @@ private int backtrack(int n, int row,
 }
 ```
 
----
+--
 
 ### The Golden Rule: Check 3 Sets, Undo 3 Sets
 
@@ -3258,7 +3258,7 @@ diag2.remove(row + col);
 // Forgetting ANY of the three undos will corrupt future paths!
 ```
 
----
+--
 
 ### Why Row-by-Row? (Implicit Constraint)
 
@@ -3278,19 +3278,19 @@ diag2.remove(row + col);
 //   - diag2: which / diagonals are taken
 ```
 
----
+--
 
 ### Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Forgetting diag1 or diag2 | Queens attack diagonally! | Always check all 3 sets |
 | Using `row - col` for both diagonals | \ and / have different formulas | diag1 = r-c, diag2 = r+c |
 | Not undoing all 3 sets | Future paths see phantom queens | Remove from cols, diag1, AND diag2 |
 | Checking row conflicts | Unnecessary, row-by-row handles it | Only check cols, diag1, diag2 |
 | Building board during recursion | Slow and complex | Build board only at base case |
 
----
+--
 
 ### Mind-Map Anchor
 
@@ -3312,7 +3312,7 @@ N-QUEENS
 
 **Memory phrase:** "Row by row, check 3 sets: col, r-c, r+c"
 
----
+--
 
 ## 🔢 Pattern 10: Sudoku Solver (LC 37) ⭐⭐
 
@@ -3322,7 +3322,7 @@ N-QUEENS
 
 **Instant thought:** "Try 1-9, check 3 zones, return boolean to stop early → Sudoku pattern!"
 
----
+--
 
 ### The Mental Model (Before Coding!)
 
@@ -3431,7 +3431,7 @@ Example: Cell (5, 7) is in which box?
 4. If no digit works → Return false (trigger backtracking)
 ```
 
----
+--
 
 ### Visual Dry Run (Simplified 4×4 Sudoku)
 
@@ -3541,7 +3541,7 @@ The board remains filled with the solution!
 ═══════════════════════════════════════════════════════════
 ```
 
----
+--
 
 ### The Code (With Line-by-Line Explanation)
 
@@ -3631,7 +3631,7 @@ private boolean isValid(char[][] board, int row, int col, char d) {
 }
 ```
 
----
+--
 
 ### The Golden Rule: Return True to Stop Everything
 
@@ -3658,7 +3658,7 @@ board[r][c] = '.';  // This would UNDO the solution!
 // We'd keep trying other digits for no reason
 ```
 
----
+--
 
 ### Why `(row / 3) * 3` for Box Calculation?
 
@@ -3688,7 +3688,7 @@ board[r][c] = '.';  // This would UNDO the solution!
 //     0-2      3-5       6-8
 ```
 
----
+--
 
 ### Optimization: Using Sets for O(1) Lookup
 
@@ -3711,12 +3711,12 @@ private boolean isValid(int r, int c, char d) {
 // Don't forget to update sets during DO and UNDO!
 ```
 
----
+--
 
 ### Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Returning void instead of boolean | Can't stop when solution found | Return boolean, propagate true |
 | Forgetting `return true` after successful recurse | Solution gets undone | `if (solve(board)) return true;` |
 | Wrong box calculation | Checks wrong 3×3 region | Use `(r/3)*3` and `(c/3)*3` |
@@ -3724,7 +3724,7 @@ private boolean isValid(int r, int c, char d) {
 | Checking validity AFTER placing | Corrupts the board state | Check validity BEFORE placing |
 | Using `int` instead of `char` | Type mismatch with board | Use `char d = '1'` to `'9'` |
 
----
+--
 
 ### Mind-Map Anchor
 
@@ -3746,7 +3746,7 @@ SUDOKU SOLVER
 
 **Memory phrase:** "Try 1-9, check 3 zones, return true to stop"
 
----
+--
 
 ### ⚠️ The Trap: Multiple Solutions
 
@@ -3769,7 +3769,7 @@ if (noEmptyCell) {
 }
 ```
 
----
+--
 
 ## 🎯 PATTERN 11: Partition to K Equal Sum Subsets (LC 698) & Matchsticks to Square (LC 473) ⭐⭐
 
@@ -3781,7 +3781,7 @@ if (noEmptyCell) {
 
 **Trigger keywords:** partition, divide, K subsets, equal sum, matchsticks, square
 
----
+--
 
 ### The Mental Model: "The Moving Company"
 
@@ -3801,7 +3801,7 @@ All boxes loaded! → Return TRUE
 
 **The Question:** For each box, which truck should it go into?
 
----
+--
 
 ### The L5 Pruning Insight (CRITICAL FOR INTERVIEWS!)
 
@@ -3836,7 +3836,7 @@ DFS tries large numbers first:
 2. We prune **massive branches** before they expand
 3. Small elements are flexible and fill gaps easily
 
----
+--
 
 ### Additional Pruning Techniques
 
@@ -3861,7 +3861,7 @@ if (buckets[i] == 0) {
 if (buckets[i] + nums[index] > target) continue;
 ```
 
----
+--
 
 ### Visual Dry Run
 
@@ -3908,7 +3908,7 @@ Place 5:
 
 **Result:** [5,4,1] in bucket 1, [3,3,2,2] in bucket 2 → Both sum to 10 ✓
 
----
+--
 
 ### The Code (With Line-by-Line Explanation)
 
@@ -3976,12 +3976,12 @@ private void reverse(int[] nums) {
     while (left < right) {
         int temp = nums[left];
         nums[left++] = nums[right];
-        nums[right--] = temp;
+        nums[right-] = temp;
     }
 }
 ```
 
----
+--
 
 ### Matchsticks to Square (LC 473)
 
@@ -4011,19 +4011,19 @@ public boolean makesquare(int[] matchsticks) {
 
 **The insight:** A square is just "partition into 4 equal parts" where each part is a side.
 
----
+--
 
 ### Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Not sorting descending | TLE - explores too many branches | Always sort DESC first |
 | Forgetting sum % k check | Wastes time on impossible cases | Check divisibility first |
 | Not skipping duplicate buckets | Redundant exploration | `if (buckets[i] == buckets[i-1]) continue` |
 | Not breaking on empty bucket fail | Explores equivalent empty buckets | `if (buckets[i] == 0) break` |
 | Using `index++` instead of `index + 1` | Corrupts index for backtracking | Always pass `index + 1` |
 
----
+--
 
 ### Mind-Map Anchor
 
@@ -4043,7 +4043,7 @@ PARTITION K EQUAL SUM
 
 **Memory phrase:** "Sort DESC, fill buckets, prune duplicates and empty equivalents"
 
----
+--
 
 ## 🎯 PATTERN 12: Expression Add Operators (LC 282) ⭐⭐⭐
 
@@ -4055,7 +4055,7 @@ PARTITION K EQUAL SUM
 
 **Trigger keywords:** add operators, insert operators, expression evaluation, digits to target
 
----
+--
 
 ### The Mental Model: "The Calculator Builder"
 
@@ -4081,7 +4081,7 @@ Output: ["1+2+3", "1*2*3"]
 - "123"             → one three-digit number
 ```
 
----
+--
 
 ### The Precedence Problem (THE HARD PART!)
 
@@ -4117,7 +4117,7 @@ Formula: result = result - prev + (prev * current)
          prev = prev * current
 ```
 
----
+--
 
 ### The Multi-Digit Challenge
 
@@ -4134,7 +4134,7 @@ Invalid: "1*05" ✗ (leading zero in "05"!)
 2. Multi-digit starting with "0" is INVALID: "05", "007"
 3. Build number digit by digit: `num = num * 10 + digit`
 
----
+--
 
 ### The 4 Choices at Each Position
 
@@ -4157,7 +4157,7 @@ At each step, we have these choices:
    - prev = prev * num
 ```
 
----
+--
 
 ### Visual Dry Run
 
@@ -4219,7 +4219,7 @@ Step 4: index=3 == length → BASE CASE
   result=6 == target=6 → ADD "1*2*3" to answer!
 ```
 
----
+--
 
 ### The Code (With Line-by-Line Explanation)
 
@@ -4291,7 +4291,7 @@ private void backtrack(List<String> result, String num, int target,
 }
 ```
 
----
+--
 
 ### Why StringBuilder with setLength()?
 
@@ -4311,7 +4311,7 @@ path.setLength(len);                // Reset to original length (O(1)!)
 
 This avoids heap allocation during recursion - critical for performance!
 
----
+--
 
 ### Why Use `long` Instead of `int`?
 
@@ -4324,12 +4324,12 @@ long curr = Long.parseLong(...);  // Use long to avoid overflow
 
 Intermediate results can overflow int, especially with multiplication.
 
----
+--
 
 ### Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Forgetting leading zero check | "05" treated as valid | `if (i > index && num.charAt(index) == '0') break` |
 | Using int instead of long | Overflow on large numbers | Use `long` for curr, eval, prev |
 | Wrong prev for subtraction | Multiply undo fails | `prev = -curr` (negative!) |
@@ -4337,7 +4337,7 @@ Intermediate results can overflow int, especially with multiplication.
 | Forgetting to undo path | Corrupted expressions | Always `path.setLength(len)` |
 | Not handling first number | Missing operator case | Special case when `index == 0` |
 
----
+--
 
 ### Mind-Map Anchor
 
@@ -4358,7 +4358,7 @@ EXPRESSION ADD OPERATORS
 
 **Memory phrase:** "Track prev for multiply undo. No leading zeros. StringBuilder backtrack."
 
----
+--
 
 ### The Multiplication Undo Formula (Memorize This!)
 

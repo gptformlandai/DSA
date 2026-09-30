@@ -1,24 +1,24 @@
 # Sorting Patterns Deep Dive (MAANG L5 Coverage)
 
----
+--
 
 # INDEX
 
 | Category | Patterns |
-|----------|----------|
+|-----|-----|
 | [Core Algorithms](#the-7-sorting-algorithms-you-must-know) | Quick, Merge, Heap, Counting, etc. |
-| [Fundamental](#pattern-0-sort-colors-lc-75-) | Patterns 0-4 |
-| [Quick Select](#pattern-5-kth-largest-element-lc-215-) | Patterns 5-8 |
-| [Intervals](#pattern-9-merge-intervals-lc-56-) | Patterns 9-14 |
-| [Custom Sort](#pattern-4-largest-number-lc-179-) | Patterns 15-18 |
+| [Fundamental](#pattern-0-sort-colors-lc-75) | Patterns 0-4 |
+| [Quick Select](#pattern-5-kth-largest-element-lc-215) | Patterns 5-8 |
+| [Intervals](#pattern-9-merge-intervals-lc-56) | Patterns 9-14 |
+| [Custom Sort](#pattern-4-largest-number-lc-179) | Patterns 15-18 |
 
----
+--
 
 # The One Sentence That Unlocks All Sorting Problems
 
 > **"Sorting transforms CHAOS into ORDER — enabling binary search, two pointers, and greedy approaches."**
 
----
+--
 
 # 🌟 ZERO TO HERO: Understanding Sorting
 
@@ -34,14 +34,14 @@ SORTED: Unlocks powerful techniques
                 → Merge intervals O(n)
 ```
 
----
+--
 
 # The 7 Sorting Algorithms You Must Know
 
 ## Algorithm Comparison Table
 
 | Algorithm | Time (Avg) | Time (Worst) | Space | Stable | In-Place |
-|-----------|------------|--------------|-------|--------|----------|
+|------|------|-------|----|----|-----|
 | Quick Sort | O(n log n) | O(n²) | O(log n) | No | Yes |
 | Merge Sort | O(n log n) | O(n log n) | O(n) | Yes | No |
 | Heap Sort | O(n log n) | O(n log n) | O(1) | No | Yes |
@@ -50,7 +50,7 @@ SORTED: Unlocks powerful techniques
 | Radix Sort | O(d·n) | O(d·n) | O(n + k) | Yes | No |
 | Tim Sort | O(n log n) | O(n log n) | O(n) | Yes | No |
 
----
+--
 
 ## 1. Quick Sort
 
@@ -80,7 +80,7 @@ int partition(int[] arr, int low, int high) {
 
 **Use when:** General purpose, in-place needed
 
----
+--
 
 ## 2. Merge Sort
 
@@ -111,7 +111,7 @@ void merge(int[] arr, int left, int mid, int right) {
 
 **Use when:** Stable sort needed, linked lists, counting inversions
 
----
+--
 
 ## 3. Dutch National Flag (3-Way Partition)
 
@@ -125,7 +125,7 @@ void sortColors(int[] nums) {
         } else if (nums[mid] == 1) {
             mid++;
         } else {
-            swap(nums, mid, high--);
+            swap(nums, mid, high-);
         }
     }
 }
@@ -133,7 +133,7 @@ void sortColors(int[] nums) {
 
 **Use when:** 3 distinct values, partition around pivot
 
----
+--
 
 # When to Use Which Sorting
 
@@ -159,7 +159,7 @@ void sortColors(int[] nums) {
 └─────────────────────────────────────────────────────────────┘
 ```
 
----
+--
 
 # PATTERN 0: Sort Colors (LC 75) ⭐⭐
 
@@ -169,7 +169,7 @@ void sortColors(int[] nums) {
 
 **Instant thought:** "Three pointers! low, mid, high."
 
----
+--
 
 ## The Mental Model: "The Flag Sorter"
 
@@ -188,7 +188,7 @@ Process mid pointer:
 - See 2? Swap with high, only decrease high
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -204,7 +204,7 @@ Initial: [2, 0, 2, 1, 1, 0]
 
 ═══════════════════════════════════════════════════════════════
 
-nums[mid]=2: Swap with high, high--
+nums[mid]=2: Swap with high, high-
          [0, 0, 2, 1, 1, 2]
           L
           M
@@ -225,7 +225,7 @@ nums[mid]=0: Swap with low, low++, mid++
 Final: [0, 0, 1, 1, 2, 2] ✓
 ```
 
----
+--
 
 ## The Code
 
@@ -242,23 +242,23 @@ void sortColors(int[] nums) {
             mid++;
         } else {
             // Swap with high region, only decrease high
-            swap(nums, mid, high--);
+            swap(nums, mid, high-);
             // Don't advance mid! New element needs checking
         }
     }
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
-| Advancing mid after swap with high | New element unchecked | Only high-- |
+|---|------|---|
+| Advancing mid after swap with high | New element unchecked | Only high- |
 | Using < instead of <= | Miss last element | Use mid <= high |
 
----
+--
 
 # PATTERN 5: Kth Largest Element (LC 215) ⭐⭐
 
@@ -268,7 +268,7 @@ void sortColors(int[] nums) {
 
 **Instant thought:** "Quick Select! O(n) average."
 
----
+--
 
 ## The Mental Model: "Partial Sorting"
 
@@ -282,7 +282,7 @@ Target index: 6-2 = 4 (0-indexed)
 After partition, if pivot at index 4 → that's our answer!
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -336,7 +336,7 @@ Final: nums[4] = 5 (2nd largest element) ✓
 Sorted verification: [1, 2, 3, 4, 5, 6] → 2nd largest = 5 ✓
 ```
 
----
+--
 
 ## The Code
 
@@ -372,16 +372,16 @@ int partition(int[] nums, int left, int right) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Using k directly as index | Kth largest ≠ index k | Use n-k for 0-indexed |
 | Not handling duplicates | May infinite loop | Randomize pivot |
 
----
+--
 
 # PATTERN 9: Merge Intervals (LC 56) ⭐⭐
 
@@ -391,7 +391,7 @@ int partition(int[] nums, int left, int right) {
 
 **Instant thought:** "Sort by start! Then merge adjacent."
 
----
+--
 
 ## The Mental Model: "Calendar Merging"
 
@@ -399,18 +399,18 @@ int partition(int[] nums, int left, int right) {
 Meetings on calendar - merge overlapping ones:
 
 Before: [1,3], [2,6], [8,10], [15,18]
-        |---|
-          |-----|
-                  |--|
-                        |---|
+        |--|
+          |---|
+                  |-|
+                        |--|
 
 After:  [1,6], [8,10], [15,18]
-        |-------|
-                  |--|
-                        |---|
+        |----|
+                  |-|
+                        |--|
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -428,7 +428,7 @@ Step 2: Initialize result with first interval
   result = [[1,3]]
   
   Timeline:
-  1----3
+  1--3
   |████|
 
 ═══════════════════════════════════════════════════════════════
@@ -441,7 +441,7 @@ Step 3: Process [2,6]
   result = [[1,6]]
   
   Timeline:
-  1---------6
+  1-----6
   |█████████|
 
 ═══════════════════════════════════════════════════════════════
@@ -454,7 +454,7 @@ Step 4: Process [8,10]
   result = [[1,6], [8,10]]
   
   Timeline:
-  1---------6     8---10
+  1-----6     8--10
   |█████████|     |███|
 
 ═══════════════════════════════════════════════════════════════
@@ -467,7 +467,7 @@ Step 5: Process [15,18]
   result = [[1,6], [8,10], [15,18]]
   
   Timeline:
-  1---------6     8---10        15---18
+  1-----6     8--10        15--18
   |█████████|     |███|         |████|
 
 ═══════════════════════════════════════════════════════════════
@@ -475,7 +475,7 @@ Step 5: Process [15,18]
 Final: [[1,6], [8,10], [15,18]] ✓
 ```
 
----
+--
 
 ## The Code
 
@@ -506,17 +506,17 @@ int[][] merge(int[][] intervals) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Forgetting to sort | Can't detect overlaps | Always sort first |
 | Using < instead of <= | Miss adjacent [1,2],[2,3] | Use curr[0] <= last[1] |
 | Not using max for end | Miss contained intervals | Use max(last[1], curr[1]) |
 
----
+--
 
 # PATTERN 10: Meeting Rooms II (LC 253) ⭐⭐
 
@@ -526,7 +526,7 @@ int[][] merge(int[][] intervals) {
 
 **Instant thought:** "Sort + Min Heap! Track end times."
 
----
+--
 
 ## Visual Dry Run
 
@@ -590,7 +590,7 @@ Step 4: Process [15,20]
 Final: heap.size() = 2 rooms needed ✓
 ```
 
----
+--
 
 ## The Code
 
@@ -618,12 +618,12 @@ int minMeetingRooms(int[][] intervals) {
 }
 ```
 
----
+--
 
 # MAANG Coverage Map
 
 | Pattern | Problem | Difficulty | Frequency |
-|---------|---------|------------|-----------|
+|-----|-----|------|------|
 | 0 | Sort Colors (LC 75) | Medium | ⭐⭐⭐⭐⭐ |
 | 5 | Kth Largest (LC 215) | Medium | ⭐⭐⭐⭐⭐ |
 | 6 | Top K Frequent (LC 347) | Medium | ⭐⭐⭐⭐⭐ |
@@ -632,7 +632,7 @@ int minMeetingRooms(int[][] intervals) {
 | 11 | Non-overlapping (LC 435) | Medium | ⭐⭐⭐⭐ |
 | 15 | Largest Number (LC 179) | Medium | ⭐⭐⭐⭐ |
 
----
+--
 
 # Mastery Checklist
 
@@ -651,7 +651,7 @@ int minMeetingRooms(int[][] intervals) {
 - [ ] Count of Smaller Numbers After Self (LC 315)
 - [ ] Reverse Pairs (LC 493)
 
----
+--
 
 # Quick Reference Card
 
@@ -680,11 +680,11 @@ int minMeetingRooms(int[][] intervals) {
 └─────────────────────────────────────────────────────────────┘
 ```
 
----
+--
 
 # ADDITIONAL DETAILED PATTERNS
 
----
+--
 
 # PATTERN 2: Sort List (LC 148) ⭐
 
@@ -694,7 +694,7 @@ int minMeetingRooms(int[][] intervals) {
 
 **Instant thought:** "Merge Sort! Find middle, split, merge."
 
----
+--
 
 ## The Mental Model: "Divide and Conquer on a Chain"
 
@@ -713,7 +713,7 @@ Why Merge Sort?
 - O(n log n) guaranteed
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -791,7 +791,7 @@ Step 5: Merge sorted halves
 Final: 1 → 2 → 3 → 4 ✓
 ```
 
----
+--
 
 ## The Code
 
@@ -843,23 +843,23 @@ ListNode merge(ListNode l1, ListNode l2) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | fast starting at head | Wrong middle for even length | Start fast at head.next |
 | Not cutting the list | Infinite recursion | Set mid.next = null |
 | Forgetting base case | Stack overflow | Check head == null or head.next == null |
 
----
+--
 
 ## Mind-Map Anchor
 
 **Memory phrase:** "Find mid, cut, sort both, merge back."
 
----
+--
 
 # PATTERN 4: Largest Number (LC 179) ⭐
 
@@ -869,7 +869,7 @@ ListNode merge(ListNode l1, ListNode l2) {
 
 **Instant thought:** "Custom comparator! Compare a+b vs b+a."
 
----
+--
 
 ## The Mental Model: "The Greedy Concatenation"
 
@@ -888,7 +888,7 @@ Key insight: Compare concatenations!
 Custom comparator: (a, b) → compare (b+a) vs (a+b)
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -949,7 +949,7 @@ Verification:
   "9534303" (naive descending) < "9534330" ✓
 ```
 
----
+--
 
 ## The Code
 
@@ -975,17 +975,17 @@ String largestNumber(int[] nums) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Sorting by numeric value | "9" vs "34": 34 > 9 but "9" should come first | Use string concatenation comparison |
 | Not handling all zeros | Returns "000..." | Check if first element is "0" |
 | Wrong comparator order | Smallest instead of largest | Use (b+a).compareTo(a+b) |
 
----
+--
 
 # PATTERN 6: Top K Frequent Elements (LC 347) ⭐⭐
 
@@ -995,7 +995,7 @@ String largestNumber(int[] nums) {
 
 **Instant thought:** "Bucket Sort O(n) or Min Heap O(n log k)!"
 
----
+--
 
 ## The Mental Model: "Frequency Buckets"
 
@@ -1018,7 +1018,7 @@ Step 3: Collect from highest bucket down
 Why O(n)? Max frequency is n, so max n buckets.
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -1097,7 +1097,7 @@ Verification:
   Element 3 appears 1 time
 ```
 
----
+--
 
 ## Bucket Sort Solution (O(n))
 
@@ -1123,7 +1123,7 @@ int[] topKFrequent(int[] nums, int k) {
     int[] result = new int[k];
     int index = 0;
     
-    for (int i = buckets.length - 1; i >= 0 && index < k; i--) {
+    for (int i = buckets.length - 1; i >= 0 && index < k; i-) {
         for (int num : buckets[i]) {
             result[index++] = num;
             if (index == k) break;
@@ -1134,7 +1134,7 @@ int[] topKFrequent(int[] nums, int k) {
 }
 ```
 
----
+--
 
 ## Min Heap Solution (O(n log k))
 
@@ -1164,7 +1164,7 @@ int[] topKFrequent(int[] nums, int k) {
 }
 ```
 
----
+--
 
 # PATTERN 11: Non-overlapping Intervals (LC 435) ⭐
 
@@ -1174,7 +1174,7 @@ int[] topKFrequent(int[] nums, int k) {
 
 **Instant thought:** "Sort by END time! Greedy: keep earliest ending."
 
----
+--
 
 ## The Mental Model: "The Activity Selection"
 
@@ -1194,7 +1194,7 @@ Pick [3,5] (starts at 3, [2,3] ends at 3, no overlap)
 Removed: 1 interval
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -1287,7 +1287,7 @@ Final: removed = 1 ✓
 Kept intervals: [1,2], [2,3], [3,4] (non-overlapping)
 ```
 
----
+--
 
 ## The Code
 
@@ -1315,17 +1315,17 @@ int eraseOverlapIntervals(int[][] intervals) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Sorting by start time | Greedy doesn't work | Sort by END time |
 | Using <= for overlap | Adjacent intervals don't overlap | Use < for overlap check |
 | Updating prevEnd on overlap | Should keep earlier end | Only update when no overlap |
 
----
+--
 
 # PATTERN 15: Queue Reconstruction by Height (LC 406) ⭐
 
@@ -1335,7 +1335,7 @@ int eraseOverlapIntervals(int[][] intervals) {
 
 **Instant thought:** "Sort by height DESC, then insert by k value!"
 
----
+--
 
 ## The Mental Model: "Tallest First"
 
@@ -1360,7 +1360,7 @@ Insert at index k:
 [4,4] → [[5,0], [7,0], [5,2], [6,1], [4,4], [7,1]]
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -1447,7 +1447,7 @@ Step 7: Insert [4,4] at index 4
 Final: [[5,0], [7,0], [5,2], [6,1], [4,4], [7,1]] ✓
 ```
 
----
+--
 
 ## The Code
 
@@ -1469,7 +1469,7 @@ int[][] reconstructQueue(int[][] people) {
 }
 ```
 
----
+--
 
 # PATTERN 18: Count of Smaller Numbers After Self (LC 315) ⭐⭐
 
@@ -1479,7 +1479,7 @@ int[][] reconstructQueue(int[][] people) {
 
 **Instant thought:** "Merge Sort with counting! Count during merge."
 
----
+--
 
 ## The Mental Model: "Counting During Merge"
 
@@ -1495,7 +1495,7 @@ This is the KEY insight: merge sort naturally compares
 elements from left with elements from right!
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -1587,7 +1587,7 @@ Verification:
   1 has 0 smaller elements to right ✓
 ```
 
----
+--
 
 ## The Code (Simplified)
 
@@ -1646,7 +1646,7 @@ void merge(int[] nums, int left, int mid, int right) {
 }
 ```
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1665,6 +1665,6 @@ void merge(int[] nums, int left, int mid, int right) {
 
 **Memory phrase:** "Merge sort counts inversions. Track indices, count during merge."
 
----
+--
 
 *End of Sorting Patterns Deep Dive*

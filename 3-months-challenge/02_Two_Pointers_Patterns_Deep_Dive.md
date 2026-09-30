@@ -1,21 +1,21 @@
 # Section 5 — Two Pointers Patterns Deep Dive (MAANG L5 Coverage)
 
----
+--
 
 # INDEX — Quick Navigation (18 Patterns)
 
 ## Core Concepts
 | Section | Description |
-|---------|-------------|
+|-----|-------|
 | [The "One Sentence"](#the-one-sentence-that-unlocks-all-two-pointer-problems) | Unlocks all Two Pointer problems |
 | [5 Pointer Techniques](#the-5-two-pointer-techniques-your-weapons) | Your configurations |
-| [Decision Tree](#the-master-decision-tree--pick-your-weapon-in-10-seconds) | Pick your weapon |
+| [Decision Tree](#the-master-decision-tree-pick-your-weapon-in-10-seconds) | Pick your weapon |
 
----
+--
 
 ## Opposite Direction Family (0-4)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 0 | [Two Sum II](#pattern-0-two-sum-ii-leetcode-167) | 167 |
 | 1 | [Valid Palindrome](#pattern-1-valid-palindrome-leetcode-125) | 125 |
 | 2 | [Valid Palindrome II](#pattern-2-valid-palindrome-ii-leetcode-680) | 680 |
@@ -24,7 +24,7 @@
 
 ## Read-Write Pointer Family (5-8)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 5 | [Remove Duplicates from Sorted Array](#pattern-5-remove-duplicates-from-sorted-array-leetcode-26) | 26 |
 | 6 | [Move Zeroes](#pattern-6-move-zeroes-leetcode-283) | 283 |
 | 7 | [Remove Element](#pattern-7-remove-element-leetcode-27) | 27 |
@@ -32,7 +32,7 @@
 
 ## Three Pointers / Partitioning (9-12)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 9 | [Sort Colors](#pattern-9-sort-colors-leetcode-75) | 75 |
 | 10 | [3Sum](#pattern-10-3sum-leetcode-15) | 15 |
 | 11 | [3Sum Closest](#pattern-11-3sum-closest-leetcode-16) | 16 |
@@ -40,7 +40,7 @@
 
 ## Array Manipulation (13-17)
 | # | Pattern | LeetCode |
-|---|---------|----------|
+|--|-----|-----|
 | 13 | [Reverse String](#pattern-13-reverse-string-leetcode-344) | 344 |
 | 14 | [Squares of Sorted Array](#pattern-14-squares-of-sorted-array-leetcode-977) | 977 |
 | 15 | [Merge Sorted Array](#pattern-15-merge-sorted-array-leetcode-88) | 88 |
@@ -49,12 +49,12 @@
 
 ## Reference Sections
 | Section |
-|---------|
+|-----|
 | [MAANG Coverage Map](#maang-coverage-map) |
 | [Pattern Recognition Cheat Sheet](#pattern-recognition-cheat-sheet) |
 | [Mastery Checklist](#mastery-checklist) |
 
----
+--
 
 # The "One Sentence That Unlocks All Two Pointer Problems"
 
@@ -66,7 +66,7 @@ That's the entire subject. Every two pointer problem — from easy to hard — i
 3. **Decide** which pointer to move based on what you observe
 4. **Terminate** when pointers meet or cross
 
----
+--
 
 ## 📋 THE JUNIOR DEV CHEAT CARD (Memorize This!)
 
@@ -116,7 +116,7 @@ That's the entire subject. Every two pointer problem — from easy to hard — i
 ║      int sum = arr[left] + arr[right];                                ║
 ║      if (sum == target) return true;                                  ║
 ║      else if (sum < target) left++;   // need bigger                  ║
-║      else right--;                    // need smaller                 ║
+║      else right-;                    // need smaller                 ║
 ║  }                                                                     ║
 ║                                                                        ║
 ║  // Read-Write (remove duplicates)                                    ║
@@ -131,7 +131,7 @@ That's the entire subject. Every two pointer problem — from easy to hard — i
 ╚═══════════════════════════════════════════════════════════════════════╝
 ```
 
----
+--
 
 ## 🚀 QUICK START: The 60-Second Two Pointer Approach
 
@@ -144,7 +144,7 @@ That's the entire subject. Every two pointer problem — from easy to hard — i
 ```
 1. "Need to find a pair with target sum in SORTED array?"
    → Setup: left = 0, right = n-1
-   → Loop: if sum < target, left++; if sum > target, right--
+   → Loop: if sum < target, left++; if sum > target, right-
    → Why: Moving left increases sum, moving right decreases sum
 
 2. "Need to check if something is a palindrome?"
@@ -177,7 +177,7 @@ the sum is to move left pointer right (to a larger value).
 Moving right pointer left would make sum even smaller. So I MUST move left."
 ```
 
----
+--
 
 ## Why Two Pointers Feel Easy But Bugs Happen
 
@@ -189,13 +189,13 @@ Moving right pointer left would make sum even smaller. So I MUST move left."
 3. Which pointer moves in which condition?
 4. What happens when pointers meet?
 
----
+--
 
 # The 5 Two Pointer Techniques (Your "Weapons")
 
 Think of these as your **5 weapons**. Every two pointer problem uses one (or a combination). Learn to recognize which weapon to draw!
 
----
+--
 
 ## Technique 1: Opposite Direction (Converging Pointers)
 
@@ -241,14 +241,14 @@ while (left < right) {
     } else if (value < target) {
         left++;   // Need bigger value, move left pointer right
     } else {
-        right--;  // Need smaller value, move right pointer left
+        right-;  // Need smaller value, move right pointer left
     }
 }
 ```
 
 **Memory Trick:** "Start at ends, walk toward middle, move the pointer that helps"
 
----
+--
 
 ## Technique 2: Same Direction (Fast-Slow / Read-Write)
 
@@ -298,7 +298,7 @@ return write;  // New length of compacted array
 
 **Memory Trick:** "Read scans all, Write only moves for keepers"
 
----
+--
 
 ## Technique 3: Read-Write Pointers (In-Place Transformation)
 
@@ -349,7 +349,7 @@ while (write < arr.length) {
 
 **Memory Trick:** "Write pointer marks the boundary of 'processed good elements'"
 
----
+--
 
 ## Technique 4: Three Pointers (Dutch National Flag)
 
@@ -378,7 +378,7 @@ Three pointers maintain three regions:
 Process arr[mid]:
 - If 0: swap with low, low++, mid++ (0 goes to red region)
 - If 1: mid++ (1 is already in place)
-- If 2: swap with high, high-- (2 goes to blue region, DON'T move mid!)
+- If 2: swap with high, high- (2 goes to blue region, DON'T move mid!)
 
 Why not move mid when swapping with high?
 Because we don't know what we swapped IN — need to check it!
@@ -397,7 +397,7 @@ while (mid <= high) {
         mid++;
     } else {  // arr[mid] == 2
         swap(arr, mid, high);
-        high--;
+        high-;
         // Don't increment mid! We need to check swapped element
     }
 }
@@ -405,7 +405,7 @@ while (mid <= high) {
 
 **Memory Trick:** "0 goes left (swap with low), 2 goes right (swap with high), 1 stays"
 
----
+--
 
 ## Technique 5: Sliding Window Hybrid
 
@@ -456,7 +456,7 @@ for (int right = 0; right < s.length(); right++) {
 
 **Memory Trick:** "Right expands greedily, Left contracts when needed"
 
----
+--
 
 # The Master Decision Tree — Pick Your Weapon in 10 Seconds
 
@@ -510,7 +510,7 @@ When you see a two pointer problem, ask these questions IN ORDER:
                                                           └────────────┘ └──────────┘
 ```
 
----
+--
 
 # The 4-Question Template (Ask For EVERY Pattern)
 
@@ -532,7 +532,7 @@ Before writing ANY code, answer these 4 questions:
 ├────────────────────────────────────────────────────────────────────┤
 │ 3. MOVEMENT: What moves each pointer?                              │
 │    □ left++ when value too small / left element processed          │
-│    □ right-- when value too big / right element processed          │
+│    □ right- when value too big / right element processed          │
 │    □ write++ only when element should be kept                      │
 │    □ Both move when match found (skip duplicates)                  │
 ├────────────────────────────────────────────────────────────────────┤
@@ -545,7 +545,7 @@ Before writing ANY code, answer these 4 questions:
 └────────────────────────────────────────────────────────────────────┘
 ```
 
----
+--
 
 # PATTERN 0: Two Sum II (LeetCode 167)
 
@@ -555,7 +555,7 @@ Before writing ANY code, answer these 4 questions:
 
 **Instant thought:** "Opposite direction pointers — classic converging!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -582,7 +582,7 @@ They want their combined weight to equal 9.
 
 Current sum = 2 + 15 = 17 > 9
   "We're too heavy! The person on the right should step to a smaller number."
-  right--
+  right-
 
   [2]  [7]  [11]  [15]
    ↑          ↑
@@ -590,7 +590,7 @@ Current sum = 2 + 15 = 17 > 9
 
 Current sum = 2 + 11 = 13 > 9
   "Still too heavy! Right person steps again."
-  right--
+  right-
 
   [2]  [7]  [11]  [15]
    ↑    ↑
@@ -609,13 +609,13 @@ In a SORTED array:
 
 So we have CONTROL over the sum:
 - Sum too small? Increase it by moving left++
-- Sum too big? Decrease it by moving right--
+- Sum too big? Decrease it by moving right-
 - Sum perfect? Found the answer!
 
 This is why sorting is essential — it gives us directional control!
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -634,7 +634,7 @@ Initial State:
 Step 1: sum = numbers[0] + numbers[3] = 2 + 15 = 17
 
   17 > 9 (target)
-  Sum too big → need smaller → right--
+  Sum too big → need smaller → right-
   
   [2]  [7]  [11]  [15]
    ↑          ↑
@@ -645,7 +645,7 @@ Step 1: sum = numbers[0] + numbers[3] = 2 + 15 = 17
 Step 2: sum = numbers[0] + numbers[2] = 2 + 11 = 13
 
   13 > 9 (target)
-  Sum too big → need smaller → right--
+  Sum too big → need smaller → right-
   
   [2]  [7]  [11]  [15]
    ↑    ↑
@@ -665,7 +665,7 @@ Step 3: sum = numbers[0] + numbers[1] = 2 + 7 = 9
 Output: [1, 2] ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -687,7 +687,7 @@ public int[] twoSum(int[] numbers, int target) {
         } else {
             // Sum too big, need smaller numbers
             // Only way to decrease: move right to smaller value
-            right--;
+            right-;
         }
     }
     
@@ -696,19 +696,19 @@ public int[] twoSum(int[] numbers, int target) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why It's Wrong | Fix |
-|------|----------------|-----|
+|---|--------|---|
 | Using HashMap | Works but O(n) space | Two pointers is O(1) space for sorted input |
 | Forgetting 1-indexed | LeetCode 167 uses 1-indexed output | Return `left+1, right+1` |
 | `left <= right` | Might use same element twice | Use `left < right` |
-| Moving wrong pointer | Breaks the algorithm | Sum < target → left++, Sum > target → right-- |
+| Moving wrong pointer | Breaks the algorithm | Sum < target → left++, Sum > target → right- |
 | Not checking sorted | Two pointers only works on sorted | Verify input is sorted |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -720,7 +720,7 @@ TWO SUM II
     ├── Setup: left=0, right=n-1
     │
     ├── Logic: sum < target → left++
-    │          sum > target → right--
+    │          sum > target → right-
     │          sum == target → found!
     │
     ├── Why it works: Sorted gives directional control
@@ -728,7 +728,7 @@ TWO SUM II
     └── Complexity: O(n) time, O(1) space
 ```
 
----
+--
 
 # PATTERN 1: Valid Palindrome (LeetCode 125)
 
@@ -738,7 +738,7 @@ TWO SUM II
 
 **Instant thought:** "Opposite direction — compare from both ends!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -800,7 +800,7 @@ We need to:
   Move both, skip spaces and punctuation...
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -822,7 +822,7 @@ Step 1:
   left points to 'A' (alphanumeric)
   right points to 'a' (alphanumeric)
   toLowerCase: 'a' == 'a' ✓
-  left++, right--
+  left++, right-
 
 ═══════════════════════════════════════════════════════════
 
@@ -831,7 +831,7 @@ Step 2:
   left points to 'm' (alphanumeric)
   right points to 'm' (alphanumeric)
   'm' == 'm' ✓
-  left++, right--
+  left++, right-
 
 ═══════════════════════════════════════════════════════════
 
@@ -845,7 +845,7 @@ All characters matched!
 Output: true ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -862,7 +862,7 @@ public boolean isPalindrome(String s) {
         
         // Skip non-alphanumeric from right
         while (left < right && !Character.isLetterOrDigit(s.charAt(right))) {
-            right--;
+            right-;
         }
         
         // Compare characters (case-insensitive)
@@ -873,26 +873,26 @@ public boolean isPalindrome(String s) {
         
         // Move both pointers inward
         left++;
-        right--;
+        right-;
     }
     
     return true;  // All characters matched
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why It's Wrong | Fix |
-|------|----------------|-----|
+|---|--------|---|
 | Forgetting to skip non-alphanumeric | Compares spaces/punctuation | Add skip loops |
 | Case-sensitive comparison | 'A' != 'a' fails | Use `toLowerCase()` |
 | `left < right` in skip loops | Might go out of bounds | Always check `left < right` |
 | Creating new string | O(n) extra space | Use two pointers on original |
 | Off-by-one in empty string | Edge case | `left < right` handles it |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -912,7 +912,7 @@ VALID PALINDROME
     └── Complexity: O(n) time, O(1) space
 ```
 
----
+--
 
 # PATTERN 2: Valid Palindrome II (LeetCode 680)
 
@@ -922,7 +922,7 @@ VALID PALINDROME
 
 **Instant thought:** "Two pointers with one skip allowance!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -978,7 +978,7 @@ If EITHER option works, return true.
 If BOTH fail, return false.
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -996,7 +996,7 @@ Initial:
 
 Step 1: s[0]='a', s[3]='a'
   'a' == 'a' ✓
-  left++, right--
+  left++, right-
   
   "abca"
     ↑↑
@@ -1039,7 +1039,7 @@ Output: true ✓
 Output: false ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -1057,7 +1057,7 @@ public boolean validPalindrome(String s) {
                    isPalindromeRange(s, left, right - 1);
         }
         left++;
-        right--;
+        right-;
     }
     
     return true;  // No mismatch found, already a palindrome
@@ -1070,24 +1070,24 @@ private boolean isPalindromeRange(String s, int i, int j) {
             return false;
         }
         i++;
-        j--;
+        j-;
     }
     return true;
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why It's Wrong | Fix |
-|------|----------------|-----|
+|---|--------|---|
 | Trying all possible deletions | O(n²) time | Only try deletion at mismatch point |
 | Forgetting to check both options | Might miss valid solution | Use `||` to try both |
 | Deleting more than one | Problem says "at most one" | Only one skip allowed |
 | Not handling already-palindrome | Should return true | Main loop handles it |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1108,7 +1108,7 @@ VALID PALINDROME II
     └── Complexity: O(n) time, O(1) space
 ```
 
----
+--
 
 # PATTERN 3: Container With Most Water (LeetCode 11)
 
@@ -1118,7 +1118,7 @@ VALID PALINDROME II
 
 **Instant thought:** "Opposite direction — move the shorter line!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -1176,7 +1176,7 @@ If we move the SHORTER wall (left):
 Conclusion: Always move the shorter wall — it's the only way to potentially improve!
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -1228,7 +1228,7 @@ Step 3:
 Final: maxArea = 49 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -1251,7 +1251,7 @@ public int maxArea(int[] height) {
         if (height[left] < height[right]) {
             left++;
         } else {
-            right--;
+            right-;
         }
     }
     
@@ -1259,19 +1259,19 @@ public int maxArea(int[] height) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why It's Wrong | Fix |
-|------|----------------|-----|
+|---|--------|---|
 | Moving the taller wall | Can only decrease area | Always move shorter wall |
 | Using height[left] + height[right] | Area uses MIN, not sum | Use `Math.min()` |
 | Forgetting width in area | Area = width × height | Include `right - left` |
 | Brute force O(n²) | Too slow for large inputs | Two pointers is O(n) |
 | Moving both pointers | Skips potential solutions | Move only one per iteration |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1291,7 +1291,7 @@ CONTAINER WITH MOST WATER
     └── Complexity: O(n) time, O(1) space
 ```
 
----
+--
 
 # PATTERN 4: Trapping Rain Water (LeetCode 42)
 
@@ -1301,7 +1301,7 @@ CONTAINER WITH MOST WATER
 
 **Instant thought:** "Two pointers tracking left/right max heights!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -1355,7 +1355,7 @@ The insight:
 So we process the SHORTER side, knowing its water level is determined.
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -1407,7 +1407,7 @@ Step 4: height[left]=2 > height[right]=1
   Process right side:
   rightMax = max(0, 1) = 1
   water += 1 - 1 = 0
-  right--
+  right-
   
   right=10, water=1
 
@@ -1420,7 +1420,7 @@ Step 4: height[left]=2 > height[right]=1
 Final: water = 6 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -1446,7 +1446,7 @@ public int trap(int[] height) {
             // Water level at right is determined by rightMax
             rightMax = Math.max(rightMax, height[right]);
             water += rightMax - height[right];
-            right--;
+            right-;
         }
     }
     
@@ -1454,19 +1454,19 @@ public int trap(int[] height) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why It's Wrong | Fix |
-|------|----------------|-----|
+|---|--------|---|
 | Using max(leftMax, rightMax) | Water bounded by MIN, not max | Use the side being processed |
 | Forgetting to update leftMax/rightMax | Misses taller bars | Update before calculating water |
 | Processing wrong side | Incorrect water calculation | Process the SHORTER side |
 | Negative water values | height[i] > max shouldn't happen | Update max first, then calculate |
 | Off-by-one errors | Missing first/last positions | `left < right` handles correctly |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1486,7 +1486,7 @@ TRAPPING RAIN WATER
     └── Complexity: O(n) time, O(1) space
 ```
 
----
+--
 
 # PATTERN 5: Remove Duplicates from Sorted Array (LeetCode 26)
 
@@ -1496,7 +1496,7 @@ TRAPPING RAIN WATER
 
 **Instant thought:** "Read-Write pointers — write only keeps unique elements!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -1534,7 +1534,7 @@ Rule: "Only let someone in if they're DIFFERENT from the last VIP"
   Return write+1 = 3 unique elements
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -1586,7 +1586,7 @@ Final: [0, 1, 2, 3, 4, _, _, _, _, _], write=4
 Return write+1 = 5 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -1609,19 +1609,19 @@ public int removeDuplicates(int[] nums) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why It's Wrong | Fix |
-|------|----------------|-----|
+|---|--------|---|
 | Starting read at 0 | Compares first element with itself | Start read at 1 |
 | Returning write | Off by one | Return write + 1 |
 | Comparing with read-1 | Wrong comparison | Compare with nums[write] |
 | Empty array | Index out of bounds | Check length == 0 first |
 | Forgetting to copy | Just incrementing write | Must copy: nums[write] = nums[read] |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1640,7 +1640,7 @@ REMOVE DUPLICATES
     └── Complexity: O(n) time, O(1) space
 ```
 
----
+--
 
 # PATTERN 6: Move Zeroes (LeetCode 283)
 
@@ -1650,7 +1650,7 @@ REMOVE DUPLICATES
 
 **Instant thought:** "Read-Write pointers — write non-zeros, fill rest with zeros!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -1684,7 +1684,7 @@ Imagine a checkout conveyor belt:
   Fill rest with zeros: [1, 3, 12, 0, 0]
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -1745,7 +1745,7 @@ Fill remaining with zeros:
 Output: [1, 3, 12, 0, 0] ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -1786,18 +1786,18 @@ public void moveZeroesSwap(int[] nums) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why It's Wrong | Fix |
-|------|----------------|-----|
+|---|--------|---|
 | Forgetting to fill zeros | Array has garbage at end | Add second pass to fill zeros |
 | Swapping when read==write | Unnecessary operation | Check if read != write before swap |
 | Not maintaining order | Problem requires relative order | Read-write maintains order |
 | Using extra array | Problem says in-place | Use two pointers |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1817,7 +1817,7 @@ MOVE ZEROES
     └── Complexity: O(n) time, O(1) space
 ```
 
----
+--
 
 # PATTERN 7: Remove Element (LeetCode 27)
 
@@ -1827,7 +1827,7 @@ MOVE ZEROES
 
 **Instant thought:** "Read-Write pointers — write only keeps non-target elements!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -1857,7 +1857,7 @@ Imagine a water filter that removes impurities (val=3):
   [2, 2, _, _]  ← Clean water (first 2 elements)
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -1910,7 +1910,7 @@ Final: [0, 1, 3, 0, 4, _, _, _], write=5
 Return 5 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -1931,17 +1931,17 @@ public int removeElement(int[] nums, int val) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why It's Wrong | Fix |
-|------|----------------|-----|
+|---|--------|---|
 | Returning write+1 | Unlike remove duplicates, write IS the count | Return write (not write+1) |
 | Shifting elements | O(n²) time | Use read-write pointers |
 | Using extra space | Problem says in-place | Two pointers use O(1) |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1960,7 +1960,7 @@ REMOVE ELEMENT
     └── Complexity: O(n) time, O(1) space
 ```
 
----
+--
 
 # PATTERN 8: Is Subsequence (LeetCode 392)
 
@@ -1970,7 +1970,7 @@ REMOVE ELEMENT
 
 **Instant thought:** "Two pointers on two strings — match characters in order!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2009,7 +2009,7 @@ t = "ahbgdc" (the path)
   sPtr reached end of s → All treasures found! Return true.
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -2065,7 +2065,7 @@ Step 6: s[2]='c' == t[5]='c'
 Output: true ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2088,18 +2088,18 @@ public boolean isSubsequence(String s, String t) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why It's Wrong | Fix |
-|------|----------------|-----|
+|---|--------|---|
 | Moving sPtr on every iteration | Should only move on match | Only sPtr++ when characters match |
 | Checking tPtr == t.length() | Wrong condition | Check sPtr == s.length() |
 | Using indexOf repeatedly | O(n*m) time | Two pointers is O(n+m) |
 | Forgetting empty s | Empty string is subsequence of anything | Loop handles it (returns true) |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2118,7 +2118,7 @@ IS SUBSEQUENCE
     └── Complexity: O(n+m) time, O(1) space
 ```
 
----
+--
 
 # PATTERN 9: Sort Colors (LeetCode 75)
 
@@ -2128,7 +2128,7 @@ IS SUBSEQUENCE
 
 **Instant thought:** "Three pointers — low, mid, high!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2162,7 +2162,7 @@ Three pointers maintain three regions:
 Process nums[mid]:
 - If 0: swap with low, both low++ and mid++
 - If 1: just mid++ (it's in the right place)
-- If 2: swap with high, high-- (DON'T move mid!)
+- If 2: swap with high, high- (DON'T move mid!)
 ```
 
 ### Why Not Move Mid When Swapping With High?
@@ -2181,7 +2181,7 @@ When we swap nums[mid] with nums[low]:
 - So we KNOW we got a 1 — safe to move mid++
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -2200,7 +2200,7 @@ Initial:
 ═══════════════════════════════════════════════════════════
 
 Step 1: nums[mid]=2
-  Swap with high, high--
+  Swap with high, high-
   
   [0, 0, 2, 1, 1, 2]
    ↑           ↑
@@ -2229,7 +2229,7 @@ Step 3: nums[mid]=0
 ═══════════════════════════════════════════════════════════
 
 Step 4: nums[mid]=2
-  Swap with high, high--
+  Swap with high, high-
   
   [0, 0, 1, 1, 2, 2]
          ↑  ↑
@@ -2259,7 +2259,7 @@ mid > high → Loop ends
 Output: [0, 0, 1, 1, 2, 2] ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2281,7 +2281,7 @@ public void sortColors(int[] nums) {
         } else {  // nums[mid] == 2
             // Swap with high region, shrink high boundary
             swap(nums, mid, high);
-            high--;
+            high-;
             // DON'T increment mid! Need to check swapped element
         }
     }
@@ -2294,18 +2294,18 @@ private void swap(int[] nums, int i, int j) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why It's Wrong | Fix |
-|------|----------------|-----|
-| mid++ after swap with high | Don't know what we got | Only high--, keep mid same |
+|---|--------|---|
+| mid++ after swap with high | Don't know what we got | Only high-, keep mid same |
 | `mid < high` condition | Misses last element | Use `mid <= high` |
 | Not swapping, just assigning | Loses data | Must swap to preserve elements |
 | Using counting sort | Works but not one-pass | Dutch flag is elegant one-pass |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2324,12 +2324,12 @@ SORT COLORS (Dutch National Flag)
     │
     ├── Logic: 0 → swap low, low++, mid++
     │          1 → mid++
-    │          2 → swap high, high-- (NO mid++)
+    │          2 → swap high, high- (NO mid++)
     │
     └── Complexity: O(n) time, O(1) space
 ```
 
----
+--
 
 # PATTERN 10: 3Sum (LeetCode 15)
 
@@ -2339,7 +2339,7 @@ SORT COLORS (Dutch National Flag)
 
 **Instant thought:** "Sort + Fix one + Two pointers on rest!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2395,7 +2395,7 @@ Three places to skip duplicates:
 3. Skip duplicate right (after finding triplet)
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -2430,11 +2430,11 @@ i=1: nums[i]=-1, target=1
   sum = -1 + 2 = 1 == target!
   Found: [-1, -1, 2] ✓
   Skip duplicate left: left++
-  Skip duplicate right: right--
+  Skip duplicate right: right-
   
   sum = 0 + 1 = 1 == target!
   Found: [-1, 0, 1] ✓
-  left++, right--
+  left++, right-
   
   left >= right → done with i=1
 
@@ -2447,7 +2447,7 @@ i=2: nums[i]=-1 == nums[i-1]=-1
 
 i=3: nums[i]=0, target=0
   
-  sum = 1 + 2 = 3 > 0 → right--
+  sum = 1 + 2 = 3 > 0 → right-
   left >= right → done
 
 ═══════════════════════════════════════════════════════════
@@ -2455,7 +2455,7 @@ i=3: nums[i]=0, target=0
 Output: [[-1, -1, 2], [-1, 0, 1]] ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2484,14 +2484,14 @@ public List<List<Integer>> threeSum(int[] nums) {
                 // Skip duplicate left values
                 while (left < right && nums[left] == nums[left + 1]) left++;
                 // Skip duplicate right values
-                while (left < right && nums[right] == nums[right - 1]) right--;
+                while (left < right && nums[right] == nums[right - 1]) right-;
                 
                 left++;
-                right--;
+                right-;
             } else if (sum < target) {
                 left++;
             } else {
-                right--;
+                right-;
             }
         }
     }
@@ -2500,19 +2500,19 @@ public List<List<Integer>> threeSum(int[] nums) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why It's Wrong | Fix |
-|------|----------------|-----|
+|---|--------|---|
 | Forgetting to sort | Two pointers need sorted array | Always sort first |
 | Not skipping duplicates | Returns duplicate triplets | Skip at all three levels |
 | `i > 0` check missing | Index out of bounds | Check `i > 0` before comparing |
-| Moving only one pointer after match | Misses other solutions | Move BOTH left++ and right-- |
+| Moving only one pointer after match | Misses other solutions | Move BOTH left++ and right- |
 | Skip duplicates BEFORE adding | Might skip valid triplet | Skip AFTER adding to result |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2535,7 +2535,7 @@ public List<List<Integer>> threeSum(int[] nums) {
     └── Complexity: O(n²) time, O(1) space (excluding output)
 ```
 
----
+--
 
 # PATTERN 11: 3Sum Closest (LeetCode 16)
 
@@ -2545,7 +2545,7 @@ public List<List<Integer>> threeSum(int[] nums) {
 
 **Instant thought:** "Like 3Sum but track closest difference!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2572,7 +2572,7 @@ Instead of finding exact match, track the closest sum seen so far.
   Return closestSum
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -2610,7 +2610,7 @@ i=1: nums[i]=-1
   sum = -1 + 1 + 2 = 2
   |2 − 1| = 1 < 2, closestSum = 2
   
-  sum > target → right--
+  sum > target → right-
   left >= right → done
 
 ═══════════════════════════════════════════════════════════
@@ -2618,7 +2618,7 @@ i=1: nums[i]=-1
 Output: 2 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2648,7 +2648,7 @@ public int threeSumClosest(int[] nums, int target) {
             } else if (sum < target) {
                 left++;
             } else {
-                right--;
+                right-;
             }
         }
     }
@@ -2657,17 +2657,17 @@ public int threeSumClosest(int[] nums, int target) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why It's Wrong | Fix |
-|------|----------------|-----|
+|---|--------|---|
 | Returning difference | Problem asks for sum | Return closestSum, not difference |
 | Not handling exact match | Wastes time continuing | Return immediately if sum == target |
 | Integer overflow | sum - target might overflow | Use long or be careful with comparisons |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2685,7 +2685,7 @@ public int threeSumClosest(int[] nums, int target) {
     └── Complexity: O(n²) time, O(1) space
 ```
 
----
+--
 
 # PATTERN 12: 4Sum (LeetCode 18)
 
@@ -2695,7 +2695,7 @@ public int threeSumClosest(int[] nums, int target) {
 
 **Instant thought:** "Fix two + Two pointers = O(n³)!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2722,7 +2722,7 @@ for i in range(n-3):           // Fix first number
     // Standard two-pointer search
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -2764,7 +2764,7 @@ i=1, j=2: nums[i]=-1, nums[j]=0, need sum=1
 Output: [[-2, -1, 1, 2], [-2, 0, 0, 2], [-1, 0, 0, 1]] ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2796,14 +2796,14 @@ public List<List<Integer>> fourSum(int[] nums, int target) {
                     
                     // Skip duplicates
                     while (left < right && nums[left] == nums[left + 1]) left++;
-                    while (left < right && nums[right] == nums[right - 1]) right--;
+                    while (left < right && nums[right] == nums[right - 1]) right-;
                     
                     left++;
-                    right--;
+                    right-;
                 } else if (sum < targetSum) {
                     left++;
                 } else {
-                    right--;
+                    right-;
                 }
             }
         }
@@ -2813,17 +2813,17 @@ public List<List<Integer>> fourSum(int[] nums, int target) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why It's Wrong | Fix |
-|------|----------------|-----|
+|---|--------|---|
 | Integer overflow | Large numbers can overflow | Use long for target calculation |
 | Wrong duplicate skip for j | `j > 0` instead of `j > i + 1` | Must be `j > i + 1` |
 | O(n⁴) brute force | Too slow | Use two pointers for O(n³) |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2841,7 +2841,7 @@ public List<List<Integer>> fourSum(int[] nums, int target) {
     └── Complexity: O(n³) time, O(1) space
 ```
 
----
+--
 
 # PATTERN 13: Reverse String (LeetCode 344)
 
@@ -2851,7 +2851,7 @@ public List<List<Integer>> fourSum(int[] nums, int target) {
 
 **Instant thought:** "Opposite direction — swap from both ends!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -2886,7 +2886,7 @@ Imagine folding a paper in half — characters on opposite sides swap:
   left >= right → DONE!
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -2924,7 +2924,7 @@ Step 3: left=2, right=2
 Output: ['o', 'l', 'l', 'e', 'h'] ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -2941,22 +2941,22 @@ public void reverseString(char[] s) {
         
         // Move pointers toward center
         left++;
-        right--;
+        right-;
     }
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why It's Wrong | Fix |
-|------|----------------|-----|
+|---|--------|---|
 | `left <= right` | Swaps middle element with itself | Use `left < right` |
 | Creating new array | Problem says in-place | Swap in original array |
 | Using StringBuilder | O(n) space | Two pointers is O(1) |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -2974,7 +2974,7 @@ REVERSE STRING
     └── Complexity: O(n) time, O(1) space
 ```
 
----
+--
 
 # PATTERN 14: Squares of Sorted Array (LeetCode 977)
 
@@ -2984,7 +2984,7 @@ REVERSE STRING
 
 **Instant thought:** "Opposite direction — largest squares at ends!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -3017,7 +3017,7 @@ In a sorted array with negatives:
   Move right pointer, compare again...
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -3035,7 +3035,7 @@ Initial:
 ═══════════════════════════════════════════════════════════
 
 Step 1: |-4|=4 vs |10|=10
-  10 > 4, so result[4] = 100, right--
+  10 > 4, so result[4] = 100, right-
   
   result = [_, _, _, _, 100]
   pos = 3
@@ -3051,7 +3051,7 @@ Step 2: |-4|=4 vs |3|=3
 ═══════════════════════════════════════════════════════════
 
 Step 3: |-1|=1 vs |3|=3
-  3 > 1, so result[2] = 9, right--
+  3 > 1, so result[2] = 9, right-
   
   result = [_, _, 9, 16, 100]
   pos = 1
@@ -3076,7 +3076,7 @@ Step 5: left=2, right=2 (same element)
 Output: [0, 1, 9, 16, 100] ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -3098,27 +3098,27 @@ public int[] sortedSquares(int[] nums) {
             left++;
         } else {
             result[pos] = rightSquare;
-            right--;
+            right-;
         }
-        pos--;
+        pos-;
     }
     
     return result;
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why It's Wrong | Fix |
-|------|----------------|-----|
+|---|--------|---|
 | Filling from start | Puts largest at beginning | Fill from end (pos = n-1) |
 | `left < right` | Misses middle element | Use `left <= right` |
 | Sorting after squaring | O(n log n) | Two pointers is O(n) |
 | Forgetting negatives | Negative² can be large | Compare absolute values |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -3136,7 +3136,7 @@ SQUARES OF SORTED ARRAY
     └── Complexity: O(n) time, O(n) space (for result)
 ```
 
----
+--
 
 # PATTERN 15: Merge Sorted Array (LeetCode 88)
 
@@ -3146,7 +3146,7 @@ SQUARES OF SORTED ARRAY
 
 **Instant thought:** "Three pointers from the END — fill backwards!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -3176,12 +3176,12 @@ Why fill from the end?
                p2
                
   Compare nums1[p1]=3 vs nums2[p2]=6
-  6 > 3, so nums1[pos] = 6, p2--, pos--
+  6 > 3, so nums1[pos] = 6, p2-, pos-
   
   nums1 = [1, 2, 3, 0, 0, 6]
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -3204,7 +3204,7 @@ Initial:
 ═══════════════════════════════════════════════════════════
 
 Step 1: nums1[2]=3 vs nums2[2]=6
-  6 > 3, nums1[5] = 6, p2--, pos--
+  6 > 3, nums1[5] = 6, p2-, pos-
   
   nums1 = [1, 2, 3, 0, 0, 6]
                 ↑     ↑
@@ -3213,7 +3213,7 @@ Step 1: nums1[2]=3 vs nums2[2]=6
 ═══════════════════════════════════════════════════════════
 
 Step 2: nums1[2]=3 vs nums2[1]=5
-  5 > 3, nums1[4] = 5, p2--, pos--
+  5 > 3, nums1[4] = 5, p2-, pos-
   
   nums1 = [1, 2, 3, 0, 5, 6]
                 ↑  ↑
@@ -3222,7 +3222,7 @@ Step 2: nums1[2]=3 vs nums2[1]=5
 ═══════════════════════════════════════════════════════════
 
 Step 3: nums1[2]=3 vs nums2[0]=2
-  3 > 2, nums1[3] = 3, p1--, pos--
+  3 > 2, nums1[3] = 3, p1-, pos-
   
   nums1 = [1, 2, 3, 3, 5, 6]
              ↑  ↑
@@ -3232,7 +3232,7 @@ Step 3: nums1[2]=3 vs nums2[0]=2
 
 Step 4: nums1[1]=2 vs nums2[0]=2
   2 == 2, take from nums2 (or nums1, doesn't matter)
-  nums1[2] = 2, p2--, pos--
+  nums1[2] = 2, p2-, pos-
   
   nums1 = [1, 2, 2, 3, 5, 6]
              ↑
@@ -3247,7 +3247,7 @@ Remaining nums1 elements [1, 2] are already in place!
 Output: [1, 2, 2, 3, 5, 6] ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -3261,36 +3261,36 @@ public void merge(int[] nums1, int m, int[] nums2, int n) {
     while (p1 >= 0 && p2 >= 0) {
         if (nums1[p1] > nums2[p2]) {
             nums1[pos] = nums1[p1];
-            p1--;
+            p1-;
         } else {
             nums1[pos] = nums2[p2];
-            p2--;
+            p2-;
         }
-        pos--;
+        pos-;
     }
     
     // If nums2 has remaining elements, copy them
     // (If nums1 has remaining, they're already in place!)
     while (p2 >= 0) {
         nums1[pos] = nums2[p2];
-        p2--;
-        pos--;
+        p2-;
+        pos-;
     }
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why It's Wrong | Fix |
-|------|----------------|-----|
+|---|--------|---|
 | Merging from start | Overwrites nums1's data | Merge from end |
 | Forgetting remaining nums2 | Leaves elements uncopied | Add second while loop |
 | Copying remaining nums1 | They're already in place | Only copy remaining nums2 |
 | Using extra array | Problem says in-place | Use three pointers |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -3310,7 +3310,7 @@ MERGE SORTED ARRAY
     └── Complexity: O(m+n) time, O(1) space
 ```
 
----
+--
 
 # PATTERN 16: Partition Labels (LeetCode 763)
 
@@ -3320,7 +3320,7 @@ MERGE SORTED ARRAY
 
 **Instant thought:** "Track last occurrence + greedy expansion!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -3357,7 +3357,7 @@ For each partition:
   So first partition is [0..8], size = 9
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -3417,7 +3417,7 @@ Partition 3: start=16
 Output: [9, 7, 8] ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -3449,17 +3449,17 @@ public List<Integer> partitionLabels(String s) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why It's Wrong | Fix |
-|------|----------------|-----|
+|---|--------|---|
 | Not precomputing last index | O(n²) to find last occurrence each time | Precompute in O(n) |
 | Forgetting to expand end | Partition might be too small | Always update end with max |
 | Off-by-one in size | Size = end - start + 1 | Include both endpoints |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -3478,7 +3478,7 @@ PARTITION LABELS
     └── Complexity: O(n) time, O(1) space (26 letters)
 ```
 
----
+--
 
 # PATTERN 17: Longest Mountain in Array (LeetCode 845)
 
@@ -3488,7 +3488,7 @@ PARTITION LABELS
 
 **Instant thought:** "Two pointers to find peak and expand!"
 
----
+--
 
 ## The Mental Model (Before Coding!)
 
@@ -3521,7 +3521,7 @@ For each potential peak:
   Mountain: indices [1..5], length = 5
 ```
 
----
+--
 
 ## Visual Dry Run (Step-by-Step)
 
@@ -3575,7 +3575,7 @@ i=6: arr[6]=5
 Output: 5 ✓
 ```
 
----
+--
 
 ## The Code (With Line-by-Line Explanation)
 
@@ -3590,7 +3590,7 @@ public int longestMountain(int[] arr) {
             // Expand left (while strictly increasing toward peak)
             int left = i;
             while (left > 0 && arr[left - 1] < arr[left]) {
-                left--;
+                left-;
             }
             
             // Expand right (while strictly decreasing from peak)
@@ -3622,7 +3622,7 @@ public int longestMountainOnePass(int[] arr) {
             
             // Expand left
             while (left > 0 && arr[left - 1] < arr[left]) {
-                left--;
+                left-;
             }
             
             // Expand right
@@ -3641,18 +3641,18 @@ public int longestMountainOnePass(int[] arr) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why It's Wrong | Fix |
-|------|----------------|-----|
+|---|--------|---|
 | Not checking strictly increasing/decreasing | Plateau is not a mountain | Use `<` and `>`, not `<=` and `>=` |
 | Forgetting minimum length 3 | Single peak or two elements isn't mountain | Peak check ensures length >= 3 |
 | Not skipping processed elements | Rechecks same mountain | Jump i to right after finding mountain |
 | Checking boundaries | Index out of bounds | Start i at 1, end at n-2 |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -3672,7 +3672,7 @@ LONGEST MOUNTAIN
     └── Complexity: O(n) time, O(1) space
 ```
 
----
+--
 
 # MAANG Coverage Map
 
@@ -3712,7 +3712,7 @@ LONGEST MOUNTAIN
 ## Top 10 Must-Know for Interviews
 
 | Rank | Pattern | Why It's Critical |
-|------|---------|-------------------|
+|---|-----|----------|
 | 1 | **3Sum** | Tests sorting + two pointers + duplicate handling |
 | 2 | **Trapping Rain Water** | Classic hard problem, tests deep understanding |
 | 3 | **Container With Most Water** | Tests greedy + two pointer reasoning |
@@ -3724,7 +3724,7 @@ LONGEST MOUNTAIN
 | 9 | **Two Sum II** | Classic opposite-direction template |
 | 10 | **Squares of Sorted Array** | Tests understanding of sorted array properties |
 
----
+--
 
 # Pattern Recognition Cheat Sheet
 
@@ -3758,14 +3758,14 @@ LONGEST MOUNTAIN
 ## Complexity Quick Reference
 
 | Pattern Type | Time | Space | Key Insight |
-|--------------|------|-------|-------------|
+|-------|---|----|-------|
 | Opposite Direction | O(n) | O(1) | Each pointer moves at most n times |
 | Read-Write | O(n) | O(1) | Single pass, write ≤ read |
 | Three Pointers | O(n) | O(1) | Each element processed once |
 | Fix One + 2-Ptr | O(n²) | O(1) | Outer O(n) × Inner O(n) |
 | Fix Two + 2-Ptr | O(n³) | O(1) | Two outer O(n²) × Inner O(n) |
 
----
+--
 
 # Mastery Checklist
 
@@ -3802,7 +3802,7 @@ LONGEST MOUNTAIN
 - [ ] Can optimize from O(n²) brute force to O(n) two pointers
 - [ ] Can combine two pointers with other techniques (binary search, sliding window)
 
----
+--
 
 # Quick Reference Card
 
@@ -3816,7 +3816,7 @@ LONGEST MOUNTAIN
 ║  int left = 0, right = n - 1;                                                  ║
 ║  while (left < right) {                                                        ║
 ║      if (condition) left++;                                                    ║
-║      else right--;                                                             ║
+║      else right-;                                                             ║
 ║  }                                                                             ║
 ║                                                                                ║
 ║  READ-WRITE POINTERS                                                           ║
@@ -3835,7 +3835,7 @@ LONGEST MOUNTAIN
 ║  while (mid <= high) {                                                         ║
 ║      if (arr[mid] == 0) swap(low++, mid++);                                    ║
 ║      else if (arr[mid] == 1) mid++;                                            ║
-║      else swap(mid, high--);  // DON'T increment mid!                          ║
+║      else swap(mid, high-);  // DON'T increment mid!                          ║
 ║  }                                                                             ║
 ║                                                                                ║
 ║  FIX ONE + TWO POINTERS (3Sum)                                                 ║
@@ -3859,7 +3859,7 @@ LONGEST MOUNTAIN
 ╚═══════════════════════════════════════════════════════════════════════════════╝
 ```
 
----
+--
 
 # Interview Tips
 
@@ -3874,7 +3874,7 @@ LONGEST MOUNTAIN
 ## Common Follow-Up Questions
 
 | Question | Good Answer |
-|----------|-------------|
+|-----|-------|
 | "Why two pointers instead of HashMap?" | "Sorted input allows O(1) space with two pointers vs O(n) for HashMap" |
 | "Why move the shorter pointer in Container?" | "Moving taller can only decrease area; moving shorter might find taller" |
 | "Why not increment mid when swapping with high?" | "We don't know what we got from high — need to check it" |
@@ -3890,7 +3890,7 @@ LONGEST MOUNTAIN
 - ❌ Not handling duplicates in kSum problems
 - ❌ Incrementing mid when swapping with high in Dutch Flag
 
----
+--
 
 **End of Two Pointers Patterns Deep Dive**
 

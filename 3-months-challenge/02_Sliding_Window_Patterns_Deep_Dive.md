@@ -1,24 +1,24 @@
 # Sliding Window Patterns Deep Dive (MAANG L5 Coverage)
 
----
+--
 
 # INDEX
 
 | Category | Patterns |
-|----------|----------|
+|-----|-----|
 | [Core Concepts](#core-templates) | Templates, Decision Tree |
 | [Fixed Window](#pattern-0-maximum-sum-subarray-of-size-k) | Patterns 0-5 |
-| [Variable - Longest](#pattern-6-longest-substring-without-repeating-characters-lc-3-) | Patterns 6-12 |
-| [Variable - Shortest](#pattern-13-minimum-window-substring-lc-76-) | Patterns 13-15 |
-| [Variable - Count](#pattern-16-subarrays-with-k-different-integers-lc-992-) | Patterns 16-20 |
+| [Variable - Longest](#pattern-6-longest-substring-without-repeating-characters-lc-3) | Patterns 6-12 |
+| [Variable - Shortest](#pattern-13-minimum-window-substring-lc-76) | Patterns 13-15 |
+| [Variable - Count](#pattern-16-subarrays-with-k-different-integers-lc-992) | Patterns 16-20 |
 
----
+--
 
 # The One Sentence That Unlocks All Sliding Window Problems
 
 > **"Maintain a WINDOW of elements, EXPAND to explore, SHRINK to restore validity."**
 
----
+--
 
 # 🌟 ZERO TO HERO: Understanding Sliding Window
 
@@ -40,7 +40,7 @@ Slide right:
             New window
 ```
 
----
+--
 
 ## The 2 Types of Sliding Window
 
@@ -56,7 +56,7 @@ Window size changes based on a condition
 EXPAND to explore, SHRINK when invalid
 ```
 
----
+--
 
 ## The Master Decision Tree
 
@@ -83,7 +83,7 @@ EXPAND to explore, SHRINK when invalid
                     └────────┘ └─────┘ └─────┘
 ```
 
----
+--
 
 # CORE TEMPLATES
 
@@ -110,7 +110,7 @@ for (int right = 0; right < n; right++) {
 
 **Use when:** "subarray of size K", "every K elements"
 
----
+--
 
 ## Template 2: Variable Window - Find LONGEST
 
@@ -133,7 +133,7 @@ for (int right = 0; right < n; right++) {
 
 **Use when:** "longest substring with...", "maximum length..."
 
----
+--
 
 ## Template 3: Variable Window - Find SHORTEST
 
@@ -153,7 +153,7 @@ for (int right = 0; right < n; right++) {
 
 **Use when:** "minimum length subarray...", "shortest substring..."
 
----
+--
 
 ## Template 4: Variable Window - COUNT All Valid
 
@@ -175,7 +175,7 @@ for (int right = 0; right < n; right++) {
 
 **Use when:** "count subarrays with at most K..."
 
----
+--
 
 ## The "Exactly K" Trick 🔥
 
@@ -185,7 +185,7 @@ exactlyK(k) = atMostK(k) - atMostK(k-1)
 
 This is CRITICAL for problems like "exactly K distinct characters"!
 
----
+--
 
 # PATTERN 0: Maximum Sum Subarray of Size K
 
@@ -195,7 +195,7 @@ This is CRITICAL for problems like "exactly K distinct characters"!
 
 **Instant thought:** "Fixed window! Slide and track max."
 
----
+--
 
 ## The Mental Model
 
@@ -212,7 +212,7 @@ Window of size 3 sliding through array:
        └──────┘ sum = 9  ← Maximum!
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -281,7 +281,7 @@ Step 5: right=5, arr[5]=2
 Final: maxSum = 9 (window [5, 1, 3])
 ```
 
----
+--
 
 ## The Code
 
@@ -303,16 +303,16 @@ int maxSumSubarray(int[] arr, int k) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Starting max at 0 | Negative arrays fail | Use Integer.MIN_VALUE or first window |
 | Off-by-one in window size | Window too big/small | right >= k-1 means window has k elements |
 
----
+--
 
 # PATTERN 6: Longest Substring Without Repeating Characters (LC 3) ⭐⭐
 
@@ -322,7 +322,7 @@ int maxSumSubarray(int[] arr, int k) {
 
 **Instant thought:** "Variable window! Expand until duplicate, shrink until valid."
 
----
+--
 
 ## The Mental Model: "The Unique Guest List"
 
@@ -338,7 +338,7 @@ As guests arrive (expand window):
 Track the maximum party size you ever achieved.
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -379,7 +379,7 @@ Step 3: right=3, char='a'
 Final: maxLen = 3
 ```
 
----
+--
 
 ## The Code
 
@@ -407,16 +407,16 @@ int lengthOfLongestSubstring(String s) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Using if instead of while | Multiple duplicates | Use while loop |
 | Forgetting to add char after shrinking | Window state wrong | Add after while |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -435,7 +435,7 @@ int lengthOfLongestSubstring(String s) {
 
 **Memory phrase:** "Expand until duplicate, shrink until unique."
 
----
+--
 
 # PATTERN 13: Minimum Window Substring (LC 76) ⭐⭐⭐
 
@@ -445,7 +445,7 @@ int lengthOfLongestSubstring(String s) {
 
 **Instant thought:** "Variable window - SHORTEST! Shrink while valid."
 
----
+--
 
 ## The Mental Model: "The Shopping List"
 
@@ -460,7 +460,7 @@ Strategy:
 3. Track the shortest valid section
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -501,7 +501,7 @@ Step 5: right=5, char='C'
   
   SHRINK LOOP:
     minLen = 6, minStart = 0, window = "ADOBEC"
-    Remove 'A' at left=0: have[A]=0 < need[A]=1 → formed--
+    Remove 'A' at left=0: have[A]=0 < need[A]=1 → formed-
     formed = 2, left = 1
     formed ≠ required, stop shrinking
 
@@ -530,7 +530,7 @@ Step 10: right=10, char='A'
     
     ... continue shrinking ...
     
-    Remove 'B' at left=5: have[B]=1 < need[B]=1 → formed--
+    Remove 'B' at left=5: have[B]=1 < need[B]=1 → formed-
     formed = 2, left = 6
     Stop shrinking
 
@@ -560,7 +560,7 @@ Step 12: right=12, char='C'
     Remove 'E': not in need, left = 9
     Window size = 4 < minLen! Update: minLen = 4, minStart = 9
     Window = "BANC"
-    Remove 'B': have[B]=0 < need[B]=1 → formed--
+    Remove 'B': have[B]=0 < need[B]=1 → formed-
     formed = 2, left = 10
     Stop shrinking
 
@@ -570,7 +570,7 @@ Final: minLen = 4, minStart = 9
 Result: s.substring(9, 13) = "BANC"
 ```
 
----
+--
 
 ## The Code
 
@@ -610,7 +610,7 @@ String minWindow(String s, String t) {
             have.put(leftChar, have.get(leftChar) - 1);
             if (need.containsKey(leftChar) && 
                 have.get(leftChar) < need.get(leftChar)) {
-                formed--;
+                formed-;
             }
             left++;
         }
@@ -621,17 +621,17 @@ String minWindow(String s, String t) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Using == for Integer comparison | Reference comparison | Use .equals() |
 | Shrinking with if instead of while | Miss shorter windows | Use while |
 | Not handling "no solution" case | Return garbage | Check minLen == MAX_VALUE |
 
----
+--
 
 # PATTERN 16: Subarrays with K Different Integers (LC 992) ⭐⭐
 
@@ -641,7 +641,7 @@ String minWindow(String s, String t) {
 
 **Instant thought:** "Use the trick: exactlyK = atMostK(k) - atMostK(k-1)"
 
----
+--
 
 ## Visual Dry Run
 
@@ -730,7 +730,7 @@ Let me recount: indices (0,1), (1,2), (0,1,2), (1,2,3), (0,1,2,3), (2,3,4), (3,4
 The answer is 7 ✓
 ```
 
----
+--
 
 ## The Code
 
@@ -758,12 +758,12 @@ int atMostK(int[] nums, int k) {
 }
 ```
 
----
+--
 
 # MAANG Coverage Map
 
 | Pattern | Problem | Difficulty | Frequency |
-|---------|---------|------------|-----------|
+|-----|-----|------|------|
 | 0 | Max Sum Subarray K | Easy | ⭐⭐⭐ |
 | 6 | Longest Without Repeating (LC 3) | Medium | ⭐⭐⭐⭐⭐ |
 | 7 | Longest K Distinct (LC 340) | Medium | ⭐⭐⭐⭐ |
@@ -774,7 +774,7 @@ int atMostK(int[] nums, int k) {
 | 17 | Find All Anagrams (LC 438) | Medium | ⭐⭐⭐⭐ |
 | 18 | Sliding Window Maximum (LC 239) | Hard | ⭐⭐⭐⭐ |
 
----
+--
 
 # Mastery Checklist
 
@@ -792,7 +792,7 @@ int atMostK(int[] nums, int k) {
 - [ ] Sliding Window Maximum (LC 239)
 - [ ] Subarrays with K Different Integers (LC 992)
 
----
+--
 
 # Quick Reference Card
 
@@ -821,11 +821,11 @@ int atMostK(int[] nums, int k) {
 └─────────────────────────────────────────────────────────────┘
 ```
 
----
+--
 
 # ADDITIONAL DETAILED PATTERNS
 
----
+--
 
 # PATTERN 2: Sliding Window Maximum (LC 239) ⭐⭐
 
@@ -835,7 +835,7 @@ int atMostK(int[] nums, int k) {
 
 **Instant thought:** "Monotonic Deque! Keep decreasing order, front = max."
 
----
+--
 
 ## The Mental Model: "The Bouncer Line"
 
@@ -852,7 +852,7 @@ When the window slides:
 - The front is still the maximum for current window
 ```
 
----
+--
 
 ## Why Regular Max Doesn't Work
 
@@ -868,7 +868,7 @@ Example: Window [5, 3, 4], max = 5
 Monotonic Deque: O(n) total - each element enters/exits once
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -922,7 +922,7 @@ Step 4: Process nums[4] = 5
 Final Result: [3, 3, 5, 5, 6, 7]
 ```
 
----
+--
 
 ## The Code
 
@@ -958,17 +958,17 @@ int[] maxSlidingWindow(int[] nums, int k) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Storing values instead of indices | Can't check if element is outside window | Store indices |
 | Using < instead of <= for removal | Keep duplicates incorrectly | Use < for max, <= for unique |
 | Forgetting window size check | Access result before window ready | Check i >= k-1 |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -987,7 +987,7 @@ int[] maxSlidingWindow(int[] nums, int k) {
 
 **Memory phrase:** "Tall people kick out short people. Front is always tallest."
 
----
+--
 
 # PATTERN 3: Find All Anagrams in a String (LC 438) ⭐
 
@@ -997,7 +997,7 @@ int[] maxSlidingWindow(int[] nums, int k) {
 
 **Instant thought:** "Fixed window of size p.length! Compare frequency arrays."
 
----
+--
 
 ## The Mental Model: "The Ingredient Checker"
 
@@ -1015,7 +1015,7 @@ Window "bae" → {b:1, a:1, e:1} ≠ recipe
 ... and so on
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -1060,7 +1060,7 @@ Step 2: i=2, char='a'
 
 Step 3: i=3, char='e'
   Add 'e': sCount[4]++ → [1,1,1,0,1,...]
-  Remove s[i-windowSize] = s[0] = 'c': sCount[2]-- → [1,1,0,0,1,...]
+  Remove s[i-windowSize] = s[0] = 'c': sCount[2]- → [1,1,0,0,1,...]
   Window: c[bae]babacd
   
   Compare: sCount = [1,1,0,0,1,...] vs pCount = [1,1,1,...]
@@ -1070,7 +1070,7 @@ Step 3: i=3, char='e'
 
 Step 4: i=4, char='b'
   Add 'b': sCount[1]++ → [1,2,0,0,1,...]
-  Remove s[1] = 'b': sCount[1]-- → [1,1,0,0,1,...]
+  Remove s[1] = 'b': sCount[1]- → [1,1,0,0,1,...]
   Window: cb[aeb]abacd
   
   Compare: NO (missing c, has e)
@@ -1079,7 +1079,7 @@ Step 4: i=4, char='b'
 
 Step 5: i=5, char='a'
   Add 'a': sCount[0]++ → [2,1,0,0,1,...]
-  Remove s[2] = 'a': sCount[0]-- → [1,1,0,0,1,...]
+  Remove s[2] = 'a': sCount[0]- → [1,1,0,0,1,...]
   Window: cba[eba]bacd
   
   Compare: NO
@@ -1088,7 +1088,7 @@ Step 5: i=5, char='a'
 
 Step 6: i=6, char='b'
   Add 'b': sCount[1]++ → [1,2,0,0,1,...]
-  Remove s[3] = 'e': sCount[4]-- → [1,2,0,0,0,...]
+  Remove s[3] = 'e': sCount[4]- → [1,2,0,0,0,...]
   Window: cbae[bab]acd
   
   Compare: NO (b count is 2)
@@ -1097,7 +1097,7 @@ Step 6: i=6, char='b'
 
 Step 7: i=7, char='a'
   Add 'a': sCount[0]++ → [2,2,0,...]
-  Remove s[4] = 'b': sCount[1]-- → [2,1,0,...]
+  Remove s[4] = 'b': sCount[1]- → [2,1,0,...]
   Window: cbaeb[aba]cd
   
   Compare: NO
@@ -1106,7 +1106,7 @@ Step 7: i=7, char='a'
 
 Step 8: i=8, char='c'
   Add 'c': sCount[2]++ → [2,1,1,...]
-  Remove s[5] = 'a': sCount[0]-- → [1,1,1,...]
+  Remove s[5] = 'a': sCount[0]- → [1,1,1,...]
   Window: cbaeba[bac]d
   
   Compare: sCount = [1,1,1,...] vs pCount = [1,1,1,...]
@@ -1118,7 +1118,7 @@ Step 8: i=8, char='c'
 
 Step 9: i=9, char='d'
   Add 'd': sCount[3]++ → [1,1,1,1,...]
-  Remove s[6] = 'b': sCount[1]-- → [1,0,1,1,...]
+  Remove s[6] = 'b': sCount[1]- → [1,0,1,1,...]
   Window: cbaebab[acd]
   
   Compare: NO
@@ -1129,7 +1129,7 @@ Final: result = [0, 6]
 Anagrams found at indices 0 ("cba") and 6 ("bac")
 ```
 
----
+--
 
 ## The Code
 
@@ -1154,7 +1154,7 @@ List<Integer> findAnagrams(String s, String p) {
         
         // Remove left character when window exceeds size
         if (i >= windowSize) {
-            sCount[s.charAt(i - windowSize) - 'a']--;
+            sCount[s.charAt(i - windowSize) - 'a']-;
         }
         
         // Check if window matches (when window is ready)
@@ -1167,7 +1167,7 @@ List<Integer> findAnagrams(String s, String p) {
 }
 ```
 
----
+--
 
 ## Optimized Version (O(1) comparison)
 
@@ -1184,8 +1184,8 @@ List<Integer> findAnagrams(String s, String p) {
     
     for (int right = 0; right < s.length(); right++) {
         // Add right character
-        if (count[s.charAt(right) - 'a']-- > 0) {
-            required--;  // Found a needed character
+        if (count[s.charAt(right) - 'a']- > 0) {
+            required-;  // Found a needed character
         }
         
         // Shrink if window too big
@@ -1206,17 +1206,17 @@ List<Integer> findAnagrams(String s, String p) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Using HashMap (slower) | Array comparison is O(26) | Use int[26] array |
 | Off-by-one in window start | Wrong index in result | Use i - windowSize + 1 |
 | Comparing arrays with == | Reference comparison | Use Arrays.equals() |
 
----
+--
 
 # PATTERN 8: Longest Repeating Character Replacement (LC 424) ⭐⭐
 
@@ -1226,7 +1226,7 @@ List<Integer> findAnagrams(String s, String p) {
 
 **Instant thought:** "Variable window! Track maxFreq, shrink when replacements > k."
 
----
+--
 
 ## The Mental Model: "The Painting Budget"
 
@@ -1244,7 +1244,7 @@ Window "AABA": maxFreq=3 (A), size=4, repaints=4-3=1 ≤ k ✓
 Window "AABAB": maxFreq=3, size=5, repaints=5-3=2 > k=1 ✗ → shrink
 ```
 
----
+--
 
 ## The Key Insight (Why We Don't Decrease maxFreq)
 
@@ -1259,7 +1259,7 @@ So we keep maxFreq as a "high water mark" - only increase, never decrease.
 This is the KEY optimization that makes this O(n)!
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -1317,7 +1317,7 @@ right=4, char='B'
 Final maxLen = 4
 ```
 
----
+--
 
 ## The Code
 
@@ -1337,7 +1337,7 @@ int characterReplacement(String s, int k) {
         // If > k, we need to shrink
         int windowSize = right - left + 1;
         if (windowSize - maxFreq > k) {
-            freq[s.charAt(left) - 'A']--;
+            freq[s.charAt(left) - 'A']-;
             left++;
             // Note: We DON'T decrease maxFreq here!
         }
@@ -1349,17 +1349,17 @@ int characterReplacement(String s, int k) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Decreasing maxFreq when shrinking | Unnecessary, slows down | Keep maxFreq as high water mark |
 | Using while instead of if | Over-shrinks the window | Use if (shrink by 1 is enough) |
 | Using 'a' instead of 'A' | Wrong index for uppercase | Check if input is upper/lower |
 
----
+--
 
 ## Mind-Map Anchor
 
@@ -1377,7 +1377,7 @@ int characterReplacement(String s, int k) {
 
 **Memory phrase:** "Keep the majority, replace the rest. maxFreq only goes up."
 
----
+--
 
 # PATTERN 10: Minimum Size Subarray Sum (LC 209) ⭐
 
@@ -1387,7 +1387,7 @@ int characterReplacement(String s, int k) {
 
 **Instant thought:** "Variable window - SHORTEST! Shrink while valid."
 
----
+--
 
 ## The Mental Model
 
@@ -1401,7 +1401,7 @@ This is the OPPOSITE of "longest" problems:
 Why? Because we want the SMALLEST valid window.
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -1490,7 +1490,7 @@ Final: minLen = 2
 Shortest subarray: [4, 3] with sum = 7
 ```
 
----
+--
 
 ## The Code
 
@@ -1515,17 +1515,17 @@ int minSubArrayLen(int target, int[] nums) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Shrinking while invalid | That's for LONGEST problems | Shrink while VALID |
 | Returning minLen directly | Might be MAX_VALUE if no solution | Check and return 0 |
 | Using if instead of while | Miss shorter valid windows | Use while to keep shrinking |
 
----
+--
 
 # PATTERN 12: Subarray Product Less Than K (LC 713) ⭐
 
@@ -1535,7 +1535,7 @@ int minSubArrayLen(int target, int[] nums) {
 
 **Instant thought:** "Variable window - COUNT! Each valid window adds (right-left+1) subarrays."
 
----
+--
 
 ## The Key Insight: Counting Subarrays
 
@@ -1553,7 +1553,7 @@ Example: Window [2, 3, 4] (indices 1-3)
   Count = 3 - 1 + 1 = 3 ✓
 ```
 
----
+--
 
 ## Visual Dry Run
 
@@ -1618,7 +1618,7 @@ All 8 subarrays with product < 100:
 [10], [5], [10,5], [2], [5,2], [6], [2,6], [5,2,6]
 ```
 
----
+--
 
 ## The Code
 
@@ -1647,16 +1647,16 @@ int numSubarrayProductLessThanK(int[] nums, int k) {
 }
 ```
 
----
+--
 
 ## Common Traps
 
 | Trap | Why Wrong | Fix |
-|------|-----------|-----|
+|---|------|---|
 | Not handling k <= 1 | Division issues, wrong count | Return 0 early |
 | Counting wrong | Miss the formula | count += right - left + 1 |
 | Integer overflow | Product can get huge | Use long if needed |
 
----
+--
 
 *End of Sliding Window Patterns Deep Dive*
