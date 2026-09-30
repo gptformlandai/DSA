@@ -2,18 +2,61 @@
 
 --
 
-# INDEX
+# INDEX — Quick Navigation (49 Patterns)
 
-| Category | Patterns |
-|-----|-----|
-| [Core Concepts](#core-templates) | BFS vs DFS, Templates |
-| [Matrix/Grid](#pattern-0-number-of-islands-lc-200) | Patterns 0-8 |
-| [Graph Traversal](#pattern-9-course-schedule-lc-207) | Patterns 9-14 |
-| [Shortest Path](#pattern-15-word-ladder-lc-127) | Patterns 15-18 |
-| [Advanced](#additional-detailed-patterns) | Patterns 19-22 |
+| # | Pattern | Quick Link |
+|---|---------|------------|
+| 0 | Number of Islands (LC 200) | [Jump](#pattern-0-number-of-islands-lc-200) |
+| 1 | Max Area of Island (LC 695) | [Jump](#pattern-1-max-area-of-island-lc-695) |
+| 3 | Rotting Oranges (LC 994) | [Jump](#pattern-3-rotting-oranges-lc-994) |
+| 4 | Pacific Atlantic Water Flow (LC 417) | [Jump](#pattern-4-pacific-atlantic-water-flow-lc-417) |
+| 6 | Shortest Path in Binary Matrix (LC 1091) | [Jump](#pattern-6-shortest-path-in-binary-matrix-lc-1091) |
+| 9 | Course Schedule (LC 207) | [Jump](#pattern-9-course-schedule-lc-207) |
+| 10 | Word Search (LC 79) | [Jump](#pattern-10-word-search-lc-79) |
+| 10 | Number of Islands (LC 200) | [Jump](#pattern-10-number-of-islands-lc-200) |
+| 11 | Rotting Oranges (LC 994) - Multi-Source BFS | [Jump](#pattern-11-rotting-oranges-lc-994-multi-source-bfs) |
+| 12 | Pacific Atlantic Water Flow (LC 417) | [Jump](#pattern-12-pacific-atlantic-water-flow-lc-417) |
+| 13 | Shortest Path in Binary Matrix (LC 1091) | [Jump](#pattern-13-shortest-path-in-binary-matrix-lc-1091) |
+| 14 | Clone Graph (LC 133) | [Jump](#pattern-14-clone-graph-lc-133) |
+| 15 | Word Ladder (LC 127) | [Jump](#pattern-15-word-ladder-lc-127) |
+| 15 | Course Schedule (LC 207) - Cycle Detection | [Jump](#pattern-15-course-schedule-lc-207-cycle-detection) |
+| 16 | Course Schedule II (LC 210) | [Jump](#pattern-16-course-schedule-ii-lc-210) |
+| 16 | Course Schedule II (LC 210) - Topological Sort | [Jump](#pattern-16-course-schedule-ii-lc-210-topological-sort) |
+| 17 | Is Graph Bipartite (LC 785) | [Jump](#pattern-17-is-graph-bipartite-lc-785) |
+| 18 | Alien Dictionary (LC 269) | [Jump](#pattern-18-alien-dictionary-lc-269) |
+| 19 | Word Ladder (LC 127) | [Jump](#pattern-19-word-ladder-lc-127) |
+| 19 | Surrounded Regions (LC 130) | [Jump](#pattern-19-surrounded-regions-lc-130) |
+| 20 | Walls and Gates (LC 286) - Multi-Source BFS | [Jump](#pattern-20-walls-and-gates-lc-286-multi-source-bfs) |
+| 21 | 01 Matrix (LC 542) | [Jump](#pattern-21-01-matrix-lc-542) |
+| 22 | Shortest Bridge (LC 934) | [Jump](#pattern-22-shortest-bridge-lc-934) |
+| 23 | Evaluate Division (LC 399) | [Jump](#pattern-23-evaluate-division-lc-399) |
+| 24 | Longest Increasing Path in Matrix (LC 329) | [Jump](#pattern-24-longest-increasing-path-in-matrix-lc-329) |
+| 25 | Topological Sort (Kahn's Algorithm) | [Jump](#pattern-25-topological-sort-kahns-algorithm) |
+| 25 | Redundant Connection (LC 684) | [Jump](#pattern-25-redundant-connection-lc-684) |
+| 26 | Graph Valid Tree (LC 261) | [Jump](#pattern-26-graph-valid-tree-lc-261) |
+| 27 | Accounts Merge (LC 721) | [Jump](#pattern-27-accounts-merge-lc-721) |
+| 28 | Network Delay Time (LC 743) - Dijkstra | [Jump](#pattern-28-network-delay-time-lc-743-dijkstra) |
+| 29 | Cheapest Flights K Stops (LC 787) - Bellman-Ford | [Jump](#pattern-29-cheapest-flights-k-stops-lc-787-bellman-ford) |
+| 30 | Word Ladder (LC 127) | [Jump](#pattern-30-word-ladder-lc-127) |
+| 31 | Critical Connections (LC 1192) - Bridges | [Jump](#pattern-31-critical-connections-lc-1192-bridges) |
+| 32 | Reconstruct Itinerary (LC 332) - Eulerian Path | [Jump](#pattern-32-reconstruct-itinerary-lc-332-eulerian-path) |
+| 33 | Flood Fill (LC 733) | [Jump](#pattern-33-flood-fill-lc-733) |
+| 34 | Word Search II (LC 212) - Trie + DFS | [Jump](#pattern-34-word-search-ii-lc-212-trie-dfs) |
+| 35 | Number of Provinces (LC 547) | [Jump](#pattern-35-number-of-provinces-lc-547) |
+| 36 | Keys and Rooms (LC 841) | [Jump](#pattern-36-keys-and-rooms-lc-841) |
+| 37 | Possible Bipartition (LC 886) | [Jump](#pattern-37-possible-bipartition-lc-886) |
+| 38 | Find Eventual Safe States (LC 802) | [Jump](#pattern-38-find-eventual-safe-states-lc-802) |
+| 39 | Minimum Height Trees (LC 310) | [Jump](#pattern-39-minimum-height-trees-lc-310) |
+| 40 | Shortest Path with Obstacles Elimination (LC 1293) | [Jump](#pattern-40-shortest-path-with-obstacles-elimination-lc-1293) |
+| 41 | Path With Minimum Effort (LC 1631) | [Jump](#pattern-41-path-with-minimum-effort-lc-1631) |
+| 42 | Swim in Rising Water (LC 778) | [Jump](#pattern-42-swim-in-rising-water-lc-778) |
+| 43 | All Paths From Source to Target (LC 797) | [Jump](#pattern-43-all-paths-from-source-to-target-lc-797) |
+| 44 | Most Stones Removed (LC 947) | [Jump](#pattern-44-most-stones-removed-lc-947) |
+| 45 | Unique Paths III (LC 980) | [Jump](#pattern-45-unique-paths-iii-lc-980) |
+| 46 | Parallel Courses (LC 1136) | [Jump](#pattern-46-parallel-courses-lc-1136) |
+| 47 | Redundant Connection II (LC 685) - Directed Graph | [Jump](#pattern-47-redundant-connection-ii-lc-685-directed-graph) |
 
---
-
+---
 # The One Sentence That Unlocks All Graph Problems
 
 > **"BFS for SHORTEST PATH, DFS for EXPLORING ALL PATHS."**

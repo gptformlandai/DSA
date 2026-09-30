@@ -18,7 +18,7 @@
 | # | Pattern | LeetCode |
 |--|-----|-----|
 | 0 | [Single Number (XOR)](#pattern-0-single-number-leetcode-136) | 136 |
-| 1 | [Number of 1 Bits](#pattern-1-number-of-1-bits--hamming-weight-leetcode-191) | 191 |
+| 1 | [Number of 1 Bits](#pattern-1-number-of-1-bits-hamming-weight-leetcode-191) | 191 |
 | 2 | [Counting Bits](#pattern-2-counting-bits-leetcode-338) | 338 |
 | 3 | [Reverse Bits](#pattern-3-reverse-bits-leetcode-190) | 190 |
 | 4 | [Missing Number](#pattern-4-missing-number-leetcode-268) | 268 |

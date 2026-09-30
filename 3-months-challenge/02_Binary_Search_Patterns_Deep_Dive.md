@@ -55,7 +55,7 @@
 |--|-----|-----|
 | 17 | [Median of Two Sorted Arrays](#pattern-17-median-of-two-sorted-arrays-leetcode-4) | 4 |
 | 18 | [Find K-th Smallest Pair Distance](#pattern-18-find-k-th-smallest-pair-distance-leetcode-719) | 719 |
-| 19 | [Aggressive Cows / Maximize Minimum Distance](#pattern-19-aggressive-cows--maximize-minimum-distance-classic) | Classic |
+| 19 | [Aggressive Cows / Maximize Minimum Distance](#pattern-19-aggressive-cows-maximize-minimum-distance-classic) | Classic |
 
 ## Reference Sections
 | Section |

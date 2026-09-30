@@ -1,4 +1,26 @@
 # Matrix & 2D Arrays Patterns Deep Dive
+
+# INDEX — Quick Navigation (15 Patterns)
+
+| # | Pattern | Quick Link |
+|---|---------|------------|
+| 1 | Spiral Matrix (LC 54) | [Jump](#pattern-1-spiral-matrix-lc-54) |
+| 2 | Spiral Matrix II (LC 59) | [Jump](#pattern-2-spiral-matrix-ii-lc-59) |
+| 3 | Diagonal Traverse (LC 498) | [Jump](#pattern-3-diagonal-traverse-lc-498) |
+| 4 | Rotate Image 90° Clockwise (LC 48) | [Jump](#pattern-4-rotate-image-90-clockwise-lc-48) |
+| 5 | Set Matrix Zeroes (LC 73) | [Jump](#pattern-5-set-matrix-zeroes-lc-73) |
+| 6 | Search a 2D Matrix (LC 74) | [Jump](#pattern-6-search-a-2d-matrix-lc-74) |
+| 7 | Search a 2D Matrix II (LC 240) | [Jump](#pattern-7-search-a-2d-matrix-ii-lc-240) |
+| 8 | Range Sum Query 2D - Immutable (LC 304) | [Jump](#pattern-8-range-sum-query-2d-immutable-lc-304) |
+| 9 | Number of Islands (LC 200) | [Jump](#pattern-9-number-of-islands-lc-200) |
+| 10 | Max Area of Island (LC 695) | [Jump](#pattern-10-max-area-of-island-lc-695) |
+| 11 | Flood Fill (LC 733) | [Jump](#pattern-11-flood-fill-lc-733) |
+| 12 | Rotting Oranges (LC 994) | [Jump](#pattern-12-rotting-oranges-lc-994) |
+| 13 | 01 Matrix (LC 542) | [Jump](#pattern-13-01-matrix-lc-542) |
+| 14 | Valid Sudoku (LC 36) | [Jump](#pattern-14-valid-sudoku-lc-36) |
+| 15 | Kth Smallest Element in Sorted Matrix (LC 378) | [Jump](#pattern-15-kth-smallest-element-in-sorted-matrix-lc-378) |
+
+---
 ## Junior Dev's Complete Guide to L5 MAANG Matrix Mastery
 
 --

@@ -1,4 +1,23 @@
 # Segment Tree & Fenwick Tree Patterns Deep Dive
+
+# INDEX — Quick Navigation (12 Patterns)
+
+| # | Pattern | Quick Link |
+|---|---------|------------|
+| 1 | Range Sum Query - Mutable (LC 307) | [Jump](#pattern-1-range-sum-query-mutable-lc-307) |
+| 2 | Count of Smaller Numbers After Self (LC 315) | [Jump](#pattern-2-count-of-smaller-numbers-after-self-lc-315) |
+| 3 | Count Inversions (Classic) | [Jump](#pattern-3-count-inversions-classic) |
+| 4 | Range Sum Query - Mutable (Segment Tree Version) | [Jump](#pattern-4-range-sum-query-mutable-segment-tree-version) |
+| 5 | Range Minimum Query (RMQ) | [Jump](#pattern-5-range-minimum-query-rmq) |
+| 6 | Lazy Propagation (Range Updates) | [Jump](#pattern-6-lazy-propagation-range-updates) |
+| 7 | Range Maximum Query with Point Update | [Jump](#pattern-7-range-maximum-query-with-point-update) |
+| 8 | Count of Range Sum (LC 327) | [Jump](#pattern-8-count-of-range-sum-lc-327) |
+| 9 | Falling Squares (LC 699) | [Jump](#pattern-9-falling-squares-lc-699) |
+| 10 | My Calendar III (LC 732) | [Jump](#pattern-10-my-calendar-iii-lc-732) |
+| 11 | Range GCD Query | [Jump](#pattern-11-range-gcd-query) |
+| 12 | 2D Segment Tree (Range Sum 2D - Mutable) | [Jump](#pattern-12-2d-segment-tree-range-sum-2d-mutable) |
+
+---
 ## Junior Dev's Complete Guide to L5 MAANG Range Query Mastery
 
 --

@@ -2,18 +2,21 @@
 
 --
 
-# INDEX
+# INDEX — Quick Navigation (9 Patterns)
 
-| Category | Patterns |
-|-----|-----|
-| [Core Concepts](#core-templates) | Templates, Decision Tree |
-| [Fixed Window](#pattern-0-maximum-sum-subarray-of-size-k) | Patterns 0-5 |
-| [Variable - Longest](#pattern-6-longest-substring-without-repeating-characters-lc-3) | Patterns 6-12 |
-| [Variable - Shortest](#pattern-13-minimum-window-substring-lc-76) | Patterns 13-15 |
-| [Variable - Count](#pattern-16-subarrays-with-k-different-integers-lc-992) | Patterns 16-20 |
+| # | Pattern | Quick Link |
+|---|---------|------------|
+| 0 | Maximum Sum Subarray of Size K | [Jump](#pattern-0-maximum-sum-subarray-of-size-k) |
+| 2 | Sliding Window Maximum (LC 239) | [Jump](#pattern-2-sliding-window-maximum-lc-239) |
+| 3 | Find All Anagrams in a String (LC 438) | [Jump](#pattern-3-find-all-anagrams-in-a-string-lc-438) |
+| 6 | Longest Substring Without Repeating Characters (LC 3) | [Jump](#pattern-6-longest-substring-without-repeating-characters-lc-3) |
+| 8 | Longest Repeating Character Replacement (LC 424) | [Jump](#pattern-8-longest-repeating-character-replacement-lc-424) |
+| 10 | Minimum Size Subarray Sum (LC 209) | [Jump](#pattern-10-minimum-size-subarray-sum-lc-209) |
+| 12 | Subarray Product Less Than K (LC 713) | [Jump](#pattern-12-subarray-product-less-than-k-lc-713) |
+| 13 | Minimum Window Substring (LC 76) | [Jump](#pattern-13-minimum-window-substring-lc-76) |
+| 16 | Subarrays with K Different Integers (LC 992) | [Jump](#pattern-16-subarrays-with-k-different-integers-lc-992) |
 
---
-
+---
 # The One Sentence That Unlocks All Sliding Window Problems
 
 > **"Maintain a WINDOW of elements, EXPAND to explore, SHRINK to restore validity."**

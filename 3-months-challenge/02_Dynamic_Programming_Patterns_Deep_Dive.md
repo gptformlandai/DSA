@@ -1,4 +1,61 @@
 # Dynamic Programming Patterns Deep Dive
+
+# INDEX — Quick Navigation (50 Patterns)
+
+| # | Pattern | Quick Link |
+|---|---------|------------|
+| 1 | Climbing Stairs (LC 70) | [Jump](#pattern-1-climbing-stairs-lc-70) |
+| 2 | House Robber (LC 198) | [Jump](#pattern-2-house-robber-lc-198) |
+| 3 | House Robber II (LC 213) - Circular | [Jump](#pattern-3-house-robber-ii-lc-213-circular) |
+| 4 | Jump Game (LC 55) | [Jump](#pattern-4-jump-game-lc-55) |
+| 5 | Jump Game II (LC 45) | [Jump](#pattern-5-jump-game-ii-lc-45) |
+| 6 | Decode Ways (LC 91) | [Jump](#pattern-6-decode-ways-lc-91) |
+| 7 | Maximum Subarray (LC 53) - Kadane's | [Jump](#pattern-7-maximum-subarray-lc-53-kadanes) |
+| 8 | Maximum Product Subarray (LC 152) | [Jump](#pattern-8-maximum-product-subarray-lc-152) |
+| 9 | Perfect Squares (LC 279) | [Jump](#pattern-9-perfect-squares-lc-279) |
+| 10 | 0/1 Knapsack (Classic) | [Jump](#pattern-10-01-knapsack-classic) |
+| 11 | Partition Equal Subset Sum (LC 416) | [Jump](#pattern-11-partition-equal-subset-sum-lc-416) |
+| 12 | Target Sum (LC 494) | [Jump](#pattern-12-target-sum-lc-494) |
+| 13 | Coin Change (LC 322) - Unbounded | [Jump](#pattern-13-coin-change-lc-322-unbounded) |
+| 14 | Coin Change II (LC 518) - Count Ways | [Jump](#pattern-14-coin-change-ii-lc-518-count-ways) |
+| 15 | Ones and Zeroes (LC 474) | [Jump](#pattern-15-ones-and-zeroes-lc-474) |
+| 16 | Unique Paths (LC 62) | [Jump](#pattern-16-unique-paths-lc-62) |
+| 17 | Minimum Path Sum (LC 64) | [Jump](#pattern-17-minimum-path-sum-lc-64) |
+| 18 | Longest Common Subsequence (LC 1143) | [Jump](#pattern-18-longest-common-subsequence-lc-1143) |
+| 19 | Edit Distance (LC 72) | [Jump](#pattern-19-edit-distance-lc-72) |
+| 20 | Longest Palindromic Subsequence (LC 516) | [Jump](#pattern-20-longest-palindromic-subsequence-lc-516) |
+| 21 | Maximal Square (LC 221) | [Jump](#pattern-21-maximal-square-lc-221) |
+| 22 | Longest Increasing Subsequence (LC 300) | [Jump](#pattern-22-longest-increasing-subsequence-lc-300) |
+| 23 | Russian Doll Envelopes (LC 354) | [Jump](#pattern-23-russian-doll-envelopes-lc-354) |
+| 24 | Burst Balloons (LC 312) | [Jump](#pattern-24-burst-balloons-lc-312) |
+| 25 | Palindrome Partitioning II (LC 132) | [Jump](#pattern-25-palindrome-partitioning-ii-lc-132) |
+| 26 | Stone Game (LC 877) | [Jump](#pattern-26-stone-game-lc-877) |
+| 27 | Partition to K Equal Sum Subsets (LC 698) - Bitmask | [Jump](#pattern-27-partition-to-k-equal-sum-subsets-lc-698-bitmask) |
+| 28 | Traveling Salesman Problem (TSP) | [Jump](#pattern-28-traveling-salesman-problem-tsp) |
+| 29 | Best Time to Buy and Sell Stock (LC 121) | [Jump](#pattern-29-best-time-to-buy-and-sell-stock-lc-121) |
+| 30 | Best Time to Buy and Sell Stock II (LC 122) | [Jump](#pattern-30-best-time-to-buy-and-sell-stock-ii-lc-122) |
+| 31 | Best Time to Buy and Sell Stock III (LC 123) | [Jump](#pattern-31-best-time-to-buy-and-sell-stock-iii-lc-123) |
+| 32 | Best Time to Buy and Sell Stock IV (LC 188) | [Jump](#pattern-32-best-time-to-buy-and-sell-stock-iv-lc-188) |
+| 33 | Best Time to Buy and Sell Stock with Cooldown (LC 309) | [Jump](#pattern-33-best-time-to-buy-and-sell-stock-with-cooldown-lc-309) |
+| 34 | Word Break (LC 139) | [Jump](#pattern-34-word-break-lc-139) |
+| 35 | Regular Expression Matching (LC 10) | [Jump](#pattern-35-regular-expression-matching-lc-10) |
+| 36 | Wildcard Matching (LC 44) | [Jump](#pattern-36-wildcard-matching-lc-44) |
+| 37 | Distinct Subsequences (LC 115) | [Jump](#pattern-37-distinct-subsequences-lc-115) |
+| 38 | Interleaving String (LC 97) | [Jump](#pattern-38-interleaving-string-lc-97) |
+| 39 | Triangle (LC 120) | [Jump](#pattern-39-triangle-lc-120) |
+| 40 | Dungeon Game (LC 174) | [Jump](#pattern-40-dungeon-game-lc-174) |
+| 41 | Unique Paths II (LC 63) - With Obstacles | [Jump](#pattern-41-unique-paths-ii-lc-63-with-obstacles) |
+| 42 | Number of LIS (LC 673) | [Jump](#pattern-42-number-of-lis-lc-673) |
+| 43 | Longest Valid Parentheses (LC 32) | [Jump](#pattern-43-longest-valid-parentheses-lc-32) |
+| 44 | Delete and Earn (LC 740) | [Jump](#pattern-44-delete-and-earn-lc-740) |
+| 45 | Min Cost Climbing Stairs (LC 746) | [Jump](#pattern-45-min-cost-climbing-stairs-lc-746) |
+| 46 | Stock with Transaction Fee (LC 714) | [Jump](#pattern-46-stock-with-transaction-fee-lc-714) |
+| 47 | Paint House (LC 256) | [Jump](#pattern-47-paint-house-lc-256) |
+| 48 | Matrix Chain Multiplication | [Jump](#pattern-48-matrix-chain-multiplication) |
+| 49 | Stone Game II (LC 1140) | [Jump](#pattern-49-stone-game-ii-lc-1140) |
+| 50 | Cherry Pickup (LC 741) | [Jump](#pattern-50-cherry-pickup-lc-741) |
+
+---
 ## Junior Dev's Complete Guide to L5 MAANG DP Mastery
 
 --

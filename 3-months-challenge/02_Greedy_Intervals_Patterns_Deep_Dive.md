@@ -1,4 +1,35 @@
 # Greedy & Intervals Patterns Deep Dive
+
+# INDEX — Quick Navigation (24 Patterns)
+
+| # | Pattern | Quick Link |
+|---|---------|------------|
+| 1 | Merge Intervals (LC 56) | [Jump](#pattern-1-merge-intervals-lc-56) |
+| 2 | Insert Interval (LC 57) | [Jump](#pattern-2-insert-interval-lc-57) |
+| 3 | Non-overlapping Intervals (LC 435) | [Jump](#pattern-3-non-overlapping-intervals-lc-435) |
+| 4 | Meeting Rooms (LC 252) | [Jump](#pattern-4-meeting-rooms-lc-252) |
+| 5 | Meeting Rooms II (LC 253) | [Jump](#pattern-5-meeting-rooms-ii-lc-253) |
+| 6 | Minimum Arrows to Burst Balloons (LC 452) | [Jump](#pattern-6-minimum-arrows-to-burst-balloons-lc-452) |
+| 7 | Interval List Intersections (LC 986) | [Jump](#pattern-7-interval-list-intersections-lc-986) |
+| 8 | Gas Station (LC 134) | [Jump](#pattern-8-gas-station-lc-134) |
+| 9 | Candy (LC 135) | [Jump](#pattern-9-candy-lc-135) |
+| 10 | Partition Labels (LC 763) | [Jump](#pattern-10-partition-labels-lc-763) |
+| 11 | Jump Game (LC 55) - Greedy | [Jump](#pattern-11-jump-game-lc-55-greedy) |
+| 12 | Jump Game II (LC 45) - Greedy | [Jump](#pattern-12-jump-game-ii-lc-45-greedy) |
+| 13 | Task Scheduler (LC 621) | [Jump](#pattern-13-task-scheduler-lc-621) |
+| 14 | Queue Reconstruction by Height (LC 406) | [Jump](#pattern-14-queue-reconstruction-by-height-lc-406) |
+| 15 | Minimum Platforms (GFG) | [Jump](#pattern-15-minimum-platforms-gfg) |
+| 16 | Activity Selection (GFG) | [Jump](#pattern-16-activity-selection-gfg) |
+| 17 | Job Sequencing (GFG) | [Jump](#pattern-17-job-sequencing-gfg) |
+| 18 | Boats to Save People (LC 881) | [Jump](#pattern-18-boats-to-save-people-lc-881) |
+| 19 | Assign Cookies (LC 455) | [Jump](#pattern-19-assign-cookies-lc-455) |
+| 20 | Lemonade Change (LC 860) | [Jump](#pattern-20-lemonade-change-lc-860) |
+| 21 | Maximum Units on a Truck (LC 1710) | [Jump](#pattern-21-maximum-units-on-a-truck-lc-1710) |
+| 22 | Minimum Cost to Connect Sticks (LC 1167) | [Jump](#pattern-22-minimum-cost-to-connect-sticks-lc-1167) |
+| 23 | Reorganize String (LC 767) | [Jump](#pattern-23-reorganize-string-lc-767) |
+| 24 | Two City Scheduling (LC 1029) | [Jump](#pattern-24-two-city-scheduling-lc-1029) |
+
+---
 ## Junior Dev's Complete Guide to L5 MAANG Greedy Mastery
 
 --

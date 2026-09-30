@@ -1,4 +1,33 @@
 # Trie & String Algorithms Patterns Deep Dive
+
+# INDEX — Quick Navigation (22 Patterns)
+
+| # | Pattern | Quick Link |
+|---|---------|------------|
+| 1 | Implement Trie (LC 208) | [Jump](#pattern-1-implement-trie-lc-208) |
+| 2 | Design Add and Search Words (LC 211) | [Jump](#pattern-2-design-add-and-search-words-lc-211) |
+| 3 | Word Search II (LC 212) | [Jump](#pattern-3-word-search-ii-lc-212) |
+| 4 | Replace Words (LC 648) | [Jump](#pattern-4-replace-words-lc-648) |
+| 5 | Design Search Autocomplete System (LC 642) | [Jump](#pattern-5-design-search-autocomplete-system-lc-642) |
+| 6 | Longest Word in Dictionary (LC 720) | [Jump](#pattern-6-longest-word-in-dictionary-lc-720) |
+| 7 | Maximum XOR of Two Numbers (LC 421) | [Jump](#pattern-7-maximum-xor-of-two-numbers-lc-421) |
+| 8 | KMP Algorithm - strStr (LC 28) | [Jump](#pattern-8-kmp-algorithm-strstr-lc-28) |
+| 9 | Rabin-Karp - Rolling Hash | [Jump](#pattern-9-rabin-karp-rolling-hash) |
+| 10 | Longest Palindromic Substring (LC 5) | [Jump](#pattern-10-longest-palindromic-substring-lc-5) |
+| 11 | Shortest Palindrome (LC 214) | [Jump](#pattern-11-shortest-palindrome-lc-214) |
+| 12 | Repeated Substring Pattern (LC 459) | [Jump](#pattern-12-repeated-substring-pattern-lc-459) |
+| 13 | Palindrome Pairs (LC 336) | [Jump](#pattern-13-palindrome-pairs-lc-336) |
+| 14 | Map Sum Pairs (LC 677) | [Jump](#pattern-14-map-sum-pairs-lc-677) |
+| 15 | Prefix and Suffix Search (LC 745) | [Jump](#pattern-15-prefix-and-suffix-search-lc-745) |
+| 16 | Stream of Characters (LC 1032) | [Jump](#pattern-16-stream-of-characters-lc-1032) |
+| 17 | Concatenated Words (LC 472) | [Jump](#pattern-17-concatenated-words-lc-472) |
+| 18 | Z-Algorithm | [Jump](#pattern-18-z-algorithm) |
+| 19 | Longest Happy Prefix (LC 1392) | [Jump](#pattern-19-longest-happy-prefix-lc-1392) |
+| 20 | Longest Duplicate Substring (LC 1044) | [Jump](#pattern-20-longest-duplicate-substring-lc-1044) |
+| 21 | Count Palindromic Substrings (LC 647) | [Jump](#pattern-21-count-palindromic-substrings-lc-647) |
+| 22 | Repeated DNA Sequences (LC 187) | [Jump](#pattern-22-repeated-dna-sequences-lc-187) |
+
+---
 ## Junior Dev's Complete Guide to L5 MAANG String Mastery
 
 --

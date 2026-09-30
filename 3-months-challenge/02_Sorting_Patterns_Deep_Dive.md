@@ -2,18 +2,22 @@
 
 --
 
-# INDEX
+# INDEX — Quick Navigation (10 Patterns)
 
-| Category | Patterns |
-|-----|-----|
-| [Core Algorithms](#the-7-sorting-algorithms-you-must-know) | Quick, Merge, Heap, Counting, etc. |
-| [Fundamental](#pattern-0-sort-colors-lc-75) | Patterns 0-4 |
-| [Quick Select](#pattern-5-kth-largest-element-lc-215) | Patterns 5-8 |
-| [Intervals](#pattern-9-merge-intervals-lc-56) | Patterns 9-14 |
-| [Custom Sort](#pattern-4-largest-number-lc-179) | Patterns 15-18 |
+| # | Pattern | Quick Link |
+|---|---------|------------|
+| 0 | Sort Colors (LC 75) | [Jump](#pattern-0-sort-colors-lc-75) |
+| 2 | Sort List (LC 148) | [Jump](#pattern-2-sort-list-lc-148) |
+| 4 | Largest Number (LC 179) | [Jump](#pattern-4-largest-number-lc-179) |
+| 5 | Kth Largest Element (LC 215) | [Jump](#pattern-5-kth-largest-element-lc-215) |
+| 6 | Top K Frequent Elements (LC 347) | [Jump](#pattern-6-top-k-frequent-elements-lc-347) |
+| 9 | Merge Intervals (LC 56) | [Jump](#pattern-9-merge-intervals-lc-56) |
+| 10 | Meeting Rooms II (LC 253) | [Jump](#pattern-10-meeting-rooms-ii-lc-253) |
+| 11 | Non-overlapping Intervals (LC 435) | [Jump](#pattern-11-non-overlapping-intervals-lc-435) |
+| 15 | Queue Reconstruction by Height (LC 406) | [Jump](#pattern-15-queue-reconstruction-by-height-lc-406) |
+| 18 | Count of Smaller Numbers After Self (LC 315) | [Jump](#pattern-18-count-of-smaller-numbers-after-self-lc-315) |
 
---
-
+---
 # The One Sentence That Unlocks All Sorting Problems
 
 > **"Sorting transforms CHAOS into ORDER — enabling binary search, two pointers, and greedy approaches."**
