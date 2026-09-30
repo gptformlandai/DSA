@@ -1,9 +1,9 @@
-# 🎯 DSA Master Index - L5 MAANG Complete Guide
+# DSA Master Index - L5 MAANG Complete Guide
 ## Junior Dev's 3-Month Challenge - 393+ Patterns
 
 --
 
-# 📊 Quick Stats
+# Quick Stats
 
 | Metric | Value |
 |----|----|
@@ -14,7 +14,7 @@
 
 --
 
-# 🗺️ NAVIGATION MAP
+# NAVIGATION MAP
 
 ## By Study Week (Recommended Order)
 
@@ -59,7 +59,7 @@
 
 --
 
-# 📚 TOPIC DEEP LINKS
+# TOPIC DEEP LINKS
 
 ## 1. [Prefix Sum Patterns](02_Prefix_Sum_Patterns_Deep_Dive.md) (20 Patterns)
 **Key Patterns:**
@@ -269,7 +269,7 @@
 
 --
 
-# 🎯 PATTERN RECOGNITION CHEAT SHEET
+# PATTERN RECOGNITION CHEAT SHEET
 
 ## Instant Pattern Triggers
 
@@ -296,7 +296,7 @@
 
 --
 
-# 📅 DAILY PRACTICE PLAN
+# DAILY PRACTICE PLAN
 
 ## Week Structure
 ```
@@ -319,7 +319,7 @@ Sunday:    Review + fill gaps
 
 --
 
-# 🏆 INTERVIEW DAY QUICK REVIEW
+# INTERVIEW DAY QUICK REVIEW
 
 ## 30-Minute Refresh Checklist
 
@@ -357,7 +357,7 @@ Sunday:    Review + fill gaps
 
 --
 
-# 📁 FILE STRUCTURE
+# FILE STRUCTURE
 
 ```
 3-months-challenge/
@@ -382,7 +382,7 @@ Sunday:    Review + fill gaps
 
 --
 
-# 🎉 YOU'RE READY!
+# YOU'RE READY!
 
 **Total Preparation:**
 - 16 comprehensive topic files

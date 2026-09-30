@@ -20,7 +20,7 @@
 
 --
 
-# 🌟 ZERO TO HERO: Understanding Sorting
+# ZERO TO HERO: Understanding Sorting
 
 ## Why Sorting Matters
 
@@ -161,7 +161,7 @@ void sortColors(int[] nums) {
 
 --
 
-# PATTERN 0: Sort Colors (LC 75) ⭐⭐
+# PATTERN 0: Sort Colors (LC 75)
 
 ## Pattern Recognition Signal
 
@@ -260,7 +260,7 @@ void sortColors(int[] nums) {
 
 --
 
-# PATTERN 5: Kth Largest Element (LC 215) ⭐⭐
+# PATTERN 5: Kth Largest Element (LC 215)
 
 ## Pattern Recognition Signal
 
@@ -383,7 +383,7 @@ int partition(int[] nums, int left, int right) {
 
 --
 
-# PATTERN 9: Merge Intervals (LC 56) ⭐⭐
+# PATTERN 9: Merge Intervals (LC 56)
 
 ## Pattern Recognition Signal
 
@@ -518,7 +518,7 @@ int[][] merge(int[][] intervals) {
 
 --
 
-# PATTERN 10: Meeting Rooms II (LC 253) ⭐⭐
+# PATTERN 10: Meeting Rooms II (LC 253)
 
 ## Pattern Recognition Signal
 
@@ -686,7 +686,7 @@ int minMeetingRooms(int[][] intervals) {
 
 --
 
-# PATTERN 2: Sort List (LC 148) ⭐
+# PATTERN 2: Sort List (LC 148)
 
 ## Pattern Recognition Signal
 
@@ -861,7 +861,7 @@ ListNode merge(ListNode l1, ListNode l2) {
 
 --
 
-# PATTERN 4: Largest Number (LC 179) ⭐
+# PATTERN 4: Largest Number (LC 179)
 
 ## Pattern Recognition Signal
 
@@ -987,7 +987,7 @@ String largestNumber(int[] nums) {
 
 --
 
-# PATTERN 6: Top K Frequent Elements (LC 347) ⭐⭐
+# PATTERN 6: Top K Frequent Elements (LC 347)
 
 ## Pattern Recognition Signal
 
@@ -1166,7 +1166,7 @@ int[] topKFrequent(int[] nums, int k) {
 
 --
 
-# PATTERN 11: Non-overlapping Intervals (LC 435) ⭐
+# PATTERN 11: Non-overlapping Intervals (LC 435)
 
 ## Pattern Recognition Signal
 
@@ -1327,7 +1327,7 @@ int eraseOverlapIntervals(int[][] intervals) {
 
 --
 
-# PATTERN 15: Queue Reconstruction by Height (LC 406) ⭐
+# PATTERN 15: Queue Reconstruction by Height (LC 406)
 
 ## Pattern Recognition Signal
 
@@ -1471,7 +1471,7 @@ int[][] reconstructQueue(int[][] people) {
 
 --
 
-# PATTERN 18: Count of Smaller Numbers After Self (LC 315) ⭐⭐
+# PATTERN 18: Count of Smaller Numbers After Self (LC 315)
 
 ## Pattern Recognition Signal
 

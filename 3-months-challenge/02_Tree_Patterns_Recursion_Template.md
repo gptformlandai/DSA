@@ -2,9 +2,9 @@
 
 --
 
-# 📑 INDEX — Quick Navigation (50 Patterns)
+# INDEX — Quick Navigation (50 Patterns)
 
-## 🎯 Core Concepts
+## Core Concepts
 | Section | Line |
 |-----|---|
 | [The "One Sentence That Unlocks All Tree Problems"](#the-one-sentence-that-unlocks-all-tree-problems) | 85 |
@@ -13,7 +13,7 @@
 
 --
 
-## 🌳 Foundation Patterns (0-17)
+## Foundation Patterns (0-17)
 
 | # | Pattern | LeetCode | Line |
 |--|-----|-----|---|
@@ -38,7 +38,7 @@
 
 --
 
-## 🆕 Extended Patterns (18-50) — L5 Complete Coverage
+## Extended Patterns (18-50) — L5 Complete Coverage
 
 ### BST Core Operations
 | # | Pattern | LeetCode | Line |
@@ -99,7 +99,7 @@
 
 --
 
-## 📚 Reference Sections
+## Reference Sections
 | Section | Line |
 |-----|---|
 | [Master Decision Tree](#the-master-decision-tree-pick-your-weapon-in-10-seconds) | 1327 |
@@ -109,7 +109,7 @@
 
 --
 
-## 🔍 Quick Find by Problem Type
+## Quick Find by Problem Type
 
 | If you need to... | Go to Pattern # |
 |----------|---------|
@@ -138,7 +138,7 @@
 
 --
 
-## 🧠 The "One Sentence That Unlocks All Tree Problems"
+## The "One Sentence That Unlocks All Tree Problems"
 
 > **Every tree problem is just asking: "What do I need from ABOVE me?" and "What do I need from BELOW me?"**
 
@@ -146,16 +146,16 @@ That's it. Once you figure out which direction the information flows, the code w
 
 --
 
-## 🎯 The TWO Pipes — The Entire Subject in Two Lines
+## The TWO Pipes — The Entire Subject in Two Lines
 
 Think of a tree like a company org chart. Information can flow in only TWO directions:
 
-### 📥 The DOWN Pipe (Parent → Child)
+### The DOWN Pipe (Parent → Child)
 **How it works:** Function PARAMETERS
 **When it happens:** BEFORE you visit children (pre-order)
 **Use when:** You need info from ancestors — "what's the max value seen so far on my path from the root?"
 
-### 📤 The UP Pipe (Child → Parent)  
+### The UP Pipe (Child → Parent)
 **How it works:** RETURN values
 **When it happens:** AFTER children finish (post-order)
 **Use when:** You need info from descendants — "how tall is my subtree?"
@@ -190,7 +190,7 @@ solve(node, [stuff from parent]):
 - **After-Call Logic (COMBINE):** Put together what my kids told me
 - **Return Values (going UP):** The answer I give to my parent
 
-### ⚠️ The #1 Mistake Everyone Makes
+### The #1 Mistake Everyone Makes
 
 > **Parameters only move info DOWNWARD. They do NOT bring values back up.**
 
@@ -215,7 +215,7 @@ Let's build you into a pro. One template, many faces.
 
 --
 
-## 🔑 The 6 Questions You Ask EVERY Time
+## The 6 Questions You Ask EVERY Time
 
 Your goal is **not** to memorize each problem. Your goal is to **figure out** the solution by asking the same 6 questions every time:
 
@@ -236,7 +236,7 @@ If you learn to ask these questions, you can walk up to ANY tree problem you've 
 
 *(Every other pattern is just a twist on this one. Master this and you're 60% done.)*
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** You're the CEO of a company. Someone asks "How many levels deep is our org chart?" You don't count it yourself. You turn to your two direct reports and ask: "How deep is YOUR team?" They each give you a number. You take the bigger one, add 1 for yourself, and report that up. Done.
 
@@ -411,7 +411,7 @@ Returning `1` for the base case instead of `0`. Remember: `null` is NOTHING — 
 
 *(The first "two-brained" pattern: the number you RETURN is different from the number you ANSWER. This single idea appears in half of all hard tree problems, so slow down here.)*
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Imagine you're finding the longest hiking trail in a mountain range. The trail can START anywhere and END anywhere — it doesn't have to go through the main peak. At each peak, you ask: "If the longest trail BENDS right here at me — going down my left slope, through me, and down my right slope — how long is it?"
 
@@ -458,7 +458,7 @@ Can you separate **"the value I return to my parent"** from **"the global answer
    **Answer:** **NO!** Return `1 + max(leftH, rightH)`, NOT `leftH + rightH`.
    **Why (THE WHOLE PATTERN):** My parent wants to extend a path THROUGH me and keep going up. But a path can't FORK — it can only use ONE of my arms. So I return just my taller arm plus myself. The `leftH+rightH` was a TERMINAL answer (the path ends by bending here); it can't be extended, so it never goes up.
 
-## ⚡ The Critical Difference
+## The Critical Difference
 
 ```
 ANSWER = leftH + rightH     ← Path BENDS here (uses both arms) — save to global
@@ -638,7 +638,7 @@ Returning `leftH + rightH` to your parent instead of `1 + max(leftH, rightH)`. I
 
 *(This is the OPPOSITE of Diameter. Diameter used the UP pipe (return values). Good Nodes uses the DOWN pipe (parameters). This is where you truly feel the difference between the two directions.)*
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** You're walking down a mountain trail from the peak. A viewpoint is "good" if you can see the original peak from there — meaning no taller mountain blocked your view on the way down. As you walk, you keep track of "the tallest thing I've seen so far." At each viewpoint, you check: "Am I at least as tall as the tallest thing so far?" If yes, you're good!
 
@@ -834,7 +834,7 @@ Total Good Nodes: 4
 ## The classic trap
 Trying to compute "good" in POST-order (after children). You can't — goodness depends on ANCESTORS, which are only known on the way DOWN. If you need ancestor info, that's your signal: **use a parameter, do the work in pre-order.**
 
-## ⚡ DOWN vs. UP — The Twin Comparison
+## DOWN vs. UP — The Twin Comparison
 
 | Pattern | Needs info from... | Pipe | Work happens in... |
 |-----|----------|---|----------|
@@ -1124,7 +1124,7 @@ Checking `a.val == b.val` **before** the null checks. If one node is null, `a.va
 
 *(The famous "return a node, not a number" pattern. The return value is a TreeNode, and its meaning changes depending on where you are.)*
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Two cousins, `p` and `q`, are lost somewhere in a family tree. You want to find their closest shared ancestor. Here's the trick: every person asks their two kids, "Did you find either p or q down there?"
 
@@ -3332,7 +3332,7 @@ Vertical order: not breaking ties correctly. When two nodes share a column, orde
 
 --
 
-## 🎯 The Master Decision Tree — Pick Your Weapon in 10 Seconds
+## The Master Decision Tree — Pick Your Weapon in 10 Seconds
 
 Ask yourself these questions **in order**:
 
@@ -3386,7 +3386,7 @@ Ask yourself these questions **in order**:
 
 --
 
-## 🔑 The Two Pipes — The Whole Subject in Two Lines
+## The Two Pipes — The Whole Subject in Two Lines
 
 ```
 DOWN pipe = parameters = pre-order = ancestor context
@@ -3399,7 +3399,7 @@ And the special cases:
 
 --
 
-## 📊 The One-Table Pattern Map
+## The One-Table Pattern Map
 
 | # | Pattern | Direction | Return vs Answer | Key Move |
 |--|-----|------|---------|-----|
@@ -3427,7 +3427,7 @@ And the special cases:
 
 --
 
-## 🎤 The 60-Second Interview Script
+## The 60-Second Interview Script
 
 Memorize this and say it when you see a tree problem:
 
@@ -3449,7 +3449,7 @@ Memorize this and say it when you see a tree problem:
 
 --
 
-## 🔥 Common Mistakes — Loop This Until It's Automatic
+## Common Mistakes — Loop This Until It's Automatic
 
 | Mistake | The Fix |
 |-----|-----|
@@ -3472,7 +3472,7 @@ Memorize this and say it when you see a tree problem:
 
 --
 
-## 🏆 Your Mastery Checklist
+## Your Mastery Checklist
 
 You've mastered tree patterns when you can:
 
@@ -3495,7 +3495,7 @@ You've mastered tree patterns when you can:
 
 --
 
-## 📚 MAANG Coverage Map — Which Pattern Owns Each Problem
+## MAANG Coverage Map — Which Pattern Owns Each Problem
 
 | Classic MAANG question | Pattern # | LeetCode |
 |--|--|--|
@@ -3532,13 +3532,13 @@ You've mastered tree patterns when you can:
 
 --
 
-# 🆕 EXTENDED PATTERNS (18-30) — Complete L5 Coverage
+# EXTENDED PATTERNS (18-30) — Complete L5 Coverage
 
 --
 
 # PATTERN 18: BST Search (The Foundation of BST Operations)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** You're looking for a book in a library where books are sorted by number. You check the middle shelf. If your book's number is smaller, you go LEFT. If bigger, you go RIGHT. You never need to check the other side!
 
@@ -3579,7 +3579,7 @@ TreeNode searchBST(TreeNode node, int target) {
 
 # PATTERN 19: BST Insert (Find the Right Spot)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** You're adding a new book to the sorted library. You walk down comparing numbers until you find an EMPTY spot. That's where the new book goes!
 
@@ -3621,7 +3621,7 @@ Forgetting to REASSIGN: `insertIntoBST(node.left, val)` without `node.left = ...
 
 # PATTERN 20: BST Delete (The Three Cases)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Removing a book from the sorted library. Easy if it's at the end of a shelf (leaf). Tricky if it's in the middle — you need to find a replacement to keep things sorted!
 
@@ -3698,7 +3698,7 @@ Forgetting that after swapping with successor, you must DELETE the successor fro
 
 # PATTERN 21: House Robber III (The Bundle Return Pattern)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** You're a thief robbing houses arranged in a tree. If you rob a house, you CAN'T rob its direct children (alarm system). At each house, you have two choices: rob it or skip it. You want maximum money!
 
@@ -3766,7 +3766,7 @@ int[] dfs(TreeNode node) {
 
 # PATTERN 22: Binary Tree Cameras (3-State Tree DP)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** You're placing security cameras in a building (tree). A camera covers itself, its parent, and its children. You want MINIMUM cameras to cover all rooms.
 
@@ -3846,7 +3846,7 @@ Forgetting to check if ROOT needs a camera at the end! If root returns 0, add on
 
 # PATTERN 23: Distribute Coins in Binary Tree (Flow Counting)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Each node has some coins. You want exactly 1 coin per node. Coins can only move between parent-child. Count the MINIMUM moves.
 
@@ -3912,7 +3912,7 @@ int dfs(TreeNode node) {
 
 # PATTERN 24: Maximum Width of Binary Tree (BFS + Index Tracking)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** You want to find the WIDEST level of a tree, counting nulls between nodes. Imagine the tree as a complete binary tree with positions numbered.
 
@@ -3996,7 +3996,7 @@ Integer overflow! Indices can get huge (2^depth). Normalize by subtracting the f
 
 # PATTERN 25: Populating Next Right Pointers (Level Linking)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Connect each node to its RIGHT neighbor on the same level. Like linking people standing in a row.
 
@@ -4071,7 +4071,7 @@ Node connect(Node root) {
 
 # PATTERN 26: Boundary of Binary Tree (Three-Part Traversal)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Walk around the EDGE of the tree: left boundary (top-down), all leaves (left-to-right), right boundary (bottom-up). Like tracing the outline!
 
@@ -4142,7 +4142,7 @@ boolean isLeaf(TreeNode node) {
 
 # PATTERN 27: Left Side View (Mirror of Right Side View)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Stand on the LEFT side of the tree. What do you see? The FIRST node at each level!
 
@@ -4202,7 +4202,7 @@ List<Integer> leftSideView(TreeNode root) {
 
 # PATTERN 28: Diagonal Traversal (Coordinate Variant)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Draw diagonal lines from top-right to bottom-left. Group nodes by which diagonal they're on.
 
@@ -4239,7 +4239,7 @@ void dfs(TreeNode node, int diagonal, Map<Integer, List<Integer>> map) {
 
 # PATTERN 29: Merge Two Binary Trees (Parallel Traversal)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Overlay two trees on top of each other. Where both have nodes, ADD the values. Where only one has a node, use that node.
 
@@ -4273,7 +4273,7 @@ TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
 
 # PATTERN 30: Average of Levels (BFS Aggregation)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Find the average value of nodes at each level. Classic BFS with per-level computation.
 
@@ -4316,7 +4316,7 @@ List<Double> averageOfLevels(TreeNode root) {
 
 # PATTERN 31: Longest Univalue Path (Diameter Variant)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Find the longest path where ALL nodes have the SAME value. Like Diameter, but only count edges where values match!
 
@@ -4361,7 +4361,7 @@ int dfs(TreeNode node) {
 
 # PATTERN 32: LCA of Deepest Leaves (Depth + LCA Combined)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Find the lowest common ancestor of ALL the deepest leaves. If there's only one deepest leaf, return it. If multiple, return their LCA.
 
@@ -4406,7 +4406,7 @@ class Result {
 
 # PATTERN 33: Maximum Product of Splitted Binary Tree (Total Sum Trick)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Remove ONE edge to split tree into two parts. Maximize the PRODUCT of their sums.
 
@@ -4449,7 +4449,7 @@ long getSum(TreeNode node) {
 
 # PATTERN 34: Pseudo-Palindromic Paths (Backtracking + Bit Trick)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Count root-to-leaf paths that can be REARRANGED into a palindrome. A path is pseudo-palindromic if at most ONE digit has odd frequency.
 
@@ -4494,7 +4494,7 @@ void dfs(TreeNode node, int path) {
 
 # PATTERN 35: Delete Nodes and Return Forest (Post-Order with Set)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Given a list of nodes to delete, remove them and return the resulting FOREST (list of remaining trees).
 
@@ -4544,7 +4544,7 @@ TreeNode dfs(TreeNode node, Set<Integer> toDelete, List<TreeNode> forest) {
 
 # PATTERN 36: Sum Root to Leaf Numbers (Path Value Accumulation)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Each root-to-leaf path forms a number (like 1→2→3 = 123). Sum ALL such numbers.
 
@@ -4581,7 +4581,7 @@ int dfs(TreeNode node, int currentNum) {
 
 # PATTERN 37: Convert Sorted List to BST (Two-Pointer + Recursion)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Convert a sorted linked list to a height-balanced BST. Can't random access like array!
 
@@ -4623,7 +4623,7 @@ TreeNode sortedListToBST(ListNode head) {
 
 # PATTERN 38: Two Sum IV - Input is BST (Inorder + Two Pointers)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Find if two nodes in BST sum to target. Like Two Sum, but on a tree!
 
@@ -4664,7 +4664,7 @@ void inorder(TreeNode node, List<Integer> list) {
 
 # PATTERN 39: Balance a BST (Inorder → Array → Rebuild)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Given an unbalanced BST, make it balanced. 
 
@@ -4709,7 +4709,7 @@ TreeNode buildBST(List<Integer> nums, int left, int right) {
 
 # PATTERN 40: Unique Binary Search Trees (Catalan Number DP)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** How many STRUCTURALLY UNIQUE BSTs can store values 1 to n?
 
@@ -4760,7 +4760,7 @@ Answer: **5** unique BSTs ✓
 
 # PATTERN 41: Unique Binary Search Trees II (Generate All BSTs)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Actually GENERATE all unique BSTs, not just count them.
 
@@ -4811,7 +4811,7 @@ List<TreeNode> generate(int start, int end) {
 
 # PATTERN 42: Sum of Distances in Tree (Re-rooting DP — Advanced)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** For each node, find the sum of distances to ALL other nodes. Naive is O(n²). Can we do O(n)?
 
@@ -4888,7 +4888,7 @@ void dfs2(int node, int parent, int n) {
 
 # PATTERN 43: Recover Binary Search Tree (Inorder Anomaly Detection)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Two nodes in a BST were SWAPPED by mistake. Find and fix them WITHOUT changing the structure.
 
@@ -4947,7 +4947,7 @@ Inorder: 3 → 2 → 1
 
 # PATTERN 44: Trim a BST (Range Pruning)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Keep only nodes with values in range [low, high]. Remove everything else.
 
@@ -4988,7 +4988,7 @@ TreeNode trimBST(TreeNode node, int low, int high) {
 
 # PATTERN 45: All Nodes Distance K (BFS from Target)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Find all nodes at distance K from a target node. Can go UP to parent too!
 
@@ -5060,7 +5060,7 @@ void buildParentMap(TreeNode node, TreeNode par, Map<TreeNode, TreeNode> map) {
 
 # PATTERN 46: Flatten Binary Tree to Linked List (Preorder Rewiring)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Flatten tree into a "linked list" using right pointers, in PREORDER.
 
@@ -5116,7 +5116,7 @@ void flatten(TreeNode root) {
 
 # PATTERN 47: Construct BST from Preorder (Range Validation)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Given preorder traversal of BST, reconstruct the tree.
 
@@ -5156,7 +5156,7 @@ TreeNode build(int[] preorder, int min, int max) {
 
 # PATTERN 48: Range Sum of BST (BST Pruned Search)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Sum all node values in range [low, high]. Use BST property to SKIP entire subtrees!
 
@@ -5193,7 +5193,7 @@ int rangeSumBST(TreeNode node, int low, int high) {
 
 # PATTERN 49: Minimum Difference in BST (Inorder + Track Previous)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Find minimum absolute difference between ANY two nodes. In BST, minimum difference is always between ADJACENT nodes in inorder!
 
@@ -5233,7 +5233,7 @@ void inorder(TreeNode node) {
 
 # PATTERN 50: Closest BST Value (BST Binary Search)
 
-## 💡 The "Aha!" Moment
+## The "Aha!" Moment
 
 **The Dopamine Trigger:** Find the value closest to target. Use BST property to narrow down!
 
@@ -5266,7 +5266,7 @@ int closestValue(TreeNode root, double target) {
 
 --
 
-# 📊 UPDATED MAANG Coverage Map
+# UPDATED MAANG Coverage Map
 
 | Problem | Pattern | LeetCode |
 |-----|-----|-----|
@@ -5328,7 +5328,7 @@ int closestValue(TreeNode root, double target) {
 
 --
 
-# 🧠 MASTER PATTERN RECOGNITION CHEAT SHEET
+# MASTER PATTERN RECOGNITION CHEAT SHEET
 
 ## By Question Type
 
@@ -5362,7 +5362,7 @@ int closestValue(TreeNode root, double target) {
 
 --
 
-# 🏆 FINAL MASTERY CHECKLIST
+# FINAL MASTERY CHECKLIST
 
 ## Core Patterns (Must Know Cold)
 - [ ] Maximum Depth (pure UP)

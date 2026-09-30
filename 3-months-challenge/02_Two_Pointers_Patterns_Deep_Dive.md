@@ -68,7 +68,7 @@ That's the entire subject. Every two pointer problem — from easy to hard — i
 
 --
 
-## 📋 THE JUNIOR DEV CHEAT CARD (Memorize This!)
+## THE JUNIOR DEV CHEAT CARD (Memorize This!)
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════╗
@@ -133,7 +133,7 @@ That's the entire subject. Every two pointer problem — from easy to hard — i
 
 --
 
-## 🚀 QUICK START: The 60-Second Two Pointer Approach
+## QUICK START: The 60-Second Two Pointer Approach
 
 ### The ONE Question That Solves Most Problems:
 

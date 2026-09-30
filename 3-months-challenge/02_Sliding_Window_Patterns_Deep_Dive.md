@@ -20,7 +20,7 @@
 
 --
 
-# 🌟 ZERO TO HERO: Understanding Sliding Window
+# ZERO TO HERO: Understanding Sliding Window
 
 ## What IS a Sliding Window?
 
@@ -177,7 +177,7 @@ for (int right = 0; right < n; right++) {
 
 --
 
-## The "Exactly K" Trick 🔥
+## The "Exactly K" Trick
 
 ```
 exactlyK(k) = atMostK(k) - atMostK(k-1)
@@ -314,7 +314,7 @@ int maxSumSubarray(int[] arr, int k) {
 
 --
 
-# PATTERN 6: Longest Substring Without Repeating Characters (LC 3) ⭐⭐
+# PATTERN 6: Longest Substring Without Repeating Characters (LC 3)
 
 ## Pattern Recognition Signal
 
@@ -437,7 +437,7 @@ int lengthOfLongestSubstring(String s) {
 
 --
 
-# PATTERN 13: Minimum Window Substring (LC 76) ⭐⭐⭐
+# PATTERN 13: Minimum Window Substring (LC 76)
 
 ## Pattern Recognition Signal
 
@@ -633,7 +633,7 @@ String minWindow(String s, String t) {
 
 --
 
-# PATTERN 16: Subarrays with K Different Integers (LC 992) ⭐⭐
+# PATTERN 16: Subarrays with K Different Integers (LC 992)
 
 ## Pattern Recognition Signal
 
@@ -827,7 +827,7 @@ int atMostK(int[] nums, int k) {
 
 --
 
-# PATTERN 2: Sliding Window Maximum (LC 239) ⭐⭐
+# PATTERN 2: Sliding Window Maximum (LC 239)
 
 ## Pattern Recognition Signal
 
@@ -989,7 +989,7 @@ int[] maxSlidingWindow(int[] nums, int k) {
 
 --
 
-# PATTERN 3: Find All Anagrams in a String (LC 438) ⭐
+# PATTERN 3: Find All Anagrams in a String (LC 438)
 
 ## Pattern Recognition Signal
 
@@ -1218,7 +1218,7 @@ List<Integer> findAnagrams(String s, String p) {
 
 --
 
-# PATTERN 8: Longest Repeating Character Replacement (LC 424) ⭐⭐
+# PATTERN 8: Longest Repeating Character Replacement (LC 424)
 
 ## Pattern Recognition Signal
 
@@ -1379,7 +1379,7 @@ int characterReplacement(String s, int k) {
 
 --
 
-# PATTERN 10: Minimum Size Subarray Sum (LC 209) ⭐
+# PATTERN 10: Minimum Size Subarray Sum (LC 209)
 
 ## Pattern Recognition Signal
 
@@ -1527,7 +1527,7 @@ int minSubArrayLen(int target, int[] nums) {
 
 --
 
-# PATTERN 12: Subarray Product Less Than K (LC 713) ⭐
+# PATTERN 12: Subarray Product Less Than K (LC 713)
 
 ## Pattern Recognition Signal
 

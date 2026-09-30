@@ -77,7 +77,7 @@ That's the entire subject. Every bit manipulation problem is just:
 
 --
 
-## 📋 THE JUNIOR DEV CHEAT CARD (Memorize This!)
+## THE JUNIOR DEV CHEAT CARD (Memorize This!)
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════╗
@@ -122,7 +122,7 @@ That's the entire subject. Every bit manipulation problem is just:
 
 --
 
-## 🚀 QUICK START: The 60-Second Bit Manipulation Approach
+## QUICK START: The 60-Second Bit Manipulation Approach
 
 ### The ONE Question That Solves Most Problems:
 
@@ -160,7 +160,7 @@ WHY THIS MATTERS:
 
 --
 
-## 🎯 WORKED EXAMPLE: How a Junior Dev Should Think
+## WORKED EXAMPLE: How a Junior Dev Should Think
 
 **Problem:** "Every element appears twice except one. Find the single one."
 
@@ -706,7 +706,7 @@ So when mask has 1 at position i:
 
 --
 
-## Formula 5: Remove the Rightmost Set Bit ⭐⭐⭐
+## Formula 5: Remove the Rightmost Set Bit
 
 ```java
 n & (n - 1)

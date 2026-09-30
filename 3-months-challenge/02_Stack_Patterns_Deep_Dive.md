@@ -78,7 +78,7 @@ That's the entire subject. Every stack problem is just:
 
 --
 
-# 🌟 ZERO TO HERO: Understanding Stacks From Scratch
+# ZERO TO HERO: Understanding Stacks From Scratch
 
 **If you're a junior dev and stacks feel confusing, START HERE.**
 
@@ -393,7 +393,7 @@ while (!stack.isEmpty()) {
 
 --
 
-## 📋 THE JUNIOR DEV CHEAT CARD (Memorize This!)
+## THE JUNIOR DEV CHEAT CARD (Memorize This!)
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════╗
@@ -450,7 +450,7 @@ while (!stack.isEmpty()) {
 
 --
 
-## 🚀 QUICK START: The 60-Second Stack Approach
+## QUICK START: The 60-Second Stack Approach
 
 ### The ONE Question That Solves Most Problems:
 
@@ -493,7 +493,7 @@ It runs at most n times TOTAL across all iterations.
 
 --
 
-## 🎯 WORKED EXAMPLE: How a Junior Dev Should Think
+## WORKED EXAMPLE: How a Junior Dev Should Think
 
 **Problem:** "Daily Temperatures — for each day, how many days until warmer?"
 
@@ -948,7 +948,7 @@ The remaining elements (10, 7) are still waiting.
 
 --
 
-## 🎯 COMPLETE WORKED EXAMPLE: Largest Rectangle in Histogram
+## COMPLETE WORKED EXAMPLE: Largest Rectangle in Histogram
 
 Let's apply ALL 6 questions:
 

@@ -78,7 +78,7 @@ That's the entire subject. Every heap problem is just:
 
 --
 
-## 📋 THE JUNIOR DEV CHEAT CARD (Memorize This!)
+## THE JUNIOR DEV CHEAT CARD (Memorize This!)
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════╗
@@ -451,7 +451,7 @@ This template is your **mental checklist** before writing any heap code. Walk th
 
 --
 
-## 🚀 QUICK START: The 60-Second Heap Approach
+## QUICK START: The 60-Second Heap Approach
 
 **Before diving into the detailed template, here's the simple version:**
 
@@ -515,7 +515,7 @@ Your answer tells you which heap to use:
 
 --
 
-## 📖 Now the Detailed Template (For Deep Understanding)
+## Now the Detailed Template (For Deep Understanding)
 
 --
 
@@ -773,7 +773,7 @@ Imagine a VIP room with only K spots:
 
 --
 
-## 🎯 WORKED EXAMPLE: How a Junior Dev Should Think
+## WORKED EXAMPLE: How a Junior Dev Should Think
 
 Let's solve a problem step-by-step using the template:
 

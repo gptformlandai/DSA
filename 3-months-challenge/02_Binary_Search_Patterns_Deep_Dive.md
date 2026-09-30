@@ -78,7 +78,7 @@ That's the entire subject. Every binary search problem — from easy to hard —
 
 --
 
-## 📋 THE JUNIOR DEV CHEAT CARD (Memorize This!)
+## THE JUNIOR DEV CHEAT CARD (Memorize This!)
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════════════╗
@@ -146,7 +146,7 @@ That's the entire subject. Every binary search problem — from easy to hard —
 
 --
 
-## 🚀 QUICK START: The 60-Second Binary Search Approach
+## QUICK START: The 60-Second Binary Search Approach
 
 ### The ONE Question That Solves Most Problems:
 

@@ -20,7 +20,7 @@
 
 --
 
-# 🌟 ZERO TO HERO: Understanding Graph Search
+# ZERO TO HERO: Understanding Graph Search
 
 ## BFS vs DFS - When to Use Which
 
@@ -135,7 +135,7 @@ boolean isValid(int r, int c, int rows, int cols) {
 
 --
 
-# PATTERN 0: Number of Islands (LC 200) ⭐⭐
+# PATTERN 0: Number of Islands (LC 200)
 
 ## Pattern Recognition Signal
 
@@ -271,7 +271,7 @@ void dfs(char[][] grid, int r, int c) {
 
 --
 
-# PATTERN 3: Rotting Oranges (LC 994) ⭐⭐
+# PATTERN 3: Rotting Oranges (LC 994)
 
 ## Pattern Recognition Signal
 
@@ -427,7 +427,7 @@ int orangesRotting(int[][] grid) {
 
 --
 
-# PATTERN 9: Course Schedule (LC 207) ⭐⭐
+# PATTERN 9: Course Schedule (LC 207)
 
 ## Pattern Recognition Signal
 
@@ -580,7 +580,7 @@ If we reach a GRAY node → CYCLE detected!
 
 --
 
-# PATTERN 15: Word Ladder (LC 127) ⭐⭐
+# PATTERN 15: Word Ladder (LC 127)
 
 ## Pattern Recognition Signal
 
@@ -934,7 +934,7 @@ int dfs(int[][] grid, int r, int c) {
 
 --
 
-# PATTERN 4: Pacific Atlantic Water Flow (LC 417) ⭐
+# PATTERN 4: Pacific Atlantic Water Flow (LC 417)
 
 ## Pattern Recognition Signal
 
@@ -1221,7 +1221,7 @@ int shortestPathBinaryMatrix(int[][] grid) {
 
 --
 
-# PATTERN 10: Word Search (LC 79) ⭐⭐
+# PATTERN 10: Word Search (LC 79)
 
 ## Pattern Recognition Signal
 
@@ -1423,7 +1423,7 @@ boolean dfs(char[][] board, String word, int r, int c, int index) {
 
 --
 
-# PATTERN 16: Course Schedule II (LC 210) ⭐
+# PATTERN 16: Course Schedule II (LC 210)
 
 ## Pattern Recognition Signal
 
@@ -1574,7 +1574,7 @@ int[] findOrder(int numCourses, int[][] prerequisites) {
 
 --
 
-# PATTERN 19: Word Ladder (LC 127) ⭐⭐
+# PATTERN 19: Word Ladder (LC 127)
 
 ## Pattern Recognition Signal
 

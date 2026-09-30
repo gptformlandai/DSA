@@ -41,7 +41,7 @@
 
 --
 
-## 🧠 The "One Sentence That Unlocks Everything"
+## The "One Sentence That Unlocks Everything"
 
 > **Backtracking is just "try everything, but be smart about undoing your mistakes."**
 
@@ -49,7 +49,7 @@ Think of it like this: You're filling out a form with multiple blanks. For each 
 
 --
 
-## 🎯 The Mental Model: Two Questions, Every Single Time
+## The Mental Model: Two Questions, Every Single Time
 
 Before writing ANY backtracking code, ask yourself:
 
@@ -71,7 +71,7 @@ This is your **CANDIDATE POOL** (the horizontal axis — trying alternatives)
 
 --
 
-## 🔑 The Golden Rule: The "Undo" Must Mirror the "Do"
+## The Golden Rule: The "Undo" Must Mirror the "Do"
 
 ```
 Whatever you ADD before recursing, you REMOVE after returning.
@@ -132,7 +132,7 @@ This is where most people get confused:
 
 --
 
-## 🎒 Pattern 1: Subsets (Power Set)
+## Pattern 1: Subsets (Power Set)
 
 ### Pattern Recognition Signal
 
@@ -409,7 +409,7 @@ Final Result: [[1, 2], [1], [2], []] (Total: 2^2 = 4 subsets)
 
 --
 
-## 💰 Pattern 2: Combination Sum (Running Budget & Unbounded Reuse)
+## Pattern 2: Combination Sum (Running Budget & Unbounded Reuse)
 
 ### Pattern Recognition Signal
 
@@ -662,7 +662,7 @@ COMBINATION SUM
 
 --
 
-### ⚠️ The Trap: Combination Sum II (Single-Use with Duplicates)
+### The Trap: Combination Sum II (Single-Use with Duplicates)
 
 **The Shift:** Each number can only be used ONCE, but input may have duplicates like `[1, 1, 2, 5, 6, 7, 10]`.
 
@@ -684,7 +684,7 @@ if (i > start && candidates[i] == candidates[i-1]) continue;
 
 --
 
-## 🪑 Pattern 3: Permutations (The Slot-Filling & Pool Search Model)
+## Pattern 3: Permutations (The Slot-Filling & Pool Search Model)
 
 ### Pattern Recognition Signal
 
@@ -974,7 +974,7 @@ PERMUTATIONS
 
 --
 
-### ⚠️ The Trap: Permutations II (Duplicates)
+### The Trap: Permutations II (Duplicates)
 
 **The Problem:** Input `[1, 1, 2]` — you'll generate `[1a, 1b, 2]` and `[1b, 1a, 2]` which are identical!
 
@@ -1004,7 +1004,7 @@ if (i > 0 && nums[i] == nums[i-1] && !used[i-1]) continue;
 
 --
 
-## 🔗 Pattern 4: Generate Parentheses (Prefix Balance & Quota Model)
+## Pattern 4: Generate Parentheses (Prefix Balance & Quota Model)
 
 ### Pattern Recognition Signal
 
@@ -1290,7 +1290,7 @@ GENERATE PARENTHESES
 
 --
 
-### ⚠️ The Trap: Multiple Bracket Types
+### The Trap: Multiple Bracket Types
 
 **The Problem:** With `()`, `[]`, `{}`, simple counters fail because `"[)"` has balanced counts but invalid nesting!
 
@@ -1308,7 +1308,7 @@ GENERATE PARENTHESES
 
 --
 
-## 📱 Pattern 5: Letter Combinations of a Phone Number (Multi-Dial Lock)
+## Pattern 5: Letter Combinations of a Phone Number (Multi-Dial Lock)
 
 ### Pattern Recognition Signal
 
@@ -1588,7 +1588,7 @@ PHONE KEYPAD
 
 --
 
-### ⚠️ The Twist: Dictionary Word Filter (Boggle / T9)
+### The Twist: Dictionary Word Filter (Boggle / T9)
 
 **The Problem:** Instead of all combinations, only return valid dictionary words.
 
@@ -1604,7 +1604,7 @@ if (!trie.startsWith(path.toString())) return; // PRUNE! No word starts with thi
 
 --
 
-## ✂️ Pattern 6: Palindrome Partitioning (The Ribbon Knife Cutter)
+## Pattern 6: Palindrome Partitioning (The Ribbon Knife Cutter)
 
 ### Pattern Recognition Signal
 
@@ -1902,7 +1902,7 @@ PALINDROME PARTITIONING
 
 --
 
-### ⚠️ The Trap: Palindrome Partitioning II (Minimum Cuts)
+### The Trap: Palindrome Partitioning II (Minimum Cuts)
 
 **The Problem:** Finding ALL partitions is fine, but finding MINIMUM cuts with backtracking will TLE!
 
@@ -1916,7 +1916,7 @@ dp[i] = min(dp[j] + 1) for all j where s[j+1...i] is palindrome
 
 --
 
-### 🔗 The Family of "Slicing" Problems
+### The Family of "Slicing" Problems
 
 | Problem | The "Bouncer" Check | Same Pattern! |
 |-----|-----------|--------|
@@ -1929,7 +1929,7 @@ dp[i] = min(dp[j] + 1) for all j where s[j+1...i] is palindrome
 
 --
 
-## 🌐 Pattern 7: Restore IP Addresses (Depth-Bounded Ribbon Cutter)
+## Pattern 7: Restore IP Addresses (Depth-Bounded Ribbon Cutter)
 
 ### Pattern Recognition Signal
 
@@ -2290,7 +2290,7 @@ RESTORE IP ADDRESSES
 
 --
 
-## 🎯 Master Comparison Table (Plain English)
+## Master Comparison Table (Plain English)
 
 | Problem | What's the "Slot"? | Going Down (↓) | Where to Look Next | Going Sideways (→) | What to Undo |
 | :-- | :-- | :-- | :-- | :-- | :-- |
@@ -2307,7 +2307,7 @@ RESTORE IP ADDRESSES
 
 --
 
-## 🧠 The Ultimate Cheat Sheet: Pattern Recognition in 10 Seconds
+## The Ultimate Cheat Sheet: Pattern Recognition in 10 Seconds
 
 ### Step 1: What's the "Slot"?
 ```
@@ -2342,7 +2342,7 @@ Has duplicates → Sort first + skip twins at same level
 
 --
 
-## 🔥 The 5 Most Common Mistakes (And How to Avoid Them)
+## The 5 Most Common Mistakes (And How to Avoid Them)
 
 ### Mistake 1: Forgetting to Copy the Path
 ```java
@@ -2396,7 +2396,7 @@ Arrays.sort(nums);  // [1, 1, 2] → now duplicate check works
 
 --
 
-## 🎓 How to Explain Your Solution in an Interview
+## How to Explain Your Solution in an Interview
 
 When explaining your backtracking solution, use this simple structure:
 
@@ -2418,7 +2418,7 @@ When explaining your backtracking solution, use this simple structure:
 
 --
 
-## 🏆 You've Mastered Backtracking When You Can:
+## You've Mastered Backtracking When You Can:
 
 - [ ] Look at a problem and know which of the 10 patterns it is within 30 seconds
 - [ ] Write the code without looking at notes
@@ -2433,7 +2433,7 @@ When explaining your backtracking solution, use this simple structure:
 
 --
 
-## 🔗 The Pattern Family Tree
+## The Pattern Family Tree
 
 ```
                         BACKTRACKING
@@ -2469,7 +2469,7 @@ Only      (reuse?)    to 0     to 0       Forward   + Bounds  Row+3Sets Empty+
 
 --
 
-## 🔍 Pattern 8: Word Search (LC 79) ⭐⭐
+## Pattern 8: Word Search (LC 79)
 
 ### Pattern Recognition Signal
 
@@ -2852,7 +2852,7 @@ WORD SEARCH (GRID DFS)
 
 --
 
-### ⚠️ The Trap: Word Search II (Multiple Words)
+### The Trap: Word Search II (Multiple Words)
 
 **The Problem:** Finding ONE word is fine, but finding MANY words with repeated DFS will TLE!
 
@@ -2869,7 +2869,7 @@ WORD SEARCH (GRID DFS)
 
 --
 
-## ♛ Pattern 9: N-Queens (LC 51) & N-Queens II (LC 52) ⭐⭐
+## Pattern 9: N-Queens (LC 51) & N-Queens II (LC 52)
 
 ### Pattern Recognition Signal
 
@@ -3314,7 +3314,7 @@ N-QUEENS
 
 --
 
-## 🔢 Pattern 10: Sudoku Solver (LC 37) ⭐⭐
+## Pattern 10: Sudoku Solver (LC 37)
 
 ### Pattern Recognition Signal
 
@@ -3748,7 +3748,7 @@ SUDOKU SOLVER
 
 --
 
-### ⚠️ The Trap: Multiple Solutions
+### The Trap: Multiple Solutions
 
 **The Problem:** What if the puzzle has multiple solutions and you want ALL of them?
 
@@ -3771,7 +3771,7 @@ if (noEmptyCell) {
 
 --
 
-## 🎯 PATTERN 11: Partition to K Equal Sum Subsets (LC 698) & Matchsticks to Square (LC 473) ⭐⭐
+## PATTERN 11: Partition to K Equal Sum Subsets (LC 698) & Matchsticks to Square (LC 473)
 
 ### Pattern Recognition Signal
 
@@ -4045,7 +4045,7 @@ PARTITION K EQUAL SUM
 
 --
 
-## 🎯 PATTERN 12: Expression Add Operators (LC 282) ⭐⭐⭐
+## PATTERN 12: Expression Add Operators (LC 282)
 
 ### Pattern Recognition Signal
 

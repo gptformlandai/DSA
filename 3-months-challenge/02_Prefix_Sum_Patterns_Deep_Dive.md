@@ -72,7 +72,7 @@ That's the entire subject. Every prefix sum problem is just:
 
 --
 
-# 🌟 ZERO TO HERO: Understanding Prefix Sums From Scratch
+# ZERO TO HERO: Understanding Prefix Sums From Scratch
 
 **If you're a junior dev and prefix sums feel confusing, START HERE.**
 
@@ -260,7 +260,7 @@ This transforms a counting problem into a sum problem!
 
 --
 
-# 📋 THE JUNIOR DEV CHEAT CARD (Memorize This!)
+# THE JUNIOR DEV CHEAT CARD (Memorize This!)
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════╗
@@ -335,7 +335,7 @@ This transforms a counting problem into a sum problem!
 
 --
 
-# 🚀 QUICK START: The 60-Second Prefix Sum Approach
+# QUICK START: The 60-Second Prefix Sum Approach
 
 ### The ONE Question That Solves Most Problems:
 

@@ -90,7 +90,7 @@ That's the entire subject. Every linked list problem — from easy to hard — i
 
 --
 
-## 📋 THE JUNIOR DEV CHEAT CARD (Memorize This!)
+## THE JUNIOR DEV CHEAT CARD (Memorize This!)
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════╗
@@ -152,7 +152,7 @@ That's the entire subject. Every linked list problem — from easy to hard — i
 
 --
 
-## 🚀 QUICK START: The 60-Second Linked List Approach
+## QUICK START: The 60-Second Linked List Approach
 
 ### The ONE Question That Solves Most Problems:
 
@@ -199,7 +199,7 @@ curr.next = prev;      // NOW safe to redirect
 
 --
 
-## 🎯 WORKED EXAMPLE: How a Junior Dev Should Think
+## WORKED EXAMPLE: How a Junior Dev Should Think
 
 **Problem:** "Reverse a linked list."
 
@@ -1135,7 +1135,7 @@ REVERSE LINKED LIST
 
 --
 
-## 🔄 Variations & Twists
+## Variations & Twists
 
 | Variation | Twist |
 |------|----|
@@ -1143,7 +1143,7 @@ REVERSE LINKED LIST
 | Reverse in groups | Pattern 2 (k-Group) |
 | Reverse a segment | Pattern 1 (Reverse II) |
 
-## 🧠 Mind-Map Anchor
+## Mind-Map Anchor
 
 **`prev, curr, next` · save before break · flip arrow · return prev**
 
@@ -2319,7 +2319,7 @@ while (fast.next != null && fast != null)  // NPE if fast is null!
 while (fast != null && fast.next != null)
 ```
 
-## 🧠 Mind-Map Anchor
+## Mind-Map Anchor
 
 **slow=1, fast=2 · meet = cycle · null = no cycle**
 
