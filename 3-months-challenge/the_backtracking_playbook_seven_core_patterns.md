@@ -1304,9 +1304,8 @@ GENERATE PARENTHESES
 // '(' pushed → only ')' can pop it
 // '[' pushed → only ']' can pop it
 ```
-```
 
---
+---
 
 ## Pattern 5: Letter Combinations of a Phone Number (Multi-Dial Lock)
 
@@ -1601,9 +1600,8 @@ if (!trie.startsWith(path.toString())) return; // PRUNE! No word starts with thi
 
 // This avoids exploring millions of dead-end combinations!
 ```
-```
 
---
+---
 
 ## Pattern 6: Palindrome Partitioning (The Ribbon Knife Cutter)
 
