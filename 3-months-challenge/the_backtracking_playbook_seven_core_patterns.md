@@ -1337,12 +1337,11 @@ That's 3 × 3 = 9 combinations (Cartesian product)
 
 #### The Combination Lock Analogy
 
-```
 You're cracking a combination lock with multiple dials.
 Each dial has DIFFERENT symbols!
 
-Dial 0 (digit 2): a, b, c
-Dial 1 (digit 3): d, e, f
+- **Dial 0 (digit 2):** a, b, c
+- **Dial 1 (digit 3):** d, e, f
 
 For each dial, you try every symbol.
 When you move to the next dial, you START FROM ITS FIRST SYMBOL.
@@ -1352,19 +1351,18 @@ graph TD
     A["Dial 0 (digit 2)"] -->|a| B["Dial 1 (digit 3)"]
     A -->|b| C["Dial 1 (digit 3)"]
     A -->|c| D["Dial 1 (digit 3)"]
-    B -->|d| E["'ad' ✓"]
-    B -->|e| F["'ae' ✓"]
-    B -->|f| G["'af' ✓"]
-    C -->|d| H["'bd' ✓"]
-    C -->|e| I["'be' ✓"]
-    C -->|f| J["'bf' ✓"]
-    D -->|d| K["'cd' ✓"]
-    D -->|e| L["'ce' ✓"]
-    D -->|f| M["'cf' ✓"]
+    B -->|d| E["ad ✓"]
+    B -->|e| F["ae ✓"]
+    B -->|f| G["af ✓"]
+    C -->|d| H["bd ✓"]
+    C -->|e| I["be ✓"]
+    C -->|f| J["bf ✓"]
+    D -->|d| K["cd ✓"]
+    D -->|e| L["ce ✓"]
+    D -->|f| M["cf ✓"]
 ```
 
 **Each dial has its OWN pool - no need for used[] array!**
-```
 
 #### Why No `used[]` Array? (Key Difference from Permutations!)
 
