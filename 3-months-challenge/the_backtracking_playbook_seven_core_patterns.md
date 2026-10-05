@@ -167,17 +167,17 @@ You're cleaning your closet. You pick up each item ONE TIME and ask:
 You never pick up the same item twice!
 Each item gets exactly ONE binary decision.
 
-┌─────────────────────────────────────────────────────────┐
-│                                                          │
-│  Item 1: Include? ─┬─ YES ─┬─ Item 2: Include? ─┬─ ...  │
-│                    │       │                     │       │
-│                    │       └─ NO ────────────────┴─ ...  │
-│                    │                                     │
-│                    └─ NO ──┬─ Item 2: Include? ─┬─ ...  │
-│                            │                     │       │
-│                            └─ NO ────────────────┴─ ...  │
-│                                                          │
-└─────────────────────────────────────────────────────────┘
+```mermaid
+graph TD
+    A[Item 1: Include?] -->|YES| B[Item 2: Include?]
+    A -->|NO| C[Item 2: Include?]
+    B -->|YES| D[Item 3...]
+    B -->|NO| E[Item 3...]
+    C -->|YES| F[Item 3...]
+    C -->|NO| G[Item 3...]
+```
+
+**Each item = Binary choice (YES/NO). Total paths = 2^n**
 ```
 
 #### Why 2^n Subsets?
@@ -231,7 +231,7 @@ Results: [[], [2], [1], [1,2]]
 **Step-by-step trace:**
 
 ```
-═══════════════════════════════════════════════════════════
+===========================================================
 
 Call: recurse(index=0, path=[])
 
@@ -241,7 +241,7 @@ Call: recurse(index=0, path=[])
     path.add(1) → path=[1]
     recurse(index=1, path=[1])
     
-═══════════════════════════════════════════════════════════
+===========================================================
 
     Call: recurse(index=1, path=[1])
     
@@ -249,7 +249,7 @@ Call: recurse(index=0, path=[])
         path.add(2) → path=[1,2]
         recurse(index=2, path=[1,2])
         
-═══════════════════════════════════════════════════════════
+===========================================================
 
         Call: recurse(index=2, path=[1,2])
         
@@ -257,7 +257,7 @@ Call: recurse(index=0, path=[])
           result.add([1,2]) ✓
           return
           
-═══════════════════════════════════════════════════════════
+===========================================================
 
         Back to: recurse(index=1, path=[1,2])
         path.remove(2) → path=[1]  // UNDO!
@@ -265,7 +265,7 @@ Call: recurse(index=0, path=[])
       BRANCH 2: SKIP nums[1]=2
         recurse(index=2, path=[1])
         
-═══════════════════════════════════════════════════════════
+===========================================================
 
         Call: recurse(index=2, path=[1])
         
@@ -273,7 +273,7 @@ Call: recurse(index=0, path=[])
           result.add([1]) ✓
           return
           
-═══════════════════════════════════════════════════════════
+===========================================================
 
     Back to: recurse(index=0, path=[1])
     path.remove(1) → path=[]  // UNDO!
@@ -283,7 +283,7 @@ Call: recurse(index=0, path=[])
     
     ... (similar process, adds [2] and [])
 
-═══════════════════════════════════════════════════════════
+===========================================================
 
 Final results: [[], [2], [1], [1,2]] ✓
 ```
@@ -365,16 +365,16 @@ result.add(new ArrayList<>(path));  // Each entry is independent
 
 ```
 SUBSETS (POWER SET)
-        │
+        |
         ▼
-┌─────────────────────────┐
-│ Binary choice per item  │
-│ TAKE: add, recurse, undo│
-│ SKIP: just recurse      │
-│ Base: index == n        │
-│ Copy path to result!    │
-│ 2^n total subsets       │
-└─────────────────────────┘
++-------------------------+
+| Binary choice per item  |
+| TAKE: add, recurse, undo|
+| SKIP: just recurse      |
+| Base: index == n        |
+| Copy path to result!    |
+| 2^n total subsets       |
++-------------------------+
 ```
 
 **Memory phrase:** "Take or skip each item, undo after recursing, copy to result"
@@ -386,23 +386,23 @@ SUBSETS (POWER SET)
 ### Execution Trace: `nums = [1, 2]`
 ```text
 Root: recurse(idx=0) | path=[]
-│
-├── TAKE 1: path=[1]
-│   └── recurse(idx=1) | path=[1]
-│       ├── TAKE 2: path=[1, 2]
-│       │   └── recurse(idx=2) -> DONE! Save [1, 2]
-│       ├── UNDO: Remove 2 -> path=[1]
-│       └── SKIP 2:
-│           └── recurse(idx=2) -> DONE! Save [1]
-│
-├── UNDO: Remove 1 -> path=[]
-└── SKIP 1:
-    └── recurse(idx=1) | path=[]
-        ├── TAKE 2: path=[2]
-        │   └── recurse(idx=2) -> DONE! Save [2]
-        ├── UNDO: Remove 2 -> path=[]
-        └── SKIP 2:
-            └── recurse(idx=2) -> DONE! Save []
+|
++-- TAKE 1: path=[1]
+|   +-- recurse(idx=1) | path=[1]
+|       +-- TAKE 2: path=[1, 2]
+|       |   +-- recurse(idx=2) -> DONE! Save [1, 2]
+|       +-- UNDO: Remove 2 -> path=[1]
+|       +-- SKIP 2:
+|           +-- recurse(idx=2) -> DONE! Save [1]
+|
++-- UNDO: Remove 1 -> path=[]
++-- SKIP 1:
+    +-- recurse(idx=1) | path=[]
+        +-- TAKE 2: path=[2]
+        |   +-- recurse(idx=2) -> DONE! Save [2]
+        +-- UNDO: Remove 2 -> path=[]
+        +-- SKIP 2:
+            +-- recurse(idx=2) -> DONE! Save []
 
 Final Result: [[1, 2], [1], [2], []] (Total: 2^2 = 4 subsets)
 ```
@@ -443,16 +443,16 @@ At each step, you ask:
   "Do I insert this coin AGAIN?"  → Stay at same coin
   "Or do I GIVE UP on this coin forever?" → Move to next coin
 
-┌─────────────────────────────────────────────────────────┐
-│                                                          │
-│  Budget=$5: Use $2? ─┬─ YES ─┬─ Budget=$3: Use $2? ─┬─  │
-│                      │       │                       │   │
-│                      │       │  YES → Budget=$1      │   │
-│                      │       │  NO  → Try $3         │   │
-│                      │                                   │
-│                      └─ NO ──┬─ Try $3 coin             │
-│                              │                           │
-└─────────────────────────────────────────────────────────┘
++---------------------------------------------------------+
+|                                                          |
+|  Budget=$5: Use $2? -+- YES -+- Budget=$3: Use $2? -+-  |
+|                      |       |                       |   |
+|                      |       |  YES → Budget=$1      |   |
+|                      |       |  NO  → Try $3         |   |
+|                      |                                   |
+|                      +- NO --+- Try $3 coin             |
+|                              |                           |
++---------------------------------------------------------+
 ```
 
 #### Why Backtracking Works Here
@@ -509,7 +509,7 @@ index stays → BUT → target shrinks → GUARANTEED termination
 **Step-by-step trace:**
 
 ```
-═══════════════════════════════════════════════════════════
+===========================================================
 
 Call: recurse(index=0, budget=5, path=[])
 
@@ -519,7 +519,7 @@ Call: recurse(index=0, budget=5, path=[])
     path.add(2) → path=[2]
     recurse(index=0, budget=3, path=[2])  // STAY at same index!
     
-═══════════════════════════════════════════════════════════
+===========================================================
 
     Call: recurse(index=0, budget=3, path=[2])
     
@@ -527,7 +527,7 @@ Call: recurse(index=0, budget=5, path=[])
         path.add(2) → path=[2,2]
         recurse(index=0, budget=1, path=[2,2])
         
-═══════════════════════════════════════════════════════════
+===========================================================
 
         Call: recurse(index=0, budget=1, path=[2,2])
         
@@ -545,7 +545,7 @@ Call: recurse(index=0, budget=5, path=[])
               USE coin $3: budget=1-3=-2 < 0, OVER! return
               SKIP coin $3: index=2 == length, no more coins! return
               
-═══════════════════════════════════════════════════════════
+===========================================================
 
         Back to: recurse(index=0, budget=3, path=[2])
         path.remove(2) → path=[2]  // UNDO!
@@ -556,7 +556,7 @@ Call: recurse(index=0, budget=5, path=[])
           USE coin $3: budget=3-3=0 → EXACT HIT!
           result.add([2,3]) ✓
           
-═══════════════════════════════════════════════════════════
+===========================================================
 
 Final results: [[2, 3]] ✓
 ```
@@ -646,16 +646,16 @@ backtrack(candidates, index + 1, target - val, ...);  // Move forward
 
 ```
 COMBINATION SUM
-       │
+       |
        ▼
-┌─────────────────────────┐
-│ Budget shrinks, not pos │
-│ USE: stay at index      │
-│ SKIP: move to index+1   │
-│ Base: target==0 (hit!)  │
-│ Base: target<0 (over!)  │
-│ Copy path to result!    │
-└─────────────────────────┘
++-------------------------+
+| Budget shrinks, not pos |
+| USE: stay at index      |
+| SKIP: move to index+1   |
+| Base: target==0 (hit!)  |
+| Base: target<0 (over!)  |
+| Copy path to result!    |
++-------------------------+
 ```
 
 **Memory phrase:** "Stay to reuse, move to refuse, budget always shrinks"
@@ -719,20 +719,20 @@ For Chair 1: ANYONE can sit
 For Chair 2: Anyone EXCEPT whoever is already seated
 For Chair 3: Only one person is left
 
-┌─────────────────────────────────────────────────────────┐
-│                                                          │
-│  Chair 1: Who sits? ─┬─ Alice ─┬─ Chair 2: Who sits?    │
-│                      │         │  (Alice is TAKEN)       │
-│                      │         │  Bob or Carol?          │
-│                      │                                   │
-│                      ├─ Bob ───┬─ Chair 2: Who sits?    │
-│                      │         │  (Bob is TAKEN)         │
-│                      │         │  Alice or Carol?        │
-│                      │                                   │
-│                      └─ Carol ─┬─ Chair 2: Who sits?    │
-│                                │  (Carol is TAKEN)       │
-│                                │  Alice or Bob?          │
-└─────────────────────────────────────────────────────────┘
++---------------------------------------------------------+
+|                                                          |
+|  Chair 1: Who sits? -+- Alice -+- Chair 2: Who sits?    |
+|                      |         |  (Alice is TAKEN)       |
+|                      |         |  Bob or Carol?          |
+|                      |                                   |
+|                      +- Bob ---+- Chair 2: Who sits?    |
+|                      |         |  (Bob is TAKEN)         |
+|                      |         |  Alice or Carol?        |
+|                      |                                   |
+|                      +- Carol -+- Chair 2: Who sits?    |
+|                                |  (Carol is TAKEN)       |
+|                                |  Alice or Bob?          |
++---------------------------------------------------------+
 ```
 
 #### Why Reset to 0? (The Critical Insight!)
@@ -791,7 +791,7 @@ Results: [[1, 2], [2, 1]]
 **Step-by-step trace:**
 
 ```
-═══════════════════════════════════════════════════════════
+===========================================================
 
 Call: backtrack(path=[], used=[F,F])
 
@@ -803,7 +803,7 @@ Call: backtrack(path=[], used=[F,F])
     used[0]=true, path.add(1) → path=[1], used=[T,F]
     backtrack(path=[1], used=[T,F])  // Next chair, RESET to i=0!
     
-═══════════════════════════════════════════════════════════
+===========================================================
 
     Call: backtrack(path=[1], used=[T,F])
     
@@ -815,7 +815,7 @@ Call: backtrack(path=[], used=[F,F])
         used[1]=true, path.add(2) → path=[1,2], used=[T,T]
         backtrack(path=[1,2], used=[T,T])
         
-═══════════════════════════════════════════════════════════
+===========================================================
 
         Call: backtrack(path=[1,2], used=[T,T])
         
@@ -823,7 +823,7 @@ Call: backtrack(path=[], used=[F,F])
           result.add([1,2]) ✓
           return
           
-═══════════════════════════════════════════════════════════
+===========================================================
 
         Back to: backtrack(path=[1,2], used=[T,T])
         path.remove(2) → path=[1]  // UNDO!
@@ -832,7 +832,7 @@ Call: backtrack(path=[], used=[F,F])
       No more candidates for Chair 1
       return
       
-═══════════════════════════════════════════════════════════
+===========================================================
 
     Back to: backtrack(path=[1], used=[T,F])
     path.remove(1) → path=[]  // UNDO!
@@ -842,7 +842,7 @@ Call: backtrack(path=[], used=[F,F])
     used[1]=true, path.add(2) → path=[2], used=[F,T]
     backtrack(path=[2], used=[F,T])  // Next chair, RESET to i=0!
     
-═══════════════════════════════════════════════════════════
+===========================================================
 
     Call: backtrack(path=[2], used=[F,T])
     
@@ -855,7 +855,7 @@ Call: backtrack(path=[], used=[F,F])
           path.size=2 == 2, BASE CASE!
           result.add([2,1]) ✓
           
-═══════════════════════════════════════════════════════════
+===========================================================
 
 Final results: [[1, 2], [2, 1]] ✓
 ```
@@ -957,17 +957,17 @@ for (int i = 0; i < nums.length; i++) {
 
 ```
 PERMUTATIONS
-      │
+      |
       ▼
-┌─────────────────────────┐
-│ Order MATTERS!          │
-│ Reset to 0 each level   │
-│ used[] = bouncer array  │
-│ DO: mark + add          │
-│ UNDO: remove + unmark   │
-│ Base: path.size == n    │
-│ n! total permutations   │
-└─────────────────────────┘
++-------------------------+
+| Order MATTERS!          |
+| Reset to 0 each level   |
+| used[] = bouncer array  |
+| DO: mark + add          |
+| UNDO: remove + unmark   |
+| Base: path.size == n    |
+| n! total permutations   |
++-------------------------+
 ```
 
 **Memory phrase:** "Reset to zero, bouncer says no, undo both mark and add"
@@ -1038,21 +1038,21 @@ You can SPEND if you have credit limit left (open < n)
 You can PAY ONLY if you have debt to pay (close < open)
 You can't pay off debt you don't have!
 
-┌─────────────────────────────────────────────────────────┐
-│                                                          │
-│  Position 0: Can spend? ─┬─ YES (open<n) → "("          │
-│                          │   debt=1                      │
-│                          │                               │
-│                          └─ NO (close<open fails)        │
-│                              Can't pay debt you don't    │
-│                              have!                       │
-│                                                          │
-│  Position 1: Can spend? ─┬─ YES (open<n) → "(("         │
-│              Can pay?    │   debt=2                      │
-│                          │                               │
-│                          └─ YES (close<open) → "()"     │
-│                              debt=0                      │
-└─────────────────────────────────────────────────────────┘
++---------------------------------------------------------+
+|                                                          |
+|  Position 0: Can spend? -+- YES (open<n) → "("          |
+|                          |   debt=1                      |
+|                          |                               |
+|                          +- NO (close<open fails)        |
+|                              Can't pay debt you don't    |
+|                              have!                       |
+|                                                          |
+|  Position 1: Can spend? -+- YES (open<n) → "(("         |
+|              Can pay?    |   debt=2                      |
+|                          |                               |
+|                          +- YES (close<open) → "()"     |
+|                              debt=0                      |
++---------------------------------------------------------+
 ```
 
 #### The Two Rules That Govern Everything
@@ -1103,7 +1103,7 @@ Results: ["(())", "()()"]
 **Step-by-step trace:**
 
 ```
-═══════════════════════════════════════════════════════════
+===========================================================
 
 Call: backtrack(path="", open=0, close=0)
 
@@ -1113,7 +1113,7 @@ Call: backtrack(path="", open=0, close=0)
     path.append('(') → path="("
     backtrack(path="(", open=1, close=0)
     
-═══════════════════════════════════════════════════════════
+===========================================================
 
     Call: backtrack(path="(", open=1, close=0)
     
@@ -1121,7 +1121,7 @@ Call: backtrack(path="", open=0, close=0)
         path.append('(') → path="(("
         backtrack(path="((", open=2, close=0)
         
-═══════════════════════════════════════════════════════════
+===========================================================
 
         Call: backtrack(path="((", open=2, close=0)
         
@@ -1131,7 +1131,7 @@ Call: backtrack(path="", open=0, close=0)
             path.append(')') → path="(()"
             backtrack(path="(()", open=2, close=1)
             
-═══════════════════════════════════════════════════════════
+===========================================================
 
             Call: backtrack(path="(()", open=2, close=1)
             
@@ -1147,12 +1147,12 @@ Call: backtrack(path="", open=0, close=0)
                   
                 path.deleteCharAt() → path="(()"  // UNDO!
                 
-═══════════════════════════════════════════════════════════
+===========================================================
 
         Back to: backtrack(path="((", open=2, close=0)
         path.deleteCharAt() → path="("  // UNDO!
         
-═══════════════════════════════════════════════════════════
+===========================================================
 
     Back to: backtrack(path="(", open=1, close=0)
     path.deleteCharAt() → path=""  // UNDO!
@@ -1161,7 +1161,7 @@ Call: backtrack(path="", open=0, close=0)
         path.append(')') → path="()"
         backtrack(path="()", open=1, close=1)
         
-═══════════════════════════════════════════════════════════
+===========================================================
 
         Call: backtrack(path="()", open=1, close=1)
         
@@ -1175,7 +1175,7 @@ Call: backtrack(path="", open=0, close=0)
                   length=4 == 4, BASE CASE!
                   result.add("()()") ✓
                   
-═══════════════════════════════════════════════════════════
+===========================================================
 
 Final results: ["(())", "()()"] ✓
 ```
@@ -1274,16 +1274,16 @@ path.deleteCharAt(path.length() - 1);  // UNDO!
 
 ```
 GENERATE PARENTHESES
-         │
+         |
          ▼
-┌─────────────────────────┐
-│ Two counters: open/close│
-│ '(' if open < n         │
-│ ')' if close < open     │
-│ BOTH branches undo!     │
-│ Base: length == 2*n     │
-│ Catalan number results  │
-└─────────────────────────┘
++-------------------------+
+| Two counters: open/close|
+| '(' if open < n         |
+| ')' if close < open     |
+| BOTH branches undo!     |
+| Base: length == 2*n     |
+| Catalan number results  |
++-------------------------+
 ```
 
 **Memory phrase:** "Open if quota left, close if debt exists, undo both branches"
@@ -1347,20 +1347,23 @@ Dial 1 (digit 3): d, e, f
 For each dial, you try every symbol.
 When you move to the next dial, you START FROM ITS FIRST SYMBOL.
 
-┌─────────────────────────────────────────────────────────┐
-│                                                          │
-│  Dial 0: Lock 'a' ─┬─ Dial 1: Lock 'd' → "ad" ✓        │
-│                    │          Lock 'e' → "ae" ✓        │
-│                    │          Lock 'f' → "af" ✓        │
-│                    │                                     │
-│          Lock 'b' ─┬─ Dial 1: Lock 'd' → "bd" ✓        │
-│                    │          Lock 'e' → "be" ✓        │
-│                    │          Lock 'f' → "bf" ✓        │
-│                    │                                     │
-│          Lock 'c' ─┬─ Dial 1: Lock 'd' → "cd" ✓        │
-│                               Lock 'e' → "ce" ✓        │
-│                               Lock 'f' → "cf" ✓        │
-└─────────────────────────────────────────────────────────┘
+```mermaid
+graph TD
+    A["Dial 0 (digit 2)"] -->|a| B["Dial 1 (digit 3)"]
+    A -->|b| C["Dial 1 (digit 3)"]
+    A -->|c| D["Dial 1 (digit 3)"]
+    B -->|d| E["'ad' ✓"]
+    B -->|e| F["'ae' ✓"]
+    B -->|f| G["'af' ✓"]
+    C -->|d| H["'bd' ✓"]
+    C -->|e| I["'be' ✓"]
+    C -->|f| J["'bf' ✓"]
+    D -->|d| K["'cd' ✓"]
+    D -->|e| L["'ce' ✓"]
+    D -->|f| M["'cf' ✓"]
+```
+
+**Each dial has its OWN pool - no need for used[] array!**
 ```
 
 #### Why No `used[]` Array? (Key Difference from Permutations!)
@@ -1411,7 +1414,7 @@ Results: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"]
 **Step-by-step trace:**
 
 ```
-═══════════════════════════════════════════════════════════
+===========================================================
 
 Call: backtrack(digitIdx=0, path="")
 
@@ -1422,7 +1425,7 @@ Call: backtrack(digitIdx=0, path="")
     path.append('a') → path="a"
     backtrack(digitIdx=1, path="a")  // Next dial!
     
-═══════════════════════════════════════════════════════════
+===========================================================
 
     Call: backtrack(digitIdx=1, path="a")
     
@@ -1454,7 +1457,7 @@ Call: backtrack(digitIdx=0, path="")
           
         path.deleteCharAt() → path="a"  // UNDO!
         
-═══════════════════════════════════════════════════════════
+===========================================================
 
     Back to: backtrack(digitIdx=0, path="a")
     path.deleteCharAt() → path=""  // UNDO!
@@ -1465,7 +1468,7 @@ Call: backtrack(digitIdx=0, path="")
     
       ... (similar process, adds "bd", "be", "bf")
       
-═══════════════════════════════════════════════════════════
+===========================================================
 
   i=2: letter='c'
     path.append('c') → path="c"
@@ -1473,7 +1476,7 @@ Call: backtrack(digitIdx=0, path="")
     
       ... (similar process, adds "cd", "ce", "cf")
       
-═══════════════════════════════════════════════════════════
+===========================================================
 
 Final results: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"] ✓
 ```
@@ -1571,17 +1574,17 @@ path.deleteCharAt(path.length() - 1); // UNDO: Remove letter
 
 ```
 PHONE KEYPAD
-      │
+      |
       ▼
-┌─────────────────────────┐
-│ Each dial = own pool    │
-│ No used[] needed!       │
-│ Reset to letter 0       │
-│ of NEXT dial's pool     │
-│ DO: append letter       │
-│ UNDO: deleteCharAt      │
-│ Cartesian product       │
-└─────────────────────────┘
++-------------------------+
+| Each dial = own pool    |
+| No used[] needed!       |
+| Reset to letter 0       |
+| of NEXT dial's pool     |
+| DO: append letter       |
+| UNDO: deleteCharAt      |
+| Cartesian product       |
++-------------------------+
 ```
 
 **Memory phrase:** "Each dial has its own pool, no bouncer needed, reset to first letter"
@@ -1638,23 +1641,23 @@ You're a sushi chef cutting a roll. You MUST use the entire roll.
 At each position, you decide: "Do I cut here, or do I extend my current piece?"
 But you can only cut if the piece you're creating is VALID (palindrome)!
 
-┌─────────────────────────────────────────────────────────┐
-│                                                          │
-│  String: "aab"                                          │
-│                                                          │
-│  Position 0: Cut after 'a'? ─┬─ "a" is palindrome ✓    │
-│                              │  → Cut! Move to pos 1    │
-│                              │                           │
-│              Cut after 'aa'? ─┬─ "aa" is palindrome ✓  │
-│                               │  → Cut! Move to pos 2   │
-│                                                          │
-│  Position 1: Cut after 'a'? ─┬─ "a" is palindrome ✓    │
-│                              │  → Cut! Move to pos 2    │
-│                              │                           │
-│              Cut after 'ab'? ─┬─ "ab" NOT palindrome ✗ │
-│                               │  → Can't cut here!      │
-│                                                          │
-└─────────────────────────────────────────────────────────┘
++---------------------------------------------------------+
+|                                                          |
+|  String: "aab"                                          |
+|                                                          |
+|  Position 0: Cut after 'a'? -+- "a" is palindrome ✓    |
+|                              |  → Cut! Move to pos 1    |
+|                              |                           |
+|              Cut after 'aa'? -+- "aa" is palindrome ✓  |
+|                               |  → Cut! Move to pos 2   |
+|                                                          |
+|  Position 1: Cut after 'a'? -+- "a" is palindrome ✓    |
+|                              |  → Cut! Move to pos 2    |
+|                              |                           |
+|              Cut after 'ab'? -+- "ab" NOT palindrome ✗ |
+|                               |  → Can't cut here!      |
+|                                                          |
++---------------------------------------------------------+
 ```
 
 #### Key Difference from Subsets
@@ -1713,7 +1716,7 @@ Results: [["a", "a", "b"], ["aa", "b"]]
 **Step-by-step trace:**
 
 ```
-═══════════════════════════════════════════════════════════
+===========================================================
 
 Call: backtrack(start=0, path=[])
 
@@ -1724,7 +1727,7 @@ Call: backtrack(start=0, path=[])
     path.add("a") → path=["a"]
     backtrack(start=1, path=["a"])
     
-═══════════════════════════════════════════════════════════
+===========================================================
 
     Call: backtrack(start=1, path=["a"])
     
@@ -1733,7 +1736,7 @@ Call: backtrack(start=0, path=[])
         path.add("a") → path=["a", "a"]
         backtrack(start=2, path=["a", "a"])
         
-═══════════════════════════════════════════════════════════
+===========================================================
 
         Call: backtrack(start=2, path=["a", "a"])
         
@@ -1748,13 +1751,13 @@ Call: backtrack(start=0, path=[])
               
             path.remove("b") → path=["a", "a"]  // UNDO!
             
-═══════════════════════════════════════════════════════════
+===========================================================
 
         Back to: backtrack(start=2, path=["a", "a"])
         No more positions to try
         return
         
-═══════════════════════════════════════════════════════════
+===========================================================
 
     Back to: backtrack(start=1, path=["a"])
     path.remove("a") → path=["a"]  // UNDO!
@@ -1763,7 +1766,7 @@ Call: backtrack(start=0, path=[])
         isPalindrome("ab")? NO! (a ≠ b)
         SKIP this cut position!
         
-═══════════════════════════════════════════════════════════
+===========================================================
 
   Back to: backtrack(start=0, path=[])
   path.remove("a") → path=[]  // UNDO!
@@ -1781,7 +1784,7 @@ Call: backtrack(start=0, path=[])
           start=3 == 3, BASE CASE!
           result.add(["aa", "b"]) ✓
           
-═══════════════════════════════════════════════════════════
+===========================================================
 
 Final results: [["a", "a", "b"], ["aa", "b"]] ✓
 ```
@@ -1886,16 +1889,16 @@ path.remove(path.size() - 1);         // UNDO: Remove piece
 
 ```
 PALINDROME PARTITIONING
-          │
+          |
           ▼
-┌─────────────────────────┐
-│ Cut string into pieces  │
-│ Every piece = palindrome│
-│ No gaps, no overlaps    │
-│ start → i+1 after cut   │
-│ Only cut if valid!      │
-│ Copy path to result!    │
-└─────────────────────────┘
++-------------------------+
+| Cut string into pieces  |
+| Every piece = palindrome|
+| No gaps, no overlaps    |
+| start → i+1 after cut   |
+| Only cut if valid!      |
+| Copy path to result!    |
++-------------------------+
 ```
 
 **Memory phrase:** "Cut only if palindrome, next piece starts right after, no gaps allowed"
@@ -2033,7 +2036,7 @@ Final valid paths:
 **Step-by-step trace:**
 
 ```
-═══════════════════════════════════════════════════════════
+===========================================================
 
 Call: backtrack(start=0, path=[])
 
@@ -2052,7 +2055,7 @@ Call: backtrack(start=0, path=[])
     path.add("25") → path=["25"]
     backtrack(start=2, path=["25"])
     
-═══════════════════════════════════════════════════════════
+===========================================================
 
     Call: backtrack(start=2, path=["25"])
     
@@ -2070,7 +2073,7 @@ Call: backtrack(start=0, path=[])
         isValid("525")? NO! 525 > 255
         SKIP! (invalid value)
         
-═══════════════════════════════════════════════════════════
+===========================================================
 
     Back to: backtrack(start=0, path=["25"])
     path.remove("25") → path=[]  // UNDO!
@@ -2082,7 +2085,7 @@ Call: backtrack(start=0, path=[])
     path.add("255") → path=["255"]
     backtrack(start=3, path=["255"])
     
-═══════════════════════════════════════════════════════════
+===========================================================
 
     Call: backtrack(start=3, path=["255"])
     
@@ -2093,7 +2096,7 @@ Call: backtrack(start=0, path=[])
         path.add("255") → path=["255", "255"]
         backtrack(start=6, path=["255", "255"])
         
-═══════════════════════════════════════════════════════════
+===========================================================
 
         Call: backtrack(start=6, path=["255", "255"])
         
@@ -2113,11 +2116,11 @@ Call: backtrack(start=0, path=[])
                   path.size=4 AND start=11 == 11
                   BASE CASE! result.add("255.255.11.135") ✓
                   
-═══════════════════════════════════════════════════════════
+===========================================================
 
         ... (continue exploring, find "255.255.111.35")
 
-═══════════════════════════════════════════════════════════
+===========================================================
 
 Final results: ["255.255.11.135", "255.255.111.35"] ✓
 ```
@@ -2273,16 +2276,16 @@ private boolean isValidSegment(String segment) {
 
 ```
 RESTORE IP ADDRESSES
-         │
+         |
          ▼
-┌─────────────────────────┐
-│ Exactly 4 segments      │
-│ Each: 1-3 digits, 0-255 │
-│ No leading zeros!       │
-│ Pigeonhole pruning      │
-│ Base: 4 segments + done │
-│ Join with "." at end    │
-└─────────────────────────┘
++-------------------------+
+| Exactly 4 segments      |
+| Each: 1-3 digits, 0-255 |
+| No leading zeros!       |
+| Pigeonhole pruning      |
+| Base: 4 segments + done |
+| Join with "." at end    |
++-------------------------+
 ```
 
 **Memory phrase:** "Four segments, no leading zeros, pigeonhole prune early, join with dots"
@@ -2506,16 +2509,16 @@ Rules:
 3. Can't step on the same cell twice in one path
 4. If you hit a dead end, BACKTRACK and try another direction
 
-┌─────────────────────────────────────────────────────────┐
-│                                                          │
-│  You're at 'A', need to spell "ABCCED"                  │
-│                                                          │
-│  A → B → C → C → E → D  ✓ Found it!                     │
-│  ↓                                                       │
-│  If 'B' wasn't adjacent, you'd backtrack to 'A'         │
-│  and try a different direction                          │
-│                                                          │
-└─────────────────────────────────────────────────────────┘
++---------------------------------------------------------+
+|                                                          |
+|  You're at 'A', need to spell "ABCCED"                  |
+|                                                          |
+|  A → B → C → C → E → D  ✓ Found it!                     |
+|  ↓                                                       |
+|  If 'B' wasn't adjacent, you'd backtrack to 'A'         |
+|  and try a different direction                          |
+|                                                          |
++---------------------------------------------------------+
 ```
 
 #### Why In-Place Masking? (The Key Trick!)
@@ -2569,17 +2572,17 @@ word = "ABCCED"
 **Step-by-step trace:**
 
 ```
-═══════════════════════════════════════════════════════════
+===========================================================
 STEP 1: Start at (0,0) = 'A', need word[0] = 'A' ✓ MATCH!
 
 Grid State:          Path: "A"
-┌───┬───┬───┬───┐
-│ # │ B │ C │ E │   '#' marks current cell as visited
-├───┼───┼───┼───┤
-│ S │ F │ C │ S │
-├───┼───┼───┼───┤
-│ A │ D │ E │ E │
-└───┴───┴───┴───┘
++---+---+---+---+
+| # | B | C | E |   '#' marks current cell as visited
++---+---+---+---+
+| S | F | C | S |
++---+---+---+---+
+| A | D | E | E |
++---+---+---+---+
 
 Next: need word[1] = 'B', try 4 directions from (0,0)
   UP:    (-1,0) → out of bounds ✗
@@ -2587,17 +2590,17 @@ Next: need word[1] = 'B', try 4 directions from (0,0)
   LEFT:  (0,-1) → out of bounds ✗
   RIGHT: (0,1) = 'B' = 'B' ✓ GO!
 
-═══════════════════════════════════════════════════════════
+===========================================================
 STEP 2: Move to (0,1) = 'B', need word[1] = 'B' ✓ MATCH!
 
 Grid State:          Path: "AB"
-┌───┬───┬───┬───┐
-│ # │ # │ C │ E │   Two cells marked as visited
-├───┼───┼───┼───┤
-│ S │ F │ C │ S │
-├───┼───┼───┼───┤
-│ A │ D │ E │ E │
-└───┴───┴───┴───┘
++---+---+---+---+
+| # | # | C | E |   Two cells marked as visited
++---+---+---+---+
+| S | F | C | S |
++---+---+---+---+
+| A | D | E | E |
++---+---+---+---+
 
 Next: need word[2] = 'C', try 4 directions from (0,1)
   UP:    out of bounds ✗
@@ -2605,49 +2608,49 @@ Next: need word[2] = 'C', try 4 directions from (0,1)
   LEFT:  (0,0) = '#' ≠ 'C' ✗ (already visited!)
   RIGHT: (0,2) = 'C' = 'C' ✓ GO!
 
-═══════════════════════════════════════════════════════════
+===========================================================
 STEP 3: Move to (0,2) = 'C', need word[2] = 'C' ✓ MATCH!
 
 Grid State:          Path: "ABC"
-┌───┬───┬───┬───┐
-│ # │ # │ # │ E │
-├───┼───┼───┼───┤
-│ S │ F │ C │ S │
-├───┼───┼───┼───┤
-│ A │ D │ E │ E │
-└───┴───┴───┴───┘
++---+---+---+---+
+| # | # | # | E |
++---+---+---+---+
+| S | F | C | S |
++---+---+---+---+
+| A | D | E | E |
++---+---+---+---+
 
 Next: need word[3] = 'C', try 4 directions from (0,2)
   UP:    out of bounds ✗
   DOWN:  (1,2) = 'C' = 'C' ✓ GO!
 
-═══════════════════════════════════════════════════════════
+===========================================================
 STEP 4: Move to (1,2) = 'C', need word[3] = 'C' ✓ MATCH!
 
 Grid State:          Path: "ABCC"
-┌───┬───┬───┬───┐
-│ # │ # │ # │ E │
-├───┼───┼───┼───┤
-│ S │ F │ # │ S │
-├───┼───┼───┼───┤
-│ A │ D │ E │ E │
-└───┴───┴───┴───┘
++---+---+---+---+
+| # | # | # | E |
++---+---+---+---+
+| S | F | # | S |
++---+---+---+---+
+| A | D | E | E |
++---+---+---+---+
 
 Next: need word[4] = 'E', try 4 directions from (1,2)
   UP:    (0,2) = '#' ✗ (visited)
   DOWN:  (2,2) = 'E' = 'E' ✓ GO!
 
-═══════════════════════════════════════════════════════════
+===========================================================
 STEP 5: Move to (2,2) = 'E', need word[4] = 'E' ✓ MATCH!
 
 Grid State:          Path: "ABCCE"
-┌───┬───┬───┬───┐
-│ # │ # │ # │ E │
-├───┼───┼───┼───┤
-│ S │ F │ # │ S │
-├───┼───┼───┼───┤
-│ A │ D │ # │ E │
-└───┴───┴───┴───┘
++---+---+---+---+
+| # | # | # | E |
++---+---+---+---+
+| S | F | # | S |
++---+---+---+---+
+| A | D | # | E |
++---+---+---+---+
 
 Next: need word[5] = 'D', try 4 directions from (2,2)
   UP:    (1,2) = '#' ✗ (visited)
@@ -2655,35 +2658,35 @@ Next: need word[5] = 'D', try 4 directions from (2,2)
   LEFT:  (2,1) = 'D' = 'D' ✓ GO!
   RIGHT: (2,3) = 'E' ≠ 'D' ✗
 
-═══════════════════════════════════════════════════════════
+===========================================================
 STEP 6: Move to (2,1) = 'D', need word[5] = 'D' ✓ MATCH!
 
 Grid State:          Path: "ABCCED"
-┌───┬───┬───┬───┐
-│ # │ # │ # │ E │
-├───┼───┼───┼───┤
-│ S │ F │ # │ S │
-├───┼───┼───┼───┤
-│ A │ # │ # │ E │
-└───┴───┴───┴───┘
++---+---+---+---+
+| # | # | # | E |
++---+---+---+---+
+| S | F | # | S |
++---+---+---+---+
+| A | # | # | E |
++---+---+---+---+
 
 wordIndex = 6 == word.length = 6
 BASE CASE HIT! Return TRUE ✓
 
-═══════════════════════════════════════════════════════════
+===========================================================
 BACKTRACK: Restore all cells as we unwind
 
 After returning true, the grid is restored:
-┌───┬───┬───┬───┐
-│ A │ B │ C │ E │
-├───┼───┼───┼───┤
-│ S │ F │ C │ S │
-├───┼───┼───┼───┤
-│ A │ D │ E │ E │
-└───┴───┴───┴───┘
++---+---+---+---+
+| A | B | C | E |
++---+---+---+---+
+| S | F | C | S |
++---+---+---+---+
+| A | D | E | E |
++---+---+---+---+
 
 Result: TRUE (word "ABCCED" found!)
-═══════════════════════════════════════════════════════════
+===========================================================
 ```
 
 --
@@ -2835,17 +2838,17 @@ boolean found = dfs(UP) | dfs(DOWN) | dfs(LEFT) | dfs(RIGHT);
 
 ```
 WORD SEARCH (GRID DFS)
-         │
+         |
          ▼
-┌─────────────────────────┐
-│ Grid + spell word       │
-│ In-place masking: '#'   │
-│ 4 directions: ↑↓←→      │
-│ Match → Mark → Explore  │
-│ → Restore (ALWAYS!)     │
-│ Short-circuit || to stop│
-│ O(m×n×4^L) worst case   │
-└─────────────────────────┘
++-------------------------+
+| Grid + spell word       |
+| In-place masking: '#'   |
+| 4 directions: ↑↓←→      |
+| Match → Mark → Explore  |
+| → Restore (ALWAYS!)     |
+| Short-circuit || to stop|
+| O(m×n×4^L) worst case   |
++-------------------------+
 ```
 
 **Memory phrase:** "Match, mark, explore, restore"
@@ -2911,17 +2914,17 @@ A column is SAFE if:
 2. No queen on the same diagonal (\)
 3. No queen on the same anti-diagonal (/)
 
-┌─────────────────────────────────────────────────────────┐
-│                                                          │
-│  Row 0: Try each column, place queen in first safe one  │
-│         ↓                                                │
-│  Row 1: Try each column, skip attacked ones             │
-│         ↓                                                │
-│  Row 2: Try each column... if ALL attacked, BACKTRACK!  │
-│         ↓                                                │
-│  Row 3: Place queen, if successful → VALID SOLUTION!    │
-│                                                          │
-└─────────────────────────────────────────────────────────┘
++---------------------------------------------------------+
+|                                                          |
+|  Row 0: Try each column, place queen in first safe one  |
+|         ↓                                                |
+|  Row 1: Try each column, skip attacked ones             |
+|         ↓                                                |
+|  Row 2: Try each column... if ALL attacked, BACKTRACK!  |
+|         ↓                                                |
+|  Row 3: Place queen, if successful → VALID SOLUTION!    |
+|                                                          |
++---------------------------------------------------------+
 ```
 
 #### The Diagonal Insight (The Key Mathematical Trick!)
@@ -2989,7 +2992,7 @@ THREE SETS = COMPLETE ATTACK COVERAGE!
 **Input:** `n = 4`
 
 ```
-═══════════════════════════════════════════════════════════
+===========================================================
 ROW 0: Try placing queen
 
   Try col=0:
@@ -3006,7 +3009,7 @@ ROW 0: Try placing queen
     . . . .          diag2 = {0}    (r+c = 0+0 = 0)
     . . . .
 
-═══════════════════════════════════════════════════════════
+===========================================================
 ROW 1: Try placing queen
 
   Try col=0: 0 in cols ✗ ATTACKED!
@@ -3029,7 +3032,7 @@ ROW 1: Try placing queen
     . . . .          diag2 = {0, 3}
     . . . .
 
-═══════════════════════════════════════════════════════════
+===========================================================
 ROW 2: Try placing queen
 
   Try col=0: 0 in cols ✗ ATTACKED!
@@ -3049,7 +3052,7 @@ ROW 2: Try placing queen
 
   ALL COLUMNS ATTACKED! BACKTRACK to Row 1!
 
-═══════════════════════════════════════════════════════════
+===========================================================
 BACKTRACK: Remove queen from (1,2)
 
     Board:           Sets after removal:
@@ -3072,7 +3075,7 @@ ROW 1 (continued): Try col=3
     . . . .          diag2 = {0, 4}
     . . . .
 
-═══════════════════════════════════════════════════════════
+===========================================================
 ROW 2: Try placing queen
 
   Try col=0: 0 in cols ✗
@@ -3089,7 +3092,7 @@ ROW 2: Try placing queen
     . Q . .          diag2 = {0, 4, 3}
     . . . .
 
-═══════════════════════════════════════════════════════════
+===========================================================
 ROW 3: Try placing queen
 
   Try col=0: 0 in cols ✗
@@ -3103,7 +3106,7 @@ ROW 3: Try placing queen
 
   ALL COLUMNS ATTACKED! BACKTRACK!
 
-═══════════════════════════════════════════════════════════
+===========================================================
 ... (continue backtracking and exploring)
 
 Eventually find 2 valid solutions:
@@ -3114,7 +3117,7 @@ Solution 1:        Solution 2:
 Q . . .            . . . Q
 . . Q .            . Q . .
 
-═══════════════════════════════════════════════════════════
+===========================================================
 ```
 
 --
@@ -3296,18 +3299,18 @@ diag2.remove(row + col);
 
 ```
 N-QUEENS
-    │
+    |
     ▼
-┌─────────────────────────┐
-│ Place N queens, no attack│
-│ Row by row placement     │
-│ 3 sets: cols, diag1, diag2│
-│ diag1 = r - c (\ diagonal)│
-│ diag2 = r + c (/ diagonal)│
-│ DO: add to 3 sets        │
-│ UNDO: remove from 3 sets │
-│ Base: row == n           │
-└─────────────────────────┘
++-------------------------+
+| Place N queens, no attack|
+| Row by row placement     |
+| 3 sets: cols, diag1, diag2|
+| diag1 = r - c (\ diagonal)|
+| diag2 = r + c (/ diagonal)|
+| DO: add to 3 sets        |
+| UNDO: remove from 3 sets |
+| Base: row == n           |
++-------------------------+
 ```
 
 **Memory phrase:** "Row by row, check 3 sets: col, r-c, r+c"
@@ -3354,15 +3357,15 @@ You're solving a Sudoku puzzle by trial and error:
 5. If you get stuck (no valid digit): BACKTRACK!
 6. If you fill all cells: SUCCESS!
 
-┌─────────────────────────────────────────────────────────┐
-│                                                          │
-│  Find empty cell → Try 1 → Valid? → Place → Next cell   │
-│                      ↓                                   │
-│                    Invalid? → Try 2 → Try 3 → ... → 9   │
-│                                                ↓         │
-│                              All invalid? → BACKTRACK!   │
-│                                                          │
-└─────────────────────────────────────────────────────────┘
++---------------------------------------------------------+
+|                                                          |
+|  Find empty cell → Try 1 → Valid? → Place → Next cell   |
+|                      ↓                                   |
+|                    Invalid? → Try 2 → Try 3 → ... → 9   |
+|                                                ↓         |
+|                              All invalid? → BACKTRACK!   |
+|                                                          |
++---------------------------------------------------------+
 ```
 
 #### The Boolean Return Trick (The Key Insight!)
@@ -3438,15 +3441,15 @@ Example: Cell (5, 7) is in which box?
 **Input:** (Using 4×4 for clarity, same logic applies to 9×9)
 
 ```
-┌───┬───┬───┬───┐
-│ 1 │ . │ . │ 4 │
-├───┼───┼───┼───┤
-│ . │ . │ 1 │ . │
-├───┼───┼───┼───┤
-│ . │ 1 │ . │ . │
-├───┼───┼───┼───┤
-│ 4 │ . │ . │ 1 │
-└───┴───┴───┴───┘
++---+---+---+---+
+| 1 | . | . | 4 |
++---+---+---+---+
+| . | . | 1 | . |
++---+---+---+---+
+| . | 1 | . | . |
++---+---+---+---+
+| 4 | . | . | 1 |
++---+---+---+---+
 
 Rules: Each row, column, and 2×2 box must have 1-4 exactly once.
 ```
@@ -3454,7 +3457,7 @@ Rules: Each row, column, and 2×2 box must have 1-4 exactly once.
 **Step-by-step trace:**
 
 ```
-═══════════════════════════════════════════════════════════
+===========================================================
 STEP 1: Find first empty cell → (0, 1)
 
 Try digit 1: Already in row 0 ✗
@@ -3465,19 +3468,19 @@ Try digit 2:
   VALID! Place 2 at (0,1)
 
 Board:
-┌───┬───┬───┬───┐
-│ 1 │ 2 │ . │ 4 │
-├───┼───┼───┼───┤
-│ . │ . │ 1 │ . │
-├───┼───┼───┼───┤
-│ . │ 1 │ . │ . │
-├───┼───┼───┼───┤
-│ 4 │ . │ . │ 1 │
-└───┴───┴───┴───┘
++---+---+---+---+
+| 1 | 2 | . | 4 |
++---+---+---+---+
+| . | . | 1 | . |
++---+---+---+---+
+| . | 1 | . | . |
++---+---+---+---+
+| 4 | . | . | 1 |
++---+---+---+---+
 
 Recurse to next empty cell...
 
-═══════════════════════════════════════════════════════════
+===========================================================
 STEP 2: Find first empty cell → (0, 2)
 
 Try digit 1: Already in row 0 ✗
@@ -3489,19 +3492,19 @@ Try digit 3:
   VALID! Place 3 at (0,2)
 
 Board:
-┌───┬───┬───┬───┐
-│ 1 │ 2 │ 3 │ 4 │  ← Row 0 complete!
-├───┼───┼───┼───┤
-│ . │ . │ 1 │ . │
-├───┼───┼───┼───┤
-│ . │ 1 │ . │ . │
-├───┼───┼───┼───┤
-│ 4 │ . │ . │ 1 │
-└───┴───┴───┴───┘
++---+---+---+---+
+| 1 | 2 | 3 | 4 |  ← Row 0 complete!
++---+---+---+---+
+| . | . | 1 | . |
++---+---+---+---+
+| . | 1 | . | . |
++---+---+---+---+
+| 4 | . | . | 1 |
++---+---+---+---+
 
 Recurse to next empty cell...
 
-═══════════════════════════════════════════════════════════
+===========================================================
 STEP 3: Find first empty cell → (1, 0)
 
 Try digit 1: Already in row 1 ✗
@@ -3512,7 +3515,7 @@ Place 2 at (1,0), recurse...
 
 ... (continuing the solve)
 
-═══════════════════════════════════════════════════════════
+===========================================================
 STEP N: Eventually hit a dead end
 
 At some cell, no digit 1-4 is valid!
@@ -3520,25 +3523,25 @@ Return false → BACKTRACK
 
 Remove the last placed digit, try next digit...
 
-═══════════════════════════════════════════════════════════
+===========================================================
 EVENTUALLY: All cells filled!
 
 Board:
-┌───┬───┬───┬───┐
-│ 1 │ 2 │ 3 │ 4 │
-├───┼───┼───┼───┤
-│ 3 │ 4 │ 1 │ 2 │
-├───┼───┼───┼───┤
-│ 2 │ 1 │ 4 │ 3 │
-├───┼───┼───┼───┤
-│ 4 │ 3 │ 2 │ 1 │
-└───┴───┴───┴───┘
++---+---+---+---+
+| 1 | 2 | 3 | 4 |
++---+---+---+---+
+| 3 | 4 | 1 | 2 |
++---+---+---+---+
+| 2 | 1 | 4 | 3 |
++---+---+---+---+
+| 4 | 3 | 2 | 1 |
++---+---+---+---+
 
 No empty cell found → Return TRUE!
 This propagates up, stopping all recursion.
 The board remains filled with the solution!
 
-═══════════════════════════════════════════════════════════
+===========================================================
 ```
 
 --
@@ -3677,13 +3680,13 @@ board[r][c] = '.';  // This would UNDO the solution!
 //   Box covers rows 3-5, cols 6-8
 
 // Visual:
-//   ┌─────────┬─────────┬─────────┐
-//   │ Box 0,0 │ Box 0,3 │ Box 0,6 │  rows 0-2
-//   ├─────────┼─────────┼─────────┤
-//   │ Box 3,0 │ Box 3,3 │ Box 3,6 │  rows 3-5  ← (5,7) is here
-//   ├─────────┼─────────┼─────────┤
-//   │ Box 6,0 │ Box 6,3 │ Box 6,6 │  rows 6-8
-//   └─────────┴─────────┴─────────┘
+//   +---------+---------+---------+
+//   | Box 0,0 | Box 0,3 | Box 0,6 |  rows 0-2
+//   +---------+---------+---------+
+//   | Box 3,0 | Box 3,3 | Box 3,6 |  rows 3-5  ← (5,7) is here
+//   +---------+---------+---------+
+//   | Box 6,0 | Box 6,3 | Box 6,6 |  rows 6-8
+//   +---------+---------+---------+
 //     cols     cols      cols
 //     0-2      3-5       6-8
 ```
@@ -3730,18 +3733,18 @@ private boolean isValid(int r, int c, char d) {
 
 ```
 SUDOKU SOLVER
-      │
+      |
       ▼
-┌─────────────────────────┐
-│ Fill grid, 3 constraints│
-│ Find empty → Try 1-9    │
-│ Check: row, col, 3×3 box│
-│ Box: (r/3)*3, (c/3)*3   │
-│ Return BOOLEAN!         │
-│ true = STOP everything  │
-│ false = backtrack       │
-│ Don't undo on success!  │
-└─────────────────────────┘
++-------------------------+
+| Fill grid, 3 constraints|
+| Find empty → Try 1-9    |
+| Check: row, col, 3×3 box|
+| Box: (r/3)*3, (c/3)*3   |
+| Return BOOLEAN!         |
+| true = STOP everything  |
+| false = backtrack       |
+| Don't undo on success!  |
++-------------------------+
 ```
 
 **Memory phrase:** "Try 1-9, check 3 zones, return true to stop"
@@ -4029,16 +4032,16 @@ public boolean makesquare(int[] matchsticks) {
 
 ```
 PARTITION K EQUAL SUM
-        │
+        |
         ▼
-┌─────────────────────────┐
-│ 1. sum % k == 0?        │
-│ 2. SORT DESCENDING!     │
-│ 3. nums[0] ≤ target?    │
-│ 4. k buckets, fill each │
-│ 5. Skip duplicate bucket│
-│ 6. Break on empty fail  │
-└─────────────────────────┘
++-------------------------+
+| 1. sum % k == 0?        |
+| 2. SORT DESCENDING!     |
+| 3. nums[0] ≤ target?    |
+| 4. k buckets, fill each |
+| 5. Skip duplicate bucket|
+| 6. Break on empty fail  |
++-------------------------+
 ```
 
 **Memory phrase:** "Sort DESC, fill buckets, prune duplicates and empty equivalents"
@@ -4166,16 +4169,16 @@ At each step, we have these choices:
 **Decision Tree (partial):**
 ```
                         ""
-                        │
-            ┌───────────┼───────────┐
+                        |
+            +-----------+-----------+
             1          12          123
          (r=1,p=1)  (r=12,p=12)  (r=123,p=123)
-            │
-    ┌───────┼───────┐
+            |
+    +-------+-------+
    1+2     1-2     1*2
 (r=3,p=2) (r=-1,p=-2) (r=2,p=2)
-    │
-┌───┼───┐
+    |
++---+---+
 1+2+3  1+2-3  1+2*3
 (r=6)  (r=0)  (r=1-2+2*3=7)
   ✓      ✗       ✗
@@ -4343,17 +4346,17 @@ Intermediate results can overflow int, especially with multiplication.
 
 ```
 EXPRESSION ADD OPERATORS
-         │
+         |
          ▼
-┌─────────────────────────┐
-│ 1. Try all num lengths  │
-│ 2. No leading zeros!    │
-│ 3. First num: no op     │
-│ 4. +: eval+curr, p=curr │
-│ 5. -: eval-curr, p=-curr│
-│ 6. *: eval-p+p*curr     │
-│ 7. StringBuilder undo   │
-└─────────────────────────┘
++-------------------------+
+| 1. Try all num lengths  |
+| 2. No leading zeros!    |
+| 3. First num: no op     |
+| 4. +: eval+curr, p=curr |
+| 5. -: eval-curr, p=-curr|
+| 6. *: eval-p+p*curr     |
+| 7. StringBuilder undo   |
++-------------------------+
 ```
 
 **Memory phrase:** "Track prev for multiply undo. No leading zeros. StringBuilder backtrack."
